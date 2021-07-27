@@ -1,0 +1,28 @@
+.profile-info {
+    p {
+        text-align: left;
+    }
+}
+
+#profile-hero {
+    height: 38.2vh;
+    background-color: #ccc;
+}
+
+.profile-container {
+    padding-top: 50px !important;
+}
+
+#profile-hero {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.profile-contact {
+    font-size: 200%;
+}
+
+.social-icon {
+    margin-right: 3px;
+}

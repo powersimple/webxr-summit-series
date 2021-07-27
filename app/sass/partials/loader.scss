@@ -1,0 +1,28 @@
+/*--------------------------------------------------------------
+      Preloader
+  --------------------------------------------------------------*/
+
+.page-loader {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 9998;
+    display: none;
+}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0.9;
+    z-index: 1000;
+    width: 50vw;
+    margin-left: -25vw;
+    z-index: 9999;
+    margin-top: -14.5vw;
+    svg {
+        width: 100%;
+    }
+}

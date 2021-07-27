@@ -1,0 +1,71 @@
+#header {
+    // background-color: $darkest_gray;
+}
+
+@media(min-width:768px) {
+    #header {
+        //  background-color: $darkest_gray;
+        height: 50px;
+    }
+    #logo {
+        position: relative;
+        top: -15px;
+    }
+}
+
+#site-title {
+    color: $light_blue;
+    font-weight: 600;
+    padding-top: 3px;
+    display:none;
+}
+
+@media (min-width: 768px) {
+    .navbar-transparent {
+        background-color: rgba(10, 10, 10, 0.9);
+    }
+    .navbar-custom {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .navbar-custom .dropdown-menu {
+        position: absolute;
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+    }
+    .navbar-custom .open>.dropdown-menu {
+        visibility: visible;
+        opacity: 1;
+    }
+    .navbar-custom .dropdown-menu .dropdown-toggle:after {
+        position: absolute;
+        display: block;
+        right: 9px;
+        top: 50%;
+        margin-top: -6px;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 9px;
+        content: "\f105";
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .navbar-right .dropdown-menu {
+        right: auto;
+        left: 0;
+    }
+    /* Comments */
+    .comment .comment {
+        margin-left: 75px;
+    }
+}
+.discord{
+    height:20px;
+    width:20px;
+
+    background:url(images/icons/discord.png) center center no-repeat;
+    background-size: cover;
+    margin-bottom:-5px !important;
+    opacity:.8;
+}

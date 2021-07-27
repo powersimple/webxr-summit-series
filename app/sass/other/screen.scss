@@ -1,0 +1,129 @@
+.phi-centered{
+    width:61.8vh;
+    height:61.8vh;
+    position: absolute;
+    left:50%;
+    top:50%;
+    margin-left:-30.9vh;
+    margin-top:-30.9vh;
+    z-index: 1;
+    border-radius:50%;
+    .button-ring{
+        z-index: 100;
+        position: absolute;
+        width: 17.2%;
+        height:17.2%;
+    }
+    #link-home{
+        left:50%;
+        margin-left:-8.6%;
+        top:105%;
+    }
+
+
+}
+
+#screen{
+    transition: transform 1s;
+    border:0px solid #0f0;
+    position: absolute;
+    width:100vw;
+    height:100vh;
+    
+}
+
+#screen.horizontal.maxed{
+
+    
+    transform-origin: center center;
+  //  background-color:rgba(0,200,0,0.2);
+}
+#screen.horizontal.maxed .slick-list{
+    transform:translateX(25vw);
+}
+#screen.vertical.maxed .slick-track{
+    
+}
+
+#screen-image-wrap{
+    //background:rgba(0,250,0,0.1);
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    position: absolute;
+   
+    img {
+        width: 100%;
+        height: auto;
+        z-index: 1000;
+    }
+    div {
+        text-align: center;
+        width: 100%;
+        line-height:120%;
+    }
+    #screen-image-header {
+        bottom: 100%;
+        #screen-image-title {
+            font-size: 150%;
+            position: absolute;
+            margin-top: -2em;
+            
+        
+        }
+        #screen-image-caption {
+            font-size: 80%;
+            font-style: italic;
+            position: absolute;
+            margin-top: -1.2em
+        }
+    }
+    #screen-image-footer {
+        #screen-image-description {
+            font-size: 100%;
+            position: absolute;
+            margin-top: 1.2em;
+        }
+        top:100%;
+    }
+    #screen-image-container {
+        border-radius: 50%;
+       // border: 1px solid #ccc;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        .section{
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size:cover;
+              border-radius:50%;
+        }
+    }
+}
+#circle-mask {
+    svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    svg mask rect {
+        fill: rgba(255, 255, 255, 1);
+    }
+    svg mask circle {
+        overflow: hidden;
+    }
+    svg>rect {
+        fill: black;
+        -webkit-mask: url(#mask);
+        mask: url(#mask);
+    }
+    video {
+        position: absolute;
+        top: 0;
+        left: 1px;
+        z-index: -1;
+        overflow: hidden;
+        height: 99%;
+        opacity: 0.8;
+    }
+}

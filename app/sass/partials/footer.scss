@@ -1,0 +1,137 @@
+footer {
+    position: relative;
+    display: table;
+   background-color: rgba(10,10,10,0.8);
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    padding: 10px 0;
+   top:100vh;
+    min-height:50px;
+    max-height: 2vh;
+    color:$gray_text;
+    .xri-logo {
+        width: 100px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+    span.copyright {
+        display: inline-block;
+        line-height: 120%;
+        vertical-align: top;
+        margin: 0;
+        font-size: .8em;
+        margin-top: 15px;
+        padding-bottom: .5em;
+        span {
+            margin-top: 5px;
+            display: inline-block;
+            @media(max-width: 768px) {
+                display: block;
+                margin-top: 0px;
+            }
+        }
+
+    }
+    .footer-social-links {
+        text-align: right;
+    }
+    .footer-social-links a {
+        display: inline-block;
+        line-height: 52px;
+        vertical-align: top;
+        padding: 0 6px;
+    }
+    footer.horizontal.maxed {
+        width: 50%;
+        left: 50%;
+        position: absolute;
+        height: 50px;
+    }
+}
+footer{
+    ul{
+        float:right;
+        li{
+            list-style:none;
+            padding:0px 10px;
+            display: inline-block;
+            border-left:1px solid #fff;
+            a{
+                text-decoration: none;
+            }
+            @media(max-width:767px){
+                display: block;
+                border:none !important;
+            }
+        }
+        li:first-child{
+            border-left:none;
+            
+        }
+        li:last-child{
+            border-right:1px solid #fff;
+        }
+    }
+}
+.page-footer {
+    display: block;
+    position: absolute;
+    top: 10.25in;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    padding: 0px;
+    .dots {
+        width: 25%;
+        left: 50%;
+        margin-left: -12.5%;
+        display: block;
+        position: absolute;
+    }
+    a {
+        color: blue;
+    }
+    a:hover {
+        color:#fff;
+    }
+    
+    strong {
+        font-weight: 700;
+    }
+}
+
+.partners{
+    background-color: #000;
+    display: inline-block;
+    padding-right:25px;
+    width:100%;
+    position: absolute;
+    bottom:0px;
+    left:0px;
+    .container{
+        margin-bottom:0px;
+        padding:5px 0px;
+    }
+    a{
+        font-size:.8rem;
+    }
+
+    //position: fixed;
+    //top: 50vh;
+}
+.awe{
+    background:url(images/logo/awe50h.png)center left no-repeat transparent;
+    background-size: contain;
+    padding-left:25px;
+}
+.vrara{
+    background:url(images/logo/vrara-summit-emblem.png)center left no-repeat transparent;
+    background-size: contain;
+    padding-left:28px;
+}
+.futurewei{
+    background:url(images/logo/futurewei.png)center left no-repeat transparent;
+    background-size: contain;
+    padding-left:25px;
+}

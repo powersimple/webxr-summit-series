@@ -1,0 +1,25 @@
+.hardware-item{
+    padding-bottom:24px;
+    h4{
+        text-align: center;
+        margin-bottom:6px;
+        font-size:1.25rem;
+        line-height:125%;
+    }
+    h6 {margin-bottom:.25em;
+    text-transform:uppercase}
+    ul{
+        padding-left:0px !important;
+        margin-bottom:14px;
+        li{
+            font-size: 100%;
+        list-style: none;
+        line-height: 125%;
+        padding-bottom: 3px;
+        }
+    }
+    img {margin-bottom:6px;}    
+}
+.breadcrumb span{
+    margin-right:5px;
+}

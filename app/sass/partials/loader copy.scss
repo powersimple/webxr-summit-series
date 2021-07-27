@@ -1,0 +1,30 @@
+/*--------------------------------------------------------------
+      Preloader
+  --------------------------------------------------------------*/
+
+.page-loader {
+    position: fixed;
+    background: rgb(0, 141, 192);
+    // background: radial-gradient(circle at center center, $deep-purple 0%, $deep-purple 33%, $power-purple 45%, $light-purple 50%, $power-purple 55%, $deep-purple 66%, $deep-purple 100%);
+    background: linear-gradient(to bottom, $deep-purple 0%, $deep-purple 25%, $power-purple 45%, $light-purple 50%, $power-purple 55%, $deep-purple 75%, $deep-purple 100%);
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 9998;
+}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0.9;
+    z-index: 1000;
+    width: 50vw;
+    margin-left: -25vw;
+    z-index: 9999;
+    margin-top: -14.5vw;
+    svg {
+        width: 100%;
+    }
+}

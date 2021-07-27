@@ -1,0 +1,65 @@
+.main{
+    h1.title{
+      
+     
+        font-family: 'Zen Dots', cursive;
+        color:#fff;
+        text-align: center;
+        text-transform: uppercase;
+        padding:10px 0px 5px;
+
+    }
+    h2.featuring{
+        color:#fff;
+        font-size:1.2rem;
+        text-align: center;
+        font-weight:400;
+    }
+    input, textarea {
+        color:#20448c;
+        font-weight: 600;
+    }
+    
+    color:#fff;
+    a{
+        color:cyan;
+    }
+
+
+}
+.light-mode{
+    background-color: #f8f8f8;
+    p{
+        color:#111;
+        font-weight:400;
+    }
+}
+.title-bar{
+    background:rgba(0,0,0,0.8);
+    margin-bottom:1rem;
+    padding-bottom: 1rem;
+    position: relative;
+    display: block;
+    z-index: 100;
+    
+    @media(max-width:1280px){
+        max-width: 640px;
+        margin:0px auto;
+    }
+    h1.title{
+        font-family: 'Zen Dots', cursive;
+     
+        
+        color:#fff;
+        text-align: center;
+        text-transform: uppercase;
+        padding:10px 0px 5px;
+
+    }
+    h2.featuring{
+        color:#fff;
+        font-size:1.2rem;
+        text-align: center;
+        font-weight:400;
+    }
+}

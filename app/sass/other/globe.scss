@@ -1,0 +1,30 @@
+#globe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 70%;
+    height: 70%;
+    margin-left: 15%;
+    margin-top: 15%;
+}
+
+#logo-container {
+    position: relative;
+    height: 0;
+    width: 100%;
+    padding-bottom: 100%;
+}
+
+.svg-element {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#world {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}

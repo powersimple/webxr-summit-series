@@ -1,0 +1,33 @@
+.meta-image-preview { max-width: 300px !important; }
+
+.set-meta { background: #000; color: #fff; padding: 3px 5px; font-size: 70%; border-radius: 5px; }
+
+.image-options { clear: both; position: relative; max-width: 300px; }
+
+#data-results { font-size: .8em; display: table; max-height: 300px; overflow: y-scroll; }
+
+#results-list { width: 38%; display: table-cell; padding-left: 0px; }
+
+#results-list li { cursor: pointer; margin-bottom: 0px; }
+
+#results-list li:hover { background: #f7f7f7; }
+
+#selection { display: table-cell; width: 50%; background: #f7f7f7; }
+
+#admin-card { background: #f7f7f7; height: 25px; margin-bottom: 1em; }
+
+#link-list { display: table; }
+
+#link-list li { display: table-cell; padding: 3px; font-size: .6em; }
+
+#keys li { list-style: none; display: inline; margin-right: 1em; cursor: pointer; }
+
+#scrape-results li { list-style: none; }
+#scrape-results span.admin-img-wrap { background-color: #000; display: inline-block; width: 30%; max-width: 200px; margin: 10px; }
+
+#terms { font-size: 80%; }
+#terms ul { max-width: 200px; }
+#terms ul li { margin-bottom: 2px; }
+#terms .cat-title { font-weight: bold; text-transform: uppercase; }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiIiwic291cmNlcyI6WyJwcm9maWxlci9hZG1pbi5jc3MiXSwiZmlsZSI6InByb2ZpbGVyL2FkbWluLmNzcyJ9 */

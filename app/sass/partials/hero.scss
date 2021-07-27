@@ -1,0 +1,191 @@
+  /* Dark background */
+  
+  .bg-dark,
+  .bg-dark-30,
+  .bg-dark-60,
+  .bg-dark-90,
+  .bg-dark .module-title,
+  .bg-dark-30 .module-title,
+  .bg-dark-60 .module-title,
+  .bg-dark-90 .module-title,
+  .bg-dark .module-subtitle,
+  .bg-dark-30 .module-subtitle,
+  .bg-dark-60 .module-subtitle,
+  .bg-dark-90 .module-subtitle,
+  .bg-dark .alt-module-subtitle h5,
+  .bg-dark-30 .alt-module-subtitle h5,
+  .bg-dark-60 .alt-module-subtitle h5,
+  .bg-dark-90 .alt-module-subtitle h5 {
+      color: #fff;
+  }
+  
+  .bg-dark-30:before {
+      position: absolute;
+      //background: rgba(2, 2, 2, 0.2);
+      content: " ";
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+  }
+  
+  .bg-dark-60:before {
+      position: absolute;
+      background: rgba(34, 34, 34, 0.8);
+      content: " ";
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+  }
+  
+  .bg-dark-90:before {
+      position: absolute;
+      background: rgba(34, 34, 34, 0.9);
+      content: " ";
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+  }
+  
+  .bg-gradient:before {
+      position: absolute;
+      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk1JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjk1Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+      /* FF3.6+ */
+      /* Chrome,Safari4+ */
+      /* Chrome10+,Safari5.1+ */
+      /* Opera 11.10+ */
+      /* IE10+ */
+      background: linear-gradient(to bottom, rgba(40, 115, 113, 0.57) 25%, rgba(115, 54, 31, 0.67) 75%);
+      /* W3C */
+      //filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#000000', GradientType=0);
+      /* IE6-8 */
+      content: " ";
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+  }
+  /* -------------------------------------------------------------------
+  Hero Slider
+  ------------------------------------------------------------------- */
+  
+  .hero-slider {
+      margin: 0 !important;
+  }
+  
+  .hero-slider .slides>li {
+      display: none;
+      -webkit-backface-visibility: hidden;
+  }
+  
+  .hero-slider,
+  .hero-slider .flex-viewport {
+      height: 100% !important;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+  }
+  
+  .hero-slider .slides {
+      height: 100% !important;
+      transition-delay: 1s;
+  }
+  
+  .hero-slider .flex-direction-nav a {
+      width: 15%;
+  }
+  
+  .hero-slider .slides li {
+      background-size: cover;
+      background-position: center center;
+      @media(max-width: 1280px) {
+          background-position: bottom left;
+      }
+      @media(orientation:portrait) {
+          background-position: bottom left;
+      }
+      background-repeat: no-repeat;
+      height: 100% !important;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+  }
+  /* Caption */
+  
+  .titan-caption {
+      position: relative;
+      display: table;
+      height: 100%;
+      width: 100%;
+  }
+  
+  .caption-content {
+      display: table-cell;
+      width: 70%;
+      top: 50vh;
+      left: 50%;
+      margin-left: -35%;
+      text-align: center;
+      position: absolute;
+  }
+  
+  .bg-light {
+      background: #f6f6f6;
+  }
+  
+  .parallax-bg {
+      background-attachment: fixed;
+      background-size: cover;
+  }
+  
+  .titan-title-size-1 {
+      letter-spacing: 4px;
+      font-size: 2vw;
+      text-shadow: 1px 1px #333;
+  }
+  
+  .titan-title-size-2 {
+      line-height: 1.3;
+      letter-spacing: 3px;
+      font-size: 2vw;
+      opacity: .8;
+      text-shadow: 1px 1px #333;
+  }
+  
+  .titan-title-size-3 {
+      letter-spacing: 16px;
+      font-size: 3vw;
+      text-shadow: 1px 1px #333;
+  }
+  
+  .titan-title-size-4 {
+      letter-spacing: 24px;
+      font-weight: 900;
+      font-size: 4vw;
+      line-height: 120%;
+      text-shadow: 5px 5px $darkest_blue;
+  }
+  
+  .hero-slider {}
+  
+  .caption-content a.btn {
+      font-size: 1vw;
+      text-shadow: 1px 1px #000;
+      background-color: rgba(18, 19, 60, 0.6);
+      p {
+          font-weight: 700;
+          margin-bottom: 0px;
+          span {
+              color: $light_green;
+          }
+      }
+      @media(max-width:767px) {
+          max-width: 90%;
+          word-wrap: break-word;
+      }
+  }

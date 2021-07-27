@@ -1,0 +1,95 @@
+#featured-image-wrap { // MARKED FOR DEATH
+    display:none;
+    /*
+    position: absolute;
+    width: 20vw;
+    height: 20vw;
+    padding: 0px;
+    top: 50%;
+    left: 2vw;
+    margin-top: -10%;
+    opacity: 1;
+    color: #fff;
+    img {
+        width: 100%;
+        height: auto;
+        z-index: 1000;
+    }
+    div {
+        text-align: center;
+        width: 100%;
+        line-height:120%;
+    }
+    #featured-image-header {
+        bottom: 100%;
+        #featured-image-title {
+            font-size: 150%;
+            position: absolute;
+            margin-top: -2em;
+            
+        
+        }
+        #featured-image-caption {
+            font-size: 80%;
+            font-style: italic;
+            position: absolute;
+            margin-top: -1.2em
+        }
+    }
+    #featured-image-footer {
+        #featured-image-description {
+            font-size: 100%;
+            position: absolute;
+            margin-top: 1.2em;
+        }
+        top:100%;
+    }
+    #featured-image-container {
+        border-radius: 50%;
+        border: 1px solid #ccc;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+    */
+}
+
+#featured-image-projector {
+    display: none;
+    position: absolute;
+    width: 9.09vw;
+    height: 9.09vw;
+    padding: 0px;
+    border-radius: 50%;
+  
+    top: 50%;
+    left: 2vw;
+    margin-top: -9.545%;
+    opacity: 1; // border: 1px solid #ccc;
+    overflow: hidden;
+    color: #fff;
+    transform: scale(3.0) scaleZ(1.2) rotateX(-16deg) rotateY(98deg) skewX(-16deg);
+    transform-origin: 0% 23%;
+    perspective: 230;
+    -webkit-transform: scale(3.0) scaleZ(1.2) rotateX(-16deg) rotateY(98deg) skewX(-16deg);
+    -webkit-transform-origin: 0% 23%;
+    -webkit-perspective: 230;
+    -webkit-perspective-origin: 50% 50%;
+    -moz-transform: scale(3.0) scaleZ(1.2) rotateX(-16deg) rotateY(98deg) skewX(-16deg);
+    -moz-transform-origin: 0% 23%;
+    -moz-perspective: 230;
+    -moz-perspective-origin: 50% 50%;
+    -o-transform: scale(3.0) scaleZ(1.2) rotateX(-16deg) rotateY(98deg) skewX(-16deg);
+    -o-transform-origin: 0% 23%;
+    -o-perspective: 230;
+    img {
+        width: 100%;
+        height: auto;
+        z-index: 1000;
+    }
+}
+
+.featured-caption {
+    position: absolute;
+    top: -10px;
+}

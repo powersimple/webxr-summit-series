@@ -1,0 +1,11 @@
+#language-menu{
+    position:absolute;
+    top:10px;
+    right:10px;
+    ul{
+        background-color: #fff;
+    }
+}
+.horizontal.maxed #language-menu{
+    transform:translate(-5vw,90vh);
+}

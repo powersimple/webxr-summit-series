@@ -1,0 +1,231 @@
+#guide {
+    strong {
+        font-weight: 700;
+    }
+    em {
+        font-style: italic;
+    }
+    td.col-sm-3 {
+        width: 25%
+    }
+    .row {
+        clear: both;
+        margin-bottom: 1em;
+        border-bottom: #606060;
+        padding-bottom: 1em;
+    }
+    .full-bleed {
+        margin: 0px;
+        padding: 0px !important;
+        page-break-before: avoid !important;
+        width: 100%;
+        height: 100%;
+        img {
+            width: 8.5in;
+            height: 11in;
+        }
+    }
+    .two_column {
+        max-height: 10.25in;
+        margin: 0 .5in;
+        column-width: 2.5in;
+        column-gap: .5in;
+        font-family: 'Freight Sans Book';
+        overflow: hidden;
+        padding: 1in .5in !important
+    }
+    p,
+    li {
+        margin-bottom: 13.2pt;
+        line-height: 13.2pt;
+        font-size: 11pt;
+    }
+    li {
+        margin-bottom: .5em;
+    }
+    @font-face {
+        font-family: "Freight Sans Book";
+        src: url("fonts/FreightSansBook.otf") format("opentype");
+    }
+    @media print {
+        a[href]:after {
+            content: none !important;
+        }
+        .container {
+            max-width: 100%;
+        }
+        hr.page-break {
+            page-break-after: always;
+            max-width: 100%;
+            display: block;
+            position: relative;
+            margin: 0px !important;
+            border: none;
+        }
+        hr.page-break:after {
+            margin-bottom: .5in;
+        }
+    }
+    .col-print-1 {
+        width: 8%;
+        float: left;
+    }
+    .col-print-2 {
+        width: 16%;
+        float: left;
+    }
+    .col-print-3 {
+        width: 25%;
+        float: left;
+    }
+    .col-print-4 {
+        width: 33%;
+        float: left;
+    }
+    .col-print-5 {
+        width: 42%;
+        float: left;
+    }
+    .col-print-6 {
+        width: 50%;
+        float: left;
+    }
+    .col-print-7 {
+        width: 58%;
+        float: left;
+    }
+    .col-print-8 {
+        width: 66%;
+        float: left;
+    }
+    .col-print-9 {
+        width: 75%;
+        float: left;
+    }
+    .col-print-10 {
+        width: 83%;
+        float: left;
+    }
+    .col-print-11 {
+        width: 92%;
+        float: left;
+    }
+    .col-print-12 {
+        width: 100%;
+        float: left;
+    }
+    h1,
+    h2,
+    h3,
+    h4 {
+        position: relative;
+        clear: both;
+    }
+    h1 {
+        font-size: 24pt;
+        font-weight: 700;
+        line-height: 26pt;
+        margin-bottom: 12pt;
+        width: 100%;
+    }
+    h2 {
+        font-size: 20pt;
+        font-weight: 600;
+    }
+    h3 {
+        font-size: 16pt;
+        font-weight: 600;
+    }
+    h4 {
+        font-size: 14pt;
+        font-weight: 600;
+    }
+    a.toc-h1 {
+        font-size: 12pt;
+        font-weight: 700;
+        white-space: nowrap;
+        margin-top: 1em;
+        margin-bottom: .5em;
+    }
+    a.toc-h2 {
+        font-size: 11pt;
+        font-weight: 600;
+        padding-left: .5in;
+        white-space: nowrap;
+    }
+    a.toc-h3 {
+        font-size: 10pt;
+        font-weight: 400;
+        padding-left: 1in;
+        white-space: nowrap;
+    }
+    a.toc-h4 {
+        font-size: 9pt;
+        font-weight: 400;
+        padding-left: 1.2in;
+        white-space: nowrap;
+    }
+    .section_menu td {
+        height: 100%;
+        a {
+            width: 90%;
+            height: 100%;
+            font-size: 11px;
+            line-height: 1.25;
+            text-transform:uppercase;
+            img {
+                border-radius: 10px;
+                width: 100%;
+                height: 100%;
+                margin:6px 0 0 0;                
+            }
+
+        }
+         @media(max-width:768px){
+            padding:3px;
+            a{    
+            font-size:8pt;
+            }
+        }
+    }
+    .newpage {
+        margin-top: 1in;
+    }
+
+    #t-o-c {
+        ul {
+            margin-top: .5em;
+            li {
+                list-style: none;
+                line-height: 100%;
+                ul {
+                    padding-left: 0px;
+                }
+            }
+        }
+    }
+    #pojo-a11y-toolbar {
+        display: none;
+    }
+    .col-left {
+        padding-left: 0px;
+    }
+    .col-right {
+        padding-right: 0px;
+    }
+    .clear {
+        clear: both;
+        position: relative;
+    }
+    p,
+    li {
+        font-size: 1rem;
+        line-height: 150%;
+    }
+    p {
+        margin-bottom: 1rem;
+    }
+    ul.col-left {
+        padding-left: 25px;
+    }
+} 

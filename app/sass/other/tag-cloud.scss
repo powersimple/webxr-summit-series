@@ -1,0 +1,31 @@
+  #tag-cloud {
+      position: absolute;
+      z-index: 10000;
+      width: 38.2vh;
+      height: 38.2%;
+      left: 50%;
+      top: 33%;
+      margin-top: -19.1vh;
+      margin-left: -32.1vh;
+      svg {
+          background: transparent !important;
+          rect {
+              background: transparent !important;
+          }
+          a {
+              @media(max-width: 539px) {
+                  font-size: 80%;
+              }
+          }
+      }
+      background:transparent !important;
+      // margin-left: -19.1vh;
+  }
+  
+  #tag-cloud-button {
+      top: 25px;
+      right: 5px;
+      width: 50px;
+      position: absolute;
+      cursor: pointer;
+  }

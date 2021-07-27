@@ -1,0 +1,362 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
+* {
+    box-sizing: border-box
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00bfff;
+    text-decoration: none;
+}
+
+body {
+
+    margin: 0;
+
+}
+
+/*NAVIGATION -------------------------------------------------------*/
+#top-nav,
+.nav2 {
+    background-color: rgba(0,0,0,.5);
+    border-bottom: 1px solid #000;
+    height: 50px;
+    width: 100%;
+    z-index: 1;
+    position: fixed;
+}
+
+.nav2 {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+#menu,
+#menuclose {
+    float: left;
+    height: 50px;
+    width: 50px;
+    background-position: 0 0;
+    position: relative;
+    z-index: 2;
+    background: url(../images/icons/menu.png);
+}
+
+#menu:hover,
+#menuclose:hover {
+    background-position: 50px 0;
+    cursor: pointer;
+}
+
+#menuclose,
+#menuclose:hover {
+    display: none;
+}
+
+#logo {
+    float: left;
+ 
+    background-position: 0 -50px;
+    width: 50px;
+    border-left: 1px solid #5a6972;
+    height: 50px;
+}
+
+#profile {
+    float: right;
+    width: 300px;
+    height: 50px;
+   position: re;
+   right:0px;
+
+}
+#profile .fa{
+        font-size: 25px;
+        margin-top:10px;
+        margin-right:10px;
+        opacity:0.5;
+}
+#profile .fa span{
+ font-family:'Open Sans',
+ Arial,
+ Helvetica,
+ sans-serif;
+}
+#profile .fa:hover {
+    font-size: 25px;
+    margin-top: 10px;
+    margin-right: 10px;
+    opacity: 1;
+}
+.discord{
+    height:25px;
+    width:25px;
+    background:url(../images/icons/discord.png) center center no-repeat;
+    background-size: cover;
+    margin-bottom:-5px !important;
+}
+.winner::before{
+    content: "WINNER";
+    text-align: center;
+    color: #fff;
+    border-top: 1px solid #fff;
+    display: block;
+    font-weight: bold;
+    border-bottom: 1px solid #fff;
+
+    padding: 5px 0px;
+    margin-bottom: 10px;
+}
+
+.winner{
+background: #333;
+padding: 25px 0px;
+border-radius: 25px;
+border: 1px solid #fff;
+}
+.inapppage {
+    padding-left: 0px;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    float: left;
+    width: 160px;
+    font-size: 16px;
+    padding-top: 14px;
+    height: 36px;
+}
+
+.studio {
+    display: none;
+}
+
+.bredcrumb {
+    margin-left: 10px;
+}
+
+#subnav {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    color: #333;
+    padding-left: 60px;
+    padding-top: 15px;
+    display: block;
+    width: 100%;
+    height: 50px;
+    background-color: #FFF;
+
+}
+
+.home,
+.trends,
+.search,
+.topics,
+.groups,
+.help,
+.feedback,
+.expand,
+.collapse {
+   
+    height: 50px;
+    width: 200px;
+    margin-left: 5px;
+    background-position: 0px 0px;
+    margin-top: 5px;
+}
+
+.home {
+    margin-top: 55px;
+    background-position: -420px 0px;
+}
+
+.home.unselected:hover {
+    cursor: pointer;
+    background-position: -0px -0px;
+}
+
+.trends {
+    background-position: 0px -50px;
+}
+
+.trends.unselected:hover {
+    cursor: pointer;
+    background-position: -250px -50px;
+}
+
+.search {
+    background-position: 0px -100px;
+}
+
+.search.unselected:hover {
+    cursor: pointer;
+    background-position: -250px -100px;
+}
+
+.topics {
+    background-position: 0px -150px;
+}
+
+.topics.unselected:hover {
+    cursor: pointer;
+    background-position: -250px -150px;
+}
+
+.groups {
+    background-position: 0px -200px;
+}
+
+.groups.unselected:hover {
+    cursor: pointer;
+    background-position: -250px -200px;
+}
+
+.expand {
+    display: none;
+    position: absolute;
+    background-position: 0px 100px;
+    bottom: 0px;
+}
+
+.expand:hover {
+    cursor: pointer;
+    background-position: -250px 100px;
+}
+
+.feedback {
+    position: absolute;
+    background-position: 0px 150px;
+    bottom: 55px;
+}
+
+.feedback:hover {
+    cursor: pointer;
+    background-position: -250px 150px;
+}
+
+.help {
+    position: absolute;
+    background-position: 0px 200px;
+    bottom: 110px;
+}
+
+.help:hover {
+    cursor: pointer;
+    background-position: -250px 200px;
+}
+
+.collapse {
+    position: absolute;
+    bottom: 0px;
+    background-position: 0px 50px;
+}
+
+.collapse:hover {
+    cursor: pointer;
+    background-position: -250px 50px;
+}
+
+/*SIDE DRAWER--------------------------------------------------*/
+.sidedrawer {
+    position: absolute;
+    width: 250px;
+    background-color: rgba(0,0,0,.3);
+    top: 0;
+    left: -250px;
+    bottom: 0;
+    z-index: 1000;
+     font-family:'Open Sans',
+     sans-serif;
+}
+
+#accordion {
+    z-index: 1000;
+    position: inherit;
+    color: #fff;
+    overflow-y: scroll;
+    line-height: 120%;
+    width:100%;
+        max-height: 70vh;
+}
+
+#accordion ul li{
+    margin-bottom:25px;
+}
+
+#accordion ul li img{
+    width:75px;
+    border-radius:50%;
+    margin: 0px auto;
+    display: block;
+}
+/*
+#accordion ul li img:hover {
+    
+    -webkit-box-shadow: 5px 5px 15px 5px #FF8080,
+    -9px 5px 15px 5px #FFE488,
+    -7px -5px 15px 5px #8CFF85,
+    12px -5px 15px 5px #80C7FF,
+    12px 10px 15px 7px #E488FF,
+    -10px 10px 15px 7px #FF616B,
+    -10px -7px 27px 1px #8E5CFF,
+    5px 5px 15px 5px rgba(0, 0, 0, 0);
+}*/
+
+#nominees
+    h2{
+        font-size:16px;
+        font-weight:bold;
+    color:#fff;
+    text-align: center;
+}
+
+#accordion h3 {
+    text-align:center;
+    background:rgb(255,255,255,0.1);
+    padding:20px 25px;
+    text-shadow: 1px 1px #000;
+
+}
+.sidedrawer  h4 {
+    color:#fff;
+    font-size:14px;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    font-family: sans-serif;
+    font-weight: 300;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0px 10px;
+
+}
+#accordion ul li span {
+  display:block;
+  text-align: center;
+  text-shadow:1px 1px #000;
+  
+}
+
+.nomination {
+  
+    font-weight:bold;
+    font-size:16px;
+}
+.nominee{
+    display:block;
+    font-size:12px;
+    
+}
+
+
+.a-enter-ar,
+.a-enter-vr {
+    position:fixed;
+  
+}

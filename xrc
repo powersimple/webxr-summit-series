@@ -1,0 +1,123 @@
+<?php
+# Database Configuration
+define( 'DB_NAME', 'wp_xrcollab' );
+define( 'DB_USER', 'xrcollab' );
+define( 'DB_PASSWORD', 'NkwbvapSMpjvVuUx-GMN' );
+define( 'DB_HOST', '127.0.0.1' );
+define( 'DB_HOST_SLAVE', '127.0.0.1' );
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', 'utf8_unicode_ci');
+$table_prefix = 'wp_';
+
+# Security Salts, Keys, Etc
+define('AUTH_KEY',         'aH(+7%tuMuj/Jgy[];`V09|#m+TQh;g5<>GEB@]NYP$<FzvkzP-]O QTxGB7|:jZ');
+define('SECURE_AUTH_KEY',  'W|Ja57*@,&VyL::GmT|&S&$PHc)Q7+OW+1@|;hqkg]}ANwduK+,U|Iu4eAGVVwd^');
+define('LOGGED_IN_KEY',    'R|1>xGb;l+vg+Z2oUE85pPHH]|^X#Q^t7+* 4a}m+/Lh- Qc9QgT&H{x|>3(Pu^>');
+define('NONCE_KEY',        'BqtH0mP-{|9{)tZ5Tmss--jE;Z/q4v;7&`LtOjbj-/-k9j=P7,E(Caf&LqZOCF#%');
+define('AUTH_SALT',        'iC_3D)3b*PgI!I?dc|7<7*>^f*7]!<`,/nfw}`sMSQz0@Q-FrDThFUk@{uS2@k6F');
+define('SECURE_AUTH_SALT', 'rg(~|lV7dI+gL?Y,p%*t10ue>yn^R5gX(Lt#|MF.Qu&;DtRbe]x@WrZZw@9ubMBJ');
+define('LOGGED_IN_SALT',   '*qu?+I-_||<j&p[t,Se}D$|7NFRVkhucCL)v0D30+#>Z 0:?iNaeDI#_!}[gArTN');
+define('NONCE_SALT',       'tGgq$M80COJM7hPWjmaDkGL:x0M-Lkj9dGodI!nB<zTgl|n<1P8:e-F+s~)~i+]/');
+
+
+# Localized Language Stuff
+
+define( 'WP_CACHE', TRUE );
+
+define( 'WP_AUTO_UPDATE_CORE', false );
+
+define( 'PWP_NAME', 'xrcollab' );
+
+define( 'FS_METHOD', 'direct' );
+
+define( 'FS_CHMOD_DIR', 0775 );
+
+define( 'FS_CHMOD_FILE', 0664 );
+
+define( 'PWP_ROOT_DIR', '/nas/wp' );
+
+define( 'WPE_APIKEY', '6e171a35b3882a57948af0e9906540067597d0a7' );
+
+define( 'WPE_CLUSTER_ID', '140191' );
+
+define( 'WPE_CLUSTER_TYPE', 'pod' );
+
+define( 'WPE_ISP', true );
+
+define( 'WPE_BPOD', false );
+
+define( 'WPE_RO_FILESYSTEM', false );
+
+define( 'WPE_LARGEFS_BUCKET', 'largefs.wpengine' );
+
+define( 'WPE_SFTP_PORT', 2222 );
+
+define( 'WPE_LBMASTER_IP', '' );
+
+define( 'WPE_CDN_DISABLE_ALLOWED', true );
+
+define( 'DISALLOW_FILE_MODS', FALSE );
+
+define( 'DISALLOW_FILE_EDIT', FALSE );
+
+define( 'DISABLE_WP_CRON', false );
+
+define( 'WPE_FORCE_SSL_LOGIN', false );
+
+define( 'FORCE_SSL_LOGIN', false );
+
+/*SSLSTART*/ if ( isset($_SERVER['HTTP_X_WPE_SSL']) && $_SERVER['HTTP_X_WPE_SSL'] ) $_SERVER['HTTPS'] = 'on'; /*SSLEND*/
+
+define( 'WPE_EXTERNAL_URL', false );
+
+define( 'WP_POST_REVISIONS', FALSE );
+
+define( 'WPE_WHITELABEL', 'wpengine' );
+
+define( 'WP_TURN_OFF_ADMIN_BAR', false );
+
+define( 'WPE_BETA_TESTER', false );
+
+umask(0002);
+
+$wpe_cdn_uris=array ( );
+
+$wpe_no_cdn_uris=array ( );
+
+$wpe_content_regexs=array ( );
+
+$wpe_all_domains=array ( 0 => 'xrcollaboration.com', 1 => 'xrcollab.wpengine.com', );
+
+$wpe_varnish_servers=array ( 0 => 'pod-140191', );
+
+$wpe_special_ips=array ( 0 => '35.203.2.158', );
+
+$wpe_netdna_domains=array ( );
+
+$wpe_netdna_domains_secure=array ( );
+
+$wpe_netdna_push_domains=array ( );
+
+$wpe_domain_mappings=array ( );
+
+$memcached_servers=array ( );
+
+define( 'WP_SITEURL', 'https://xrcollaboration.com' );
+
+define( 'WP_HOME', 'https://xrcollaboration.com' );
+define('WPLANG','');
+
+# WP Engine ID
+
+
+# WP Engine Settings
+
+
+
+
+
+
+# That's It. Pencils down
+if ( !defined('ABSPATH') )
+	define('ABSPATH', __DIR__ . '/');
+require_once(ABSPATH . 'wp-settings.php');

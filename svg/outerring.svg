@@ -1,0 +1,35 @@
+<svg id="OuterRing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+    <defs>
+        <style>
+        .outer-ring {
+            fill: none;
+            stroke-miterlimit: 10;
+            stroke-width: 34px;
+        }
+        </style>
+    </defs>
+    <defs>
+        <linearGradient id="outer-ring-gradient" fx="50%" fy="50%" cx="50%" cy="50%" r="75%">
+            <stop offset="0%" stop-color="#ffdd15" stop-opacity="1">
+                <animate attributeName="stop-color" values="#ffdd15; #fff200; #a87c4f" dur="4s" repeatCount="indefinite"></animate>
+            </stop>
+           
+            <stop offset="50%" stop-color="#fff200" stop-opacity="1">
+                <animate attributeName="stop-color" values="#fff200; #a87c4f; #ffdd15" dur="4s" repeatCount="indefinite"></animate>
+            </stop>
+       
+            <stop offset="100%" stop-color="#ffdd15" stop-opacity="1">
+                <animate attributeName="stop-color" values="#ffdd15; #fff200; #a87c4f" dur="4s" repeatCount="indefinite"></animate>
+            </stop>
+        </linearGradient>
+         <filter id="pyraglow">
+        <feSpecularLighting result="specOut"
+            specularExponent="60" lighting-color="#ffcc00">
+          <fePointLight id="pyralight" x="400" y="300" z="10"/>
+        </feSpecularLighting>
+        <feComposite in="SourceGraphic" in2="specOut"
+            operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+      </filter>
+    </defs>
+    <circle class="outer-ring" stroke="url(#outer-ring-gradient)" cx="500" cy="500" r="483" />
+</svg>

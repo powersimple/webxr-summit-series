@@ -1,0 +1,117 @@
+#agenda {
+    background: linear-gradient(to bottom, $darkest_blue 0%, $dark_blue 25%, $dark_blue 75%, $darkest_blue 100%);
+    color: #fff;
+    border-bottom: 10px solid $darkest_blue;
+    h2.module-title {
+        color: #b7d547;
+    }
+    font-size:120%;
+    line-height:120%;
+    @media(max-width:767px) {
+        .seal {
+            width: 50%;
+            margin: 0px auto;
+            display: block;
+        }
+    }
+    .featured {
+        margin: 25px 0px;
+        padding: 15px;
+    }
+    .schedule-bg {
+        max-width: 90%;
+        background-color: $lightest_gray;
+        color: $dark_blue;
+        border-radius: 25px;
+        padding: 15px;
+        margin: 0px aut0;
+        h3 {
+            font-size: 1.5vw;
+            font-weight: 600;
+            text-align: center;
+            color: $blue;
+            @media(max-width: 768px) {
+                font-size: 3vw;
+            }
+            @media(min-width:1681px) {
+                font-size: 1.5em;
+            }
+            h4 {
+                font-weight: 600;
+                color: $power-purple;
+                text-align: center;
+            }
+        }
+    }
+}
+
+#slideshow {
+    padding-bottom: 0px;
+    background: #000;
+}
+
+.panel-speaker {
+    line-height: 120%;
+}
+
+#venue {
+    background: $lightest_gray;
+}
+
+#volunteer {
+    input[type=text],
+    input[type=submit],
+    textarea {
+        color: $dark_blue;
+    }
+}
+
+#registration {
+    background: $light_blue;
+    h2.module-title {
+        color: $dark_blue;
+    }
+    p,
+    li {
+        color: #fff;
+    }
+    border-bottom:10px solid $darkest_gray;
+}
+
+#widgets {
+    background: linear-gradient(to bottom, $darkest_blue 0%, $dark_blue 25%, $blue 61.8%, $dark_blue 75%, $darkest_blue 100%);
+    color: $light_gray;
+}
+
+.section-thumbnail {}
+
+.section-content {}
+
+#conference2020 {
+    background: linear-gradient(to bottom, $deep-purple 0%, $deep-purple 25%, $power-purple 45%, $light-purple 50%, $power-purple 55%, $deep-purple 75%, $deep-purple 100%);
+    color: #fff;
+    border-bottom: 6px groove $bright-yellow;
+    h2 {
+        color: $hot-yellow;
+    }
+}
+
+#conference2019 {
+    // background: linear-gradient(to bottom, $darkest_blue 0%, $dark_blue 25%, $blue 61.8%, $dark_blue 75%, $darkest_blue 100%);
+    color: $darkest_blue;
+    h2 {
+        color: $light-green;
+    }
+}
+
+.download-posters {
+    background: #fff;
+    color: #11233c;
+    padding: 70px;
+    border-top: 3px solid $darkest_blue;
+    border-bottom: 10px solid $darkest_blue;
+}
+
+#conference2020 {
+    height: 100vh;
+}

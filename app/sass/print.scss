@@ -1,0 +1,395 @@
+@import "partials/colors";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap');
+#header,
+footer,
+#sponsor-footer,
+#pojo-a11y-toolbar,
+#directory-filters {
+    display: none;
+}
+
+html,
+body,
+main {
+    display: block;
+    size: 8.5in 11in;
+    margin: 0;
+    padding: 0;
+    font-size: 11pt;
+    font-family: 'Open Sans' sans-serif;
+}
+
+table {
+    page-break-inside: auto;
+}
+
+tr {
+    page-break-inside: auto;
+}
+
+@page {
+    h1 {
+        clear: both;
+        page-break-before: none;
+    }
+}
+
+section {
+    clear: both;
+    max-width: 8.5in;
+    position: relative;
+}
+
+section:last-child {
+    clear: both;
+    max-width: 8.5in;
+    position: relative;
+}
+
+section#lead-page {
+    margin-top: -1in;
+    page-break-after: always;
+}
+
+.module {
+    padding: 0 1in;
+}
+
+h1 {
+    margin-top: 0in;
+    color: $power-purple !important;
+}
+
+h2 {
+    color: $dark_blue !important;
+}
+
+@page {
+    size: 8.5in 11in;
+    margin: 1in 0 0 0!important;
+    padding: 0;
+    position: relative;
+}
+
+@page:first {
+    size: 8.5in 11in;
+    margin: 0!important;
+    padding: 0;
+    position: relative; }
+
+html,
+body {
+    //height: 100%;
+}
+
+body {
+    margin: 0;
+    line-height: 1.3;
+}
+
+strong {
+    font-weight: 700;
+}
+
+em {
+    font-style: italic;
+}
+
+td.col-sm-3 {
+    width: 25%
+}
+
+.row {
+    clear: both;
+    margin-bottom: 1em;
+    border-bottom: #606060;
+    padding-bottom: 1em;
+}
+
+.full-bleed {
+    margin: 0px;
+    padding: 0px !important;
+    page-break-before: avoid !important;
+    width: 100%;
+    height: 100%;
+    img {
+        width: 8.5in;
+        height: 11in;
+    }
+}
+
+.two_column {
+    max-height: 10.25in;
+    margin: 0 .5in;
+    column-width: 2.5in;
+    column-gap: .5in;
+    font-family: 'Freight Sans Book';
+    overflow: hidden;
+    padding: 0 .5in !important
+}
+
+p,
+li {
+    margin-bottom: 13.2pt;
+    line-height: 13.2pt;
+    font-size: 11pt;
+}
+
+li {
+    margin-bottom: .5em;
+}
+
+@font-face {
+    font-family: "Freight Sans Book";
+    src: url("fonts/FreightSansBook.otf") format("opentype");
+}
+
+@media print {
+    a[href]:after {
+        content: none !important;
+    }
+    .container {
+        max-width: 100%;
+    }
+    hr.page-break {
+        page-break-after: always;
+        max-width: 100%;
+        display: block;
+        position: relative;
+        margin: 0px !important;
+        border: none;    
+        clear:both;
+    }
+    hr.page-break:after {
+        margin-bottom: .5in;
+    } 
+}
+
+
+.col-print-1 {
+    width: 8%;
+    float: left;
+}
+
+.col-print-2 {
+    width: 16%;
+    float: left;
+}
+
+.col-print-3 {
+    width: 25%;
+    float: left;
+}
+
+.col-print-4 {
+    width: 33%;
+    float: left;
+}
+
+.col-print-5 {
+    width: 42%;
+    float: left;
+}
+
+.col-print-6 {
+    width: 50%;
+    float: left;
+}
+
+.col-print-7 {
+    width: 58%;
+    float: left;
+}
+
+.col-print-8 {
+    width: 66%;
+    float: left;
+}
+
+.col-print-9 {
+    width: 75%;
+    float: left;
+}
+
+.col-print-10 {
+    width: 83%;
+    float: left;
+}
+
+.col-print-11 {
+    width: 92%;
+    float: left;
+}
+
+.col-print-12 {
+    width: 100%;
+    float: left;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    position: relative;
+    clear: both;
+}
+
+h1 {
+    font-size: 24pt;
+    font-weight: 700;
+    line-height: 26pt;
+    margin-bottom: 12pt;
+    width: 100%;
+}
+
+h2 {
+    font-size: 20pt;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 16pt;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 14pt;
+    font-weight: 600;
+}
+
+a.toc-h1 {
+    font-size: 12pt;
+    font-weight: 700;
+    white-space: nowrap;
+    margin-top: 1em;
+    margin-bottom: .5em;
+}
+
+a.toc-h2 {
+    font-size: 11pt;
+    font-weight: 600;
+    padding-left: .5in;
+    white-space: nowrap;
+}
+
+a.toc-h3 {
+    font-size: 10pt;
+    font-weight: 400;
+    padding-left: 1in;
+    white-space: nowrap;
+}
+
+a.toc-h4 {
+    font-size: 9pt;
+    font-weight: 400;
+    padding-left: 1.2in;
+    white-space: nowrap;
+}
+
+.section_menu td {
+    height: 100%;
+    a {
+        width: 90%;
+        height: 100%;
+        font-size: 11px;
+        line-height: 1.25;
+        text-transform:uppercase;
+        img {
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;            
+        }
+
+    }
+}
+
+img.alignright {float:right;margin: 0 0 24px 12px;max-width:50%!important}
+img.alignleft {float:left;margin: 0 12px 24px 0;max-width:50%!important}
+figcaption {font-size:12px; font-style: italic; }
+
+.newpage {
+    margin-top: .1in;
+}
+
+@media print {
+    table.video-conferencing {
+        width: 66%;
+        position: relative;
+        margin:auto;
+        td a strong {
+            font-size: 10pt;
+        }
+    }
+}
+
+section.print-page {
+    page-break-after: always;
+}
+
+.page-footer {
+    display: block;
+    position: absolute;
+    top: 9.3in;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    padding: 0px;
+    span.page_number {
+        background: $power-purple !important;
+        color: #fff !important;
+        padding: 3px;
+        border-radius: 50%;
+        width: .25in;
+        height: .25in;
+        padding: 3px;
+        right: 1in;
+        position: absolute;
+        font-weight: 700;
+        text-align: center;
+    }
+    .dots {
+        width: 25%;
+        left: 50%;
+        margin-left: -12.5%;
+        display: block;
+        position: absolute;
+    }
+    a {
+        color: $blue;
+    }
+    strong {
+        font-weight: 700;
+    }
+}
+
+#t-o-c {
+    ul {
+        margin-top: .5em;
+        li {
+            list-style: none;
+            line-height: 100%;
+            ul {
+                padding-left: 0px;
+            }
+        }
+    }
+}
+
+.col-left {
+    padding-left: 0px;
+}
+
+.col-right {
+    padding-right: 0px;
+}
+
+.clear {
+    clear: both;
+    position: relative;
+}
+
+#xr-glossary .wp-block-table
+    {
+        td {font-size:14px; padding:6px; line-height:125%}
+        td:nth-of-type(1) {text-align:right;color:$power-purple!important; font-weight:bold; width: 140px;}
+    }
