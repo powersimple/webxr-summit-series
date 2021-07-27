@@ -587,7 +587,8 @@ blockquote {
   #megamenu li,
   #megamenu li {
     font-size: 1em !important;
-    list-style: none; }
+    list-style: none;
+    border: 1px solid rgba(0, 0, 0, 0.8); }
   #megamenu a,
   #megamenu a:hover,
   #megamenu a.active,
@@ -621,7 +622,8 @@ blockquote {
   #megamenu .exo-menu > li > a:hover,
   #megamenu li.drop-down ul > li > a {
     background: #009FE1;
-    color: #fff; }
+    color: #fff;
+    text-shadow: 1px 1px #000; }
   #megamenu li.drop-down::after {
     margin-right: 10px;
     border-bottom-left-radius: 10px;
@@ -1037,6 +1039,8 @@ footer ul {
     padding: 5px 0px; }
   .partners a {
     font-size: .8rem; }
+  .partners a:hover, .partners a:active {
+    color: #FFF; }
 
 .awe {
   background: url(images/logo/awe50h.png) center left no-repeat transparent;
@@ -1244,7 +1248,6 @@ body::-webkit-scrollbar-thumb {
 .main {
   color: #fff; }
   .main h1.title {
-    font-family: 'Zen Dots', cursive;
     color: #fff;
     text-align: center;
     text-transform: uppercase;
@@ -1278,7 +1281,6 @@ body::-webkit-scrollbar-thumb {
       max-width: 640px;
       margin: 0px auto; } }
   .title-bar h1.title {
-    font-family: 'Zen Dots', cursive;
     color: #fff;
     text-align: center;
     text-transform: uppercase;
@@ -5083,34 +5085,44 @@ Google map
 .a-enter-ar {
   right: 190px !important; }
 
-.polys a {
-  padding-left: 25px !important;
-  background: url(images/icons/Trophy.png) left center no-repeat transparent !important;
-  height: 60px !important; }
+.polys {
+  background: url(images/icons/Trophy.png) left center no-repeat transparent !important; }
+  .polys a {
+    padding-left: 25px !important;
+    height: 60px !important; }
+  .polys a:hover {
+    background: #c945cc;
+    background: linear-gradient(0deg, #9245cc 1%, #4e157a 19%, #1a073a 35%, #200642 60%, #600a7c 85%, #a034d9 100%) !important; }
+
+.polys2 a {
+  background: #e750cd;
+  background: linear-gradient(0deg, #fa5af4 1%, #c2118e 21%, #af1e89 48%, #d50194 60%, #991380 85%, #db11b8 100%) !important; }
+  .polys2 a sup {
+    font-size: 80%; }
 
 .red-carpet a {
-  background-color: #bf2525 !important; }
+  background: #fe4c4a;
+  background: linear-gradient(0deg, #fe4c4a 0%, #fa0001 16%, #8e0e17 33%, #7e030c 60%, #fc0000 84%, #eb2d37 100%) !important; }
 
-.red-carpet a:hover, .red-carpet a:active {
-  background-color: #78060e !important; }
-
-.ceremony {
-  background-color: #260642; }
+.award-ceremony a {
+  background: #50dce7;
+  background: linear-gradient(0deg, #50dce7 1%, #1f8887 19%, #0e6e7e 35%, #095c7c 60%, #137499 85%, #11d6db 100%) !important; }
 
 .business-summit a {
-  background-color: #b05f01 !important; }
-
-.developer-summit {
-  background-color: #12709B; }
+  background: #ffff04;
+  background: linear-gradient(0deg, #ffff04 0%, #df7101 13%, #884b02 41%, #985202 62%, #df7101 78%, #f79801 100%) !important; }
 
 .design-summit a {
-  background-color: #eb2607 !important; }
+  background: #ff464f;
+  background: linear-gradient(0deg, #ff4aa6 0%, #ff290e 14%, #d52712 36%, #bd1704 61%, #bd2a1b 81%, #e66d39 100%) !important; }
 
-.developer-summit {
-  background-color: #1d78cb !important; }
+.developer-summit a {
+  background: #62e8ff;
+  background: linear-gradient(0deg, #62e8ff 0%, #3fafff 12%, #0b6486 34%, #095175 69%, #1184dd 86%, #a8fefd 100%) !important; }
 
 .summit-series a:hover {
-  background-color: #3a5825; }
+  background-color: #3a5825;
+  background: linear-gradient(0deg, #8cb273 0%, #4b8b1d 13%, #335e17 33%, #366e0e 65%, #46960f 82%, #afe28d 100%) !important; }
 
 .awards a:hover {
   background-color: #260642; }

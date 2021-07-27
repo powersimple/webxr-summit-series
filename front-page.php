@@ -73,7 +73,7 @@
 <a-asset-item id="design-summmit-square" response-type="arraybuffer"
     src="/assets/models/DesignSummit-square.glb"></a-asset-item>
 <a-asset-item id="space-elevator" response-type="arraybuffer"
-    src="/assets/models/elevator/SpaceElevatorTower.glb"></a-asset-item>
+    src="/assets/models/elevator/ElevatorShaftPink.glb"></a-asset-item>
 <a-asset-item id="business-platform" response-type="arraybuffer"
     src="/assets/models/elevator/business-platform.glb"></a-asset-item>
 <a-asset-item id="design-platform" response-type="arraybuffer"
@@ -118,33 +118,7 @@
 
 
         <a-entity id="rig" rotation-reader thumbstick-logging
-            movement-controls="speed: 0.2; constrainToNavMesh: true;fly: true " position="0 0.1 1">
-            <!-- Player Character -->
-            <a-box id="body" plane-hit aabb-collider="collideNonVisible: true; objects: .zone" static-body="shape: box"
-                position="0 0.05 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
-
-            <!-- CAMERA 
-                    summit coords position="-40 35 -105" f
-
-                -->
-
-            <a-entity id="camera" camera look-controls raycaster="far: 5; objects: .clickable"
-                super-hands="colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
-                position="-39 167.5 -101" rotation="180 150 0">
-                <a-entity id="crosshair" cursor="rayOrigin:mouse" position="0 0 -0.2"
-                    geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003" material="shader: flat"
-                    raycaster="far: 5; objects: .clickable" visible="false"></a-entity>
-            </a-entity>
-            <a-entity mixin="hand" hand-controls="hand: left; handModelStyle: lowPoly; color: #0055ff">
-                <!--<a-entity fps-counter></a-entity>-->
-
-            </a-entity>
-            <a-entity mixin="hand" hand-controls="hand: right; handModelStyle: lowPoly; color: #0055ff"
-                blink-controls="cameraRig: #rig;  teleportOrigin: #camera; collisionEntities: #mountain-model; hitCylinderColor: #00; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8">
-            </a-entity>
-        </a-entity>
-        <a-entity id="rig" rotation-reader thumbstick-logging
-            movement-controls="speed: 0.1; constrainToNavMesh: true;fly: true" position="-39 157 -97.5" rotation="0 0 0">
+            movement-controls="speed: 0.1; constrainToNavMesh: true;fly: true" position="-40 161 -97.5" rotation="0 0 0">
            
             <a-box id="body" plane-hit aabb-collider="collideNonVisible: true; objects: .zone" static-body="shape: box"
                 position="0 0.05 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
@@ -161,7 +135,7 @@
             <a-entity oculus-touch-controls="hand: left" vive-controls="hand: left" thumb-controls="hand: left">
             </a-entity>
             <a-entity oculus-touch-controls="hand: right" vive-controls="hand: right " thumb-controls="hand: right"
-                blink-controls="cameraRig: #rig; teleportOrigin: #camera; collisionEntities: #nav #platform-collider; hitCylinderColor: #e9974c; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8">
+                blink-controls="cameraRig: #rig; teleportOrigin: #camera; collisionEntities: #nav; hitCylinderColor: #e9974c; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8">
             </a-entity>
 
         </a-entity>  
@@ -353,9 +327,6 @@ Karen Alexander - Linda Ricci - Ben Erwin;color:#fff; fontSize:.5;align:center;"
         </a-entity>
 
 
-
-
-        <?php// include "webxr/polys/2020-Polys.php";?>
 
 
 

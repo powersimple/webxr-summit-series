@@ -44,6 +44,7 @@ if($post->post_parent==0){
     <h1 class="title"><?=$post->post_title?></h1>
     <?php
     if(@$post->post_excerpt){
+      
     ?>
     <h2 class="featuring">
         <?=$post->post_excerpt?></h1>
@@ -83,14 +84,35 @@ if($post->post_parent==0){
         <div class="event-list order-sm-1 col-sm-5 col-md-4 col-lg-3 col-xl-2">
 <?php
 
-$event_id = getEventID($post->ID);
+if($post->post_parent == 0){
+    $event_id = $post->ID;
+} else {
+    $event_id = get_post($post->ID)->post_parent;
+    if(get_post($event_id)->post_parent != 0){
+      //  $event_id = get_post($post->ID)->post_parent;
+    }
+
+}
+
+$utc_start =  get_post_meta($event_id,"utc_start",true); 
+$tense = null;
+if(is_date($utc_start)){
+   print $now = date("Y-m-d");
+    print $then = date("Y-m-d", $utc_start);
+    if($now > $then){
+print         $tense = "past";
+    } else {
+       print $tense = "future";
+    }
+}
+
 
 $events = getChildList($event_id,$post_type,$sort='menu_order');
 
 
 
  if(count($events)){
-    print "<ul>";
+    print "<ul>". $tense;
     foreach($events as $key => $event){
         extract($event);
         $embed_video_url = '';
@@ -99,17 +121,9 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
         $link = get_permalink($ID);
         $children = getChildList($event['ID'],$post_type,$sort='menu_order');
         //if($utc_start)
-        $tense = null;
-        if(is_date($utc_start)){
-            $now = date("y-m-d");
-            $then = date("Y-m-d", $utc_start);
-            if($now > $then){
-                $tense = "past";
-            } else {
-                $tense = "future";
-            }
-        }
+       
         print "<li>";
+      
         print "<a href='$link'>";
 
         if($embed_video_url == ''){
@@ -124,14 +138,14 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
             print "</a>";
           
        
-          
+       
         foreach($children as $c =>$child) {
             
             $embed_video_url = '';
             $link = get_permalink($child['ID']);
             extract( $event_meta = getEventMeta($child));
         
-            print "<ul><li>";
+            print "<ul><li>$tense";
             print "<a href='$link'>"; 
         if($embed_video_url == ''){
             print "<a href='$link'>";

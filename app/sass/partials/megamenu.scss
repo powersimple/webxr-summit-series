@@ -75,7 +75,8 @@
     li,
     li {
         font-size: 1em !important;
-        list-style: none; 
+        list-style: none;
+        border:1px solid rgba(0,0,0,.8);
     }
     a,
     a:hover,
@@ -120,6 +121,7 @@
     li.drop-down ul>li>a {
         background: #009FE1;
         color: #fff;
+        text-shadow:1px 1px #000;
     }
     li.drop-down::after {
         margin-right: 10px;
