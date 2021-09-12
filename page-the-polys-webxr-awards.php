@@ -70,7 +70,7 @@
 <a-asset-item id="polys2" response-type="arraybuffer" src="/assets/models/Polys2.glb"></a-asset-item>
 <!--  <a-asset-item id="the-movie" response-type="arraybuffer" src="/assets/models/themovie.glb">
     </a-asset-item>-->
-<a-asset-item id="world-premiere" response-type="arraybuffer" src="/assets/models/world-premiere-may-6.glb">
+
 </a-asset-item>
             <?php include "webxr/summits/mixins.php";?>
 

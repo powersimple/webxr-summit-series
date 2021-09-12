@@ -2590,15 +2590,12 @@ table.authors {
   margin-right: 5px; }
 
 #ros-accordion h3.ros {
-  padding: 3px !important;
+  padding: 0px !important;
   margin-top: 3px;
   padding-top: 3px;
   border-top: 1px dashed #f1c40f;
   line-height: 1;
-  font-weight: 600;
-  font-family: 'Zen Dots';
-  font-size: 20px;
-  letter-spacing: 1px; }
+  font-weight: 600; }
   #ros-accordion h3.ros span.spacer {
     height: 5px;
     display: block; }
@@ -2606,9 +2603,6 @@ table.authors {
 #ros-accordion div {
   overflow-x: hidden;
   margin-bottom: 3px; }
-
-#ros-accordion .session-times {
-  display: none; }
 
 #ros-accordion .profile-card {
   line-height: 120%;
@@ -2623,192 +2617,21 @@ table.authors {
     font-size: .7rem; }
   #ros-accordion .profile-card span.profile-name {
     font-weight: 600;
-    font-family: 'Zen Dots';
     font-size: .8rem;
     padding-bottom: 5px;
     border-bottom: 1px dashed #ccc;
     margin-bottom: 5px; }
-  #ros-accordion .profile-card .blurb {
-    display: none; }
-
-#ros-accordion p {
-  font-size: 20px; }
 
 #ros-accordion .profile-thumbnail {
   overflow: hidden;
-  padding: 15px; }
+  padding: 5px; }
   #ros-accordion .profile-thumbnail img {
-    width: 150px;
-    display: block;
-    margin: 0px auto;
+    width: 100%;
     height: 100%;
     border-radius: 50%;
     border: 2px solid #fff;
-    box-shadow: 0px 0px 10px 10px rgba(255, 173, 2, 0.4); }
-
-#ros-accordion .card-info {
-  visibility: hidden; }
-
-#ros-accordion .fifth {
-  width: 20% !important; }
-
-#ros-accordion.cards {
-  width: 1200px !important; }
-  #ros-accordion.cards span.blurb {
-    visibility: hidden; }
-  #ros-accordion.cards #speaker-list {
-    width: 80%;
-    margin-left: 23%; }
-    #ros-accordion.cards #speaker-list .fifth {
-      width: 20% !important; }
-      #ros-accordion.cards #speaker-list .fifth .profile-name {
-        width: 100%;
-        display: block;
-        margin-left: 0px;
-        font-size: 14px;
-        height: 30px; }
-    #ros-accordion.cards #speaker-list .presentation {
-      width: 80% !important;
-      margin-left: 10% !important; }
-      #ros-accordion.cards #speaker-list .presentation span.blurb {
-        visibility: visible;
-        display: block;
-        width: 100%;
-        text-align: left;
-        margin-left: 0%;
-        font-size: 14px;
-        line-height: 150%; }
-        #ros-accordion.cards #speaker-list .presentation span.blurb p {
-          padding-left: 0px;
-          font-size: 16px; }
-      #ros-accordion.cards #speaker-list .presentation .profile-card {
-        margin-top: 30px; }
-      #ros-accordion.cards #speaker-list .presentation .profile-thumbnail {
-        width: 30%;
-        display: inline-block; }
-        #ros-accordion.cards #speaker-list .presentation .profile-thumbnail img {
-          margin-left: 0px;
-          width: 100%; }
-      #ros-accordion.cards #speaker-list .presentation .profile-info {
-        width: 65%;
-        display: inline;
-        float: right; }
-        #ros-accordion.cards #speaker-list .presentation .profile-info span.credential span {
-          font-size: 16px !important;
-          line-height: 150% !important;
-          font-weight: 600; }
-        #ros-accordion.cards #speaker-list .presentation .profile-info span.profile-name {
-          text-decoration: underline;
-          display: block;
-          text-align: center;
-          border-bottom: none;
-          font-size: 24px;
-          height: 30px; }
-    #ros-accordion.cards #speaker-list .pair {
-      width: 35% !important;
-      margin-left: 10%; }
-      #ros-accordion.cards #speaker-list .pair .profile-card .profile-name {
-        width: 100%;
-        display: block;
-        margin-left: 0px;
-        font-size: 20px;
-        height: 30px; }
-      #ros-accordion.cards #speaker-list .pair .profile-card span.credential span {
-        font-size: 16px !important;
-        line-height: 150% !important;
-        font-weight: 600; }
-  #ros-accordion.cards .card-mode {
-    border: 3px solid #fff;
-    width: 1200px;
-    height: 630px;
-    padding: 20px;
-    margin-bottom: 50px;
-    background: url(images/bg/BizSummitCardBG.jpg) center center no-repeat;
-    position: relative;
-    overflow: hidden; }
-  #ros-accordion.cards h3.ros {
-    display: none; }
-  #ros-accordion.cards h3 {
-    font-weight: 600;
-    font-family: 'Zen Dots';
-    text-align: right;
-    font-size: 24px;
-    padding-left: 25%;
-    margin: 0px auto 25px;
-    text-shadow: 3px 3px 7px rgba(239, 255, 227, 0.3);
-    text-align: center; }
-  #ros-accordion.cards p {
-    font-size: 20px;
-    padding-left: 23%; }
-  #ros-accordion.cards .card-info {
-    visibility: visible; }
-  #ros-accordion.cards h3.card-info {
-    font-size: 36px; }
-  #ros-accordion.cards .social {
-    visibility: hidden; }
-  #ros-accordion.cards .profile-card span.credential span {
-    font-size: 14px !important;
-    line-height: 150% !important;
-    font-weight: 600;
-    text-shadow: 1px 1px 2px black; }
-  #ros-accordion.cards .profile-card span.profile-name {
-    font-weight: 600;
-    font-size: 16px;
-    padding-bottom: 5px;
-    border-bottom: 1px dashed #ccc;
-    margin: 10px auto 5px;
-    line-height: 150%;
-    letter-spacing: 1px;
-    width: 100%;
-    text-shadow: 2px 2px 2px black;
-    display: block; }
-  #ros-accordion.cards .profile-card .samantha-mathews {
-    font-size: 15px !important; }
-  #ros-accordion.cards .profile-card .terry-schussler {
-    font-size: 14px !important; }
-  #ros-accordion.cards .session-times {
-    display: block;
-    text-align: right;
-    margin: 0px auto 25px; }
-    #ros-accordion.cards .session-times li {
-      display: inline-block;
-      padding: 0px 10px;
-      text-align: center;
-      font-weight: 900;
-      border-right: 1px dashed #ccc;
-      font-size: 24px;
-      line-height: 24px;
-      letter-spacing: 1px; }
-      #ros-accordion.cards .session-times li span {
-        font-weight: 600;
-        font-size: 50%; }
-    #ros-accordion.cards .session-times li:last-child {
-      border-right: none; }
-  #ros-accordion.cards .card-footer {
-    position: absolute;
-    bottom: 7px;
-    left: 25%;
-    height: 80px;
-    width: 75%;
-    overflow: hidden;
-    line-height: 35px;
-    padding-top: 9px; }
-    #ros-accordion.cards .card-footer .event-info .rsvp-link {
-      text-shadow: 0px 0px 7px black;
-      font-size: 20px;
-      display: inline-block; }
-    #ros-accordion.cards .card-footer .event-info a {
-      visibility: visible !important;
-      font-size: 24px;
-      font-weight: 600; }
-    #ros-accordion.cards .card-footer .sponsor-logo {
-      top: 0px;
-      width: 240px;
-      height: 80px;
-      position: absolute;
-      right: 10px; }
-      #ros-accordion.cards .card-footer .sponsor-logo a img {
-        width: 240px; }
+    -webkit-box-shadow: 3px 3px 4px 3px rgba(255, 229, 54, 0.64);
+    box-shadow: 2px 3px 4px 3px rgba(255, 229, 54, 0.44); }
 
 /*
 @import "partials/admin";
@@ -2832,11 +2655,6 @@ table.authors {
 //languages
 @import "partials/wpml-languages";
 */
-.a-enter-vr-button {
-  position: fixed !important;
-  right: 20px !important;
-  bottom: 20px !important; }
-
 .row {
   padding: 0px !important; }
 
@@ -5449,8 +5267,7 @@ div.developer-summit {
   @media (max-width: 575px) {
     .profile {
       margin: 0px auto;
-      width: 61.8%;
-      height: 400px; } }
+      width: 61.8%; } }
   .profile h4 {
     font-family: 'Zen Dots', cursive;
     font-size: 125%;
@@ -5475,24 +5292,3 @@ div.developer-summit {
   width: 38.2%;
   margin: 0px auto 4em; }
 
-.invitation {
-  background-color: #cCccC9;
-  color: #111;
-  padding: 20px;
-  border: 2p outset #fff;
-  font-family: Arial, Helvetica, sans-serif; }
-  .invitation a {
-    color: #00F; }
-
-.post {
-  background-color: #fff;
-  color: #000;
-  padding: 40px;
-  border: 3px outset #fff; }
-  .post strong {
-    font-weight: 600; }
-  .post h2 {
-    font-weight: 600;
-    font-size: 1.5rem; }
-  .post a {
-    color: #00a; }

@@ -14,7 +14,7 @@
             } else if($profiles_count == 4){
                 $cols = ['col-sm-6','col-md-3','col-xl-6'];
             } else{
-                $cols = [];
+                $cols = ['col-sm-6','col-md-3','col-lg-3','col-xl-2'];
             }
         }
         $grid= implode(" ",@$cols);
@@ -54,15 +54,18 @@
 
         </div>
         <h4><?=$profile_post->post_title?></h4>
+        <div class="speaker-meta">
         <?= wrapMeta($profile_meta,'profile_title','h5');?>
         <?= wrapMeta($profile_meta,'company','h5');?>
         <?= wrapMeta($profile_meta,'twitter','a');?>
         <?= wrapMeta($profile_meta,'linkedin','a');?>
         <?= wrapMeta($profile_meta,'github','a');?>
+        <?= wrapMeta($profile_meta,'website','a');?>
         <?php 
         if($profile_context == 'about'){?>
         <p class="profile-excerpt"><?=nl2br($profile_excerpt)?></p>
         <?php } ?>
+        </div>
 
 <?php
 
@@ -87,7 +90,8 @@ return ob_get_clean();
         $use_font_awesome = false;
         if($var == 'twitter'
         || $var == 'linkedin'
-        || $var == 'github'){
+        || $var == 'github'
+        || $var == 'website'){
             $use_font_awesome = true;
 
         }    

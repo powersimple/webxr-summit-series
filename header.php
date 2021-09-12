@@ -59,6 +59,10 @@ if(is_front_page()){
 
     <title><?=$page_title?><?=get_bloginfo('name')?> - <?=bloginfo("description");?></title>
  <script>
+
+if (location.protocol !== 'https:') {
+    location.replace(`https:${location.href.substring(location.protocol.length)}`);
+}
       // Wordpress PHP variables to render into JS at outset.
       var active_id = <?=$post->ID?>,
       active_object = "<?=$post->post_type?>",
@@ -99,6 +103,12 @@ if(is_front_page()){
         ?>
          ]
       <?php
+      // post specific hacks
+      if($post->ID == 13){ 
+        $_GET['event_menu'] = 'bizsummit21';
+    
+    }
+    
           if(function_exists('icl_object_id')){
               global $sitepress;
 
@@ -155,7 +165,23 @@ if(is_front_page()){
       
       
 <?php
+if(@$_GET['disappear']==1){
 
+?>
 
+<style>
+ 
+   
+        .a-enter-ar-button, .a-enter-vr-button {
+            display: none !important;
+            
+        } 
+        header, footer {
+            display: none !important;
+            
+        } 
+    </style>
+<?php
+}
  
 ?>

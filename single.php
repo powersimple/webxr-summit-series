@@ -48,13 +48,14 @@ if($post->post_parent==0){
 <div class="row">
 <div class="container">
  
-  <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-offset-1 col-10 ">
-
+  <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+    <div class="post">
 
 <?php
 
   print do_blocks(do_shortcode($post->post_content));
 ?>
+    </div>
 </div>
 </section>
 </div>

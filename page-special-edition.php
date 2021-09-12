@@ -1,8 +1,5 @@
 <?php
-
-//phpinfo(); die();
-
-get_header();
+    get_header();
 //    get_eventsFromTable(15);
     require_once "webxr/functions-aframe.php";
     $speed = "0.1";
@@ -21,7 +18,26 @@ get_header();
             location.replace(`https:${location.href.substring(location.protocol.length)}`);
         }
     </script>
-  
+    <style>
+        /* */
+        /*
+            #top-nav{display:none; }
+       
+        .a-enter-ar{display:bock; }*/
+        .a-enter-ar-button{
+            display: none;
+        } 
+        .a-enter-vr-button{
+            position:fixed !important;
+            right:20px !important;
+            bottom:20px !important;
+
+        } 
+        header, footer,{
+           /* 
+           display: none;*/
+        }
+    </style>
 
 </head>
 
@@ -75,18 +91,14 @@ get_header();
     src="/assets/models/elevator/business-platform.glb"></a-asset-item>
 <a-asset-item id="design-platform" response-type="arraybuffer"
     src="/assets/models/elevator/design-platform.glb"></a-asset-item>
-    <a-asset-item id="powersimple-3d-logo" response-type="arraybuffer"
-    src="/assets/models/Powersimple_3DLogo.glb"></a-asset-item>
-    <a-asset-item id="futurewei-3d-logo2" response-type="arraybuffer"
-    src="/assets/models/Logo_FutureWei.glb"></a-asset-item>
-    <a-asset-item id="metavrse-3d-logo" response-type="arraybuffer"
-    src="/assets/models/Logo_MetaVRse.glb"></a-asset-item>
-    
-    
+    <a-asset-item id="special-edition" response-type="arraybuffer"
+    src="/assets/models/SpecialEdition.glb"></a-asset-item>
 <a-asset-item id="platforms" response-type="arraybuffer" src="/assets/models/elevator/platforms.glb">
 </a-asset-item>
 <a-asset-item id="walkway" response-type="arraybuffer" src="/assets/models/elevator/walkway.glb">
 </a-asset-item>
+<a-asset-item id="series-model" response-type="arraybuffer" src="/assets/models/WebXRSummitSeries-Horizontal.glb"></a-asset-item>
+
 
 <a-asset-item id="futurewei-3d-logo" response-type="arraybuffer"
     src="/assets/models/sponsors/futurewei1.glb"></a-asset-item>
@@ -149,30 +161,10 @@ get_header();
 
 
 
-
+        <?php include "webxr/summits/special-edition.php";?>
         <?php include "webxr/summits/space-elevator.php";?>
-        <?php include "webxr/summits/lowpolymountain.php";?>
+        <?php //include "webxr/summits/lowpolymountain.php";?>
 
-
-        
-
-
-        <?php 
-        
-
-        include "webxr/summits/brand-business.php";
-
-
-        $this_ros = [
-            "menu"=>'bizsummit21',
-            "position"=>"-33 165 -105",
-            "rotation"=>"0 90 0",
-            "scale"=>".75 .75 .75",
-            
-        ];
-      //  include "webxr/summits/agenda.php";
-        
-        ?>
         <?php // include "webxr/summits/partners.php"; ?>
 
 

@@ -379,7 +379,7 @@ function get_post_tags($object){
 		
     function get_profile_info( $object ) {
         $post_id = $object['id'];
-        $fields = "url,company,solution_name, unique_value_proposition,tagline,use_cases,max_spectators,max_collaborators,demo_video,video_embed_code,url, description,email,facebook,mdn,flickr,github,google_plus,instagram,linkedin,location,medium,pinterest,rss,skype,slack,telegram,Tumblr,profile_title,blurb,resources,twitter,vimeo,website,wikipedia,youtube,acronym,name,apply_url,blog_url,conference_url,contact_url,events_url,jobs_url,logo_svgtag,logo_url";
+        $fields = "url,company,solution_name, unique_value_proposition,tagline,use_cases,max_spectators,max_collaborators,demo_video,video_embed_code,url, description,email,talk_title,talk_description,facebook,mdn,flickr,github,google_plus,instagram,linkedin,location,medium,pinterest,rss,skype,slack,telegram,Tumblr,profile_title,timezone,blurb,resources,twitter,vimeo,website,wikipedia,youtube,acronym,name,apply_url,blog_url,conference_url,contact_url,events_url,jobs_url,logo_svgtag,logo_url";
 
         $profile_info = array();
 
@@ -490,7 +490,30 @@ add_action( 'rest_api_init', 'register_support_hardware' );
 
 
 
+	add_action( 'rest_api_init', 'register_event_info' );
+		
+	function register_event_info() {
+		
+		register_rest_field( 'event', 'event_info', array(
+			'get_callback' => 'get_event_info',
+			'schema' => null,
+			)
+		);
+	}
+		
+		function get_event_info( $object ) {
+		$post_id = $object['id'];
+			$event_info = array(
+				"duration"=>get_post_meta($post_id,"duration",true),
+				"utc_start"=>get_post_meta($post_id,"utc_start",true),
+				
+				
+			);
 
+
+
+		return $event_info;
+		}
 
 
 

@@ -64,7 +64,10 @@ add_theme_support('post-thumbnails', array(
 					$img = wp_get_attachment_image_src($id,$size);//get the url 
 					
 					if(@$img[0] !=""){
-						$thumbnail_versions[$size]=$img[0];//sets size by url
+						$version = str_replace('https://'.$_SERVER['HTTP_HOST'],'',$img[0]);
+						$version = str_replace('https://'.$_SERVER['HTTP_HOST'],'',$img[0]);
+						
+						$thumbnail_versions[$size]=$version;//sets size by url
 					} 
 				}
 				return $thumbnail_versions;

@@ -105,5 +105,56 @@
 
 		return json_encode($nav_meta);
 	}
+	function get_menu_array($current_menu='Main Menu') {
+
+		$menu_array = wp_get_nav_menu_items($current_menu);
+	
+		$menu = array();
+	
+		function populate_children($menu_array, $menu_item){
+			$children = array();
+			if (!empty($menu_array)){
+				foreach ($menu_array as $k=>$m) {
+					if ($m->menu_item_parent == $menu_item->ID) {
+						$post = get_post($m->object_id);
+						$meta = get_post_meta($m->object_id);
+						$children[$m->ID] = array();
+						$children[$m->ID]['ID'] = $m->ID;
+						$children[$m->ID]['title'] = $m->title;
+						$children[$m->ID]['url'] = $m->url;
+						$children[$m->ID]['classes'] = $m->classes;
+						
+						$children[$m->ID]['post'] = $post;
+						$children[$m->ID]['meta'] = $meta;
+						unset($menu_array[$k]);
+						$children[$m->ID]['children'] = populate_children($menu_array, $m);
+	
+	
+					}
+				}
+			};
+			return $children;
+		}
+	
+		foreach ($menu_array as $m) {
+			if (empty($m->menu_item_parent)) {
+				$post = get_post($m->object_id);
+				$meta = get_post_meta($m->object_id);
+				$menu[$m->ID] = array();
+	
+				$menu[$m->ID]['ID'] = $m->ID;
+				$menu[$m->ID]['title'] = $m->title;
+				$menu[$m->ID]['url'] = $m->url;
+				$menu[$m->ID]['classes'] = $m->classes;
+				$menu[$m->ID]['post'] = $post;
+				$menu[$m->ID]['meta'] = $meta;            
+				$menu[$m->ID]['children'] = populate_children($menu_array, $m);
+			}
+		}
+		;
+	
+		return $menu;
+	
+	}
 
 ?>

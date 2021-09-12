@@ -15,7 +15,7 @@
                 <div class="col-sm-9" id="footer-menu">
                     <ul>
                         <li><a href="/about/">About</a></li>
-                        <li><a href="/sponsors/">Become a Sponsor</a></li>
+                       <!-- <li><a href="/sponsors/">Become a Sponsor</a></li>-->
                     </ul>
 
                   
@@ -134,7 +134,9 @@
 
     */
 </script>
-<?php wp_footer(); ?>
+<?php 
+
+wp_footer(); ?>
 
 
 

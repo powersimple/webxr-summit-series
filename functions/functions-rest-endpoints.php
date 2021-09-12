@@ -63,11 +63,14 @@ function iterateEndpoint($field,$name,$query){
 $GLOBALS['REST_CONFIG'] =array(//An array of url arguments
             "posts"=>"fields=id,type,title,content,slug,excerpt,languages,post_media,featured_media,screen_images,video,type,cats,tags&".$GLOBALS['REST_post_filter'],
             "pages"=>"fields=id,type,title,content,slug,excerpt,languages,post_media,featured_media,screen_images,featured_video,cats,tags,type&".$GLOBALS['REST_post_filter'],
-            "profile"=>"fields=id,type,title,content,slug,excerpt,post_media,languages,info,seo,featured_media,screen_images,featured_video,type,feature,thumbnail_url,cats,tags&".$GLOBALS['REST_post_filter'],
+            "profile"=>iterateEndpoint('post_type','profile',"fields=id,type,title,content,slug,excerpt,post_media,languages,info,seo,featured_media,screen_images,featured_video,type,industry,support_hardware,feature,thumbnail_url,collaboration_type,platform,cats,tags&".$GLOBALS['REST_post_filter_name_sort']),
+
+           // "profile"=>iterateEndpoint('post_type','profile',"fields=id,type,title,content,slug,excerpt,post_media,languages,info,seo,featured_media,screen_images,featured_video,type,industry,support_hardware,feature,thumbnail_url,collaboration_type,platform,cats,tags&".$GLOBALS['REST_post_filter_name_sort']),
          //"profile"=>iterateEndpoint('post_type','profile',"fields=id,type,title,content,slug,excerpt,post_media,languages,info,seo,featured_media,screen_images,featured_video,type,industry,support_hardware,feature,thumbnail_url,collaboration_type,platform,cats,tags&".$GLOBALS['REST_post_filter_name_sort']),
            // "hardware"=>"fields=id,type,title,content,slug,excerpt,posts,post_media,languages,info,seo,profiles,featured_media,screen_images,featured_video,type,industry,feature,thumbnail_url,platform,cats,tags&".$GLOBALS['REST_post_filter'],
          "resource"=>"fields=id,type,title,content,slug,excerpt,languages,info,related,featured_media,screen_images,post_media,related,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
-            "event"=>"fields=id,type,title,content,slug,excerpt,languages,project_info,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
+            //"event"=>"fields=id,type,title,content,slug,excerpt,languages,event_info,profiles,date_time,resources,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
+            "event"=>iterateEndpoint('post_type','event',"fields=id,type,title,content,slug,excerpt,languages,event_info,profiles,date_time,resources,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter']),
             //"product"=>"fields=id,type,title,content,slug,excerpt,languages,project_info,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
             //"person"=>"fields=id,type,title,content,slug,excerpt,languages,project_info,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
             "sponsor"=>"fields=id,type,title,content,slug,excerpt,languages,project_info,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
@@ -124,8 +127,9 @@ require_once("functions-wpml-languages.php");
            if(@$_GET['publish']){
             
             if(is_array($value)){
-           print   $url = $url_path.$key."?".$value; // default, value passes params in REST_CONFIG array
-           die();  
+           //     var_dump($value);
+         //  print   $url = $url_path.$key."?".$value; // default, value passes params in REST_CONFIG array
+         //  die();  
            $result_array = array();
              foreach($value as $it => $qstring){
                  $url = $url_path.$key."?".$qstring;

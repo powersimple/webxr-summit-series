@@ -1,0 +1,60 @@
+                <!-- BUSINESS AGENDA -->
+                <a-entity id="business-summit-agenda"
+            position="-4.1 0 4" 
+            rotation="0 105 0">
+                    <?php
+?>
+<!--
+<a-entity id="label-created" troika-text="value:Agenda;color:#fff; fontSize:.8;align:left;" material="shader: standard;" position="1 0 0"
+        rotation="0 0 0" scale=".2 .2 .2"></a-entity>
+-->
+<?php
+    
+    
+    
+    /* */
+   // print displayAgendaList(getAgenda(406),-2.5,-0.15,0);
+   // print displayAgendaList(getAgenda(420),-0.25,-0.15,0);
+   // print displayAgendaList(getAgenda(519),2,-0.15,0);   
+   
+
+
+?>
+
+
+
+            </a-entity>
+
+
+<!-- DESIGN AGENDA -->
+<a-entity id="design-summit-agenda"position="4.2 1 -3" rotation="0 -75 0">
+                    <?php
+?>
+<a-entity id="label-created" troika-text="value:Agenda;color:#fff; fontSize:.8;align:left;" material="shader: standard;" position="1 0 0"
+        rotation="0 0 0" scale=".2 .2 .2"></a-entity>
+
+<?php
+    
+    
+    
+    
+    print displayAgendaList(getAgenda(434),-2.8,-0.15,0);
+    print displayAgendaList(getAgenda(444),-0.25,-0.15,0);
+    print displayAgendaList(getAgenda(493),2,-0.15,0);   
+
+
+
+   
+
+
+
+//   print displayAgendaList(getAgenda(518),3,-0.15,0);   
+    
+    
+
+
+?>
+
+
+
+            </a-entity>

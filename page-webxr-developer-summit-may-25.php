@@ -1,15 +1,8 @@
 <?php
-
-//phpinfo(); die();
-
-get_header();
+    get_header();
 //    get_eventsFromTable(15);
     require_once "webxr/functions-aframe.php";
-    $speed = "0.1";
-    if(@$_GET['speed']){
-        $speed = $_GET['speed'];    
-    }
-
+    
      ?>
 
 
@@ -21,7 +14,21 @@ get_header();
             location.replace(`https:${location.href.substring(location.protocol.length)}`);
         }
     </script>
-  
+    <style>
+        /* */
+        /*
+            #top-nav{display:none; }
+       */
+     
+      .a-enter-vr{display:block; }
+        .a-enter-ar-button, .a-enter-vr-button{
+            position:fixed !important;
+            right:20px !important;
+            bottom:20px !important;
+        } header, footer{
+           /* */display: none;
+        }
+    </style>
 
 </head>
 
@@ -43,7 +50,6 @@ get_header();
         background="color: #000000">
         <a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
         <a-entity tracked-controls="controller: 1; idPrefix: OpenVR"></a-entity>
-
         <a-assets timeout="800000">
              <!-- Loads models -->
  <a-asset-item id="pedestal" response-type="arraybuffer" src="/assets/models/pedestal.glb"></a-asset-item>
@@ -53,7 +59,7 @@ get_header();
 </a-asset-item>
 <a-asset-item id="emblem" response-type="arraybuffer" src="/assets/models/emblem.glb"></a-asset-item>
 <a-asset-item id="mountain" response-type="arraybuffer" src="/assets/models/mountain9b.glb"></a-asset-item>
-<a-asset-item id="dev-summmit-logos-square" response-type="arraybuffer"
+<a-asset-item id="dev-summmit-logo-square" response-type="arraybuffer"
     src="/assets/models/dev-summit-logo-square.glb"></a-asset-item>
 <!--   <a-asset-item id="town-hall" response-type="arraybuffer"
     src="/assets/models/TownHall.glb"></a-asset-item>-->
@@ -75,14 +81,6 @@ get_header();
     src="/assets/models/elevator/business-platform.glb"></a-asset-item>
 <a-asset-item id="design-platform" response-type="arraybuffer"
     src="/assets/models/elevator/design-platform.glb"></a-asset-item>
-    <a-asset-item id="powersimple-3d-logo" response-type="arraybuffer"
-    src="/assets/models/Powersimple_3DLogo.glb"></a-asset-item>
-    <a-asset-item id="futurewei-3d-logo2" response-type="arraybuffer"
-    src="/assets/models/Logo_FutureWei.glb"></a-asset-item>
-    <a-asset-item id="metavrse-3d-logo" response-type="arraybuffer"
-    src="/assets/models/Logo_MetaVRse.glb"></a-asset-item>
-    
-    
 <a-asset-item id="platforms" response-type="arraybuffer" src="/assets/models/elevator/platforms.glb">
 </a-asset-item>
 <a-asset-item id="walkway" response-type="arraybuffer" src="/assets/models/elevator/walkway.glb">
@@ -92,19 +90,17 @@ get_header();
     src="/assets/models/sponsors/futurewei1.glb"></a-asset-item>
     <a-asset-item id="polys2" response-type="arraybuffer" src="/assets/models/Polys2.glb"></a-asset-item>
 <img id="sky" src="/assets/images/skybox/blueskybox.jpg">
-<img id="green" src="/assets/images/skybox/greenscreen.jpg">
+
 <a-asset-item id="table" response-type="arraybuffer" src="/assets/models/table.glb"></a-asset-item>
 <a-asset-item id="chair" response-type="arraybuffer" src="/assets/models/chair.glb"></a-asset-item>
 
-
+     
 
             <?php// include "webxr/summits/assets.php";?>
             <?php include "webxr/summits/mixins.php";?>
 
 
         </a-assets>
-
-
         <a-sky src="#sky"></a-sky>
         <a-entity>
             <a-text id="GL-VR" visible="false" position="2.55 -0.1 0.01" value="" color="white" width="4"
@@ -125,10 +121,12 @@ get_header();
 
 
         <a-entity id="rig" rotation-reader thumbstick-logging
-            movement-controls="speed: <?=$speed?>; constrainToNavMesh: true;fly: true" position="-41 161 -95" rotation="0 0 0">
+            movement-controls="speed: 0.1; constrainToNavMesh: true;fly: true" 
+            position="-42.5 33 -99" 
+            rotation="0 0 0">
            
             <a-box id="body" plane-hit aabb-collider="collideNonVisible: true; objects: .zone" static-body="shape: box"
-                position="0 0.05 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
+                position="0 0 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
 
             <a-entity id="camera" camera look-controls capture-mouse cursor="rayOrigin:mouse" camera="zoom: 1"
                 raycaster="far: 5; objects: .clickable" super-hands="colliderEvent: raycaster-intersection;
@@ -138,77 +136,106 @@ get_header();
 
             <a-entity mixin="hand" hand-controls="hand: left; handModelStyle: highPoly; color: #ffcccc"></a-entity>
             <a-entity mixin="hand" hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc"></a-entity>
-<!--
-            <a-entity oculus-touch-controls="hand: left" vive-controls="hand: left" thumb-controls="hand: left" blink-controls="cameraRig: #rig; teleportOrigin: #camera; collisionEntities: #nav; hitCylinderColor: #e9974c; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8">
-            </a-entity>
-            <a-entity oculus-touch-controls="hand: right" vive-controls="hand: right " thumb-controls="hand: right">
-            </a-entity>-->
 
-            
+            <a-entity oculus-touch-controls="hand: left" vive-controls="hand: left" thumb-controls="hand: left">
+            </a-entity>
+            <a-entity oculus-touch-controls="hand: right" vive-controls="hand: right " thumb-controls="hand: right"
+                blink-controls="cameraRig: #rig; teleportOrigin: #camera; collisionEntities: #nav; hitCylinderColor: #e9974c; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8">
+            </a-entity>
+
         </a-entity>  
 
-
-
-
-        <?php include "webxr/summits/space-elevator.php";?>
-        <?php include "webxr/summits/lowpolymountain.php";?>
-
-
         
-
-
         <?php 
+        $se_pos = "-41.6 48 -108.8";
+        $se_rot = "-0 125 0";
         
-
-        include "webxr/summits/brand-business.php";
-
-
-        $this_ros = [
-            "menu"=>'bizsummit21',
-            "position"=>"-33 165 -105",
-            "rotation"=>"0 90 0",
-            "scale"=>".75 .75 .75",
-            
-        ];
-      //  include "webxr/summits/agenda.php";
-        
-        ?>
-        <?php // include "webxr/summits/partners.php"; ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        include "webxr/summits/space-elevator.php";?>
+        <?php include "webxr/summits/lowpolymountain.php";?>
 
 
 
 
     </a-scene>
 </body>
+<script>
+    jQuery("#menu").click(function () {
 
+        jQuery(".sidedrawer").animate({
+            left: 0,
+            opacity: 1
+        }, 500);
+        jQuery("body").animate({
+            marginLeft: 250,
+        }, 500);
+        jQuery("#menuclose").show();
+        jQuery(this).hide();
+    });
+
+    jQuery("#menuclose").click(function () {
+        jQuery(".appswitchdropdown").hide();
+        jQuery(".sidedrawer").animate({
+            left: -250,
+            opacity: 1
+        }, 300);
+        jQuery("body").animate({
+            marginLeft: 0,
+        }, 300);
+        jQuery("#menu").show();
+        jQuery(this).hide();
+    });
+
+    jQuery(".appswitch").click(function () {
+        jQuery(".appswitchdropdown").toggle();
+    });
+    jQuery(".page").hover(function () {
+        jQuery(".appswitchdropdown").hide();
+    });
+    jQuery(".appconversation").click(function () {
+        jQuery("#nav, .page, .sidedrawer,.appswitchdropdown").hide();
+        jQuery(".convo").show();
+        jQuery("body").css({
+            marginLeft: 0,
+        }, 500);
+    });
+
+    jQuery(".convo").click(function () {
+        jQuery("#nav, .page, .sidedrawer,.appswitchdropdown").show();
+        jQuery(".convo, .trendscontent ").hide();
+        jQuery("body").css({
+            marginLeft: 250,
+        }, 500);
+    });
+
+    jQuery(".appstudio").click(function () {
+        jQuery(".spark, .sparkcontent, .sparklist").hide();
+        jQuery(".studio, .studiolist").show();
+        jQuery('#logo').css('background-position', '0px 0px');
+        jQuery('.appswitch').css('background-position', '0px 0px');
+    });
+
+
+
+    jQuery(".collapse").click(function () {
+        jQuery(".collapse").hide();
+        jQuery(".expand").show();
+        jQuery('.sidedrawer').css('width', '60px');
+        jQuery(".sparklist div, .appswitch").css({
+            width: 50,
+        }, 500);
+
+        jQuery("body").animate({
+            marginLeft: 60,
+        }, 500);
+
+
+    });
+
+    jQuery(function () {
+        jQuery("#accordion").accordion({
+            autoHeight: true
+        });
+    });
+</script>
 <?php get_footer();?>
 </html>

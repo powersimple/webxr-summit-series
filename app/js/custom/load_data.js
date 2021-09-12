@@ -53,7 +53,7 @@ function getStaticJSON(filename, callback, dest) {
         url: json_data, // the url
         data: '',
         success: function(data, textStatus, request) {
-         //   console.log("load json", data);
+            console.log("load json", data);
             //      data_loaded.push(callback);
             return data,
 
@@ -97,7 +97,7 @@ function setData(data) { //sets all content arrays
     posts = setPosts(data.posts)
     pages = setPosts(data.pages)
     profiles = setPosts(data.profile)
-
+    events = setPosts(data.event)
   //  console.log("profiles",profiles)
     for (p in posts) {
 
@@ -138,6 +138,7 @@ function setData(data) { //sets all content arrays
 
     setTags(data.tags)
     setMenus(data.menus)
+    
         //  setMedia(data.media) media embeded into posts 
     initSite()
     data_loaded = true;

@@ -19,6 +19,33 @@ foreach($screenshots as $key => $image_id){
 }
 //print json_encode($screenshot_array);
 */
+  $current_event = 13;
+
+
+  function getProfileEvents($id){
+    global $wpdb;
+    $sql = "select post_id from wp_postmeta where meta_value = $id and meta_key like 'event_%'";
+    return $wpdb->get_results($sql);
+    
+
+  }
+  function getProfileSession($id){
+    global $wpdb;
+    $sql = "select ID, post_title, post_excerpt, post_content, post_parent from wp_posts where ID = $id";
+    return $wpdb->get_results($sql);
+    
+
+  }
+ 
+  $profile_meta = get_post_meta($post->ID);
+  $thumbnail = getThumbnail(@$profile_meta['_thumbnail_id'][0],"large");
+                  
+  $thumbnail = str_replace(@$_GET['host_root'],"/",$thumbnail);
+  $thumbnail = str_replace('/webxrsummitseries/',"/",$thumbnail);
+  $thumbnail = str_replace('https://',"/",$thumbnail);
+  
+  $profile_events = getProfileEvents($post->ID);
+
 ?>
     <script>
   var profile_template = 'full-profile-template'
@@ -27,9 +54,6 @@ foreach($screenshots as $key => $image_id){
 
 
 </script>
-<section id="profile-hero"></section>
-
-
 
 
 
@@ -37,11 +61,67 @@ foreach($screenshots as $key => $image_id){
 
   <section class="module profile-container" id="<?php echo @$slug?>" role="region">
 <div class="row">
-<div class="container">
- 
+<div class="container" style="background-color:#fff">
+    <?php
+
+include "webxr/summits/session-profile-card.php";
+
+        foreach($profile_events as $s => $session){
+          $this_session = getProfileSession($session->post_id)[0];
+          $session_meta = get_post_meta($session->post_id);
+          $track = null;
+          if($this_session->post_parent == $current_event){
+            
+            $event = getProfileSession($current_event)[0];
+           
+            
+          } else {
+            $grand_parent = getProfileSession($this_session->post_parent)[0];
+            //var_dump($grand_parent);
+            if(empty(getProfileSession($grand_parent->post_parent)[0])){
+              $event = getProfileSession($grand_parent->post_parent);
+
+            } else {
+              $track = getProfileSession($this_session->post_parent)[0];
+              $event = getProfileSession($grand_parent->post_parent)[0];
+            }
+           
+             
+             
+              
+          }
+          
+          
+          if(!empty($event)){
+            ?>
+         <h2><?=$event->post_title?></h2>
+          <?php
+            if(!empty(@$track)){
+                ?>
+ <h3><?=$track->post_title?></h3>
+                <?php
+            }
+          ?>
+          <h4><?=$this_session->post_title?></h4>
+          <?php 
+          } 
+        }
   
 
-  <div id="full-profile"></div>
+
+    ?>
+     
+  
+
+  <?php
+  
+    
+    //$event_meta = getEventMeta($current_event);
+   
+
+  ?>
+
+
 
 </section>
 </div>
@@ -50,41 +130,6 @@ foreach($screenshots as $key => $image_id){
   </main>
 
 
-   <div id="full-profile-template" style="display:none;">
-      <div class="row">
-          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2 logo-holder display-flex">
-            <div class="profile-logo"></div>
-            <div class="profile-contact"></div>
-            
-          </div>
-          <div class="col-xs-12 col-sm-9 col-md-9 col-lg-6 info-holder display-flex">
-
-            <div class="profile-info">
-              <div class="solution_name"><h1></h1></div>
-              <div class="company"><h2></h2></div>
-              <div class="blurb"></div>
-              
-              
-
-              <div class="use-cases"></div>
-              
-
-              <div class="view-profile"></div>
-
-            </div>
-
-          </div>
-          <div class="xs-col-12 col-sm-12 col-md-12 col-lg-4 tag-holder display-flex">
-            <div class="demo-video"></div>
-            
-            <div class="hardware filter-list"></div>
-            <div class="platform filter-list"></div>
-             <div class="feature filter-list"></div>
-              <div class="industry filter-list"></div>
-               <div class="collaboration_type filter-list"></div>
-          </div>
-      </div>
   
-    </div><!--template-->
 
   <?php get_footer(); ?>

@@ -1,5 +1,5 @@
 <?php
-
+//phpinfo();die();
 get_header(); 
 $section_class = get_post_meta($post->ID,'section_class',true);
 print $default_video_url = get_post_meta($post->ID,"embed_video_url",true);
@@ -48,12 +48,32 @@ if($post->post_parent==0){
 <div class="row">
 <div class="container">
  
-  <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-offset-1 col-10 ">
+  <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-offset-1 col-10 ">
 
 
 <?php
 
   print do_blocks(do_shortcode($post->post_content));
+
+    if(@$_GET['event_menu']){
+       ?>
+
+        <div id="run-of-show">
+
+            <div id="show"></div>
+            <div id="sessions"></div>
+            <div id="ros_meta"></div>
+
+        </div>
+<?php
+
+
+
+
+
+    }
+
+
 ?>
 </div>
 </section>
@@ -61,4 +81,22 @@ if($post->post_parent==0){
 
 </div>
   </main>
-  <?php get_footer(); ?>
+  <?php
+  
+  
+if(@$_GET['event_menu']){
+
+    ?>
+<script>
+    jQuery(document).ready(function() {
+
+       
+
+});
+    
+    
+    
+</script>
+    <?php
+}
+  get_footer(); ?>

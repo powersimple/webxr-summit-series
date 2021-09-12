@@ -10,8 +10,28 @@ var menu_config = {
     'social-links': {
         'menu_type': 'social',
         'location': '#social'
+    },
+    'bizsummit21': {
+        'menu_type': 'run-of-show',
+        'location': '#run-of-show'
+
     }
 }
+function runOfShow(id){
+    console.log("run of show"+id)
+       console.log(menus[id])
+    var show = menus[id]
+    for (var i = 0; i < show.length; i++) {
+        show[show[i].slug] = {}
+
+    }
+    console.log(show)
+
+
+
+}
+
+
 
 function setMenus(data) {
     //console.log("raw menu data",data)
@@ -27,7 +47,7 @@ function setMenus(data) {
         //console.log("slug", data[i].slug)
     }
     buildMenuData();
-    //   console.log("raw menu data", menus)
+       //console.log("raw menu data", menus)
 
 }
 
@@ -73,6 +93,16 @@ function setMenuItem(slug, item) {
     return this_item
 }
 
+jQuery(document).ready(function() {
+    if ( $.isFunction(window.localTrigger) ) {
+        localTrigger();
+        console.log("triggered")
+    } else {
+        console.log("not triggered")
+    }
+
+
+});
 
 function menu_order(a, b) {
     if (a.menu_order < b.menu_order)
@@ -272,10 +302,13 @@ function buildMenuData() {
 
                 }
                 menus[m].menu_levels = data
+                console.log("menu level data",m,menus[m].menu_levels)
+
                 menu_levels = data;
+               
                 setLinearDataNav(m, data);
                 setLinearNav(m)
-                    // console.log('data', menus);
+                    
 
 
 

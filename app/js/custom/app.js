@@ -26,11 +26,12 @@ var menu = {},
 function getVideo() {
 
     if (pages[active_id] != undefined) {
-
-        var featured_video = pages[active_id].post_media.featured_video
-        if (featured_video.length > 0) {
-            for (i = 0; i < featured_video.length; i++) {
-                setVideoPath(pages[active_id].post_media.featured_video[0].full_path);
+        if(pages[active_id].post_media != undefined){
+            var featured_video = pages[active_id].post_media.featured_video
+            if (featured_video.length > 0) {
+                for (i = 0; i < featured_video.length; i++) {
+                    setVideoPath(pages[active_id].post_media.featured_video[0].full_path);
+                }
             }
         }
 
@@ -39,7 +40,21 @@ function getVideo() {
 }
 
 
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
 
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+    return false;
+};
 
 
 function setVideoPath(video_path) {
@@ -53,6 +68,22 @@ function initSite() {
 
     getVideo();
 
+    var menu_name = getUrlParameter('event_menu')
+
+  console.log('url',window.location.pathname,getUrlParameter('event_menu'))
+    if(window.location.pathname == '/event/webxr-business-summit/'){
+        menu_name = 'bizsummit21'
+    } 
+
+  
+    if(menu_name != false){
+       
+        var run_of_show = runOfShow(menus[menu_name]);
+        displayRunOfShow(run_of_show)
+    }
+
+
+    
     if (menus == undefined) {
         window.setTimeout(initSite(), 100);
     }
@@ -83,7 +114,7 @@ function initSite() {
     if (profile_template != undefined) {
         if (profile_template == 'full-profile-template') {
 
-            loadFullProfile(active_id)
+          //  loadFullProfile(active_id)
         }
     }
 
