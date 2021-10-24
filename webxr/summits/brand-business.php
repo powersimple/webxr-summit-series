@@ -11,7 +11,18 @@
                 <a-entity id="futurewei-logo-model" class="center-obj-zone" static-body
                 gltf-model="#futurewei-3d-logo" visible="true" scale=".375 .25 .375" position="0 2.4 0"
                 rotation="90 3 180"></a-entity>
+  
  <!--
+                <a-entity id="WebXRsummit-FutureWei-model" class="center-obj-zone" static-body
+                gltf-model="#WebXRsummit-FutureWei" visible="true" scale=".375 .55 .375" position="0 2.4 0"
+                rotation="90 3 180"></a-entity>
+
+                <a-entity id="powersimple-loci-metavrse-model" class="center-obj-zone" static-body
+                gltf-model="#powersimple-loci-metavrse" visible="true" scale=".375 .55 .375" position="0 2.4 0"
+                rotation="90 3 180"></a-entity>
+
+                
+
             <a-entity id="powersimple-model" class="center-obj-zone" static-body
                 gltf-model="#powersimple-3d-logo" visible="true" scale=".375 .375 .375" position=".25 4.7 1"
                 rotation="0 120 .1"></a-entity>

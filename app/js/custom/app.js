@@ -73,6 +73,10 @@ function initSite() {
   console.log('url',window.location.pathname,getUrlParameter('event_menu'))
     if(window.location.pathname == '/event/webxr-business-summit/'){
         menu_name = 'bizsummit21'
+    } else if (window.location.pathname == '/event/webxr-design-summit/'){
+        menu_name = 'designsummit21'
+    } else if (window.location.pathname == '/event/webxr-developer-summit/'){
+        menu_name = 'devsummit21'
     } 
 
   
@@ -80,6 +84,7 @@ function initSite() {
        
         var run_of_show = runOfShow(menus[menu_name]);
         displayRunOfShow(run_of_show)
+        displayRunOfShowTable(run_of_show)
     }
 
 

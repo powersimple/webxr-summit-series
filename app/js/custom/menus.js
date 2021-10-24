@@ -15,6 +15,16 @@ var menu_config = {
         'menu_type': 'run-of-show',
         'location': '#run-of-show'
 
+    },
+    'designsummit21': {
+        'menu_type': 'run-of-show',
+        'location': '#run-of-show'
+
+    },
+    'devsummit21': {
+        'menu_type': 'run-of-show',
+        'location': '#run-of-show'
+
     }
 }
 function runOfShow(id){

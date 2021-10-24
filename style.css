@@ -2616,7 +2616,7 @@ table.authors {
   #ros-accordion .profile-card .social-icon {
     color: #fff;
     display: table-cell;
-    padding: 5px; }
+    padding: 10px; }
   #ros-accordion .profile-card span {
     display: block;
     text-align: center;
@@ -2644,7 +2644,7 @@ table.authors {
     height: 100%;
     border-radius: 50%;
     border: 2px solid #fff;
-    box-shadow: 0px 0px 10px 10px rgba(255, 173, 2, 0.4); }
+    box-shadow: 0px 0px 10px 10px rgba(176, 2, 255, 0.3); }
 
 #ros-accordion .card-info {
   visibility: hidden; }
@@ -2667,12 +2667,14 @@ table.authors {
         margin-left: 0px;
         font-size: 14px;
         height: 30px; }
+      #ros-accordion.cards #speaker-list .fifth .sophia-moshasha, #ros-accordion.cards #speaker-list .fifth .atsushi-shimono, #ros-accordion.cards #speaker-list .fifth .daniel-ljunggren, #ros-accordion.cards #speaker-list .fifth .yu-yuan, #ros-accordion.cards #speaker-list .fifth .neil-trevett {
+        height: 50px !important; }
     #ros-accordion.cards #speaker-list .presentation {
       width: 80% !important;
       margin-left: 10% !important; }
       #ros-accordion.cards #speaker-list .presentation span.blurb {
         visibility: visible;
-        display: block;
+        display: none;
         width: 100%;
         text-align: left;
         margin-left: 0%;
@@ -2693,6 +2695,10 @@ table.authors {
         width: 65%;
         display: inline;
         float: right; }
+        #ros-accordion.cards #speaker-list .presentation .profile-info .social {
+          display: block; }
+          #ros-accordion.cards #speaker-list .presentation .profile-info .social a {
+            margin-right: .5em; }
         #ros-accordion.cards #speaker-list .presentation .profile-info span.credential span {
           font-size: 16px !important;
           line-height: 150% !important;
@@ -2704,6 +2710,8 @@ table.authors {
           border-bottom: none;
           font-size: 24px;
           height: 30px; }
+      #ros-accordion.cards #speaker-list .presentation .samantha-mathews {
+        font-size: 20px !important; }
     #ros-accordion.cards #speaker-list .pair {
       width: 35% !important;
       margin-left: 10%; }
@@ -2717,13 +2725,17 @@ table.authors {
         font-size: 16px !important;
         line-height: 150% !important;
         font-weight: 600; }
+      #ros-accordion.cards #speaker-list .pair .profile-card .samantha-mathews {
+        font-size: 20px !important; }
+    #ros-accordion.cards #speaker-list .samantha-mathews {
+      font-size: 15px !important; }
   #ros-accordion.cards .card-mode {
     border: 3px solid #fff;
     width: 1200px;
     height: 630px;
     padding: 20px;
     margin-bottom: 50px;
-    background: url(images/bg/BizSummitCardBG.jpg) center center no-repeat;
+    background: url(images/bg/DesignSummitCardBG.jpg) center center no-repeat;
     position: relative;
     overflow: hidden; }
   #ros-accordion.cards h3.ros {
@@ -2735,8 +2747,9 @@ table.authors {
     font-size: 24px;
     padding-left: 25%;
     margin: 0px auto 25px;
-    text-shadow: 3px 3px 7px rgba(239, 255, 227, 0.3);
-    text-align: center; }
+    text-shadow: 3px 3px 7px rgba(176, 2, 255, 0.5);
+    text-align: center;
+    color: #ff6b18; }
   #ros-accordion.cards p {
     font-size: 20px;
     padding-left: 23%; }
@@ -2766,6 +2779,9 @@ table.authors {
     font-size: 15px !important; }
   #ros-accordion.cards .profile-card .terry-schussler {
     font-size: 14px !important; }
+  #ros-accordion.cards .profile-card .chris-duffey .credentials {
+    width: 90%;
+    margin-left: 5%; }
   #ros-accordion.cards .session-times {
     display: block;
     text-align: right;
@@ -2809,6 +2825,81 @@ table.authors {
       right: 10px; }
       #ros-accordion.cards .card-footer .sponsor-logo a img {
         width: 240px; }
+
+#schedule .session-times {
+  display: table-row; }
+  #schedule .session-times li {
+    display: table-cell;
+    list-style: none; }
+
+#schedule .session-title {
+  padding: 10px; }
+
+#schedule .fifth {
+  float: left;
+  width: 20%; }
+  @media (max-width: 975px) {
+    #schedule .fifth {
+      width: 50%; } }
+
+#schedule .profile-name {
+  font-family: 'Zen Dots';
+  font-size: 1rem; }
+
+#schedule .profile-info {
+  padding-bottom: 20px; }
+  #schedule .profile-info .social {
+    display: none; }
+    #schedule .profile-info .social a {
+      margin-right: .5em; }
+
+#schedule .profile-thumbnail {
+  width: 80%;
+  margin: 0px auto 20px; }
+  #schedule .profile-thumbnail img {
+    width: 100%;
+    max-width: 150px;
+    display: block;
+    margin: 0px auto;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0px 0px 10px 10px rgba(255, 173, 2, 0.4); }
+
+#schedule .profile-name {
+  font-size: 1rem;
+  border-bottom: 1px dashed #ccc; }
+
+#schedule .credential {
+  font-size: .8rem;
+  line-height: 150%; }
+
+#schedule .profile-card .samantha-mathews, #schedule .profile-info .samantha-mathews {
+  font-size: 15px !important; }
+
+#schedule .profile-card .terry-schussler, #schedule .profile-info .terry-schussler {
+  font-size: 14px !important; }
+
+#schedule .profile-card span, #schedule .profile-info span {
+  display: block;
+  text-align: center; }
+
+#schedule .session {
+  margin: 40px 0px;
+  border-bottom: 5px dashed #4173D8;
+  padding-bottom: 10px !important; }
+
+#schedule .blurb {
+  font-size: .8rem;
+  line-height: 120%;
+  padding-bottom: 20px;
+  display: none; }
+
+#schedule .talk-blurb {
+  padding-bottom: 20px; }
+
+#schedule .ricardo-cabello {
+  width: 90%;
+  margin-left: 5%; }
 
 /*
 @import "partials/admin";

@@ -2,7 +2,11 @@
     get_header();
 //    get_eventsFromTable(15);
     require_once "webxr/functions-aframe.php";
-    
+    $speed = "0.1";
+    if(@$_GET['speed']){
+        $speed = $_GET['speed'];    
+    }
+
      ?>
 
 
@@ -93,7 +97,7 @@
 </a-asset-item>
 
 <a-asset-item id="futurewei-3d-logo" response-type="arraybuffer"
-    src="/assets/models/sponsors/futurewei.glb"></a-asset-item>
+    src="/assets/models/sponsors/futurewei1.glb"></a-asset-item>
     <a-asset-item id="polys2" response-type="arraybuffer" src="/assets/models/Polys2.glb"></a-asset-item>
 <img id="sky" src="/assets/images/skybox/blueskybox.jpg">
 <img id="green" src="/assets/images/skybox/greenscreen.jpg">
@@ -102,8 +106,8 @@
 
 
 
-            <?php// include "webxr/summits/assets.php";?>
-            <?php include "webxr/summits/mixins.php";?>
+            <?php// include "webxr/summitsold/assets.php";?>
+            <?php include "webxr/summitsold/mixins.php";?>
 
 
         </a-assets>
@@ -129,7 +133,7 @@
 
 
         <a-entity id="rig" rotation-reader thumbstick-logging
-            movement-controls="speed: 0.1; constrainToNavMesh: true;fly: true" position="-41 161 -93" rotation="0 0 0">
+            movement-controls="speed: <?=$speed?>; constrainToNavMesh: true;fly: true" position="-41 161 -95" rotation="0 0 0">
            
             <a-box id="body" plane-hit aabb-collider="collideNonVisible: true; objects: .zone" static-body="shape: box"
                 position="0 0.05 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
@@ -152,19 +156,12 @@
         </a-entity>  
 
 
-        <?php 
-        $seating_position = 'position="-50.7 161.2 -105.7" static-body rotation="0 90 0"';
 
-        $town_hall_date = 'Tuesday, September 28
-        ';
-        $town_hall_url = '//bit.ly/WebXRDesignTownHall21
-        ';
-     include "webxr/summits/town-hall-seating.php";?>
 
-        <?php include "webxr/summits/space-elevator.php";?>
-        <?php include "webxr/summits/lowpolymountain.php";?>
+        <?php include "webxr/summitsold/space-elevator.php";?>
+        <?php include "webxr/summitsold/lowpolymountain.php";?>
 
-        <?php// include "webxr/summits/partners.php"; ?>
+        <?php // include "webxr/summitsold/partners.php"; ?>
 
 
 

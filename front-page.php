@@ -9,6 +9,17 @@ get_header();
     if(@$_GET['speed']){
         $speed = $_GET['speed'];    
     }
+    $menu = 'bizsummit21';
+    $model='';
+
+    if(@$_GET['event_menu']){
+        $menu = $_GET['event_menu'];
+    }
+
+    $summit_square_model = 'business-summmit-square';
+    if(@$_GET['summit_model']){
+        $summit_square_model = $_GET['summit_model'];
+    }
 
      ?>
 
@@ -81,6 +92,10 @@ get_header();
     src="/assets/models/Logo_FutureWei.glb"></a-asset-item>
     <a-asset-item id="metavrse-3d-logo" response-type="arraybuffer"
     src="/assets/models/Logo_MetaVRse.glb"></a-asset-item>
+    <a-asset-item id="powersimple-loci-metavrse" response-type="arraybuffer"
+    src="/assets/models/partners/MetaVRse-LOCI-Powersimple.glb"></a-asset-item>
+    <a-asset-item id="WebXRsummit-FutureWei" response-type="arraybuffer"
+    src="/assets/models/partners/WebXRsummit-FutureWei.glb"></a-asset-item>
     
     
 <a-asset-item id="platforms" response-type="arraybuffer" src="/assets/models/elevator/platforms.glb">
@@ -89,7 +104,7 @@ get_header();
 </a-asset-item>
 
 <a-asset-item id="futurewei-3d-logo" response-type="arraybuffer"
-    src="/assets/models/sponsors/futurewei1.glb"></a-asset-item>
+    src="/assets/models/sponsors/futurewei.glb"></a-asset-item>
     <a-asset-item id="polys2" response-type="arraybuffer" src="/assets/models/Polys2.glb"></a-asset-item>
 <img id="sky" src="/assets/images/skybox/blueskybox.jpg">
 <img id="green" src="/assets/images/skybox/greenscreen.jpg">
@@ -125,7 +140,7 @@ get_header();
 
 
         <a-entity id="rig" rotation-reader thumbstick-logging
-            movement-controls="speed: <?=$speed?>; constrainToNavMesh: true;fly: true" position="-41 161 -95" rotation="0 0 0">
+            movement-controls="speed: <?=$speed?>; constrainToNavMesh: true;fly: true" position="-41 50 -95" rotation="0 0 0">
            
             <a-box id="body" plane-hit aabb-collider="collideNonVisible: true; objects: .zone" static-body="shape: box"
                 position="0 0.05 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
@@ -136,6 +151,35 @@ get_header();
                              colliderEndEvent:raycaster-intersection-cleared;
                              colliderEndEventProperty: clearedEls;" position="0 0 0" rotation="0 0 0"></a-entity>
 
+                     <a-entity id="cam-content"position=".4 2 .2"
+                rotation="0 0 0" scale=".5 .5 .5">
+
+                                                <a-entity id="<?=$summit_square_model?>-model" class="center-obj-zone" static-body
+                                    gltf-model="#<?=$summit_square_model?>" visible="true" scale="25 10 25" position="1.125 0 1.4"
+                                    rotation="0 140 190"></a-entity>
+
+                                    <a-image id="image-Kent" material="side:front" mixin="scale-label" src="/assets/images/talent/KentBye.jpg" geometry="primitive: circle; width: 2; height: 2; depth: 3" scale=".3 .3 .3" 
+                                position="1.2 0 -0.25" rotation="100 50 90" width="5" height="5"></a-image>
+                                <a-entity id="label-Kent" troika-text="value:Hosted by Kent Bye
+October 12, 2021;color:#fff; fontSize:.8;align:left;;outlineWidth:0.03;outlineColor:#2e0143;" material="shader: standard;"  position="2.15 0 .55"
+                                    rotation="100 50 90" scale=".2 .2 .2"></a-entity>
+                                
+                                    <a-entity id="futurewei-logo-model" class="center-obj-zone" static-body
+                                    gltf-model="#futurewei-3d-logo" visible="true" scale=".5 .5 .5" position="2.25 0 0"
+                                    rotation="0 140 190"></a-entity>
+                                    
+                                <a-light id="cam-light" type="spot" color="#fff" distance="20" intensity="2"
+                                    position="1 -3 -1" angle="30" rotation="60 180 180">
+                                    </a-light>
+                </a-entity>
+
+                <!--
+             
+
+       
+
+
+    -->
             <a-entity mixin="hand" hand-controls="hand: left; handModelStyle: highPoly; color: #ffcccc"></a-entity>
             <a-entity mixin="hand" hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc"></a-entity>
 <!--
@@ -161,16 +205,20 @@ get_header();
         
 
         include "webxr/summits/brand-business.php";
+        $menu = 'bizsummit21';
 
+        if(@$_GET['event_menu']){
+            $menu = $_GET['event_menu'];
+        }
 
         $this_ros = [
-            "menu"=>'bizsummit21',
-            "position"=>"-33 165 -105",
-            "rotation"=>"0 90 0",
+            "menu"=>$menu,
+            "position"=>"-45 35 -100",
+            "rotation"=>"179.9 140 0.44",
             "scale"=>".75 .75 .75",
             
         ];
-      //  include "webxr/summits/agenda.php";
+        include "webxr/summits/agenda.php";
         
         ?>
         <?php // include "webxr/summits/partners.php"; ?>

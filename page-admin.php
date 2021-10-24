@@ -39,36 +39,48 @@ strong {
 <?php
 }
 
-$instructions = '<BR>Karen Alexander and Linda Ricci are looking forward to welcoming you to our Green Room.<br><br>
-<strong>JOIN US IN THE GREEN ROOM: <a href="[GREEN_ROOM_URL]">[GREEN_ROOM_URL]</a> at [GREEN_ROOM_TIME] PDT</strong> for mic and camera checks, and screen sharing if necessary.<br>
+$instructions = '<strong>Arriving at the event.</strong><br>
+Karen Alexander and Linda Ricci are looking forward to welcoming you to our Green Room.<br><br>
+<strong><a href="[GREEN_ROOM_URL]">JOIN US IN THE GREEN ROOM</a> at [GREEN_ROOM_TIME] PDT</strong> for mic and camera checks.<br>
+The session will begin promptly at [START_TIME] Pacific Daylight Time (UTC-7) and end at [END_TIME] PDT.<br>
+
+<br><strong>Please accept this calendar invite to confirm your engagement.</strong><br>
 <br>
-The session will begin promptly at [START_TIME] Pacific Daylight Time (UTC-7) and end at [END_TIME] PDT<br>
-<br>
-If possible, please use a 1080p webcam and sit in a well-lit area. We will be using the Streamyard platform, which supports green screen. You are welcome to use a custom 1920x1080 jpg or png image file as your background.<BR>
-<br>
-Please accept this calendar invite to confirm your engagement.<br>
-<br>
+
+<strong>The Spirit of the Event</strong><br>
+The WebXR Design Summit is about drawing outside the lines and inspiring our audience to push this tech as far as it can go, and show what it aspires to be tomorrow. This is why the content is not just limited to the state of WebXR today, but we want to give traditional creatives a taste of some of the best spatial and experiential design thinking.<br><br>
+
+<strong>Camera and Audio</strong><BR>
+If possible, please use a 1080p webcam and sit in a well-lit, quiet area. 
+<BR><BR>
+
+<strong>Visual Aids</strong><br>
+We welcome your participation to include a bit of "Show and Tell," because "You cannot be told what The Metaverse is, you have to see it for yourself." <br><br>
+
+<strong>Advance Testing for Presentations</strong><br>
+The Restream platform supports screen sharing and OBS Virtual Camera. We have set up a link for you to <a href="https://studio.restream.io/guest/blpQa29kTY4ZXpUffUNgq9BcE57fdHQ" target="_new">TEST YOUR AUDIO AND VIDEO HERE</a> and rehearse if you like. Please take a moment to become familiar with the interface. It\'s quite simple and intuitive. We welcome creative presentations. Please only attempt what you feel comfortable doing. Having a second monitor if you are screensharing is helpful.<br><br>
+
+<strong>Videos</strong><br>
+If you would like to play a short during your session, please request access to our upload folder by providing a gmail, and upload by Friday, October 8.<br><br>
 We are excited for you to share your expertise with our global audience.<br>
 If you have any questions don\'t hesitate to reach out to us at <a href="mailto:webxrevents@gmail.com">webxrevents@gmail.com</a><br>
 
 <br>
-See you on September 14th!<br><br>
+See you on October 12th!<br><br>
 Your friends,<br>
 The Polys – WebXR Awards and WebXR Summit Series Team';
-    
-
 
 $panel_script = "Dear [NAME],<br><br>
-Thank you for joining our panel <strong>[SESSION]</strong> [MODERATION] at the <strong>WebXR Business Summit on the 14th of September</strong>.<br><br>
+We are both thrilled and grateful for your participation in the WebXR Design Summit. We're looking forward to a fun, colorful and lively event, because after all... this about creativity! 
+Thank you for joining our panel <strong>[SESSION]</strong> at the <strong>WebXR Design Summit on the 12th of October, </strong>[MODERATION]<BR><BR>[WITH]
 $instructions";
 
 $presentation_script = "Dear [NAME],<br><br>
-We are excited for your presentation titled [SESSION] at the <strong>WebXR Business Summit on the 14th of September</strong>.<br><br>
-Please notify us if you have any special requirements other than screen sharing such as playing video. If you will be screen sharing, it is helpful to share on a second monitor if possible so you can monitor the session on the first monitor.<br> 
+We are excited for your presentation titled [SESSION] at the <strong>WebXR Design Summit on the 12th of October</strong>.<br><br>
 $instructions";
 
 $interview_script = "Dear [NAME],<br><br>
-We are excited for your interview [SESSION][MODERATION] at the <strong>WebXR Business Summit on the 14th of September</strong>.<br><br>
+We are excited for your interview [SESSION][MODERATION] at the <strong>WebXR Design Summit on the 12th of October</strong>.<br><br>
 $instructions";
 
 
@@ -103,38 +115,12 @@ $instructions";
 
 
 <?php
-    function showEmails(){
-        global $wpdb;
-        $sql="select m.meta_value as email, p.ID, p.post_title as name from wp_posts p, wp_postmeta m where p.ID = m.post_id and meta_key = 'email' and p.post_status = 'publish' order by post_title";
-        $q=$wpdb->get_results($sql);
-        foreach($q as $key=>$value){
-            print "$value->name | $value->email<br>";
-        }
-    }
-
-  print do_blocks(do_shortcode($post->post_content));
-  function personalizeScript($script,$session,$name,$green_room_url,$start_time,$end_time,$green_room_time,$moderation=""){
-    $script = str_replace('[SESSION]','"'.$session.'"',$script);
-    $name = explode(" ",$name);
-    $script = str_replace('[NAME]',$name[0],$script);
-    $script = str_replace('[START_TIME]',date("H:i",$start_time),$script);
-    $script = str_replace('[END_TIME]',date("H:i",$end_time),$script);
-    
-    $script = str_replace('[GREEN_ROOM_URL]',$green_room_url,$script);
-    $script = str_replace('[GREEN_ROOM_TIME]',date("H:i",$green_room_time),$script);
-    $script = str_replace('[MODERATION]',$moderation,$script);
-    
-    
-
-    return $script;
-
-}
 
 
 
 
 
-$ros = get_menu_array('BizSummit21'); // located in functions-navigation.php
+$ros = get_menu_array('DesignSummit21'); // located in functions-navigation.php
 $offset = 0;
 if(@$_GET['offset']){
     $offset = $_GET['offset'];
@@ -177,7 +163,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
         
 
 
-
+    
         $session_slug=sanitize_title($session['post']->post_title);
         $session_blurb= do_blocks($session['post']->post_content);
         $green_room_time = $start - (15*60);
@@ -199,11 +185,43 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
         
         $moderator = '';
         $moderator_email = '';
+        $with = '';
         
         //*speakerS*/
+        $panelists = [];
+        if(in_array('panel',explode(" ",$session['classes'][0]))){
+            $with .= '<strong>Panel Contact Info</strong><br><ul>';
+            foreach($session['children'] as $p => $speaker){
+                $with .="<li>";
+              
+
+
+                if(in_array('moderator',explode(" ",$speaker['classes'][0]))){
+
+
+                }
+                $with .=$speaker['post']->post_title ." - ";
+                
+                $with .= "<a href='mailto:".$speaker['meta']['email'][0]."'>".$speaker['meta']['email'][0]."</a>";
+                $with .= wrapSocial('website',@$speaker['meta']['website'][0]);
+                $with .= wrapSocial('twitter',@$speaker['meta']['twitter'][0]);
+                $with .= wrapSocial('linkedin',@$speaker['meta']['linkedin'][0]);
+                $with .= wrapSocial('github',@$speaker['meta']['github'][0]);
+                
+                
+                
+                $with .="</li>";
+
+            }
+            $with .="</ul>";
+            
+        }
+
        
        foreach($session['children'] as $p => $speaker){
            $moderated = '';
+           
+           
            $speaker_name = $speaker['post']->post_title;
             $profile_admin_url = '/wp-admin/post.php?post='.$speaker['post']->ID.'&action=edit';
 
@@ -216,6 +234,10 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                
                     "speaker"=> $speaker_name,
                     "email"=> @$speaker['meta']['email'][0],
+                    "twitter"=> @$speaker['meta']['twitter'][0],
+                    "linkedin"=> @$speaker['meta']['linkedin'][0],
+                    "github"=> @$speaker['meta']['github'][0],
+                    
                     "signed_release"=>  @$speaker['meta']['signed_release'],
                     "calendar_sent"=>  @$speaker['meta']['calendar_sent'],
                     "calendar_confirmed"=>  @$speaker['meta']['calendar_confirmed'],
@@ -235,13 +257,15 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
 
            if(in_array('panel',explode(" ",$session['classes'][0]))){
             
+            
             if(in_array('moderator',explode(" ",$speaker['classes'][0]))){
                 $moderator = $speaker_name;
                 $moderator_email = $speaker['meta']['email'][0];
             } else {
-                
+             
 
             }
+
  
 
 
@@ -251,17 +275,18 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                
                     if(@$moderator == $speaker_name){
 
-                        $moderated = ", moderated by you";
+                        $moderated = "moderated by you.";
 
                     } else {
-                        $moderated = "moderated by ".@$moderator." &lt;<a href='mailto:".@$moderator_email."&gt;'>".@$moderator_email."</a>&gt;, ";
+                        $moderated = "moderated by ".@$moderator.".";
                     }
-                
+                    
+                   
                 
                 $script = $panel_script;
             } else if(in_array('presentation',explode(" ",$session['classes'][0]))){
                 $moderated = "";
-
+                $with="";
                 $session_type='Presentation';
                 $session_script = $presentation_script;
 
@@ -269,6 +294,8 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                 
             
                 if(in_array('interviewer',explode(" ",$speaker['classes'][0]))){
+                    $with="";
+
                     $moderator = $speaker_name;
                     $moderator_email = $speaker['meta']['email'][0];
                 } else {
@@ -284,8 +311,10 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                    
                         if(@$moderator == $speaker_name){
     
+                            $with="";
                             $moderated = ", with you";
     
+
                         } else {
                             $moderated = " with ".@$moderator." &lt;<a href='mailto:".@$moderator_email."&gt;'>".@$moderator_email."</a>&gt;, ";
                         }
@@ -294,18 +323,20 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                     $script = $interview_script;
 
             }
+          
+
            // var_dump($send_calendar, $is_profile);
             if(@$send_calendar == 0){
               
                 print '<BR>Title:
-                <input type="text" size="50" value="WebXR Business Summit '.@$session_type.'"><Br>';
+                <input type="text" size="50" value="WebXR Design Summit '.@$session_type." | ".$session['post']->post_title.' "><Br>';
                 print "<BR>Location:";
-                print '<input type="text" size="50" value="Streamyard: '.$green_room_url.'"><Br>';
+                print '<input type="text" size="50" value="Restream: '.$green_room_url.'"><Br>';
 
             
                 if(array_key_exists('email',$speaker['meta'])){
                     $end_time =  + $start+($session['meta']['duration'][0]*60);
-                $session_script = personalizeScript($session_script,$session['post']->post_title,$speaker_name,$green_room_url,$start,$end_time,$green_room_time,$moderated);
+                    $session_script = personalizeScript($session_script,$session['post']->post_title,$speaker_name,$green_room_url,$start,$end_time,$green_room_time,$moderated,$with);
 
                     array_push($speaker_emails,$speaker['title']. '&lt;'.$speaker['meta']['email'][0].'&gt;');
                     print '<BR>Emails:
@@ -331,26 +362,30 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
 
             }?>
 
-
+<!--
 ICS
  <form method="post" action="<?php echo get_stylesheet_directory_uri();?>/download-ics.php">
                 <input type="hidden" name="appt" value="<?=sanitize_title($speaker_name)."-".$session_slug?>">
                 <input type="hidden" name="date_start" value="<?=getIcalDate($green_room_time)?>">
                 <input type="hidden" name="date_end" value="<?=getIcalDate($end)?>">
-                <input type="hidden" name="location" value="Streamyard <?=$green_room_url?>">
+                <input type="hidden" name="location" value="Restream <?=$green_room_url?>">
                 <textarea style="visibility:hidden;" name="description"><?=addslashes($session_script)?></textarea>
-                <input type="hidden" name="summary" value="WebXR Business Summit - Green Room">
+                <input type="hidden" name="summary" value="WebXR Design Summit - Green Room">
                 <input type="hidden" name="url" value="<?=$link?>">
                 <input type="submit" value="Download ICS">
                 
-            </form>
+            </form>-->
             <?php
 
        }// partcipants loop
+
        if(@$_GET['moderators']==1){
 
        print '<BR>ALL Emails:<BR><textarea cols="80" rows="2">'.implode(",",$speaker_emails).'</textarea><BR>';
        }
+
+
+
        $start = $start + ($session['meta']['duration'][0]*60);
 
 //       print "<hr>";

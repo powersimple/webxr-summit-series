@@ -73,6 +73,10 @@ function initSite() {
   console.log('url',window.location.pathname,getUrlParameter('event_menu'))
     if(window.location.pathname == '/event/webxr-business-summit/'){
         menu_name = 'bizsummit21'
+    } else if (window.location.pathname == '/event/webxr-design-summit/'){
+        menu_name = 'designsummit21'
+    } else if (window.location.pathname == '/event/webxr-developer-summit/'){
+        menu_name = 'devsummit21'
     } 
 
   
@@ -80,6 +84,7 @@ function initSite() {
        
         var run_of_show = runOfShow(menus[menu_name]);
         displayRunOfShow(run_of_show)
+        displayRunOfShowTable(run_of_show)
     }
 
 
@@ -1542,6 +1547,16 @@ var menu_config = {
         'menu_type': 'run-of-show',
         'location': '#run-of-show'
 
+    },
+    'designsummit21': {
+        'menu_type': 'run-of-show',
+        'location': '#run-of-show'
+
+    },
+    'devsummit21': {
+        'menu_type': 'run-of-show',
+        'location': '#run-of-show'
+
     }
 }
 function runOfShow(id){
@@ -2166,48 +2181,49 @@ var ros_meta = {
 function runOfShow(menu){
     var show = menu.menu_levels;
     
-       
-    
-    for (var s = 0; s < show.length; s++) {
-        var this_event = show[s]
-        this_event.sessions = [];
-        this_event.info =events[show[s].object_id]
-        for (var n = 0; n < show[s].children.length; n++) {   // sessions the children of shows
-            session = show[s].children[n]
-            session.info = events[show[s].children[n].object_id]
-         //  console.log(n,"info",session.info)
-         //   session.info = events[show[s].children[n].object_id]
-       
-
-            session.profiles = []
-          
-            // session.info = events[show[s].sessions[n].object_id]
-            for (var p = 0; p < show[s].children[n].children.length; p++) { // profiles
-
-              
-                if(session.object=='profile'){ }
-                    this_profile = show[s].children[n].children[p]
-            
-                    this_profile.profile = profiles[this_profile.object_id];
-                    session.profiles.push(this_profile)
-                   // console.log("profile",this_profile)
-               
-               
-            }   
-            this_event.sessions.push(session)
-        this_event.sessions    
-        }    
+        if(show.length != undefined){
+        
+        for (var s = 0; s < show.length; s++) {
+            var this_event = show[s]
+            this_event.sessions = [];
+            this_event.info =events[show[s].object_id]
+            for (var n = 0; n < show[s].children.length; n++) {   // sessions the children of shows
+                session = show[s].children[n]
+                session.info = events[show[s].children[n].object_id]
+            //  console.log(n,"info",session.info)
+            //   session.info = events[show[s].children[n].object_id]
         
 
+                session.profiles = []
+            
+                // session.info = events[show[s].sessions[n].object_id]
+                for (var p = 0; p < show[s].children[n].children.length; p++) { // profiles
 
+                
+                    if(session.object=='profile'){ }
+                        this_profile = show[s].children[n].children[p]
+                
+                        this_profile.profile = profiles[this_profile.object_id];
+                        session.profiles.push(this_profile)
+                    // console.log("profile",this_profile)
+                
+                
+                }   
+                this_event.sessions.push(session)
+            this_event.sessions    
+            }    
+            
+
+
+        }
+        if(getUrlParameter('meta') == 'show'){
+            displayMeta()
+
+        }   
+
+
+        return this_event
     }
-    if(getUrlParameter('meta') == 'show'){
-         displayMeta()
-
-    }   
-
-
-    return this_event
 
 }
 function displayMeta(){
@@ -2266,13 +2282,13 @@ function getProfileCard(this_profile,event_time){
         
 
         if(info.profile_title != undefined){
-            credential +=  '<span>'+info.profile_title+", "+'</span>'
+            credential +=  '<span>'+info.profile_title.trim()+", "+'</span>'
         }
         if(info.company != undefined){
-            credential += '<span>'+info.company+'</span>'
+            credential += '<span>'+info.company.trim()+'</span>'
         }
         if(info.twitter != undefined){
-            credential += '<span class="twitter-handle">'+this_profile.profile.info.twitter.replace("https://twitter.com/","@")+'</span>'
+            credential += '<span>@'+info.twitter.replace("https://twitter.com/","")+'</span>'
         }
         if(credential != ''){
             card += '<span class="credential">'+credential+'</span>'
@@ -2284,7 +2300,7 @@ function getProfileCard(this_profile,event_time){
             social +='<a target="_new" class="linkedin" href="'+info.linkedin+'"><i class="fa fa-linkedin social-icon" title="'+this_profile.title+' on linkedin"></i></a>'
         }
         if(info.github != undefined){
-            social +='<a target="_new" class="github" href="'+info.linkedin+'"><i class="fa fa-linkedin social-icon" title="'+this_profile.title+' on linkedin"></i></a>'
+            social +='<a target="_new" class="github" href="'+info.linkedin+'"><i class="fa fa-github social-icon" title="'+this_profile.title+' on github"></i></a>'
         }
         if(social != ''){
             card+='<span class="social">'+social+'</span>'
@@ -2305,7 +2321,172 @@ function getProfileCard(this_profile,event_time){
 } 
 
 
+function displayRunOfShowTable(runOfShow){
 
+    console.log(runOfShow)
+   
+    var show = '<h2>'+runOfShow.title+'</h2>'
+
+    var showtime = runOfShow.info.event_info.utc_start;
+    
+    $("#show").html(show)
+    var duration = 0;
+    var sessions = '<div id="schedule">'
+    var this_profile = ''
+    var width_override = ''
+    var card_size = 1
+    var cell_width = '100%';
+    var cols = '';
+    for (var n = 0; n < runOfShow.sessions.length; n++) { 
+        console.log("session-info",runOfShow.sessions[n].info,showtime)
+        if(runOfShow.sessions[n].info != undefined){
+            
+            if(runOfShow.sessions[n].info.event_info.duration != ''){
+            duration = parseInt(runOfShow.sessions[n].info.event_info.duration)*60
+            event_time = showtime// this passes it below
+            
+            display_event_time = localTime(showtime)//converst
+            start_time = showtime
+            showtime = parseInt(showtime)+duration; //add duration for next 
+            //console.log("duration",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
+                
+                }
+            // console.log("info not undefined",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
+            }
+    //        console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
+            sessions += '<div class="row session">'
+            
+            sessions += '<div class="col-sm-2 col-md-1">'
+            sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time">'+display_event_time+' </span></h3>'
+          //  sessions += '<div class="card-mode">'
+        //  sessions += '<img src="/wp-content/uploads/2021/09/BusinessSummitBrandCard.png"+ alt="'+runOfShow.title+'">'
+        /*
+        sessions += '<ul class="session-times card-info">'
+        sessions += '<li class="event-date">14 September 2021</li>'
+ 
+        sessions += '<li><span>PDT</span><BR>'+convertDateTime(start_time,-7) +'</li>'
+        sessions += '<li><span>EDT</span><BR>'+convertDateTime(start_time,-4) +'</li>'
+        sessions += '<li><span>UTC</span><BR>'+convertDateTime(start_time,0) +'</li>'
+        sessions += '<li><span>BST</span><BR>'+convertDateTime(start_time,1) +'</li>'
+        sessions += '<li><span>CEST</span><BR>'+convertDateTime(start_time,2) +'</li>'
+        sessions += '<li><span>CST</span><BR>'+convertDateTime(start_time,8) +'</li>'
+        sessions+= '</ul>'
+        */
+        sessions+= '</div>'
+      
+        sessions+= '<div class="col-sm-3 col-md-2">'
+        
+        sessions += '<h3 class="session-title ">'+runOfShow.sessions[n].title+'</h3>'
+    //   
+
+    sessions+= '</div>'
+        sessions +='<div class="col-sm-6 col-md-8">'//session
+
+            sessions += '<div class="row" class="speaker-list">'
+            width_override = ''
+            
+            if(runOfShow.sessions[n].profiles.length == 5){
+                width_override = 'fifth'
+                card_size = 1
+                cols='fifth'
+            } else if(runOfShow.sessions[n].profiles.length == 1){
+                width_override = 'presentation'
+                card_size = 2
+                cols='col-sm-6 col-md-3'
+
+            } else if(runOfShow.sessions[n].profiles.length == 2){
+                width_override = 'pair'
+                card_size = 2
+                cols='col-sm-6 col-md-3'
+
+            } else {
+                width_override = ''
+                card_size = 1
+                cols='col-sm-6 col-md-3'
+
+            }
+
+            
+        
+
+cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
+
+        for (var p = 0; p < runOfShow.sessions[n].profiles.length; p++) { //speakers
+            
+            this_profile = runOfShow.sessions[n].profiles[p]
+               
+                    sessions += '<div  class="profile-card '+cols+' '+ this_profile.classes +'">'
+
+               // console.log("THIS PROFILE",this_profile)
+                if(this_profile.profile != undefined){
+                    sessions += getProfileThumbnail(this_profile,'thumbnail');
+                 /*                   if(card_size == 1){
+                      
+                    } else {
+                        
+                        sessions += getProfileThumbnail(this_profile,'medium');
+
+                    }*/
+                    if((width_override == 'presentation') || (width_override == 'pair')){
+                        sessions += '</div><div class="col-sm-6 col-md-3">'
+                    }
+                    sessions += '<span class="profile-info">'
+                
+                    sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title+'</span>'
+                    
+                   
+                sessions += getProfileCard(this_profile,event_time);
+                
+                if(width_override == 'presentation'){
+                   sessions += '</div><div class="col-sm-12 col-md-8 talk-blurb">'
+                
+               
+                     if(this_profile.profile.info.talk_description != undefined){
+                    sessions += '<span class="blurb">'+this_profile.profile.info.talk_description+'</span>'
+                }
+            }
+                sessions += '</span>'
+                
+                } else {
+                    if(getUrlParameter('hold') == 'show'){
+                        sessions += '<span class="profile-name">'+this_profile.title+'</span>'
+                   }
+                   
+                }
+
+                
+                
+
+
+
+                sessions += '</div>'
+
+
+           }
+           
+           sessions += '</div>'
+           sessions += '</div>'
+
+
+           
+
+          
+        sessions += '</div>'
+    }
+    sessions +='</div>'
+    $("#ros-table").html(sessions)
+
+   
+    if(getUrlParameter('collapse') != 'all'){
+       
+    //    activateAccordion("#ros-accordion")
+    }
+    if(getUrlParameter('cards') == 'show'){
+    //    $('#ros-accordion').addClass('cards')
+
+   }
+
+}
 
 
 
@@ -2324,15 +2505,24 @@ function getProfileThumbnail(this_profile,size){
 }
 
 function displayRunOfShow(runOfShow){
-    console.log("Run of Show",runOfShow)
-
+    displayRunOfShowTable(runOfShow)
+    displayRunOfShowCards(runOfShow)
+    if(getUrlParameter('cards') != 'show'){
+       
+        //    activateAccordion("#ros-accordion")
+        }
+    
+   
+}
+function displayRunOfShowCards(runOfShow){
+        
     var show = '<h2>'+runOfShow.title+'</h2>'
 
     var showtime = runOfShow.info.event_info.utc_start;
     
     $("#show").html(show)
     var duration = 0;
-    var sessions = '<div id="ros-accordion">'
+    var sessions = '<div id="ros-accordion" class="cards">'
     var this_profile = ''
     var width_override = ''
     var card_size = 1
@@ -2353,18 +2543,18 @@ function displayRunOfShow(runOfShow){
            // console.log("info not undefined",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
         }
 //        console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
-
-        sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time">'+display_event_time+' </span> '+runOfShow.sessions[n].title+'</h3>'
+      //  console.log("title time",display_event_time,runOfShow.sessions[n].title)
+        sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time"> </span> '+runOfShow.sessions[n].title+'</h3>'
         sessions += '<div class="card-mode">'
       //  sessions += '<img src="/wp-content/uploads/2021/09/BusinessSummitBrandCard.png"+ alt="'+runOfShow.title+'">'
       sessions += '<ul class="session-times card-info">'
-      sessions += '<li class="event-date">14 September 2021</li>'
-      sessions += '<li><span>Los Angeles</span><BR>'+convertDateTime(start_time,-7) +'</li>'
-      sessions += '<li><span>New York</span><BR>'+convertDateTime(start_time,-4) +'</li>'
-      sessions += '<li><span>UTC</span><BR>'+convertDateTime(start_time,0) +'</li>'
-      sessions += '<li><span>London</span><BR>'+convertDateTime(start_time,1) +'</li>'
-      sessions += '<li><span>Paris</span><BR>'+convertDateTime(start_time,2) +'</li>'
-      sessions += '<li><span>Beijing</span><BR>'+convertDateTime(start_time,8) +'</li>'
+        sessions += '<li class="event-date">12 October 2021</li>'
+       sessions += '<li><span>Los Angeles</span><BR>'+convertDateTime(start_time,-7) +'</li>'
+        sessions += '<li><span>New York</span><BR>'+convertDateTime(start_time,-4) +'</li>'
+        sessions += '<li><span>UTC</span><BR>'+convertDateTime(start_time,0) +'</li>'
+        sessions += '<li><span>London</span><BR>'+convertDateTime(start_time,1) +'</li>'
+        sessions += '<li><span>Paris</span><BR>'+convertDateTime(start_time,2) +'</li>'
+        sessions += '<li><span>Beijing</span><BR>'+convertDateTime(start_time,8) +'</li>'
       
       sessions+= '</ul>'
         sessions += '<h3 class="card-info">'+runOfShow.sessions[n].title+'</h3>'
@@ -2409,9 +2599,12 @@ function displayRunOfShow(runOfShow){
                 sessions += getProfileCard(this_profile,event_time);
                 
                 
-                if(this_profile.profile.info.talk_description != undefined){
-                    sessions += '<span class="blurb">'+this_profile.profile.info.talk_description+'</span>'
-                }
+                    if(width_override == 'presentation'){
+
+                        if(this_profile.profile.info.talk_description != undefined){
+                            sessions += '<span class="blurb">'+this_profile.profile.info.talk_description+'</span>'
+                        }
+                    }
                 sessions += '</span>'
                 
                 } else {
@@ -2435,7 +2628,7 @@ function displayRunOfShow(runOfShow){
 
            sessions += '<div class="card-footer">'
            sessions += '<span class="event-info">'
-           sessions += '<a class="rsvp-link" href"https://bit.ly/WebXRBusinessSummit21" target="_new">RSVP: https://bit.ly/WebXRBusinessSummit21</a><br>'
+           sessions += '<a class="rsvp-link" href"https://bit.ly/WebXRDesignSummit21" target="_new">RSVP: https://bit.ly/WebXRDesignSummit21</a><br>'
            sessions += '<a class="rsvp-link" href"https://webxr.events/" target="_new">//webxr.events</a> | '
            sessions += '<a class="rsvp-link" href"https://twitter.com/webxrawards" target="_new">@webxrawards</a> | '
            sessions += '<a class="rsvp-link" href"https://twitter.com/#webxrsummit" target="_new">#webxrsummit</a><br>'
@@ -2451,21 +2644,28 @@ function displayRunOfShow(runOfShow){
     }
     sessions +='</div>'
     $("#sessions").html(sessions)
-    if(getUrlParameter('collapse') != 'all'){
-        activateAccordion("#ros-accordion")
 
+   
+    if(getUrlParameter('collapse') != 'all'){
+       
+    //    activateAccordion("#ros-accordion")
     }
     if(getUrlParameter('cards') == 'show'){
-        $('#ros-accordion').addClass('cards')
+    //    $('#ros-accordion').addClass('cards')
 
    }
-    
-   
+
 }
+jQuery(document).ready(function() {
+
+  
+
+});
 function activateAccordion(id){
+    console.log("triggered")
     jQuery(id).accordion({
         header: "h3",
-        collapsible: true,
+        collapsible: false,
         autoHeight: true,
         heightStyle:"content",
         navigation: true

@@ -138,3 +138,66 @@ function insertEvent($post_title,$post_content,$post_excerpt,$post_parent){
            getEventID($parent->post_parent);
         }
     }
+    function wrapSocial($service,$url){
+        $mail="";
+        if($service=="email"){
+            $mail="mailto:";
+            if($url = ''){
+                return "Confirme, Registration pending.";
+            }
+        }
+        if($url != ''){
+        $link = " <a target='_new' href='".$mail."".$url."'>";
+        
+        switch ($service){
+            case "twitter":  
+                $link.="Twitter";
+                break;
+                case "linkedin":  
+                    $link.="LinkedIn";
+                    break;
+                case "github":  
+                    $link.="GitHub";
+                    break;
+                case "website":
+                    $link.=$url;
+                    break;
+                case "email":
+                    $link.=$url;
+                    break;
+        
+                    
+    
+        }
+        $link .= "</a> |";
+        return $link;
+        }
+    }
+    function showEmails(){
+        global $wpdb;
+        $sql="select m.meta_value as email, p.ID, p.post_title as name from wp_posts p, wp_postmeta m where p.ID = m.post_id and meta_key = 'email' and p.post_status = 'publish' order by post_title";
+        $q=$wpdb->get_results($sql);
+        foreach($q as $key=>$value){
+            print "$value->name | $value->email<br>";
+        }
+    }
+
+
+  function personalizeScript($script,$session,$name,$green_room_url,$start_time,$end_time,$green_room_time,$moderation="",$with=""){
+    $script = str_replace('[SESSION]','"'.$session.'"',$script);
+    $name = explode(" ",$name);
+    $script = str_replace('[NAME]',$name[0],$script);
+    $script = str_replace('[START_TIME]',date("H:i",$start_time),$script);
+    $script = str_replace('[END_TIME]',date("H:i",$end_time),$script);
+    
+    $script = str_replace('[GREEN_ROOM_URL]',$green_room_url,$script);
+    $script = str_replace('[GREEN_ROOM_TIME]',date("H:i",$green_room_time),$script);
+    $script = str_replace('[MODERATION]',$moderation,$script);
+    $script = str_replace('[WITH]',$with,$script);
+    
+    
+    
+
+    return $script;
+
+}

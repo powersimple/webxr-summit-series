@@ -3,6 +3,7 @@
 get_header(); 
 
 
+
 $section_class = get_post_meta($post->ID,'section_class',true);
 print $default_video_url = get_post_meta($post->ID,"embed_video_url",true);
 
@@ -113,20 +114,20 @@ $instructions";
     }
 
   print do_blocks(do_shortcode($post->post_content));
-  function personalizeScript($script,$session,$name,$green_room_url,$start_time,$end_time,$green_room_time,$moderation=""){
+function personalizeScript($script,$session,$name,$green_room_url,$start_time,$end_time,$green_room_time,$moderation=""){
     $script = str_replace('[SESSION]','"'.$session.'"',$script);
     $name = explode(" ",$name);
     $script = str_replace('[NAME]',$name[0],$script);
     $script = str_replace('[START_TIME]',date("H:i",$start_time),$script);
     $script = str_replace('[END_TIME]',date("H:i",$end_time),$script);
-    
+
     $script = str_replace('[GREEN_ROOM_URL]',$green_room_url,$script);
     $script = str_replace('[GREEN_ROOM_TIME]',date("H:i",$green_room_time),$script);
     $script = str_replace('[MODERATION]',$moderation,$script);
-    
-    
 
-    return $script;
+
+
+return $script;
 
 }
 

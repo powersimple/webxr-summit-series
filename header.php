@@ -86,7 +86,7 @@ if (location.protocol !== 'https:') {
         //  var_dump($media_data);
           $versions = getThumbnailVersions($media_id);
           $version_list = array();
-          foreach($versions as $v => $version){
+          foreach($versions as $v => $version){https://twitter.com/hunicke
               array_push($version_list,"'".$v."'".": '".$version."'");
 
           }
@@ -172,7 +172,7 @@ if(@$_GET['disappear']==1){
 <style>
  
    
-        .a-enter-ar-button, .a-enter-vr-button {
+        .a-enter-ar-button, .a-enter-vr-button, .toggle-edit {
             display: none !important;
             
         } 

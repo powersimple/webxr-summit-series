@@ -48,8 +48,15 @@ urlParams.set('cards', 'show')
 
 
 <main class="main" role="main">
+
+
+
+
 <div class="title-bar">
     <h1 class="title"><?=$post->post_title?></h1>
+    <div class="text-wrap">
+         <?=do_blocks($post->post_content)?>
+</div>
     <?php
     if(@$post->post_excerpt){
       
@@ -62,8 +69,20 @@ urlParams.set('cards', 'show')
  
     ?>
 </div>
+
+
+<section class="module" id="ros-table" >
+    <?php
+
+?>
+
+</section>
     <div class="row">
     <?php
+if(($post->ID!=13) || (@$_GET['cards'] == 'show')){
+
+
+
 
 if($post->post_parent == 0){
     $event_id = $post->ID;
@@ -216,7 +235,9 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
                     jQuery(document).ready(function() {
                         //triggers Run of show script when event menu param is present
                     var run_of_show = runOfShow('<?=$_GET['event_menu']?>');
+                    console.log("ROS",run_of_show)
                     displayRunOfShow(run_of_show)
+                    displayRunOfShowTable(run_of_show)
                 });
                 </script>
 
@@ -228,8 +249,9 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
             </div>
 
             <div>
-            <h3>Speakers</h3>
-         <?=displayProfiles(array_unique($summit_profiles),$post->ID,"event_guest",$session_type);?>
+          <!--  <h3>Speakers</h3>-->
+         <?php 
+         //displayProfiles(array_unique($summit_profiles),$post->ID,"event_guest",$session_type);?>
             </div>
 
          </div>
@@ -237,7 +259,9 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
      
      </div>
  </div>
-        
+        <?php
+    }
+        ?>
 
 </div>    
   </main>

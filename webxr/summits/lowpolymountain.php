@@ -44,7 +44,7 @@ May 25, 2021;color:#fff; fontSize:1;align:left;outlineWidth:0.06;" material="sha
 
 
             <a-light id="logo-side-spot" type="spot" color="white" intensity=".5" position="6.774 0.976 0.069"
-                angle="50" rotation="38.9 89 168.09"></a-light>
+                angle="50" rotation="41 90 170"></a-light>
 
 
             <a-light id="mountain-spot" type="spot" color="#fff" intensity="0.5" position="60 10 0" angle="60"

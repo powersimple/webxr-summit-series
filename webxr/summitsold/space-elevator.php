@@ -41,9 +41,9 @@ The Polys - WebXR Awards",
         "offset_z"=>-22,
     ];
 
-//    print displayTextSeries($elevate,$coords);
+    print displayTextSeries($elevate,$coords);
 ?>
-   
+    </a-entity>
 
 
 
@@ -56,13 +56,15 @@ The Polys - WebXR Awards",
 
         <a-entity id="platform-content" scale="10 10 10" position="0 600 0">
 
-                <!--
+            
+
+            
     
-        <a-entity id="business-summmit-square-model" class="center-obj-zone" static-body
+            <a-entity id="business-summmit-square-model" class="center-obj-zone" static-body
                 gltf-model="#business-summmit-square" visible="true" scale="20 6 20" position="0 0 4.65"
                 rotation="90 1.5 180"></a-entity>
 
-            
+                
 <a-entity id="futurewei-logo-model" class="center-obj-zone" static-body
                 gltf-model="#futurewei-3d-logo" visible="true" scale=".375 .2 .375" position="0 -1.4 4.65"
                 rotation="90 3 180"></a-entity>
@@ -82,7 +84,36 @@ September 14, 2021;color:#fff; fontSize:.8;align:left;" material="shader: standa
                 rotation="0 180 0" scale=".2 .2 .2" visibility="true"></a-entity>
 
 
--->
+                <!-- BUSINESS AGENDA -->
+            <a-entity id="business-summit-agenda"
+            position="-4.1 0 4" 
+            rotation="0 105 0">
+                    <?php
+?>
+<!---->
+<a-entity id="label-created" troika-text="value:Agenda;color:#fff; fontSize:.8;align:left;" material="shader: standard;" position="1 0 0"
+        rotation="0 0 0" scale=".2 .2 .2"></a-entity>
+
+<?php
+    
+    
+    
+    /* */
+    print displayAgendaList(getAgenda(406),-2.5,-0.15,0);
+    print displayAgendaList(getAgenda(420),-0.25,-0.15,0);
+    print displayAgendaList(getAgenda(519),2,-0.15,0);   
+   
+
+
+?>
+
+
+
+            </a-entity>
+
+
+
+
 
 
 
@@ -105,7 +136,7 @@ October 12, 2021;color:#fff; fontSize:.8;align:left;" material="shader: standard
                 rotation="0 2.48 0" scale=".2 .2 .2"></a-entity>
 
 
-<!-- DESIGN AGENDA 
+<!-- DESIGN AGENDA -->
 <a-entity id="design-summit-agenda"position="4.2 1 -3" rotation="0 -75 0">
                     <?php
 ?>
@@ -117,9 +148,9 @@ October 12, 2021;color:#fff; fontSize:.8;align:left;" material="shader: standard
     
     
     
- //   print displayAgendaList(getAgenda(434),-2.8,-0.15,0);
-  //  print displayAgendaList(getAgenda(444),-0.25,-0.15,0);
-   // print displayAgendaList(getAgenda(493),2,-0.15,0);   
+    print displayAgendaList(getAgenda(434),-2.8,-0.15,0);
+    print displayAgendaList(getAgenda(444),-0.25,-0.15,0);
+    print displayAgendaList(getAgenda(493),2,-0.15,0);   
 
 
 
@@ -136,7 +167,7 @@ October 12, 2021;color:#fff; fontSize:.8;align:left;" material="shader: standard
 
 
 
-            </a-entity>-->
+            </a-entity>
 
 
 
@@ -151,7 +182,7 @@ October 12, 2021;color:#fff; fontSize:.8;align:left;" material="shader: standard
                 </a-light>
 
                 <a-light id="business-spot2" type="spot" color="#ff8800" distance="35" intensity="20"
-                position="-8.44 0 -3.7" angle="90" rotation="0 152 0">    </a-light>   
+                position="-8.44 0 -3.7" angle="90" rotation="0 149.4 0">    </a-light>   
 
                 <a-light id="business-spot3" type="spot" color="#ff8800" distance="20" angle="51.4" intensity="6"
                 position="5.68 -1.69 4" 
@@ -218,7 +249,7 @@ October 12, 2021;color:#fff; fontSize:.8;align:left;" material="shader: standard
 
 
 <a-entity id="polys2-model" class="center-obj-zone" static-body position="0.313 16 0"
-                rotation="90 -30 0" gltf-model="#polys2" scale="10 10 10
+                rotation="90 30 0" gltf-model="#polys2" scale="10 10 10
                 " visible="true"></a-entity>
             <a-entity id="polys2-date"
                 troika-text="value:February 12, 2022;color:#fff; fontSize:1.2;align:right;"

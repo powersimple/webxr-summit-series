@@ -68,7 +68,7 @@ $GLOBALS['REST_CONFIG'] =array(//An array of url arguments
            // "profile"=>iterateEndpoint('post_type','profile',"fields=id,type,title,content,slug,excerpt,post_media,languages,info,seo,featured_media,screen_images,featured_video,type,industry,support_hardware,feature,thumbnail_url,collaboration_type,platform,cats,tags&".$GLOBALS['REST_post_filter_name_sort']),
          //"profile"=>iterateEndpoint('post_type','profile',"fields=id,type,title,content,slug,excerpt,post_media,languages,info,seo,featured_media,screen_images,featured_video,type,industry,support_hardware,feature,thumbnail_url,collaboration_type,platform,cats,tags&".$GLOBALS['REST_post_filter_name_sort']),
            // "hardware"=>"fields=id,type,title,content,slug,excerpt,posts,post_media,languages,info,seo,profiles,featured_media,screen_images,featured_video,type,industry,feature,thumbnail_url,platform,cats,tags&".$GLOBALS['REST_post_filter'],
-         "resource"=>"fields=id,type,title,content,slug,excerpt,languages,info,related,featured_media,screen_images,post_media,related,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
+            "resource"=>"fields=id,type,title,content,slug,excerpt,languages,info,related,featured_media,screen_images,post_media,related,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
             //"event"=>"fields=id,type,title,content,slug,excerpt,languages,event_info,profiles,date_time,resources,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
             "event"=>iterateEndpoint('post_type','event',"fields=id,type,title,content,slug,excerpt,languages,event_info,profiles,date_time,resources,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter']),
             //"product"=>"fields=id,type,title,content,slug,excerpt,languages,project_info,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
@@ -81,7 +81,7 @@ $GLOBALS['REST_CONFIG'] =array(//An array of url arguments
             //"industry"=>"fields=id,name,count,slug,description,posts,children&".$GLOBALS['REST_tax_filter'],
             "tags"=>"fields=id,name,slug,posts&".$GLOBALS['REST_tax_filter'],
             "menus"=>"menus",
-            "media"=>"fields=id,data&".$GLOBALS['REST_post_filter'],
+            "media"=>iterateEndpoint('post_type','media',"fields=id,data&".$GLOBALS['REST_post_filter']),
            // "collaborators"=>"fields=meta_value&".$GLOBALS['REST_post_filter'],
            
         );
