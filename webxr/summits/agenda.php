@@ -83,11 +83,12 @@ if(@$this_ros){
             <a-entity id="<?=sanitize_title($session['post']->post_title)?>" position="<?=$session_pos['x']?> <?=$session_pos['y']?> <?=$session_pos['z']?>" rotation="<?=$session_rot['x']?> <?=$session_rot['y']?> <?=$session_rot['z']?>"> 
                 <!--SESSION WRAPPER-->
       
-           
+       
                 
                 <a-entity id="label-<?=$session_slug?>" troika-text="value:
 <?=$session['title']?>;color:#b32605; fontSize:1.5;align:center;baseline:top;maxWidth:28;anchor:top;outlineWidth:0.03;outlineColor:#fe3001;" material="shader: standard;" 
                 position="-2.3 .5 0.1" rotation="0 135 0" scale=".2 .2 .2" visibility="true">
+                    <!--
                 <a-entity id="LosAngeles-<?=$session_slug?>" troika-text="value:<?=adjustTimeZone($start,"-7","Seattle")?> ;color:#ffffff; fontSize:1;align:center;maxWidth:30;anchor:center;outlineWidth:0.03;" material="shader: standard;" 
                 position="-9 1.5 0" rotation="0 0 0 "scale=".7 .7 .7" visibility="true"></a-entity>
 
@@ -108,10 +109,11 @@ if(@$this_ros){
 
                 <a-entity id="Sydney-<?=$session_slug?>" troika-text="value:<?=adjustTimeZone($start,"11","Sydney")?> ;color:#ffffff; fontSize:1;align:center;maxWidth:30;anchor:center;outlineWidth:0.03;" material="shader: standard;" 
                 position="9 1.5 0" rotation="0 0 0 "scale=".7 .7 .7" visibility="true"></a-entity>
-
+ -->
 
             
             </a-entity>
+       
 
 
 
@@ -146,6 +148,7 @@ $start =  + $start+($session['meta']['duration'][0]*60);
                   
                     $thumbnail = str_replace(@$_GET['host_root'],"/",$thumbnail);
                     $thumbnail = str_replace('/webxrsummitseries/',"/",$thumbnail);
+                    $thumbnail = str_replace('/obi-wan-v:3000/',"/",$thumbnail);
                     $thumbnail = str_replace('https://',"/",$thumbnail);
                     
                     

@@ -5,7 +5,7 @@
 get_header();
 //    get_eventsFromTable(15);
     require_once "webxr/functions-aframe.php";
-    $speed = "0.1";
+    $speed = "0.2";
     if(@$_GET['speed']){
         $speed = $_GET['speed'];    
     }
@@ -20,7 +20,21 @@ get_header();
     if(@$_GET['summit_model']){
         $summit_square_model = $_GET['summit_model'];
     }
+  
+    $cam_x = 0;
+$cam_y = 1.6;
+$cam_z = 0;
 
+if(@$_GET['camera']){
+  $cam_coords =  explode("~",$_GET['camera']);
+  if(count($cam_coords) == 3){
+    $cam_x = $cam_coords[0];
+    $cam_y = $cam_coords[1];
+    $cam_z = $cam_coords[2];
+  }
+}
+
+    $thumbnail =getThumbnail(get_post_thumbnail_id($post->ID),"Full");
      ?>
 
 
@@ -34,15 +48,7 @@ get_header();
     </script>
   
 
-</head>
-
-<body background="#000">
-    <div id="top-nav">
-        <div id="menu"></div>
-        <div id="menuclose"></div>
-
-        <div id="logo"></div>
-
+  <script src="/assets/js/polys2.js"></script>
 
 
 
@@ -57,66 +63,18 @@ get_header();
 
         <a-assets timeout="800000">
              <!-- Loads models -->
- <a-asset-item id="pedestal" response-type="arraybuffer" src="/assets/models/pedestal.glb"></a-asset-item>
-
-<a-asset-item id="buttonmodel" response-type="arraybuffer" src="/assets/models/button.glb"></a-asset-item>
-<a-asset-item id="buttonupmodel" response-type="arraybuffer" src="/assets/models/button-up.glb">
-</a-asset-item>
-<a-asset-item id="emblem" response-type="arraybuffer" src="/assets/models/emblem.glb"></a-asset-item>
-<a-asset-item id="mountain" response-type="arraybuffer" src="/assets/models/mountain9b.glb"></a-asset-item>
-<a-asset-item id="dev-summmit-logos-square" response-type="arraybuffer"
-    src="/assets/models/dev-summit-logo-square.glb"></a-asset-item>
-<!--   <a-asset-item id="town-hall" response-type="arraybuffer"
-    src="/assets/models/TownHall.glb"></a-asset-item>-->
-<a-asset-item id="dev-summmit-hosted" response-type="arraybuffer" src="/assets/models/hostedby.glb">
-</a-asset-item>
-<a-asset-item id="business-summmit-square" response-type="arraybuffer"
-    src="/assets/models/BusinessSummitSquare.glb"></a-asset-item>
-<a-asset-item id="business-summmit-wide" response-type="arraybuffer"
-    src="/assets/models/BusinessSummit-wide.glb"></a-asset-item>
-<a-asset-item id="design-summmit-wide" response-type="arraybuffer"
-    src="/assets/models/DesignSummit-wide.glb"></a-asset-item>
-<a-asset-item id="design-summmit-square" response-type="arraybuffer"
-    src="/assets/models/DesignSummit-square.glb"></a-asset-item>
-<a-asset-item id="design-summmit-square" response-type="arraybuffer"
-    src="/assets/models/DesignSummit-square.glb"></a-asset-item>
-<a-asset-item id="space-elevator" response-type="arraybuffer"
-    src="/assets/models/elevator/ElevatorShaftPink.glb"></a-asset-item>
-<a-asset-item id="business-platform" response-type="arraybuffer"
-    src="/assets/models/elevator/business-platform.glb"></a-asset-item>
-<a-asset-item id="design-platform" response-type="arraybuffer"
-    src="/assets/models/elevator/design-platform.glb"></a-asset-item>
-    <a-asset-item id="powersimple-3d-logo" response-type="arraybuffer"
-    src="/assets/models/Powersimple_3DLogo.glb"></a-asset-item>
-    <a-asset-item id="futurewei-3d-logo2" response-type="arraybuffer"
-    src="/assets/models/Logo_FutureWei.glb"></a-asset-item>
-    <a-asset-item id="metavrse-3d-logo" response-type="arraybuffer"
-    src="/assets/models/Logo_MetaVRse.glb"></a-asset-item>
-    <a-asset-item id="powersimple-loci-metavrse" response-type="arraybuffer"
-    src="/assets/models/partners/MetaVRse-LOCI-Powersimple.glb"></a-asset-item>
-    <a-asset-item id="WebXRsummit-FutureWei" response-type="arraybuffer"
-    src="/assets/models/partners/WebXRsummit-FutureWei.glb"></a-asset-item>
+    <a-asset-item id="2nd-polys-trophy" response-type="arraybuffer"
+    src="/assets/models/polys/2021-Poly.glb"></a-asset-item>
     
-    
-<a-asset-item id="platforms" response-type="arraybuffer" src="/assets/models/elevator/platforms.glb">
-</a-asset-item>
-<a-asset-item id="walkway" response-type="arraybuffer" src="/assets/models/elevator/walkway.glb">
-</a-asset-item>
-
-<a-asset-item id="futurewei-3d-logo" response-type="arraybuffer"
-    src="/assets/models/sponsors/futurewei.glb"></a-asset-item>
     <a-asset-item id="polys2" response-type="arraybuffer" src="/assets/models/Polys2.glb"></a-asset-item>
-<img id="sky" src="/assets/images/skybox/blueskybox.jpg">
-<img id="green" src="/assets/images/skybox/greenscreen.jpg">
-<a-asset-item id="table" response-type="arraybuffer" src="/assets/models/table.glb"></a-asset-item>
-<a-asset-item id="chair" response-type="arraybuffer" src="/assets/models/chair.glb"></a-asset-item>
-
+    
+    <img id="sky" src="/assets/images/skybox/Polys2Skybox.jpg">
 
 
             <?php// include "webxr/summits/assets.php";?>
             <?php include "webxr/summits/mixins.php";?>
-
-
+            <a-asset-item id="platform" response-type="arraybuffer" src="/assets/models/polys/platform.glb"></a-asset-item>
+            
         </a-assets>
 
 
@@ -140,7 +98,7 @@ get_header();
 
 
         <a-entity id="rig" rotation-reader thumbstick-logging
-            movement-controls="speed: <?=$speed?>; constrainToNavMesh: true;fly: true" position="-41 50 -95" rotation="0 0 0">
+            movement-controls="speed: <?=$speed?>; constrainToNavMesh: true;fly: true" position="<?=$cam_x?> <?=$cam_y?> <?=$cam_z?>" rotation="0 0 0">
            
             <a-box id="body" plane-hit aabb-collider="collideNonVisible: true; objects: .zone" static-body="shape: box"
                 position="0 0.05 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
@@ -151,77 +109,61 @@ get_header();
                              colliderEndEvent:raycaster-intersection-cleared;
                              colliderEndEventProperty: clearedEls;" position="0 0 0" rotation="0 0 0"></a-entity>
 
-                     <a-entity id="cam-content"position=".4 2 .2"
-                rotation="0 0 0" scale=".5 .5 .5">
-
-                                                <a-entity id="<?=$summit_square_model?>-model" class="center-obj-zone" static-body
-                                    gltf-model="#<?=$summit_square_model?>" visible="true" scale="25 10 25" position="1.125 0 1.4"
-                                    rotation="0 140 190"></a-entity>
-
-                                    <a-image id="image-Kent" material="side:front" mixin="scale-label" src="/assets/images/talent/KentBye.jpg" geometry="primitive: circle; width: 2; height: 2; depth: 3" scale=".3 .3 .3" 
-                                position="1.2 0 -0.25" rotation="100 50 90" width="5" height="5"></a-image>
-                                <a-entity id="label-Kent" troika-text="value:Hosted by Kent Bye
-October 12, 2021;color:#fff; fontSize:.8;align:left;;outlineWidth:0.03;outlineColor:#2e0143;" material="shader: standard;"  position="2.15 0 .55"
-                                    rotation="100 50 90" scale=".2 .2 .2"></a-entity>
-                                
-                                    <a-entity id="futurewei-logo-model" class="center-obj-zone" static-body
-                                    gltf-model="#futurewei-3d-logo" visible="true" scale=".5 .5 .5" position="2.25 0 0"
-                                    rotation="0 140 190"></a-entity>
-                                    
-                                <a-light id="cam-light" type="spot" color="#fff" distance="20" intensity="2"
-                                    position="1 -3 -1" angle="30" rotation="60 180 180">
-                                    </a-light>
-                </a-entity>
-
-                <!--
-             
-
-       
-
-
-    -->
             <a-entity mixin="hand" hand-controls="hand: left; handModelStyle: highPoly; color: #ffcccc"></a-entity>
             <a-entity mixin="hand" hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc"></a-entity>
-<!--
+
             <a-entity oculus-touch-controls="hand: left" vive-controls="hand: left" thumb-controls="hand: left" blink-controls="cameraRig: #rig; teleportOrigin: #camera; collisionEntities: #nav; hitCylinderColor: #e9974c; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8">
             </a-entity>
             <a-entity oculus-touch-controls="hand: right" vive-controls="hand: right " thumb-controls="hand: right">
-            </a-entity>-->
+            </a-entity><!---->
 
             
         </a-entity>  
 
-
-
-
-        <?php include "webxr/summits/space-elevator.php";?>
-        <?php include "webxr/summits/lowpolymountain.php";?>
-
-
+        <a-entity>
+       
         
+        <a-entity id="2nd-polys-logo-model" class="center-obj-zone" static-body
+                gltf-model="#polys2" visible="true" scale="200 200 200" position="0.4 80 -132"
+                rotation="90 0 0"><a-light id="logo-spot1" type="spot" color="#124aba" distance="105" intensity="15" position="0.2 -0.23 0.087" angle="90" scale="0 0 0"></a-light></a-entity>
+
+            <a-entity id="2nd-polys-trophy-model" class="center-obj-zone" static-body
+                gltf-model="#2nd-polys-trophy" visible="true" scale="20 20 20" position="0.183 -4.45 -132"
+                rotation="0 -90 0">
+                    <a-light id="trophy-spot1" type="spot" color="#fff" distance="105" intensity="40" position="3.5 1.3 0" angle="22" rotation="0 90 0"></a-light>
+                   
+                    <a-light id="trophy-spot2" type="spot" color="#f00" distance="105" intensity="40" position="3 028 0" angle="20" rotation="-14.1 90 0"></a-light>
+
+                    <a-light id="trophy-spot3" type="spot" color="#f0f" distance="157" intensity="40" position="7 1.5 0" angle="50" rotation="-34.2 90 0"></a-light></a-entity>
+
+                    <a-image id="hosts-png" material="side:front" mixin="scale-label"
+                            src="<?=$thumbnail?>" scale="75 75 75" position="3.746 30 -142"
+                rotation="0 0 0"
+                            ></a-image>
+                
+            <a-entity id="platform-model" class="center-obj-zone" static-body
+                gltf-model="#platform" visible="true" scale="250 100 250" position="0 -7 -90"
+                rotation="0 0 0">
+                <a-light id="platform-spot1" type="spot" color="#fff" distance="200" intensity="15" position="0 0.321 0.56" angle="25" rotation="-30 0 0"></a-light>
+            </a-entity>
+    </a-entity>
+
+    <a-entity id="light-rig" position="0 60 0">
+
+    <a-light id="Spin-spot1" type="spot" color="#fff" distance="150" intensity="15" position="0 0 0" animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 12000; loop: true;"angle="250" rotation="0 0 0"></a-light></a-entity>
+    
+
+
+
+
+
+    </a-entity>
 
 
         <?php 
         
-
-        include "webxr/summits/brand-business.php";
-        $menu = 'bizsummit21';
-
-        if(@$_GET['event_menu']){
-            $menu = $_GET['event_menu'];
-        }
-
-        $this_ros = [
-            "menu"=>$menu,
-            "position"=>"-45 35 -100",
-            "rotation"=>"179.9 140 0.44",
-            "scale"=>".75 .75 .75",
-            
-        ];
-        include "webxr/summits/agenda.php";
-        
+    
         ?>
-        <?php // include "webxr/summits/partners.php"; ?>
 
 
 

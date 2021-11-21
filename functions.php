@@ -8,7 +8,6 @@ require_once("functions/functions-metabox.php");
 require_once("functions/functions-rest-endpoints.php");
 // special class to register the restapi
 
-//enqueues scripts and styles
 require_once("functions/functions-post-types.php");
 require_once("functions/functions-profiles.php");
 require_once("functions/functions-events.php");
@@ -17,7 +16,7 @@ require_once("functions/functions-rest-menus.php");
 require_once("functions/functions-rest-register.php");
 require_once("functions/functions-rest-taxonomy.php");
 require_once("functions/functions-navigation.php");
-	   
+require_once("functions/functions-entities.php");	   
 require_once("functions/parsers.php");
 require_once("profiler/profiler.php");
 
@@ -34,6 +33,15 @@ add_theme_support('post-thumbnails', array(
 'resource',
 'sponsor'
 ));
+function add_mimes($mime_types){
+	$mime_types['gltf'] = 'model/gltf+json';
+	$mime_types['usdz'] = 'model/vnd.usdz+zip';
+	$mime_types['glb'] = 'model/gltf-binary'; 
+	return $mime_types;
+}
+add_filter('upload_mimes', 'add_mimes');
+
+
 
 
 

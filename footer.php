@@ -46,7 +46,6 @@
 <script src="<?php echo get_stylesheet_directory_uri()?>/assets/lib/jquery/dist/jquery.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri()?>/assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
-
 <script src="<?php echo get_stylesheet_directory_uri()?>/vendor.min.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri()?>/assets/js/plugins.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri()?>/assets/js/main.js"></script>
