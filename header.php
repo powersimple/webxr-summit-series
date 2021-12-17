@@ -36,7 +36,7 @@ if(is_front_page()){
   wp_head(); 
 ?>
 
-<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
   
@@ -56,6 +56,10 @@ if(is_front_page()){
     <script src="/assets/js/full-gltf-model.js"></script>
     <script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>
   
+
+
+
+    
 
     <title><?=$page_title?><?=get_bloginfo('name')?> - <?=bloginfo("description");?></title>
  <script>
@@ -163,14 +167,16 @@ if (location.protocol !== 'https:') {
     
 </header>
       
-      
-<?php
-if(@$_GET['disappear']==1){
 
-?>
 
 <style>
- 
+  .a-enter-ar-button{
+            display: none !important;
+            
+        }       
+<?php
+if(@$_GET['disappear']==1){
+?>
    
         .a-enter-ar-button, .a-enter-vr-button, .toggle-edit {
             display: none !important;
@@ -180,10 +186,8 @@ if(@$_GET['disappear']==1){
             display: none !important;
             
         } 
-    </style>
 <?php
-}
-
-
- 
+  } 
 ?>
+    </style>
+

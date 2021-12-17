@@ -14,7 +14,7 @@ function getIcalDate($time, $inclTime = true)
 }
 
 
-/*
+
 foreach($ros as $i =>$item){ // this is the top level of the event itself
    print $item['post']->post_title;
    $link = get_permalink($item['post']->post_title);
@@ -85,7 +85,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                 }
                 $with .=$speaker['post']->post_title ." - ";
                 
-                $with .= "<a href='mailto:".$speaker['meta']['email'][0]."'>".$speaker['meta']['email'][0]."</a>";
+              //  $with .= "<a href='mailto:".$speaker['meta']['email'][0]."'>".$speaker['meta']['email'][0]."</a>";
                 $with .= wrapSocial('website',@$speaker['meta']['website'][0]);
                 $with .= wrapSocial('twitter',@$speaker['meta']['twitter'][0]);
                 $with .= wrapSocial('linkedin',@$speaker['meta']['linkedin'][0]);
@@ -138,7 +138,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
        }
    }
 
-}*/
+}/*
 function getMetaList($key){
     global $wpdb;
     $q=$wpdb->get_results("select distinct meta_key, meta_value from wp_postmeta where meta_key='company' order by meta_value");
@@ -147,4 +147,6 @@ function getMetaList($key){
     }
 }
 getMetaList("company");
+*/
+
 ?>

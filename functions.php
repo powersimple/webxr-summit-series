@@ -3,25 +3,29 @@
 //enqueues scripts and styles
 require_once("functions/functions-enqueue.php");
 require_once("functions/functions-ballot.php");
+require_once("functions/metaboxes-aframe.php");
+
 require_once("functions/functions-metabox.php");
-//enqueues scripts and styles
-require_once("functions/functions-rest-endpoints.php");
-// special class to register the restapi
 
-require_once("functions/functions-post-types.php");
-require_once("functions/functions-profiles.php");
-require_once("functions/functions-events.php");
-require_once("functions/functions-rest-menus.php");
-// custom functions to register fields into the restapi
-require_once("functions/functions-rest-register.php");
-require_once("functions/functions-rest-taxonomy.php");
-require_once("functions/functions-navigation.php");
-require_once("functions/functions-entities.php");	   
-require_once("functions/parsers.php");
-require_once("profiler/profiler.php");
 
-require_once("scraper/simple_html_dom.php");
-require_once("functions/functions-print.php");
+	//enqueues scripts and styles
+	require_once("functions/functions-rest-endpoints.php");
+	// special class to register the restapi
+
+	require_once("functions/functions-post-types.php");
+	require_once("functions/functions-profiles.php");
+	require_once("functions/functions-events.php");
+	require_once("functions/functions-rest-menus.php");
+	// custom functions to register fields into the restapi
+	require_once("functions/functions-rest-register.php");
+	require_once("functions/functions-rest-taxonomy.php");
+	require_once("functions/functions-navigation.php");
+	require_once("functions/functions-entities.php");	   
+	require_once("functions/parsers.php");
+	require_once("profiler/profiler.php");
+
+	require_once("scraper/simple_html_dom.php");
+	require_once("functions/functions-print.php");
 	require_once("functions/functions-post-access.php");
 	
 	add_post_type_support( 'page', 'excerpt' );

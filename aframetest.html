@@ -1,0 +1,516 @@
+
+<!DOCTYPE html>
+<html lang="en-US" class="no-js no-svg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+    <link rel="shortcut icon" href="//obi-wan-v:3000/wp-content/themes/webxrsummits/images/icons/favicon.ico" />
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//d3js.org' />
+<link rel='dns-prefetch' href='//s.w.org' />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/obi-wan-v:3000\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='//obi-wan-v:3000/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='//obi-wan-v:3000/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='powersimple-css'  href='//obi-wan-v:3000/wp-content/themes/webxrsummits/style.css?ver=5.8.2' type='text/css' media='all' />
+<script type='text/javascript' src='//obi-wan-v:3000/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='//obi-wan-v:3000/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js?ver=5.8.2' id='jqueryui-js'></script>
+<script type='text/javascript' src='//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js?ver=5.8.2' id='slick-js'></script>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js?ver=5.8.2' id='three-js'></script>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js?ver=5.8.2' id='d3-js'></script>
+<script type='text/javascript' src='//d3js.org/d3-geo.v1.min.js?ver=5.8.2' id='d3-geo-js'></script>
+<script type='text/javascript' src='//d3js.org/topojson.v2.min.js?ver=5.8.2' id='topojson-js'></script>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js?ver=5.8.2' id='tweenmax-js'></script>
+<script type='text/javascript' src='//obi-wan-v:3000/wp-content/themes/webxrsummits/vendor.js?ver=5.8.2' id='vendor-js'></script>
+<link rel="https://api.w.org/" href="//obi-wan-v:3000/wp-json/" /><link rel="alternate" type="application/json" href="//obi-wan-v:3000/wp-json/wp/v2/pages/46" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="//obi-wan-v:3000/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="//obi-wan-v:3000/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<link rel="canonical" href="//obi-wan-v:3000/" />
+<link rel='shortlink' href='//obi-wan-v:3000/' />
+<link rel="alternate" type="application/json+oembed" href="//obi-wan-v:3000/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwebxrsummitseries%2F" />
+<link rel="alternate" type="text/xml+oembed" href="//obi-wan-v:3000/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwebxrsummitseries%2F&#038;format=xml" />
+    <link href="//obi-wan-v:3000/wp-content/themes/webxrsummits/assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    
+   
+    <link href="//obi-wan-v:3000/wp-content/themes/webxrsummits/assets/lib/animate.css/animate.css" rel="stylesheet">
+    <link rel='stylesheet' id='drawer-css'
+        href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css'
+        media='all' />
+    <link href="//obi-wan-v:3000/wp-content/themes/webxrsummits/assets/lib/flexslider/flexslider.css" rel="stylesheet">
+
+    <!-- Main stylesheet and color file-->
+    <link href="//obi-wan-v:3000/wp-content/themes/webxrsummits/style.css" rel="stylesheet">
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//d3js.org' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<script type='text/javascript' src='//obi-wan-v:3000/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+<link rel="https://api.w.org/" href="//obi-wan-v:3000/wp-json/" /><link rel="alternate" type="application/json" href="//obi-wan-v:3000/wp-json/wp/v2/pages/46" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="//obi-wan-v:3000/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="//obi-wan-v:3000/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<link rel="canonical" href="//obi-wan-v:3000/" />
+<link rel='shortlink' href='//obi-wan-v:3000/' />
+<link rel="alternate" type="application/json+oembed" href="//obi-wan-v:3000/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwebxrsummitseries%2F" />
+<link rel="alternate" type="text/xml+oembed" href="//obi-wan-v:3000/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwebxrsummitseries%2F&#038;format=xml" />
+
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+  
+    <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js">
+    </script>
+    
+
+    <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
+    <script src="https://unpkg.com/aframe-fps-look-controls-component/dist/aframe-fps-look-controls-component.min.js">
+    </script>
+    </script>
+    <script src="https://unpkg.com/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
+    <script src="/assets/js/msc_basis_transcoder.js"></script>
+    <script src="/assets/js/full-gltf-model.js"></script>
+    <script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>
+  
+
+    <title>WebXR Awards and Summit Series - Honoring and Inspiring the Pioneers of WebXR</title>
+ <script>
+
+if (location.protocol !== 'https:') {
+    location.replace(`https:${location.href.substring(location.protocol.length)}`);
+}
+      // Wordpress PHP variables to render into JS at outset.
+      var active_id = 46,
+      active_object = "page",
+      home_page = 46,
+      site_title = "WebXR Awards and Summit Series",
+      xr_path = "//obi-wan-v:3000/wp-content/themes/webxrsummits/xr/",
+      data_path = "//obi-wan-v:3000/wp-content/themes/webxrsummits/data/",
+      useWheelNav = false,
+      uploads_path =  "//obi-wan-v:3000/wp-content/uploads/",
+      slug = "the-2nd-polys-webxr-awards",
+      profile_template = ''//hack
+      
+      
+      var hero_slides = [
+                   ]
+           
+  </script>
+  <link rel="stylesheet" type="text/css" media="print" href="//obi-wan-v:3000/wp-content/themes/webxrsummits/print.css">
+</head>
+
+
+
+  <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60" class=""><script id="__bs_script__">//<![CDATA[
+    document.write("<script async src='/browser-sync/browser-sync-client.js?v=2.27.4'><\/script>".replace("HOST", location.hostname));
+//]]></script>
+
+
+
+        <div class="page-loader">
+        <div class="loader">Loading...</div>
+      </div>
+<header id="header" class="navbar navbar-custom navbar-fixed-top navbar-transparent" role="navigation">
+        <div class="container">
+         
+          <div class="navbar-header">
+          
+           <div id="logo" class="onpage-navigation"><a  href="/"></a></div>
+            
+          </div>
+          <div class="collapse navbar-collapse" id="custom-collapse">
+         
+
+                   
+                  
+                  
+            </div>
+            <div id="main-menu"></div>
+            <div id="social-menu">
+      <a href="https://www.eventbrite.com/e/2021-webxr-developer-summit-tickets-149418602061" target="_blank"
+                class="fa fa-twitter" title="Follow us on Twitter"></a>
+            <a href="https://www.instagram.com/webxrawards/" target="_blank" class="fa fa-instagram"
+                title="Follow us on Instagram"></a>
+            <a href="https://www.facebook.com/groups/webxrawards" target="_blank" class="fa fa-facebook"
+                title="Join our Facebook Group"></a>
+            <a href="https://www.linkedin.com/company/the-polys/" target="_blank" class="fa fa-linkedin"
+                title="Connect with us on LinkedIn" target="_blank"></a>
+
+            <a href="https://discord.gg/T5vRuM5cDS" class="fa discord" target="_blank"
+                title="Join our community Discord"></a>
+        </div>
+      </div>  
+    
+</header>
+      
+      
+
+
+
+    
+   
+    <script>
+        if (location.protocol !== 'https:') {
+            location.replace(`https:${location.href.substring(location.protocol.length)}`);
+        }
+    </script>
+  
+
+  <script src="/assets/js/polys2.js"></script>
+
+
+
+
+    <a-scene look-switch anti-drop grab-panels burial-grab item-grab device-set device-orientation-permission-ui gltf-model="dracoDecoderPath: assets/draco/;" grab-panels item-grab device-set nomination-link 
+        device-orientation-permission-ui physics="iterations: 30;"
+        inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
+        loading-screen="backgroundColor: #12171a" renderer="colorManagement: true; foveationLevel: 2;"
+        background="color: #000000">
+        <a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
+        <a-entity tracked-controls="controller: 1; idPrefix: OpenVR"></a-entity>
+
+        <a-assets timeout="800000">
+             <!-- Loads models -->
+    <a-asset-item id="2nd-polys-trophy" response-type="arraybuffer"
+    src="/assets/models/polys/2021-Poly.glb"></a-asset-item>
+    
+    <a-asset-item id="polys2" response-type="arraybuffer" src="/assets/models/Polys2.glb"></a-asset-item>
+    
+    <img id="sky" src="/assets/images/skybox/Polys2Skybox.jpg">
+
+
+            <?php// include "webxr/summits/assets.php";?>
+            <a-mixin id="obj" hoverable
+                grabbable="startButtons: trackpaddown, triggerdown, gripclose, gripdown, abuttondown, bbuttondown, xbuttondown, ybuttondown, thumbstickdown, mousedown; endButtons: trackpadup, triggerup, gripopen, gripup, abuttonup, bbuttonup, xbuttonup, ybuttonup, thumbstickup, mouseup"
+                scale="1 1 1" rotation="0 0 0"
+                animation="property: object3D.position.y; to: 1.45; startEvents: standtrigger; dur: 5000" shadow>
+            </a-mixin>
+            <a-mixin id="button" static-body hoverable
+                clickable="startButtons: trackpaddown, triggerdown, gripclose, gripdown, thumbstickdown, mousedown; endButtons: trackpadup, triggerup, gripopen, gripup, thumbstickup, mouseup"
+                shadow></a-mixin>
+            <a-mixin id="holoprojector" color="#ff6a00" position="0 0.3 0" rotation="180 0 0" height="0.05"
+                geometry="primitive: cone; segmentsRadial: 3; openEnded: true; radiusBottom: 0.5; segmentsHeight: 1"
+                material="emissive: #ff6a00; wireframe: true"
+                animation="property: rotation; to: 180 360 0; loop: true; easing: linear; dur: 10000"></a-mixin>
+            <a-mixin id="hand" physics-collider static-body="shape: box" collision-filter="collisionForces: false;"
+                super-hands="colliderEvent: collisions; 
+                              colliderEventProperty: els;
+                              colliderEndEvent: collisions;
+                              colliderEndEventProperty: clearedEls;
+                              grabStartButtons: trackpaddown, triggerdown, gripclose, gripdown, thumbstickdown, mousedown; 
+                              grabEndButtons: trackpadup, triggerup, gripopen, gripup, thumbstickup, mouseup">
+            </a-mixin>
+            </a-mixin>
+            <a-mixin id="table-label" position="0 0 -1" rotation="0 -90 0" visible="false"
+                text="width: 2; color: black; lineHeight: 60; wrap-count: 35"></a-mixin>
+            <a-mixin id="burial-label" position="0 0 -1" text="width: 2; color: black; lineHeight: 60; wrap-count: 35">
+            </a-mixin>
+            <a-mixin id="table-caption" text="align: right; color: black; lineHeight: 55; wrap-count: 50"></a-mixin>
+            <a-mixin id="scale-box" visible="false"></a-mixin>
+            <a-mixin id="scale-label-border" geometry="primitive: plane; height: 1.05; width: 1.05; buffer: false"
+                material="color: #375719; shader: flat;"></a-mixin>
+            <a-mixin id="scale-label" geometry="primitive: plane; height: 1; width: 1; buffer: false"
+                material="color: #dadada; shader: flat;"></a-mixin>
+            <a-mixin id="scale-text" text="color: black; width: 2; wrapCount: 45"></a-mixin>
+            <a-mixin id="credit-text" text=" color: black; width: 2; wrapCount: 70; lineHeight: 55">
+
+            </a-mixin>
+            <a-mixin id="mapmarker" scale="0.17 0.17 0.17" rotation="-90 0 0"
+                geometry="primitive: cone; radiusBottom: 0.2; radiusTop: 0.01; segmentsRadial: 6"
+                material="color: #ffaa00"> </a-mixin>            <a-asset-item id="platform" response-type="arraybuffer" src="/assets/models/polys/platform.glb"></a-asset-item>
+            
+        </a-assets>
+
+
+        <a-sky src="#sky"></a-sky>
+        <a-entity>
+            <a-text id="GL-VR" visible="false" position="2.55 -0.1 0.01" value="" color="white" width="4"
+                line-height="50" text="wrapCount: 30"></a-text>
+            <a-text id="GL-PC" visible="false" position="2.55 -0.1 0.1" value="" color="black" width="5"
+                line-height="50" text="wrapCount: 30"></a-text>
+            <a-text id="GL-SP" visible="false" position="2.55 -0.1 0.1" value="" color="black" width="5"
+                line-height="50" text="wrapCount: 30"></a-text>
+
+
+            <a-text id="SMH-VR" visible="false" position="-6.65 -0.57 0.01" value="" color="black" width="5"
+                line-height="60" text="wrapCount: 30"></a-text>
+            <a-text id="SMH-PC" visible="false" position="-6.65 -0.75 0.01" value="" color="black" width="5"
+                line-height="40" text="wrapCount: 30"></a-text>
+            <a-text id="SMH-SP" visible="false" position="-6.65 -0.6 0.01" value="" color="black" width="5"
+                line-height="50" text="wrapCount: 25"></a-text>
+        </a-entity>
+
+
+        <a-entity id="rig" rotation-reader thumbstick-logging
+            movement-controls="speed: 0.2; constrainToNavMesh: true;fly: true" position="0 1.6 0" rotation="0 0 0">
+           
+            <a-box id="body" plane-hit aabb-collider="collideNonVisible: true; objects: .zone" static-body="shape: box"
+                position="0 0.05 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
+
+            <a-entity id="camera" camera look-controls capture-mouse cursor="rayOrigin:mouse" camera="zoom: 1"
+                raycaster="far: 5; objects: .clickable" super-hands="colliderEvent: raycaster-intersection;
+                             colliderEventProperty: els;
+                             colliderEndEvent:raycaster-intersection-cleared;
+                             colliderEndEventProperty: clearedEls;" position="0 0 0" rotation="0 0 0"></a-entity>
+
+            <a-entity mixin="hand" hand-controls="hand: left; handModelStyle: highPoly; color: #ffcccc"></a-entity>
+            <a-entity mixin="hand" hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc"></a-entity>
+
+            <a-entity oculus-touch-controls="hand: left" vive-controls="hand: left" thumb-controls="hand: left" blink-controls="cameraRig: #rig; teleportOrigin: #camera; collisionEntities: #nav; hitCylinderColor: #e9974c; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8">
+            </a-entity>
+            <a-entity oculus-touch-controls="hand: right" vive-controls="hand: right " thumb-controls="hand: right">
+            </a-entity><!---->
+
+            
+        </a-entity>  
+
+        <a-entity>
+       
+        
+        <a-entity id="2nd-polys-logo-model" class="center-obj-zone" static-body
+                gltf-model="#polys2" visible="true" scale="200 200 200" position="0.4 80 -132"
+                rotation="90 0 0"><a-light id="logo-spot1" type="spot" color="#124aba" distance="105" intensity="15" position="0.2 -0.23 0.087" angle="90" scale="0 0 0"></a-light></a-entity>
+
+            <a-entity id="2nd-polys-trophy-model" class="center-obj-zone" static-body
+                gltf-model="#2nd-polys-trophy" visible="true" scale="20 20 20" position="0.183 -4.45 -132"
+                rotation="0 -90 0">
+                    <a-light id="trophy-spot1" type="spot" color="#fff" distance="105" intensity="40" position="3.5 1.3 0" angle="22" rotation="0 90 0"></a-light>
+                   
+                    <a-light id="trophy-spot2" type="spot" color="#f00" distance="105" intensity="40" position="3 028 0" angle="20" rotation="-14.1 90 0"></a-light>
+
+                    <a-light id="trophy-spot3" type="spot" color="#f0f" distance="157" intensity="40" position="7 1.5 0" angle="50" rotation="-34.2 90 0"></a-light></a-entity>
+
+                    <a-image id="hosts-png" material="side:front" mixin="scale-label"
+                            src="//obi-wan-v:3000/wp-content/uploads/2021/11/Hosts-Smithson-Moshasha.png" scale="75 75 75" position="3.746 30 -142"
+                rotation="0 0 0"
+                            ></a-image>
+                
+            <a-entity id="platform-model" class="center-obj-zone" static-body
+                gltf-model="#platform" visible="true" scale="250 100 250" position="0 -7 -90"
+                rotation="0 0 0">
+                <a-light id="platform-spot1" type="spot" color="#fff" distance="200" intensity="15" position="0 0.321 0.56" angle="25" rotation="-30 0 0"></a-light>
+            </a-entity>
+    </a-entity>
+
+    <a-entity id="light-rig" position="0 60 0">
+
+    <a-light id="Spin-spot1" type="spot" color="#fff" distance="150" intensity="15" position="0 0 0" animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 12000; loop: true;"angle="250" rotation="0 0 0"></a-light></a-entity>
+    
+
+
+
+
+
+    </a-entity>
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </a-scene>
+</body>
+
+<footer class="footer">
+
+
+
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+
+                    <span class="copyright font-alt"><span>&copy; 2021 Powersimple, LLC - </span><span> All
+                            Rights Reserved</span></span>
+                </div>
+                <div class="col-sm-9" id="footer-menu">
+                    <ul>
+                        <li><a href="/about/">About</a></li>
+                       <!-- <li><a href="/sponsors/">Become a Sponsor</a></li>-->
+                    </ul>
+
+                  
+                </div>
+
+            </div>
+           
+        </div>
+         <div class="partners">
+                        <ul class="container">
+                            <li>PARTNERS
+                            <li><a target="_blank" class="awe" href="https://www.awexr.com/usa-2021/auggie/">
+                                    Auggies Nomination Deadline September 8</a></li>
+                            <li><a class="awe" target="_blank"
+                                    href="https://augmentedworldexpo.secure.force.com/BuyTicket?id=7011H000001PEjd&partner=webxrsummits">Nov 9 -11</a></li>
+
+                            <li><a class="vrara" target="_blank" href="https://www.vrarglobalsummit.com/">VR/AR Global Summit</a></li>
+                            <li><a target="_blank" class="futurewei" href="https://futurewei.com/">Futurewei
+                                    Technologies</a></li>
+
+                            </li>
+                        </ul>
+
+                    </div>
+    
+</footer>
+
+<script src="//obi-wan-v:3000/wp-content/themes/webxrsummits/assets/lib/jquery/dist/jquery.js"></script>
+<script src="//obi-wan-v:3000/wp-content/themes/webxrsummits/assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="//obi-wan-v:3000/wp-content/themes/webxrsummits/vendor.min.js"></script>
+<script src="//obi-wan-v:3000/wp-content/themes/webxrsummits/assets/js/plugins.js"></script>
+<script src="//obi-wan-v:3000/wp-content/themes/webxrsummits/assets/js/main.js"></script>
+<!--   <script src="//obi-wan-v:3000/wp-content/themes/webxrsummits/main.min.js"></script>-->
+<script>
+    /*
+   // drawer accordion
+    jQuery("#menu").click(function () {
+
+        jQuery(".sidedrawer").animate({
+            left: 0,
+            opacity: 1
+        }, 500);
+        jQuery("body").animate({
+            marginLeft: 250,
+        }, 500);
+        jQuery("#menuclose").show();
+        jQuery(this).hide();
+    });
+
+    jQuery("#menuclose").click(function () {
+        jQuery(".appswitchdropdown").hide();
+        jQuery(".sidedrawer").animate({
+            left: -250,
+            opacity: 1
+        }, 300);
+        jQuery("body").animate({
+            marginLeft: 0,
+        }, 300);
+        jQuery("#menu").show();
+        jQuery(this).hide();
+    });
+
+    jQuery(".appswitch").click(function () {
+        jQuery(".appswitchdropdown").toggle();
+    });
+    jQuery(".page").hover(function () {
+        jQuery(".appswitchdropdown").hide();
+    });
+    jQuery(".appconversation").click(function () {
+        jQuery("#nav, .page, .sidedrawer,.appswitchdropdown").hide();
+        jQuery(".convo").show();
+        jQuery("body").css({
+            marginLeft: 0,
+        }, 500);
+    });
+
+    jQuery(".convo").click(function () {
+        jQuery("#nav, .page, .sidedrawer,.appswitchdropdown").show();
+        jQuery(".convo, .trendscontent ").hide();
+        jQuery("body").css({
+            marginLeft: 250,
+        }, 500);
+    });
+
+    jQuery(".appstudio").click(function () {
+        jQuery(".spark, .sparkcontent, .sparklist").hide();
+        jQuery(".studio, .studiolist").show();
+        jQuery('#logo').css('background-position', '0px 0px');
+        jQuery('.appswitch').css('background-position', '0px 0px');
+    });
+
+
+
+    jQuery(".collapse").click(function () {
+        jQuery(".collapse").hide();
+        jQuery(".expand").show();
+        jQuery('.sidedrawer').css('width', '60px');
+        jQuery(".sparklist div, .appswitch").css({
+            width: 50,
+        }, 500);
+
+        jQuery("body").animate({
+            marginLeft: 60,
+        }, 500);
+
+
+    });
+
+    jQuery(function () {
+        jQuery("#accordion").accordion({
+            autoHeight: true
+        });
+    });
+
+    */
+</script>
+<script type='text/javascript' src='//obi-wan-v:3000/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='//obi-wan-v:3000/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' id='contact-form-7-js-extra'>
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/obi-wan-v:3000\/wp-json\/","namespace":"contact-form-7\/v1"}};
+var wpcf7 = {"api":{"root":"https:\/\/obi-wan-v:3000\/wp-json\/","namespace":"contact-form-7\/v1"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//obi-wan-v:3000/wp-content/plugins/contact-form-7/includes/js/index.js?ver=5.4.2' id='contact-form-7-js'></script>
+<script type='text/javascript' src='//obi-wan-v:3000/wp-content/themes/webxrsummits/main.js?ver=710115' id='main-js'></script>
+
+
+
+</body>
+
+</html>

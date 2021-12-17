@@ -2,15 +2,8 @@
 
 //phpinfo(); die();
 
-
-
-
-
-
-//require_once "webxr/model/awards.php"; die();
 get_header();
 //    get_eventsFromTable(15);
-
     require_once "webxr/functions-aframe.php";
     $speed = "0.2";
     if(@$_GET['speed']){
@@ -47,7 +40,7 @@ if(@$_GET['camera']){
 
 
     
-
+   
     <script>
         if (location.protocol !== 'https:') {
             location.replace(`https:${location.href.substring(location.protocol.length)}`);
@@ -75,7 +68,7 @@ if(@$_GET['camera']){
 
     <a-asset-item id="pedestal" response-type="arraybuffer" src="/assets/models/polys/pedestal.glb"></a-asset-item>
     
-    <img id="sky" src="/assets/images/skybox/Polys2Skybox.jpg">
+    <img id="sky" src="/assets/images/skybox/bluescreen.jpg">
 
 
             <?php// include "webxr/summits/assets.php";?>
@@ -85,23 +78,7 @@ if(@$_GET['camera']){
 
 
         <a-sky src="#sky"></a-sky>
-        <a-entity>
-            <a-text id="GL-VR" visible="false" position="2.55 -0.1 0.01" value="" color="white" width="4"
-                line-height="50" text="wrapCount: 30"></a-text>
-            <a-text id="GL-PC" visible="false" position="2.55 -0.1 0.1" value="" color="black" width="5"
-                line-height="50" text="wrapCount: 30"></a-text>
-            <a-text id="GL-SP" visible="false" position="2.55 -0.1 0.1" value="" color="black" width="5"
-                line-height="50" text="wrapCount: 30"></a-text>
-
-
-            <a-text id="SMH-VR" visible="false" position="-6.65 -0.57 0.01" value="" color="black" width="5"
-                line-height="60" text="wrapCount: 30"></a-text>
-            <a-text id="SMH-PC" visible="false" position="-6.65 -0.75 0.01" value="" color="black" width="5"
-                line-height="40" text="wrapCount: 30"></a-text>
-            <a-text id="SMH-SP" visible="false" position="-6.65 -0.6 0.01" value="" color="black" width="5"
-                line-height="50" text="wrapCount: 25"></a-text>
-        </a-entity>
-
+ 
 
         <a-entity id="rig" rotation-reader thumbstick-logging
             movement-controls="speed: <?=$speed?>; constrainToNavMesh: true;fly: true" position="<?=$cam_x?> <?=$cam_y?> <?=$cam_z?>" rotation="0 0 0">
@@ -127,60 +104,28 @@ if(@$_GET['camera']){
         </a-entity>  
 
        
-    
-
-            <a-entity id="2nd-polys-trophy-model" class="center-obj-zone" static-body
-                gltf-model="#2nd-polys-trophy" visible="true" scale="20 20 20" position="0.183 -0.29 -132"
-                rotation="0 -90 0">
-                    <a-light id="trophy-spot1" type="spot" color="#fff" distance="105" intensity="40" position="3.5 1.3 0" angle="22" rotation="0 90 0"></a-light>
-                   
-                    <a-light id="trophy-spot2" type="spot" color="#f00" distance="105" intensity="40" position="3 028 0" angle="20" rotation="-14.1 90 0"></a-light>
-
-                    <a-light id="trophy-spot3" type="spot" color="#f0f" distance="157" intensity="40" position="7 1.5 0" angle="50" rotation="-34.2 90 0"></a-light></a-entity>
-
-                    <a-image id="hosts-png" material="side:front" mixin="scale-label"
-                            src="<?=$thumbnail?>" scale="75 75 75" position="3.746 37.81 -142"
-                rotation="0 0 0"
-                            ></a-image>
-                
-
-
-        <a-entity id="platform-wrap" visible="true" scale="250 100 250" position="0 -2.36 -90"
-                rotation="0 0 0">
-            <a-entity id="platform-model" class="center-obj-zone" static-body
-                full-gltf-model="#platform" >
-                <a-light id="platform-spot1" type="spot" color="#fff" distance="200" intensity="15" position="0 0 0.56" angle="25" rotation="-30 0 0"></a-light>
-           
-            </a-entity>
-            <a-entity id="nav" class="center-obj-zone" static-body
-                full-gltf-model="#platform" visible="false"></a-entity>
-
-
-            
-            </a-entity>
-            
-            
-        
-            <a-entity id="pedestals"> 
-        
-                <?php 
-                    require_once "webxr/polys2/pedestals.php";
-
-
-                ?>
-            
-            </a-entity>
-            
-            
-
-    </a-entity>
+     <a-entity id="2nd-polys-trophy-model" class="center-obj-zone" static-body
+                gltf-model="#2nd-polys-trophy" visible="true" scale="10 10 10"   animation="property: object3D.rotation.y; from: 360; easing: linear; dur: 12000; loop: true;"  material="shader: standard; metalness: 1 roughness:0;" position="0.183 -0.29 -10"
+                rotation="0 -90 0"></a-entity>
 
     <a-entity id="light-rig" position="0 60 0">
 
-    <a-light id="Spin-spot1" type="spot" color="#fff" distance="150" intensity="15" position="0 0 0" animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 12000; loop: true;"angle="250" rotation="0 0 0"></a-light></a-entity>
+    <a-light id="Spin-spot1" type="spot" color="#fff" distance="150" intensity="30" position="0 0 0"angle="250" rotation="0 0 0"></a-light></a-entity>
     
+    <a-light id="white1" type="spot" color="white" intensity="50" position="0.3 27 -1" rotation="90 90 0">
+        </a-light>
+        <a-light id="white2" type="directional" color="white" intensity="50" position="2 22 -6" rotation="-90 0 0" angle="45">
+        </a-light>
+        <a-light id="white3" type="spot" color="#ff4d00" intensity="5" position="-36 15 10" rotation="0 0 0" angle="90">
+        </a-light>
+        <a-light id="white4" type="spot" color="#6b0000" intensity="5" position="-60 -10 45" rotation="60 0 0"angle="90">
+        </a-light>
+        <a-light id="white5" type="directional" color="#00bfff" intensity="5" position="6  4 -6" rotation="-90 0 0"angle="90">
+        </a-light>
+        
 
-
+        <a-light id="white6" type="spot" color="white" intensity="50" position="5 -1.5 -10" rotation="45 90 0">
+        </a-light>
 
 
 
@@ -199,7 +144,7 @@ if(@$_GET['camera']){
 <a-entity id="partner-events">   </a-entity>
         
         <?php 
-            require_once "webxr/polys2/partners.php";
+     //       require_once "webxr/polys2/partners.php";
 
             
         ?>
@@ -232,7 +177,6 @@ if(@$_GET['camera']){
 
 
     </a-scene>
-    <script src="<?php echo get_stylesheet_directory_uri();?>/polys2.js?i=<?=rand(5, 1005)?>"></script>
 </body>
 
 <?php get_footer();?>

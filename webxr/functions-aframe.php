@@ -110,8 +110,8 @@ function displayModelSeries($model_series,$coords){
         print "<a-light id='series-spot1' type='spot' color='#fff'  intensity='10' distance='200'
         position='-37 1.5 66' angle='60' rotation='0 0 0'>
         </a-light>";
-        print "<a-light id='series-spot2' type='spot' color='#365bba'  intensity='10' distance='200'
-        position='-141 -1 72' angle='60' rotation='0 -45 0'>
+        print "<a-light id='series-spot2' type='spot' color='#365bba'  intensity='30' distance='600'
+        position='-141 -1 72' angle='90' rotation='0 -45 0'>
         </a-light>";
         print "<a-light id='series-spot3' type='spot' color='#365bba'  intensity='10' distance='200'
         position='45 1 60' angle='45' rotation='0 45 0'>
@@ -127,7 +127,7 @@ function displayModelSeries($model_series,$coords){
             
             extract((array) $m);
             ob_start();
-        print "<a-entity id='$k-wrap' class='center-obj-zone' static-body position='$start_x $start_y $start_z' rotation='0 0 0' 
+        print "<a-entity id='$k-wrap' class='center-obj-zone' static-body position='$start_x $start_y $start_z' rotation='0 45 0' 
              </a-entity>";
             if($m['model'] != ''){
          print "

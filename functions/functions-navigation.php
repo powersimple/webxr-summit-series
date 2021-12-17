@@ -110,31 +110,8 @@
 		$menu_array = wp_get_nav_menu_items($current_menu);
 	
 		$menu = array();
-	
-		function populate_children($menu_array, $menu_item){
-			$children = array();
-			if (!empty($menu_array)){
-				foreach ($menu_array as $k=>$m) {
-					if ($m->menu_item_parent == $menu_item->ID) {
-						$post = get_post($m->object_id);
-						$meta = get_post_meta($m->object_id);
-						$children[$m->ID] = array();
-						$children[$m->ID]['ID'] = $m->ID;
-						$children[$m->ID]['title'] = $m->title;
-						$children[$m->ID]['url'] = $m->url;
-						$children[$m->ID]['classes'] = $m->classes;
-						
-						$children[$m->ID]['post'] = $post;
-						$children[$m->ID]['meta'] = $meta;
-						unset($menu_array[$k]);
-						$children[$m->ID]['children'] = populate_children($menu_array, $m);
-	
-	
-					}
-				}
-			};
-			return $children;
-		}
+		
+		
 	
 		foreach ($menu_array as $m) {
 			if (empty($m->menu_item_parent)) {
@@ -147,14 +124,45 @@
 				$menu[$m->ID]['url'] = $m->url;
 				$menu[$m->ID]['classes'] = $m->classes;
 				$menu[$m->ID]['post'] = $post;
-				$menu[$m->ID]['meta'] = $meta;            
+				$menu[$m->ID]['post_type'] = $m->object;
+				$menu[$m->ID]['meta'] = $meta;
+				$menu[$m->ID]['thumbnail'] = getThumbnail(@$menu[$m->ID]['meta']['_thumbnail_id']);
+				
+				//$menu[$m->ID]['embed_video_url'] = get_post_meta($m->ID,"embed_video_url",true);
 				$menu[$m->ID]['children'] = populate_children($menu_array, $m);
 			}
 		}
 		;
-	
-		return $menu;
+	return $menu;
 	
 	}
+	function populate_children($menu_array, $menu_item){
+		$children = array();
+		if (!empty($menu_array)){
+			foreach ($menu_array as $k=>$m) {
+				if ($m->menu_item_parent == $menu_item->ID) {
+					$post = get_post($m->object_id);
+					$meta = get_post_meta($m->object_id);
+					$children[$m->ID] = array();
+					$children[$m->ID]['ID'] = $m->ID;
+					$children[$m->ID]['title'] = $m->title;
+					$children[$m->ID]['url'] = $m->url;
+					$children[$m->ID]['classes'] = $m->classes;
+					//$children[$m->ID]['embed_video_url'] = get_post_meta($m->ID,"embed_video_url",true);
+				
+					
+					$children[$m->ID]['post'] = $post;
+					$children[$m->ID]['post_type'] = $m->object;
+					
+					$children[$m->ID]['meta'] = $meta;
+					$children[$m->ID]['thumbnail'] = getThumbnail(@$menu[$m->ID]['meta']['_thumbnail_id']);
+					unset($menu_array[$k]);
+					$children[$m->ID]['children'] = populate_children($menu_array, $m);
 
+
+				}
+			}
+		};
+		return $children;
+	}
 ?>
