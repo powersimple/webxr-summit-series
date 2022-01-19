@@ -365,8 +365,9 @@ function get_post_tags($object){
 	return wp_get_post_tags( $post_id,array( 'fields' => 'ids' ));
 }
 
-
-	add_action( 'rest_api_init', 'register_profile_info' );
+/*
+//this is being retired in favor of a meta field
+add_action( 'rest_api_init', 'register_profile_info' );
 		
 	function register_profile_info() {
 		
@@ -390,6 +391,32 @@ function get_post_tags($object){
         }
 
         return $profile_info;
+	}
+	
+
+*/
+
+	add_action( 'rest_api_init', 'register_profile_meta' );
+		
+	function register_profile_meta() {
+		
+		register_rest_field( array('profile','resource','event'), 'meta', array(
+			'get_callback' => 'get_profile_meta',
+			'schema' => null,
+			)
+		);
+	}
+		
+    function get_profile_meta( $object ) {
+		//shift down postmeta from [0];
+		$new_meta;
+		$meta = get_post_meta( $object['id']);
+		foreach($meta as $key => $value){
+			$new_meta[$key] = $value[0];
+		}
+
+
+        return @$new_meta;
 	}
 	
 

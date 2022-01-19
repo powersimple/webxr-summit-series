@@ -369,7 +369,7 @@
   .profile-info{
     padding-bottom: 20px;
       .social{
-               display: none;
+             //  display: none;
                 a{
                   margin-right:.5em;
                 }
@@ -434,3 +434,39 @@
   }
 }
 
+.twitter i.fa{
+  color:#1DA1F2;
+}
+.linkedin i.fa{
+  color:#0077b5;
+}
+.github i.fa{
+  color:#4078c0;
+}
+a.watch{
+  font-size:16px;
+  color:#fff;
+  display: block;
+    text-align:center;
+  i{
+    font-size:36px;
+  }
+}
+.pin-bottom{
+  position: fixed;
+  width: 60%;
+  height: 25vh;
+  bottom: 0;
+  left: 50%;
+  margin-left: -30%;
+  z-index: 100;;
+  @media(max-width:767px){
+    width:100%;
+    margin-left: -50%;
+  }
+  display: inline-table;
+  .video-wrap{
+    border:3px dotted #fff;
+
+  }
+}

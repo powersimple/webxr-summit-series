@@ -201,3 +201,70 @@ function insertEvent($post_title,$post_content,$post_excerpt,$post_parent){
     return $script;
 
 }
+
+function get_pedestals($menu){
+    $awards = get_menu_array($menu);
+      $pedestals = [];
+      
+     foreach($awards as $key =>$award){
+    
+
+        if($award['coords'] !=''){
+          array_push($pedestals,[
+              
+              
+              "title"=>@$award['title'],
+              "content"=>@$award['content'],
+              
+              "slug"=>@str_replace("2021-","",$award['slug']),
+              "classes"=>$award['classes'],
+              "coords"=>$award['coords'],
+              
+              "nominees" => $award['children'],
+              "meta" => $award['meta']
+              
+          ]);
+        }
+      }// var_dump($pedestals); die();
+      return $pedestals;
+  }
+
+  
+function get_nominations($menu){
+    $awards = get_menu_array($menu);
+      $pedestals = [];
+      
+     foreach($awards as $key =>$award){
+         if($award['classes'] != null){
+        $class_array = $award['classes'];
+         
+
+
+                array_push($pedestals,[
+                    
+                    
+                    "title"=>@$award['title'],
+                    "content"=>@$award['content'],
+                    "slug"=>@str_replace("2021-","",$award['slug']),
+                    "classes"=>$award['classes'],
+                    "coords"=>$award['coords'],
+                    "nominees" => $award['children'],
+                    "meta" => $award['meta']
+                    
+                ]);
+          
+        }
+      }// var_dump($pedestals); die();
+      return $pedestals;
+  }
+
+  function getIcalDate($time, $inclTime = true)
+{
+    return date('Ymd' . ($inclTime ? '\THis' : ''), $time);
+}
+function getGLB($id){
+	if(strpos(get_post($id)->guid,"/wp-content")){
+	  return '/wp-content'.explode('/wp-content',get_post($id)->guid)[1];
+	}
+	
+  }

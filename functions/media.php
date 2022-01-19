@@ -133,6 +133,7 @@ function register_video_meta() {
 
 
 
+
 function display_videos($videos){
 		ob_start();
 	$default_video = $videos[0]['video_url'];
@@ -163,5 +164,8 @@ function display_videos($videos){
 	
 	return ob_get_clean();	
 }
+
+
+
 
 ?>

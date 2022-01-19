@@ -25,6 +25,6 @@ function entity_metabox( $meta_boxes ) {
 
 	return $meta_boxes;
 }
-    add_filter( 'rwmb_meta_boxes', 'entity_metabox' );
+    //add_filter( 'rwmb_meta_boxes', 'entity_metabox' );
 
 ?>

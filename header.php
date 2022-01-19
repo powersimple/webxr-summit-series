@@ -35,7 +35,7 @@ if(is_front_page()){
   }
   wp_head(); 
 ?>
-
+<!---
 <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
@@ -55,11 +55,42 @@ if(is_front_page()){
     <script src="/assets/js/msc_basis_transcoder.js"></script>
     <script src="/assets/js/full-gltf-model.js"></script>
     <script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>
-  
+       <script src="https://unpkg.com/aframe-fps-look-controls-component/dist/aframe-fps-look-controls-component.min.js"></script>
+-->
+<script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="/assets/js/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js">
+    </script>
+    <script src="/assets/js/aframe-look-controls.js"></script>
 
 
+    <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
+   
+    </script>
+    <script src="https://unpkg.com/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
+    <script src="/assets/js/msc_basis_transcoder.js"></script>
+    <script src="/assets/js/full-gltf-model.js"></script>
+    <script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>
     
+
+    <script src="/assets/js/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!--  -->
+    <!---->
+<link rel='stylesheet' id='drawer-css' href='/assets/css/drawer.css' type='text/css' media='all' />
+<link rel='stylesheet' id='drawer-css' href='/assets/css/jquery-ui.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='drawer-css'
+        href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css'
+        media='all' />
+
+
+
+
 
     <title><?=$page_title?><?=get_bloginfo('name')?> - <?=bloginfo("description");?></title>
  <script>
@@ -119,6 +150,27 @@ if (location.protocol !== 'https:') {
         //     print "var languages = ".json_encode(getLanguageList());
             
 
+
+        
+   
+    $speed = "0.2";
+    if(@$_GET['speed']){
+        $speed = $_GET['speed'];    
+    }
+    $menu = 'bizsummit21';
+    $model='';
+
+    if(@$_GET['event_menu']){
+        $menu = $_GET['event_menu'];
+    }
+
+    $summit_square_model = 'business-summmit-square';
+    if(@$_GET['summit_model']){
+        $summit_square_model = $_GET['summit_model'];
+    }
+  
+
+    $thumbnail =getThumbnail(get_post_thumbnail_id($post->ID),"Full");
           }
       ?>
      
@@ -138,7 +190,7 @@ if (location.protocol !== 'https:') {
         <div class="container">
          
           <div class="navbar-header">
-          
+         
            <div id="logo" class="onpage-navigation"><a  href="/"></a></div>
             
           </div>
@@ -149,6 +201,8 @@ if (location.protocol !== 'https:') {
                   
                   
             </div>
+            <div id="menu"></div>
+        
             <div id="main-menu"></div>
             <div id="social-menu">
       <a href="https://www.eventbrite.com/e/2021-webxr-developer-summit-tickets-149418602061" target="_blank"
@@ -178,7 +232,8 @@ if (location.protocol !== 'https:') {
 if(@$_GET['disappear']==1){
 ?>
    
-        .a-enter-ar-button, .a-enter-vr-button, .toggle-edit {
+        .a-enter-ar-button, .a-enter-vr-button, .toggle-edit, .sidedrawer
+       {
             display: none !important;
             
         } 

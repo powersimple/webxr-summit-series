@@ -34,6 +34,9 @@ DO NOT EDIT IN STYLE.CSS
     @import "partials/guide";    
     @import "partials/hardware";
     @import "partials/runofshow";
+    @import "partials/nominees";
+    
+   
    
     /*
 @import "partials/admin";
@@ -80,8 +83,7 @@ DO NOT EDIT IN STYLE.CSS
         border: none;
         border-radius: 5px;
         box-shadow: none;
-        cursor: pointer;
-        display: inline-block;
+        cursor: pointer;display: inline-block;
         font-size: 16px;
         padding: 12px 36px;
         text-align: center;
@@ -143,11 +145,18 @@ DO NOT EDIT IN STYLE.CSS
     
     ul {
         padding-left: .25in;
+        li {
+            list-style-type: disc;
+        }
     }
     
-    li {
-        list-style-type: disc;
+    ol {
+        padding-left: 25px;
+        li {
+            list-style-type:decimal;
+        }
     }
+    
     
     .full-center {
         display: block;
@@ -3258,6 +3267,7 @@ transform: scale(0.5) translate(-100%, -100%);
 
     }
 }
+
 .post{
     background-color: #fff;
     color:#000;
@@ -3276,4 +3286,11 @@ transform: scale(0.5) translate(-100%, -100%);
     }
     
   }
-  
+  #experiences{
+    img{
+        border-radius:50%;
+        width:150px;
+        margin:0px auto;
+        display: block;
+    }
+}

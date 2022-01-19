@@ -9,7 +9,7 @@
 FROM OUR PARTNERS
 IN 2022 ",
             "model_offset" => ["x"=>0,
-                                "y"=>3,
+                                "y"=>-1,
                                 "z"=>0],
             "model_scale" => ["x"=>15,
                                 "y"=>15,

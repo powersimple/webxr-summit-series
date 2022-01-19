@@ -165,6 +165,23 @@ print "</a-entity><!--model-series-->
     }
 
 
+    function get_camera(){
+        $cam_x = 0;
+        $cam_y = 1.6;
+        $cam_z = 0;
+        
+        if(@$_GET['camera']){
+          $cam_coords =  explode("~",$_GET['camera']);
+          if(count($cam_coords) == 3){
+            $cam_x = $cam_coords[0];
+            $cam_y = $cam_coords[1];
+            $cam_z = $cam_coords[2];
+          }
+        }
+        return [$cam_x,$cam_y,$cam_z];
+        
+    }
+
 
 
 ?>

@@ -1,0 +1,95 @@
+#cards{
+
+    position:absolute;
+    left:0;
+
+    .nominee-card{
+        border:2px #fff solid;
+        width:1920px;
+        height:1080px;margin:25px;
+        background:url(images/bg/NomineeCardBG.jpg) no-repeat top left;
+        position: relative;
+        h2{
+            font-family: "AgencyFB";
+        }
+        svg{
+            width:773px;
+            position: relative;
+            left:157px;
+            top:173px;
+           
+           
+            path, polygon, rect{
+                fill:#fff;
+                -webkit-box-shadow: 5px 5px 9px 13px #FFF275; 
+                box-shadow: 5px 5px 9px 13px #FFF275;
+                
+            }
+        }
+    }
+    
+ 
+    .showtime{
+ 
+        position: relative;
+        left: 0px;
+        top: 125px;
+        font-size: 36px;
+        line-height: 48px;
+        text-align: center;
+        font-family: "Zen Dots";
+
+    }
+    .social{
+        width: 350px;
+        font-family: "Zen Dots";
+        position: relative;
+        left: 1537px;
+        top: 32px;
+        font-size: 36px;
+        font-weight: normal;
+        line-height: 48px;
+        text-align: center;
+    }
+    
+
+}
+@font-face {
+    font-family: 'CreamCake'; /*a name to be used later*/
+    src: url('fonts/CreamCake.otf'); /*URL to font*/
+}
+.hosts{
+    font-family:"CreamCake";
+    position: relative;
+    left:700px;
+    top:300px;
+    font-size:48px;
+    color:#fff;
+    .host{ 
+        position: relative;
+        span{
+        display: block;
+        text-align: center;
+        height:36px;
+        } 
+        .by{
+            font-size: 36px;
+        }
+    }
+    .julie{
+        left:0px;
+
+    }
+    .sophia{
+        left:100px;
+    }
+
+}
+
+@font-face {
+    font-family: 'AgencyFB'; /*a name to be used later*/
+    src: url('fonts/AGENCYR.ttf'); /*URL to font*/
+}
+model-viewer#reveal {
+    --poster-color: transparent;
+  }

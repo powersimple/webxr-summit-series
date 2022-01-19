@@ -198,77 +198,7 @@ AFRAME.registerComponent("plane-hit", { // Manual occlusion zones
 })
 
 
-// VR Grab Lab Grabbing Function
-AFRAME.registerComponent("item-grab", {
-    init: function () {
-        sceneEl = document.querySelector('a-scene');
-        var grabtrig = function (grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel, grabrotate = "0 0 0", 
-        grabscale = "5 5 5", grabposition = "0 1 0") {
-                console.log("grab",grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel, grabrotate = "0 0 0", 
-        grabscale = "5 5 5", grabposition = "0 1 0")
 
-            document.getElementById(grabitem).addEventListener("grab-start", function (evt) {
-                if (document.getElementById(grabinfo).getAttribute('visible') == true) {
-                    for (let each of sceneEl.querySelectorAll(grabtable)) { // Turn off everything
-                        each.object3D.visible = false;
-                    }
-             //       document.getElementById(grabproj).object3D.visible = false;
-                   //document.getElementById(grabholo).object3D.visible = false;
-                } else {
-                    for (let each of sceneEl.querySelectorAll(grabtable)) {
-                        each.object3D.visible = false;
-                    }
-//                    document.getElementById(grabproj).object3D.visible = true;
-                    document.getElementById(grabinfo).object3D.visible = true;
-                    /*document.getElementById(grabholo).object3D.visible = true;
-                    document.getElementById(grabholo).setAttribute("full-gltf-model", grabmodel);
-                    document.getElementById(grabholo).setAttribute("rotation", grabrotate);
-                    document.getElementById(grabholo).setAttribute("scale", grabscale);
-                    document.getElementById(grabholo).setAttribute("position", grabposition);*/
-                }
-            })
-        }
-
-
-        grabtrig("poly-grab", "poly-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-
-        //Single User Experience
-       grabtrig("sueoty-grab", "sueoty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-
-       // Multi-user experience
-        grabtrig("mue-grab", "mue-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-
-
-        //GAME OF THE YEAR
-         grabtrig("goty-grab", "goty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-
-        //Entertainment OF THE YEAR
-        grabtrig("eeoty-grab", "eeoty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-
-        //Education OF THE YEAR
-        grabtrig("edoty-grab", "edoty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-
-        //Developer OF THE YEAR
-       grabtrig("doty-grab", "doty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-
-        //Innovation of the year
-        grabtrig("ioty-grab", "ioty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-
-       
-        //Framework OF THE YEAR
-        grabtrig("foty-grab", "foty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-
-        grabtrig("soty-grab", "soty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-
-
-//Lifetime Achievements Award
-grabtrig("oa-grab", "oa-title", ".art-text", "holoartifact", "holoartproj", "images/glb/", undefined, "2 2 2", undefined);
-
-        //Lifetime Achievements Award
-        grabtrig("ltaa-grab", "ltaa-title", ".art-text", "holoartifact", "holoartproj", "images/glb/", undefined, "2 2 2", undefined);
-       /* */
-    }
-})
 
 
 // Anti-Drop Protection

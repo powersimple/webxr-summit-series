@@ -330,3 +330,52 @@ function setScreenImages(screen_images, dest, callback) {
 
 
 }
+function videoOverlay(src)  {
+    $('#video-holder, #overlay').fadeIn('slow');
+    console.log(src)
+    $('#video-container').html('<iframe src="'+src+'" frameborder=0 allowfullscreen></iframe>');
+}
+  
+  $(document).on('touchend, mouseup', function(e) {
+    if (!$('#video').is(e.target)) {
+      $('#video, #overlay').fadeOut('slow');
+      $('#video-container').html('');
+    }
+  })
+
+  // video overlayer: start
+
+$(".js-overlay-start").unbind("click").bind("click", function(e) {
+	e.preventDefault();
+	var src = $(this).attr("data-url");
+	$(".overlay-video").show();
+	setTimeout(function() {
+		$(".overlay-video").addClass("o1");
+		$("#player").attr("src", src);
+	}, 100);
+});
+
+// video overlayer: close it if you click outside of the modal
+
+$(".overlay-video").click(function(event) {
+	if (!$(event.target).closest(".videoWrapperExt").length) {
+		var PlayingVideoSrc = $("#player").attr("src").replace("&autoplay=1", "");
+		$("#player").attr("src", PlayingVideoSrc);
+		$(".overlay-video").removeClass("o1");
+		setTimeout(function() {
+			$(".overlay-video").hide();
+		}, 600);
+	}
+});
+
+// video overlayer: close it via the X icon
+
+$(".close").click(function(event) {
+		var PlayingVideoSrc = $("#player").attr("src").replace("&autoplay=1", "");
+		$("#player").attr("src", PlayingVideoSrc);
+		$(".overlay-video").removeClass("o1");
+		setTimeout(function() {
+			$(".overlay-video").hide();
+		}, 600);
+
+});

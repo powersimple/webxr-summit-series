@@ -30,6 +30,45 @@ function getJurorLinks(){
 
 
 }
+function get_ballot($menu){
+    $nominations = get_nominations('polys2');
+    $last_award = 0;
+    print "<form id='ballot-form' action='/ballot/' method='post'>
+    <input name='juror_email' type='hidden' value='$_POST[juror_email]'>";
+    print '<table class="nominations">';
+
+    foreach($nominations as $key => $nomination){
+       // var_dump($nomination);
+        extract($nomination);
+        //$classes_array = explode("",$classes_array[0]){}
+        if(in_array("nomination",explode(" ",$classes[0]))){
+        print $title;
+        print "<br>";
+        $counter = 1;
+        if($counter == 1){
+            print "<tr><th class='category' colspan='4'>$value->category</th></tr>";
+              print "<tr>
+              <th></th>
+                <th>Nominee</th>
+              
+                <th class='choice'>1st</th>
+                <th class='choice'>2nd</th>
+              
+              
+              </tr>";     
+                   }
+        foreach($nominees as $k => $nominee){
+            print $nominee['title'];
+            print "<br>";
+        }
+        
+        print "<BR>";
+        }
+    }
+    print "</table></form>";
+}
+
+
 function getBallot($id){
      
     $nominations = getNominations();

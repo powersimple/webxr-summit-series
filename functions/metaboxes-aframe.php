@@ -1,104 +1,38 @@
 <?php
-add_filter( 'rwmb_meta_boxes', 'entity_positioning' );
+add_filter( 'rwmb_meta_boxes', 'awards_meta' );
 
-function entity_positioning( $meta_boxes ) {
+function awards_meta( $meta_boxes ) {
     $prefix = '';
-
+   
     $meta_boxes[] = [
         'title'   => esc_html__( 'Entity Postioning', 'online-generator' ),
         'id'      => 'entitiy_positioning',
         'context' => 'side',
         'priority' => 'high',
+        'post_types' => array( 'resource'),
 		'autosave' => true,
         'post_types' => array( 'event' ),
         'fields'  => [
             [
-                'type' => 'text',
-                'name' => esc_html__( 'Position Lock', 'online-generator' ),
-                'id'   => $prefix . 'pos_lock',
+                'type' => 'textarea',
+                'name' => esc_html__( 'About', 'online-generator' ),
+                'id'   => $prefix . 'award_about',
+                'size' => 1,
+            ],
+            [
+                'type' => 'textarea',
+                'name' => esc_html__( 'Criteria', 'online-generator' ),
+                'id'   => $prefix . 'award_former',
                 'desc' => esc_html__( '(overides x y & z)', 'online-generator' ),
                 'size' => 1,
-                'std'=>''
             ],
             [
-                'type' => 'text',
-                'name' => esc_html__( 'Position X', 'online-generator' ),
-                'id'   => $prefix . 'pos_X',
+                'type' => 'textarea',
+                'name' => esc_html__( 'Formerly', 'online-generator' ),
+                'id'   => $prefix . 'pos_x',
                 'size' => 1,
-                'std'=>'0'
             ],
-            [
-                'type' => 'text',
-                'name' => esc_html__( 'Position Y', 'online-generator' ),
-                'id'   => $prefix . 'pos_y',
-                'size' => 1,
-                'std'=>'0'
-            ],
-            [
-                'type' => 'text',
-                'name' => esc_html__( 'Position Z', 'online-generator' ),
-                'id'   => $prefix . 'pos_z',
-                'size' => 1,
-                'std'=>'0'
-            ],
-            [
-                'type' => 'text',
-                'name' => esc_html__( 'Rotation Lock', 'online-generator' ),
-                'id'   => $prefix . 'rot_lock',
-                'desc' => esc_html__( '(overides x y & z)', 'online-generator' ),
-                'size' => 1,
-                'std'=> ''
-            ],
-            [
-                'type' => 'text',
-                'name' => esc_html__( 'Rotation X', 'online-generator' ),
-                'id'   => $prefix . 'rot_X',
-                'size' => 1,
-                'std'=>'0'
-            ],
-            [
-                'type' => 'text',
-                'name' => esc_html__( 'Rotation Y', 'online-generator' ),
-                'id'   => $prefix . 'rot_y',
-                'size' => 1,
-                'std'=>'0'
-            ],
-            [
-                'type' => 'text',
-                'name' => esc_html__( 'Rotation Z', 'online-generator' ),
-                'id'   => $prefix . 'rot_z',
-                'size' => 1,
-                'std'=>'0'
-            ],
-            [
-                'type' => 'text',
-                'name' => esc_html__( 'scale Lock', 'online-generator' ),
-                'id'   => $prefix . 'scale_lock',
-                'desc' => esc_html__( '(overides x y & z)', 'online-generator' ),
-                'size' => 1,
-                'std'=>''
-            ],
-            [
-                'type' => 'text',
-                'name' => esc_html__( 'Scale X', 'online-generator' ),
-                'id'   => $prefix . 'scale_X',
-                'size' => 1,
-                'std'=>'1'
-            ],
-            [
-                'type' => 'text',
-                'name' => esc_html__( '  Position Y', 'online-generator' ),
-                'id'   => $prefix . 'scale_y',
-                'size' => 1,
-                'std'=>'1'
-            ],
-            [
-                'type' => 'text',
-                'name' => esc_html__( 'Position Z', 'online-generator' ),
-                'id'   => $prefix . 'scale_z',
-                'size' => 1,
-                'std'=>'1'
-            ],
+
 
             
         ],

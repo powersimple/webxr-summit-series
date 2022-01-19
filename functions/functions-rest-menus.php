@@ -138,6 +138,7 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
                     This reduced menu json file size by more than 80%
                 */           
                 $items = wp_get_nav_menu_items( $menu['term_id'] );
+               
                 $custom_items = array();
                 foreach($items as $key => $value){
                     // this gets rid of the infernal and wasteful printing of the absolute path in a url for local.
@@ -153,8 +154,11 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
                             "menu_item_parent"=>$value->menu_item_parent,
                             "menu_order"=>$value->menu_order,
                             "title"=>$value->title,
+                            "content"=>get_post( $value->object_id )->post_content,
+                            
                             "url"=>$url,
                             "slug"=>sanitize_title($value->title),
+                            "coords" => $value->_coords,
                             "post_parent" => $value->post_parent,
                             "classes" => implode(" ",$value->classes),       
                             "description" => $value->description,
@@ -349,10 +353,13 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
 					'order'       => (int) $item->menu_order,
 					'parent'      => abs( $item->menu_item_parent ),
 					'title'       => $item->title,
+                    'content'       => $item->content,
+                    
 					'url'         => $item->url,
 					'attr'        => $item->attr_title,
 					'target'      => $item->target,
-					'classes'     => implode( ' ', $item->classes ),
+                    'coords'      => $item->_coords,
+                    'classes'     => implode( ' ', $item->classes ),
 					'xfn'         => $item->xfn,
 					'description' => $item->description,
 					'object_id'   => abs( $item->object_id ),
@@ -438,10 +445,14 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
                 'order'       => (int) $item['menu_order'],
                 'parent'      => abs( $item['menu_item_parent'] ),
                 'title'       => $item['title'],
+                'content'       => get_post( $item['object_id'] )->post_content,
+                
                 'slug'       => $item['slug'],
                 'url'         => $item['url'],
                 'attr'        => $item['attr_title'],
                 'target'      => $item['target'],
+                'coords'      => $item['_coords'],
+                
                 'classes'     => implode( ' ', $item['classes'] ),
                 'xfn'         => $item['xfn'],
                 'description' => $item['description'],

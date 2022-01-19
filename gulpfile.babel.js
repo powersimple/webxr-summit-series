@@ -139,13 +139,13 @@ function xr_lib() {
 
 function xr_app() {
 
-    return src('xr/js/app/**/*.js', {
+    return src('app/xr/**/*.js', {
         sourcemaps: true
     })
 
 
 
-    .pipe(concat('xr-app.js'))
+    .pipe(concat('xr.js'))
         .pipe(dest('./'))
         .pipe(rename({
             suffix: '.min'
@@ -195,7 +195,7 @@ function browser() {
     watch('./xr/css/**/*.scss', xr_clean);
     watch('./xr/css/**/*.scss', xr_css).on('change', browserSync.reload);
     //watch('./xr/js/lib/**/*.js', xr_lib).on('change', browserSync.reload);
-    //watch('./xr/js/app/**/*.js', xr_app).on('change', browserSync.reload);
+    watch('./app/xr/**/*.js', xr_app).on('change', browserSync.reload);
 
 }
 

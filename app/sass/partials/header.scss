@@ -2,16 +2,27 @@
     // background-color: $darkest_gray;
 }
 
-@media(min-width:768px) {
+
     #header {
         //  background-color: $darkest_gray;
         height: 50px;
     }
     #logo {
         position: relative;
-        top: -15px;
+     
+        width:130px;
+        background-image: url(images/logo/PolysLogo.png);
+        @media(min-width:768px) {
+            top: -15px;
+        }
+        a{
+            width:100%;
+            height: 50px;
+                display: block;
+            
+        }
     }
-}
+
 
 #site-title {
     color: $light_blue;

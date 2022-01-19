@@ -1,7 +1,7 @@
 jQuery(document).ready(function() {
 
-
-
+    openDrawer()
+    $("body").css("margin-left:0px !important") //RUDE HACK
 });
 $( window ).scroll(function() {
     pinFooter()
@@ -855,6 +855,89 @@ function shuffle(array) {
   
     return array;
   }
+jQuery("#menu").click(function () {
+    openDrawer()
+  
+});
+
+jQuery("#menuclose").click(function () {
+    jQuery(".appswitchdropdown").hide();
+    jQuery(".sidedrawer").animate({
+        left: -250,
+        opacity: 1
+    }, 300);
+    jQuery("body").animate({
+        marginLeft: 0,
+    }, 300);
+    jQuery("#menu").show();
+    jQuery(this).hide();
+});
+
+jQuery(".appswitch").click(function () {
+    jQuery(".appswitchdropdown").toggle();
+});
+jQuery(".page").hover(function () {
+    jQuery(".appswitchdropdown").hide();
+});
+jQuery(".appconversation").click(function () {
+    jQuery("#nav, .page, .sidedrawer,.appswitchdropdown").hide();
+    jQuery(".convo").show();
+    jQuery("body").css({
+        marginLeft: 0,
+    }, 500);
+});
+
+jQuery(".convo").click(function () {
+    jQuery("#nav, .page, .sidedrawer,.appswitchdropdown").show();
+    jQuery(".convo, .trendscontent ").hide();
+    jQuery("body").css({
+        marginLeft: 250,
+    }, 500);
+});
+
+jQuery(".appstudio").click(function () {
+    jQuery(".spark, .sparkcontent, .sparklist").hide();
+    jQuery(".studio, .studiolist").show();
+    jQuery('#logo').css('background-position', '0px 0px');
+    jQuery('.appswitch').css('background-position', '0px 0px');
+});
+
+
+
+jQuery(".collapse").click(function () {
+    jQuery(".collapse").hide();
+    jQuery(".expand").show();
+    jQuery('.sidedrawer').css('width', '60px');
+    jQuery(".sparklist div, .appswitch").css({
+        width: 50,
+    }, 500);
+
+    jQuery("body").animate({
+        marginLeft: 60,
+    }, 500);
+
+
+});
+
+jQuery(function () {
+    jQuery("#accordion").accordion({
+        autoHeight: true,
+        heightStyle: "content" 
+    });
+});
+function openDrawer(){
+    jQuery(".sidedrawer").animate({
+        left: 0,
+        opacity: 1,
+        
+    }, 500);
+    jQuery("body").animate({
+        
+    }, 500);
+    jQuery("#menuclose").show();
+    jQuery(this).hide();
+}
+
 // pass the type in the route
 // param = url arguments for the REST API
 // callback is a dynamic function name 
@@ -1401,6 +1484,56 @@ function setScreenImages(screen_images, dest, callback) {
 
 
 }
+function videoOverlay(src)  {
+    $('#video-holder, #overlay').fadeIn('slow');
+    console.log(src)
+    $('#video-container').html('<iframe src="'+src+'" frameborder=0 allowfullscreen></iframe>');
+}
+  
+  $(document).on('touchend, mouseup', function(e) {
+    if (!$('#video').is(e.target)) {
+      $('#video, #overlay').fadeOut('slow');
+      $('#video-container').html('');
+    }
+  })
+
+  // video overlayer: start
+
+$(".js-overlay-start").unbind("click").bind("click", function(e) {
+	e.preventDefault();
+	var src = $(this).attr("data-url");
+	$(".overlay-video").show();
+	setTimeout(function() {
+		$(".overlay-video").addClass("o1");
+		$("#player").attr("src", src);
+	}, 100);
+});
+
+// video overlayer: close it if you click outside of the modal
+
+$(".overlay-video").click(function(event) {
+	if (!$(event.target).closest(".videoWrapperExt").length) {
+		var PlayingVideoSrc = $("#player").attr("src").replace("&autoplay=1", "");
+		$("#player").attr("src", PlayingVideoSrc);
+		$(".overlay-video").removeClass("o1");
+		setTimeout(function() {
+			$(".overlay-video").hide();
+		}, 600);
+	}
+});
+
+// video overlayer: close it via the X icon
+
+$(".close").click(function(event) {
+		var PlayingVideoSrc = $("#player").attr("src").replace("&autoplay=1", "");
+		$("#player").attr("src", PlayingVideoSrc);
+		$(".overlay-video").removeClass("o1");
+		setTimeout(function() {
+			$(".overlay-video").hide();
+		}, 600);
+
+});
+
 function megaMenu() {
     var classes = ''
     var megamenu = '<nav id="megamenu" class="content">'
@@ -2261,12 +2394,12 @@ function getProfileCard(this_profile,event_time){
     var card = ''
     var credential = ''
     var social = ''
-    
-    var info = this_profile.profile.info
+
+    var info = this_profile.profile.meta
 
     if(info != undefined){
         if(getUrlParameter('timezone') == 'show'){
-            var timezone = this_profile.profile.info.timezone
+            var timezone = this_profile.profile.meta.timezone[0]
             if(timezone != undefined){
             
               
@@ -2278,7 +2411,7 @@ function getProfileCard(this_profile,event_time){
             }
     
         }
-
+       
         
 
         if(info.profile_title != undefined){
@@ -2288,7 +2421,7 @@ function getProfileCard(this_profile,event_time){
             credential += '<span>'+info.company.trim()+'</span>'
         }
         if(info.twitter != undefined){
-            credential += '<span>@'+info.twitter.replace("https://twitter.com/","")+'</span>'
+          credential += '<span>@'+info.twitter.replace("https://twitter.com/","")+'</span>'
         }
         if(credential != ''){
             card += '<span class="credential">'+credential+'</span>'
@@ -2297,10 +2430,10 @@ function getProfileCard(this_profile,event_time){
             social +='<a target="_new" class="twitter" href="'+info.twitter+'"><i class="fa fa-twitter social-icon" title="'+this_profile.title+' on Twitter"></i></a>'
         }
         if(info.linkedin != undefined){
-            social +='<a target="_new" class="linkedin" href="'+info.linkedin+'"><i class="fa fa-linkedin social-icon" title="'+this_profile.title+' on linkedin"></i></a>'
+            social +='<a target="_new" class="linkedin" href="'+info.linkedin+'"><i class="fa fa-linkedin social-icon" title="'+this_profile.title+' on LinkedIn"></i></a>'
         }
         if(info.github != undefined){
-            social +='<a target="_new" class="github" href="'+info.linkedin+'"><i class="fa fa-github social-icon" title="'+this_profile.title+' on github"></i></a>'
+            social +='<a target="_new" class="github" href="'+info.linkedin+'"><i class="fa fa-github social-icon" title="'+this_profile.title+' on GitHub"></i></a>'
         }
         if(social != ''){
             card+='<span class="social">'+social+'</span>'
@@ -2323,12 +2456,16 @@ function getProfileCard(this_profile,event_time){
 
 function displayRunOfShowTable(runOfShow){
 
-    console.log(runOfShow)
+ //   console.log(runOfShow)
    
     var show = '<h2>'+runOfShow.title+'</h2>'
-
+    var now = new Date()
     var showtime = runOfShow.info.event_info.utc_start;
-    
+    var tense = "future";
+    if(now>showtime){
+        tense = "past"
+    }
+    console.log("TENSE", tense)
     $("#show").html(show)
     var duration = 0;
     var sessions = '<div id="schedule">'
@@ -2338,7 +2475,7 @@ function displayRunOfShowTable(runOfShow){
     var cell_width = '100%';
     var cols = '';
     for (var n = 0; n < runOfShow.sessions.length; n++) { 
-        console.log("session-info",runOfShow.sessions[n].info,showtime)
+      //  console.log("session-info",runOfShow.sessions[n].info,showtime)
         if(runOfShow.sessions[n].info != undefined){
             
             if(runOfShow.sessions[n].info.event_info.duration != ''){
@@ -2357,7 +2494,13 @@ function displayRunOfShowTable(runOfShow){
             sessions += '<div class="row session">'
             
             sessions += '<div class="col-sm-2 col-md-1">'
+            if(tense == 'future'){
             sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time">'+display_event_time+' </span></h3>'
+            } else {
+                if(runOfShow.sessions[n].info.meta.embed_video_url != undefined){
+                    sessions += '<a href="#" class="watch video-button" onclick="playVideo(\''+runOfShow.sessions[n].info.meta.embed_video_url+'\')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
+                }
+            }
           //  sessions += '<div class="card-mode">'
         //  sessions += '<img src="/wp-content/uploads/2021/09/BusinessSummitBrandCard.png"+ alt="'+runOfShow.title+'">'
         /*
@@ -2440,9 +2583,9 @@ cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
                 if(width_override == 'presentation'){
                    sessions += '</div><div class="col-sm-12 col-md-8 talk-blurb">'
                 
-               
-                     if(this_profile.profile.info.talk_description != undefined){
-                    sessions += '<span class="blurb">'+this_profile.profile.info.talk_description+'</span>'
+             //       console.log(this_profile.profile);
+                if(this_profile.profile.meta.talk_description != undefined){
+                    sessions += '<span class="blurb">'+this_profile.profile.meta.talk_description+'</span>'
                 }
             }
                 sessions += '</span>'
@@ -2488,7 +2631,10 @@ cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
 
 }
 
+function playVideo(src){
+   $("#video-player").attr("src",src)
 
+}
 
 function getProfileThumbnail(this_profile,size){
    
@@ -2514,12 +2660,13 @@ function displayRunOfShow(runOfShow){
     
    
 }
+
 function displayRunOfShowCards(runOfShow){
         
     var show = '<h2>'+runOfShow.title+'</h2>'
 
     var showtime = runOfShow.info.event_info.utc_start;
-    
+    console.log("SHOWTIME",showtime)
     $("#show").html(show)
     var duration = 0;
     var sessions = '<div id="ros-accordion" class="cards">'
@@ -2601,8 +2748,8 @@ function displayRunOfShowCards(runOfShow){
                 
                     if(width_override == 'presentation'){
 
-                        if(this_profile.profile.info.talk_description != undefined){
-                            sessions += '<span class="blurb">'+this_profile.profile.info.talk_description+'</span>'
+                        if(this_profile.profile.meta.talk_description != undefined){
+                            sessions += '<span class="blurb">'+this_profile.profile.meta.talk_description+'</span>'
                         }
                     }
                 sessions += '</span>'
@@ -2760,91 +2907,8 @@ function convertDateTime(unix_timestamp,offset){
     return parseInt(utc_adjusted) + ':' + minutes.substr(-2);
 }
 
-
-var gotoslide = function(slide){
-  //console.log("click on slick dot ", slide);
-   setSlideContent(notch, menus['wheel-menu'].linear_nav[slide].object_id)
-    $( '.slideshow' ).slickGoTo(parseInt(slide));
-}
-
-jQuery('.slick-dots li button').on('click', function (e) {
-   e.stopPropagation(); // use this
-  //console.log("slick dot clicked")
-});
-
-function setSlideShow(menu){
-  jQuery('.slideshow').slick({
-  //	autoplay: true,
-    dots: false,
-    arrows: true,
-    infinite: true,
-    speed: 1000,
-    fade: true,
-    cssEase:  'linear',
-    focusoOnSelect: true,
-    //nextArrow: '<i class="slick-arrow slick-next"></i>',
-    //prevArrow: '<i class="slick-arrow slick-prev"></i>',
-  });
-
-   //console.log("set slideshow")
-}
-function setSlide(slide,id){
-  /*
-  these carousel slides are created here, but their content is populated dynamically
-  because it was unreliable populating the content in a loop
-  see setSlideContent in app.js
-  */
-  slide = '\n<div><div id="slide'+id+'" data-id="'+id+'" class="slide-wrap">'
-  slide += '\n\t<h2></h2>'
-  slide += '\n\t<div class="img-wrap"></div>'
-  slide += '\n\t<section><div class="content"></div></section>'
-  slide +='\n</div></div>\n';
-  return slide
-}
-
-function setSlides(m){
-  var id="0"
-  var content = ''
-  var title = ''
-  var slides = ''
-//console.log("Begin Render Slides",m,"|")
- 
-  if(posts == undefined){
-    //console.log("No Posts Data Yet",  posts)
-    window.setTimeout(setSlides(m), 100);//without this, we cannot relay that the post data is available yet
-  } else {
-  
-  for(i=0;menus[m].linear_nav[i];i++){
-    //console.log("slides", menus[m].linear_nav[i])
-     id = menus[m].linear_nav[i].object_id.toString()
-  
-      slides += setSlide(i,id)
-   
-  }
- //console.log("slides rendered",slides)
-
-  jQuery('#'+m+'-content').html(slides);
- 
-  }
-}
-
-var $carousel = jQuery('.slideshow');
-jQuery(document).on('keydown', function(e) {
-    if(e.keyCode == 37) {
-        $carousel.slick('slickPrev');
-    }
-    if(e.keyCode == 39) {
-        $carousel.slick('slickNext');
-    }
-});
-
-jQuery('a[data-slide]').click(function(e) {
-       // console.log("click on slick dot ", slide);
-  e.preventDefault();
-  var slide = jQuery(this).data('slide');
-  //console.log("click on slick dot ", slide);
-  setSlideContent(notch, menus['wheel-menu'].linear_nav[slide].object_id)
-  //$carousel.slick('slickGoTo', slideno);
+$(".video-button").on('click', function(event){
+    console.log("THIS",$(this).data('url'))
 
 });
 function setChildCategories(data) {

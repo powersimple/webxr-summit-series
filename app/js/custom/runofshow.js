@@ -84,12 +84,12 @@ function getProfileCard(this_profile,event_time){
     var card = ''
     var credential = ''
     var social = ''
-    
-    var info = this_profile.profile.info
+
+    var info = this_profile.profile.meta
 
     if(info != undefined){
         if(getUrlParameter('timezone') == 'show'){
-            var timezone = this_profile.profile.info.timezone
+            var timezone = this_profile.profile.meta.timezone[0]
             if(timezone != undefined){
             
               
@@ -101,7 +101,7 @@ function getProfileCard(this_profile,event_time){
             }
     
         }
-
+       
         
 
         if(info.profile_title != undefined){
@@ -111,7 +111,7 @@ function getProfileCard(this_profile,event_time){
             credential += '<span>'+info.company.trim()+'</span>'
         }
         if(info.twitter != undefined){
-            credential += '<span>@'+info.twitter.replace("https://twitter.com/","")+'</span>'
+          credential += '<span>@'+info.twitter.replace("https://twitter.com/","")+'</span>'
         }
         if(credential != ''){
             card += '<span class="credential">'+credential+'</span>'
@@ -120,10 +120,10 @@ function getProfileCard(this_profile,event_time){
             social +='<a target="_new" class="twitter" href="'+info.twitter+'"><i class="fa fa-twitter social-icon" title="'+this_profile.title+' on Twitter"></i></a>'
         }
         if(info.linkedin != undefined){
-            social +='<a target="_new" class="linkedin" href="'+info.linkedin+'"><i class="fa fa-linkedin social-icon" title="'+this_profile.title+' on linkedin"></i></a>'
+            social +='<a target="_new" class="linkedin" href="'+info.linkedin+'"><i class="fa fa-linkedin social-icon" title="'+this_profile.title+' on LinkedIn"></i></a>'
         }
         if(info.github != undefined){
-            social +='<a target="_new" class="github" href="'+info.linkedin+'"><i class="fa fa-github social-icon" title="'+this_profile.title+' on github"></i></a>'
+            social +='<a target="_new" class="github" href="'+info.linkedin+'"><i class="fa fa-github social-icon" title="'+this_profile.title+' on GitHub"></i></a>'
         }
         if(social != ''){
             card+='<span class="social">'+social+'</span>'
@@ -146,12 +146,16 @@ function getProfileCard(this_profile,event_time){
 
 function displayRunOfShowTable(runOfShow){
 
-    console.log(runOfShow)
+ //   console.log(runOfShow)
    
     var show = '<h2>'+runOfShow.title+'</h2>'
-
+    var now = new Date()
     var showtime = runOfShow.info.event_info.utc_start;
-    
+    var tense = "future";
+    if(now>showtime){
+        tense = "past"
+    }
+    console.log("TENSE", tense)
     $("#show").html(show)
     var duration = 0;
     var sessions = '<div id="schedule">'
@@ -161,7 +165,7 @@ function displayRunOfShowTable(runOfShow){
     var cell_width = '100%';
     var cols = '';
     for (var n = 0; n < runOfShow.sessions.length; n++) { 
-        console.log("session-info",runOfShow.sessions[n].info,showtime)
+      //  console.log("session-info",runOfShow.sessions[n].info,showtime)
         if(runOfShow.sessions[n].info != undefined){
             
             if(runOfShow.sessions[n].info.event_info.duration != ''){
@@ -180,7 +184,13 @@ function displayRunOfShowTable(runOfShow){
             sessions += '<div class="row session">'
             
             sessions += '<div class="col-sm-2 col-md-1">'
+            if(tense == 'future'){
             sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time">'+display_event_time+' </span></h3>'
+            } else {
+                if(runOfShow.sessions[n].info.meta.embed_video_url != undefined){
+                    sessions += '<a href="#" class="watch video-button" onclick="playVideo(\''+runOfShow.sessions[n].info.meta.embed_video_url+'\')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
+                }
+            }
           //  sessions += '<div class="card-mode">'
         //  sessions += '<img src="/wp-content/uploads/2021/09/BusinessSummitBrandCard.png"+ alt="'+runOfShow.title+'">'
         /*
@@ -263,9 +273,9 @@ cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
                 if(width_override == 'presentation'){
                    sessions += '</div><div class="col-sm-12 col-md-8 talk-blurb">'
                 
-               
-                     if(this_profile.profile.info.talk_description != undefined){
-                    sessions += '<span class="blurb">'+this_profile.profile.info.talk_description+'</span>'
+             //       console.log(this_profile.profile);
+                if(this_profile.profile.meta.talk_description != undefined){
+                    sessions += '<span class="blurb">'+this_profile.profile.meta.talk_description+'</span>'
                 }
             }
                 sessions += '</span>'
@@ -311,7 +321,10 @@ cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
 
 }
 
+function playVideo(src){
+   $("#video-player").attr("src",src)
 
+}
 
 function getProfileThumbnail(this_profile,size){
    
@@ -337,12 +350,13 @@ function displayRunOfShow(runOfShow){
     
    
 }
+
 function displayRunOfShowCards(runOfShow){
         
     var show = '<h2>'+runOfShow.title+'</h2>'
 
     var showtime = runOfShow.info.event_info.utc_start;
-    
+    console.log("SHOWTIME",showtime)
     $("#show").html(show)
     var duration = 0;
     var sessions = '<div id="ros-accordion" class="cards">'
@@ -424,8 +438,8 @@ function displayRunOfShowCards(runOfShow){
                 
                     if(width_override == 'presentation'){
 
-                        if(this_profile.profile.info.talk_description != undefined){
-                            sessions += '<span class="blurb">'+this_profile.profile.info.talk_description+'</span>'
+                        if(this_profile.profile.meta.talk_description != undefined){
+                            sessions += '<span class="blurb">'+this_profile.profile.meta.talk_description+'</span>'
                         }
                     }
                 sessions += '</span>'
@@ -583,3 +597,7 @@ function convertDateTime(unix_timestamp,offset){
     return parseInt(utc_adjusted) + ':' + minutes.substr(-2);
 }
 
+$(".video-button").on('click', function(event){
+    console.log("THIS",$(this).data('url'))
+
+});

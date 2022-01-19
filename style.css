@@ -587,8 +587,7 @@ blockquote {
   #megamenu li,
   #megamenu li {
     font-size: 1em !important;
-    list-style: none;
-    border: 1px solid rgba(0, 0, 0, 0.8); }
+    list-style: none; }
   #megamenu a,
   #megamenu a:hover,
   #megamenu a.active,
@@ -889,12 +888,20 @@ blockquote {
   .loader svg {
     width: 100%; }
 
-@media (min-width: 768px) {
-  #header {
-    height: 50px; }
-  #logo {
-    position: relative;
-    top: -15px; } }
+#header {
+  height: 50px; }
+
+#logo {
+  position: relative;
+  width: 130px;
+  background-image: url(images/logo/PolysLogo.png); }
+  @media (min-width: 768px) {
+    #logo {
+      top: -15px; } }
+  #logo a {
+    width: 100%;
+    height: 50px;
+    display: block; }
 
 #site-title {
   color: #8fa2c6;
@@ -1052,10 +1059,24 @@ footer ul {
   background-size: contain;
   padding-left: 28px; }
 
+.gatherverse {
+  background: url(images/logo/Gather-Verse-Summit-Logo.png) center left no-repeat transparent;
+  background-size: contain;
+  padding-left: 28px; }
+
 .futurewei {
   background: url(images/logo/futurewei.png) center left no-repeat transparent;
   background-size: contain;
   padding-left: 25px; }
+
+.experiences-header {
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  padding: 10px 0px;
+  list-style: none;
+  margin: 0px auto;
+  color: white; }
 
 input[type=checkbox].form-checkbox {
   width: 22px;
@@ -1275,6 +1296,7 @@ body::-webkit-scrollbar-thumb {
   padding-bottom: 1rem;
   position: relative;
   display: block;
+  margin-top: 50px;
   z-index: 100; }
   @media (max-width: 1280px) {
     .title-bar {
@@ -1461,6 +1483,66 @@ body::-webkit-scrollbar-thumb {
     font-size: 18px;
     font-weight: 400;
     max-width: 975px; }
+
+.overlay-video {
+  display: none;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  opacity: 0;
+  -ms-transition: opacity 600ms ease-in;
+  transition: opacity 600ms ease-in;
+  -ms-transition: opacity .6s;
+  transition: opacity .6s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999999; }
+
+.o1 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  opacity: 1;
+  -ms-transition: opacity 600ms ease-out;
+  transition: opacity 600ms ease-out;
+  -ms-transition: opacity .6s;
+  transition: opacity .6s; }
+
+.videoWrapperExt {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  max-width: 982px;
+  padding: 0 20px; }
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  height: 0; }
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+.close {
+  background-image: url(http://djit.ac/assets/images/news/mark.png);
+  position: absolute;
+  top: -50px;
+  right: 0px;
+  cursor: pointer;
+  z-index: 9999;
+  height: 40px;
+  width: 40px;
+  background-size: 40px; }
+  @media (max-width: 767px) and (orientation: landscape) {
+    .close {
+      display: none; } }
 
 .ui-slider {
   position: relative;
@@ -2848,10 +2930,8 @@ table.authors {
 
 #schedule .profile-info {
   padding-bottom: 20px; }
-  #schedule .profile-info .social {
-    display: none; }
-    #schedule .profile-info .social a {
-      margin-right: .5em; }
+  #schedule .profile-info .social a {
+    margin-right: .5em; }
 
 #schedule .profile-thumbnail {
   width: 80%;
@@ -2900,6 +2980,114 @@ table.authors {
 #schedule .ricardo-cabello {
   width: 90%;
   margin-left: 5%; }
+
+.twitter i.fa {
+  color: #1DA1F2; }
+
+.linkedin i.fa {
+  color: #0077b5; }
+
+.github i.fa {
+  color: #4078c0; }
+
+a.watch {
+  font-size: 16px;
+  color: #fff;
+  display: block;
+  text-align: center; }
+  a.watch i {
+    font-size: 36px; }
+
+.pin-bottom {
+  position: fixed;
+  width: 60%;
+  height: 25vh;
+  bottom: 0;
+  left: 50%;
+  margin-left: -30%;
+  z-index: 100;
+  display: inline-table; }
+  @media (max-width: 767px) {
+    .pin-bottom {
+      width: 100%;
+      margin-left: -50%; } }
+  .pin-bottom .video-wrap {
+    border: 3px dotted #fff; }
+
+#cards {
+  position: absolute;
+  left: 0; }
+  #cards .nominee-card {
+    border: 2px #fff solid;
+    width: 1920px;
+    height: 1080px;
+    margin: 25px;
+    background: url(images/bg/NomineeCardBG.jpg) no-repeat top left;
+    position: relative; }
+    #cards .nominee-card h2 {
+      font-family: "AgencyFB"; }
+    #cards .nominee-card svg {
+      width: 773px;
+      position: relative;
+      left: 157px;
+      top: 173px; }
+      #cards .nominee-card svg path, #cards .nominee-card svg polygon, #cards .nominee-card svg rect {
+        fill: #fff;
+        -webkit-box-shadow: 5px 5px 9px 13px #FFF275;
+        box-shadow: 5px 5px 9px 13px #FFF275; }
+  #cards .showtime {
+    position: relative;
+    left: 0px;
+    top: 125px;
+    font-size: 36px;
+    line-height: 48px;
+    text-align: center;
+    font-family: "Zen Dots"; }
+  #cards .social {
+    width: 350px;
+    font-family: "Zen Dots";
+    position: relative;
+    left: 1537px;
+    top: 32px;
+    font-size: 36px;
+    font-weight: normal;
+    line-height: 48px;
+    text-align: center; }
+
+@font-face {
+  font-family: 'CreamCake';
+  /*a name to be used later*/
+  src: url("fonts/CreamCake.otf");
+  /*URL to font*/ }
+
+.hosts {
+  font-family: "CreamCake";
+  position: relative;
+  left: 700px;
+  top: 300px;
+  font-size: 48px;
+  color: #fff; }
+  .hosts .host {
+    position: relative; }
+    .hosts .host span {
+      display: block;
+      text-align: center;
+      height: 36px; }
+    .hosts .host .by {
+      font-size: 36px; }
+  .hosts .julie {
+    left: 0px; }
+  .hosts .sophia {
+    left: 100px; }
+
+@font-face {
+  font-family: 'AgencyFB';
+  /*a name to be used later*/
+  src: url("fonts/AGENCYR.ttf");
+  /*URL to font*/ }
+
+model-viewer#reveal {
+  --poster-color: transparent; }
 
 /*
 @import "partials/admin";
@@ -2996,9 +3184,13 @@ table.video-conferencing {
 
 ul {
   padding-left: .25in; }
+  ul li {
+    list-style-type: disc; }
 
-li {
-  list-style-type: disc; }
+ol {
+  padding-left: 25px; }
+  ol li {
+    list-style-type: decimal; }
 
 .full-center {
   display: block;
@@ -5587,3 +5779,9 @@ div.developer-summit {
     font-size: 1.5rem; }
   .post a {
     color: #00a; }
+
+#experiences img {
+  border-radius: 50%;
+  width: 150px;
+  margin: 0px auto;
+  display: block; }

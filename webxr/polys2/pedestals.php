@@ -1,190 +1,343 @@
-<?php
-                    $trophy_offset = "0.008 4.367 -1.009";
-                    $pedestal_scale = ".5 .5 .5";
-                    $card_title = "";
-                ?>
 
-                <a-entity id="pedestal-1" position="0 0 -3" scale="<?=$pedestal_scale?>">
+    <?php
+   
+   function getCoords($coords,$counter=0){
+    
+    
+    
+     //defaults
+     $coordinates = [
+                "position"=>["x"=>0,"y"=>0,"z"=>0],
+                "rotation"=>["x"=>0,"y"=>0,"z"=>0],
+                "scale"=>["x"=>1,"y"=>1,"z"=>1]
+                ];
 
-                 
-                    <a-entity class="center-obj-zone" static-body
-                    gltf-model="#pedestal" visible="true" scale="1 1 1" position="0 .5 -1"
-                    rotation="0 0 0"></a-entity>
-                    <a-entity id="2nd-polys-trophy-model" class="center-obj-zone" static-body
-                    gltf-model="#2nd-polys-trophy" visible="true" scale="1 1 1" position="<?=$trophy_offset?>"
-                    rotation="0 -50 0"></a-entity>
-                    <a-entity rotation="0 37.5 0" position="0.18 4.2 -0.8">
-                    <a-plane height="0.3" width="0.55" position="0.004 -0.056 0.005"
-                        material="side: double; color: #333333; transparent: false; opacity: 1; roughness:1;" side="double">
-
-                        <a-entity troika-text='value:Experience of the Year
-        ; color:#fff; fontSize:.04;align:center;' material="shader: standard; metalness: 0.8;"
-                            position="0 0.08 0.01" rotation="0 0.111 0"></a-entity>
-                    <!--    <a-entity troika-text='value:Troika; color:#606; fontSize:.05;align:center;'
-                            material="shader: standard; metalness: 0.8;" position="0 -0.02 0.01" rotation="0 -0.1 0">
-                        </a-entity>
-                        <a-entity troika-text='value:Jason Johnston; color:#fff; fontSize:.025;align:center;'
-                            material="shader: standard; metalness: 0.8;" position="0 -0.089 0.01" rotation="0 0 0">
-                        </a-entity>-->
-                    </a-plane>
-                </a-entity>
-                </a-entity> 
-                    <!-- POLY table 
--->
-        <a-entity class="center-zone" id="table-poly" position="0 .2 0" rotation="0 -90 0">
-
-<a-entity class="table" static-body="shape: box;" scale="1 1 1" id="poly-pedestal" gltf-model="#pedestal"
-    shadow="cast: false; receive: false"></a-entity>
-    <a-entity rotation="0 270 0" position="-0.192 0.89 0">
-        <a-plane height="0.3" width="0.55" position="0 -0.056 0.005"
-        material="side: double; color: #333333; transparent: false; opacity: 1; roughness:1;" side="double">
-
-        <a-entity troika-text='value:2020 WebXR Awards; color:#fff; fontSize:.04;align:center;' material="shader: standard; metalness: 0.8;"
-            position="0 0.09 0.01" rotation="0 0.111 0"></a-entity>
-<a-entity troika-text='value:The Polys; color:#fff; fontSize:.07;align:center;' material="shader: standard; metalness: 0.8;"
-            position="0 0.01 0.01" rotation="0 -0.1 0"></a-entity>
-            <a-entity troika-text='value:Hosted by
-Julie Smithson and Sophia Moshasha
-20 February 2021; color:#fff; fontSize:.025;align:center;' material="shader: standard; metalness: 0.8;"
-            position="0 -0.089 0.01" rotation="0 0 0"></a-entity>
-    </a-plane>
-</a-entity>
-
-<a-entity id="poly-grab" class="clickable center-obj-zone" dynamic-body="shape: box; mass: 2"
-    position="0 3.88 0" mixin="obj" rotation="0 180 0" scale="1 1 1" gltf-model="#2nd-polys-trophy">
-<!--                <a-light type="spot" color="green" intensity="10" position="0 -1 -1.6" rotation="45 180 0" angle="15"></a-light>
-    <a-light type="spot" color="blue" intensity="10" position="0 -1 1.6" rotation="45 0 0" angle="15"></a-light>
-    <a-light type="spot" color="red" intensity="10" position="-1.6 -1 0" rotation="45 270 0" angle="15"></a-light>
-    <a-light type="spot" color="white" intensity="5" position="2 0.17 0" rotation="40 90 0" angle="44"></a-light>-->
-</a-entity>
-
-<a-entity id="poly-card" rotation="0 0 0" position="3.873 1.5 -0.047" shadow material="color: red">
-    <a-entity id="poly-credits">
+                //$classes is already an array
+  
+   if(is_array($coords)){
+    foreach($coords as $key => $class){
         
-       
-    <a-text id="poly-title" class="art-text" mixin="table-label" position="-1 0.5 -3" color="white"
-        width="2.5" rotation="0 -90 0" text="value:;wrap-count:50 ">
+        $coordinates = setCoord($coordinates,$class);
+      
+     }
+    }
+     $position =  $coordinates['position']['x']." ".$coordinates['position']['y']." ".$coordinates['position']['z'];
+     $rotation =  $coordinates['rotation']['x'] ." ". $coordinates['rotation']['y'] ." ". $coordinates['rotation']['z'];
+     $scale =  $coordinates['scale']['x'] ." ". $coordinates['scale']['y'] ." ". $coordinates['scale']['z'];
 
 
-<a-text text="value:Julie Smithson; wrapCount:30" width="10" color="white" position="-2.5 6 -6" rotation="30 0 0">
-    <a-text position="0.16 -0.5 0" text="value:Host; wrapCount:60" width="10"
-        color="white">
-    </a-text>
-    <a-image material="side:front" mixin="scale-label" src="/assets/images/talent/Polys-Host-JulieSmithson.jpg"
-        scale="1 1 1" position="-1 -0.3 0" width="2" height="2"></a-image>
-</a-text>
-<a-text text="value:Sophia Moshasha; wrapCount:30" width="10" color="white" position="6 6 -6" rotation="30 0 0">
-    <a-text position="0.16 -0.5 0" text="value:Virtual Red Carpet; wrapCount:60" width="10"
-        color="white">
-    </a-text>
-    <a-image material="side:front" mixin="scale-label" src="/assets/images/talent/SophiaMoshasha-PolysRedCarpet.jpg"
-        scale="1 1 1" position="-1 -0.3 0" width="2" height="2"></a-image>
-</a-text>
 
-<a-entity id="credits-card" rotation="0 0 0" position="0 0 0">
-    <a-entity id="credits-card" rotation="0 0 0" position="0 0 0">
-        <a-text position="-4 4 -6" rotation="15 0 0" text="value: Created by Ben Erwin
+
+     return " position='$position' rotation='$rotation' scale='$scale'";
+
+
+
+
+ }
+ function setCoord($coords,$class){
+    $class = explode("_",$class);//single class parsed with _
+  
+    switch($class[0]){//sets coord
+        case "px":
+            $coords['position']['x'] = $class[1];
+            break;
+        case "py":
+            $coords['position']['y'] = $class[1];
+            break;
+        case "pz":
+            $coords['position']['z'] = $class[1];
+            break;
+         case "rx":
+            $coords['rotation']['x'] = $class[1];
+            break;
+        case "ry":
+            $coords['rotation']['y'] = $class[1];
+            break;
+        case "rz":
+            $coords['rotation']['z'] = $class[1];
+            break;
+        case "sx":
+            $coords['scale']['x'] = $class[1];
+            break;
+        case "sy":
+            $coords['scale']['y'] = $class[1];
+            break;
+        case "sz":
+            $coords['scale']['z'] = $class[1];
+            break;
+
+        }
+    return $coords;
+ }
+function setCardCoords($count){
+    $coords = [];
+    if($count){
+        $x=(0-(($count/2)*3));
+            for($i=0;$i<$count;$i++){
+                $coords[$i] = $x;
+             $x=$x+3;   
+            }
+
         
-        Written and Directed by Ben Erwin
+        
+
+    }
+    return $coords;
+
+}
+
+
+        $pedestal_z = 0;
+      //  var_dump($pedestals); die();
+        foreach($pedestals as $key=>$pedestal){
+            extract($pedestal);
+           print "<!-- $coords -->";
          
-        Show Producer: Steve Lewis
-        Broadcast Producer: David King
-        Broadcast Engineer: Phil Olshanski
+            $coords=explode(" ",$coords);
+            $title = str_replace("2021 – ","",$title);
+    ?>
     
-        Producers:
-        Julie Smithson, Sophia Moshasha, Ben Erwin
-    
-        Polys Trophy by Linda Ricci
-    
-        Music by John Sidorovich
-    
-        Publicist Lisi Linares
-        
-        Video Edited by Ben Erwin and Helen Erwin
-        
-        
-       
-        AWARDS PRESENTERS:
-        WebXR Site of the Year: Ada Rose Cannon @AdaRoseCannon
-        Innovation of the Year: Terry R. Schussler  @Schussler
-        Developer of the Year: Trevor Flowers @TrevorFSmith
-        Framework of the Year: Sikaar Keita@SikaarKe
-        Education Experience of the Year: Kai Frazier@__Kai1
-        Entertainment Experience of the Year: Linda Ricci @Decahedralist
-        Game of the Year: Chris Wilson @ChrisWilso
-        Single User Experience: Aysegul Yonet @AysSomething
-        Multi-User Experience: Liam Broza @LiamBroza
-        
-        HONORS PRESENTERS:
-        Ombudsperson Award to Kent Bye: Kavya Pearlman @KavyaPearlman
-        Lifetime Achievement Award to Mr. Doob: Antony Vitillo  @SkarredGhost
 
-        Thanks to our Generous Donors
-        Jonathan Brandel, Steve Lewis, Cynthia Johnston, Jawad Essadki,
-        Tony Hodgson, Mark Lambert, Joanna Popper, Adeeb Syed, Brendan Bradley,
-        Maria Gonima, Jon Gordon, Keith Thomas, CrimsonZA Replica, David Plant
-        Ozone Universe and LEVR                    
+    <?php
+                    $trophy_offset = "0.008 4.367 -1.009";
+                  
+                    $card_title = "";
 
-        @webxrawards
-        webxr.events
-
-        Presented by Powersimple
-
-       ; wrapCount:70;baseline:top;" width="8"
-        color="white">
-    </a-text>
-    
-    
-    
-    
-    
-    
-    <a-text position="4 4 -6" rotation="15 0 0" text="value:
-    
+                    $z_offset=2;
+                    
+                    $levels =[
+                        "level1"=>0,
+                        "level2"=>0,
+                        "level3"=>0,
+                        
+                    ]
+            
+                
+                
+                ?>
  
+
+<!--<?=$pedestal['slug']?>-->
+        
+
+<a-entity class="center-zone" id="table-<?=$pedestal['slug']?>" <?=getCoords($coords,$pedestal_z)?> class="<?=implode(" ",$classes)?>">
+
+        <!--PEDESTAL-->
+        <a-entity 
+        gltf-model="#pedestal"
+        class="table" static-body="shape: box;" 
+        position="0 0.3 0"
+        rotation="0 17.5 0"
+        scale="0.25 0.25 0.25" id="pedestal-<?=$pedestal['slug']?>"  
+        material="shader: standard; metalness: 0.8;"  
+            shadow="cast: false; receive: false"></a-entity>
+
+              <!-- SIGNAGE-->
+        <a-entity id="signage-<?=$pedestal['slug']?>" rotation="0 0 0" position="0 1.1.24 0.09">
+        <!--
+        <a-entity troika-text='value:2021 WebXR Awards; color:#fff; fontSize:.04;align:center;'
+                    material="shader: standard; metalness: 0.8;" position="0 0.09 0.01" rotation="0 0.111 0">
+                </a-entity>-->
+                <a-entity troika-text='value:<?=$title?>; color:#f5f5f5; align:center; color:#fff; fontSize:.08;align:center;maxWidth:0.8'
+                    material="shader: standard; metalness: 0.8;" position="0 0.01 0.01" rotation="0 0 0">
+                </a-entity>
+            <a-plane height="0.3" width="0.55" position="0 0 0.005"
+                material="side: double; color: #333333; transparent: false; opacity: 1; roughness:1;" side="double" visible="false">
+
+               
+<!--                <a-entity troika-text='value:; color:#fff; fontSize:.025;align:center;' material="shader: standard; metalness: 0.8;"
+                    position="0 -0.089 0.01" rotation="0 0 0"></a-entity>-->
+            </a-plane>
+        </a-entity>
+
+
+
+        <!--TROPHY-->
+        <a-entity id="<?=$pedestal['slug']?>-grab" class="clickable center-obj-zone" dynamic-body="shape: box; mass: 2"
+            position="0 1.28 0" mixin="obj" rotation="0 -75 0" scale="0.25 0.25 0.25" gltf-model="#2nd-polys-trophy"></a-entity>
+
+
+ <!--NOMINATIONs WRAPPER-->
+        <a-entity id="nominations" rotation="0 0 0" position="0 30 -200" scale="30 30 30" shadow >
+        
+                <a-entity id="<?=$pedestal['slug']?>-title" class="art-text" mixin="table-label" position="0 0 0" color="white"
+                    width="2.5" rotation="0 0 0" text="value:;wrapCount:50 ">
+
+                    <a-entity troika-text='value:<?=$pedestal['title']?>; color:#f5f5f5; align:center; color:#fff; fontSize:.5;align:center;'
+                    material="shader: standard; metalness: 0.8;" position="0 2 0" rotation="0 0 0">
+                </a-entity>
+                  <?php
+                  $pos_x = 0;
+                  $pos_y = 1.5;
+                  $pos_z = 0;
+                 
                    
-    THE META-MULTIVERSE
-    AltSpace World Builders: Cause and Christi
-    Austin Caine @cause_vr and Christi Fenison @christifenison
+
+                 $card_coordinates_x = setCardCoords(count($nominees));
+                 
+
+
+        $counter = 0;                
+        foreach($nominees as $n => $nomination){
+            $coordinates = $card_coordinates_x[$counter];
+           
+            $px = "px_".$card_coordinates_x[$counter];
+          
+
+
+
+            ?>
+
+     <a-entity  id="<?=$nomination['slug']?>-card" class="center-obj-zone"  <?=getCoords(explode(" ",$px))?>>
+            <?php
+
+            if( $laurel_id = @$nomination['meta']['laurel'][0]){
+                
+            $laurel = getGLB($laurel_id);
+            ?>
+            <a-entity  id="<?=$nomination['slug']?>-laurel-model" class="center-obj-zone" static-body
+                        full-gltf-model="#<?=$nomination['slug']?>-laurel" class="collision" position="1 -.5 0.1"
+                        
+                        scale="3 3 3" visible="true"></a-entity>
+
+            <?php
+          
+            } else {
+                ?>
+        
+                     
     
-    AltSpace Watch Party Hosted by Educators in VR
-    Daniel Dyboski-Bryant @DanielBryant, Lorelle Van Fossen @Lorelle
-    Donna McTaggart @donnamct with Terra Celeste-Cronshey, Lida Liberopoulou
-    Athena Demos @athenademos & Doug Jacobson @DougJ1100 BRCvr And Rick Tuazon Drew Johnson
+
+
+
+
+        <?php
+            }//laurel
+            $pos_x=$pos_x+3;
+            $src="";
+            if($thumbnail_id = @$nomination['meta']['_thumbnail_id'][0]){
+                $src = "/wp-content".explode("/wp-content",getThumbnail($thumbnail_id))[1];
+            }
+         
+
+
+
+            ?>
+                <a-image mixin="scale-label" src="<?=$src?>"
+                geometry="primitive: circle;"
+                                                scale="1 1 1" position="0 .5 0" ></a-image>
+<!-- nominee label-->
+            <a-entity id="label-<?=$nomination['slug']?>" troika-text='value:<?=$nomination['title']?>; color:#f5f5f5;  wrapCount:18; color:#fff; 
+            fontSize:.25;align:center; anchor:center;'material="shader: standard; metalness: 0.8;" rotation="0 0 0" position="0 -0.8 0"> </a-entity>
+
+
+
+<!--nomination-->
+<?php
+
+
+if(in_array("honoree",$nomination['classes']) == 'honoree'){
+
+    ?>
+<a-entity id="label-<?=$nomination['slug']?>" troika-text='value:Honoree; color:#f5f5f5;  color:#fff; 
+fontSize:.25;align:center; anchor:center;'material="shader: standard; metalness: 0.8;" rotation="0 0 0" position="0 -1.10 0"> </a-entity>
+
+<a-entity id="content-<?=$nomination['slug']?>" troika-text='value:<?=strip_tags(str_replace("\n\n\n",'\n',$pedestal['content']))?>; color:#f5f5f5;  max-width:4.5; color:#fff; 
+fontSize:.2;align:left; anchor:left;'material="shader: standard; metalness: 0.8;" rotation="0 0 0" position="1.4 0.15 0"> </a-entity>
+
+
+    <?php
+}
+
+    $y=-1.2;
+                        foreach($nomination['children'] as $o => $nominee){ //nominee
+                                
+                            ?>
+                             <a-entity troika-text='value: <?=$nominee['title'] ?> ; color:#f5f5f5; align:center; color:#fff; fontSize:.2;align:center;'
+                    material="shader: standard; metalness: 0.8;" position="0 <?=$y?> 0" rotation="0 -0.1 0"></a-entity>
+                            
+                                <?php
+                                $y=$y-.3;
+                                    }
+                                ?>
+</a-entity><!--nomination-->
+            
+
+            <?php
+            $counter++;//nomination counter;
+        }// for nomination
+?>
+
+
+
+                       
+                        
+
+                    </a-entity>
+
+        </a-entity>
+
+    </a-entity>
+    <?php
     
-    Hubs Watch Party World Build and hosted by Matt B. Cool @MattBCool.
-    
-    Tivoli Cloud
-    Caitlyn Meeks, Maki Deprez, Christina 'Xaos Princess' Kinne, Thomas Pasieka
-    
-    Engage Watch Parties Produced by Steve Lewis
-    
-    Olympus Campus World by George Kenyon
-    Dave School @DAVE_Schoo
-    
-    BurrCastleXR @BCXR6, 
-    Bryan Burr, Dustan Burr, Jared Burr, Dallan Burr, Andrew Burr
-    
-    WakingDreamXR
-    Alex Kohli, Keith Kenyon, Steve Lewis @slewpiter
-    
-    Film Crew
-    Carlos Austin - Austin Photography, @cpaustin2000
-    Tony Trudel - Tonycubed Studios    
-    Brad Clark - FollowYourBlissMedia
-    
-    Zoom Hospitality
-    Helen Erwin, Shannon Erwin, and David Erwin.
-    
-    Special Thanks to the W3C Immersive Web Co-Chairs 
-    Ada Rose Cannon, @AdaRoseCannon
-    Ayşegül Yönet @AysSomething, 
-    Chris Wilson @ChrisWilso
-    
-    Thanks to Terry Schussler, Richard Ward, Karen Alexander, Leila Amirsadeghi, Joe Smith and Marcia Carter
-    ; wrapCount:75;baseline:top;" width="8"
-    color="white">
-    </a-text>
+    $pedestal_z = ($pedestal_z-$z_offset);
+
+    }
+    ?>
+
+
+<script>
+
+
+AFRAME.registerComponent("item-grab", {
+    init: function () {
+        sceneEl = document.querySelector('a-scene');
+        var grabtrig = function (grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel, 
+            cgrabrotate = "0 0 0", 
+        grabscale = "5 5 5", grabposition = "0 1 0") {
+              //  console.log("grab",grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel, grabrotate = "0 0 0", grabscale = "5 5 5", grabposition = "0 1 0")
+
+            document.getElementById(grabitem).addEventListener("grab-start", function (evt) {
+                if (document.getElementById(grabinfo).getAttribute('visible') == true) {
+                    for (let each of sceneEl.querySelectorAll(grabtable)) { // Turn off everything
+                        each.object3D.visible = false;
+                    }
+             //       document.getElementById(grabproj).object3D.visible = false;
+                   //document.getElementById(grabholo).object3D.visible = false;
+                } else {
+                    for (let each of sceneEl.querySelectorAll(grabtable)) {
+                        each.object3D.visible = false;
+                    }
+//                    document.getElementById(grabproj).object3D.visible = true;
+                    document.getElementById(grabinfo).object3D.visible = true;
+                    /*document.getElementById(grabholo).object3D.visible = true;
+                    document.getElementById(grabholo).setAttribute("full-gltf-model", grabmodel);
+                    document.getElementById(grabholo).setAttribute("rotation", grabrotate);
+                    document.getElementById(grabholo).setAttribute("scale", grabscale);
+                    document.getElementById(grabholo).setAttribute("position", grabposition);*/
+                }
+            })
+           
+        }
+<?php
+        foreach($pedestals as $key=>$pedestal){
+            extract($pedestal);
+            ?>
+        grabtrig("<?=$pedestal['slug']?>-grab", "<?=$pedestal['slug']?>-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+        <?php
+        
+
+
+        foreach($nominees as $n => $nomination){
+
+            if($laurel_id = @$nomination['meta']['laurel']){
+            $laurel =getGLB($laurel_id);          
+            ?>
+        
+        //    grabtrig("<?=$nomination['slug']?>-grab", "<?=$nomination['slug']?>-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+            <?php
+            } 
+        }
 
 
 
@@ -194,16 +347,11 @@ Julie Smithson and Sophia Moshasha
 
 
 
+        
+        }
+    ?>
 
+    }
+})
 
-</a-entity>
-
-     
-    </a-text>
-</a-entity>
-</a-entity>
-
-</a-entity>
-
-
-
+</script>

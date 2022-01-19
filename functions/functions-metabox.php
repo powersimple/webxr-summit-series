@@ -437,7 +437,7 @@ function eventGuest( $meta_boxes ) {
 
 	return $meta_boxes;
 }
-add_filter( 'rwmb_meta_boxes', 'eventGuest' );
+//add_filter( 'rwmb_meta_boxes', 'eventGuest' );
 function eventModerator( $meta_boxes ) {
 	$prefix = '';
 
@@ -467,7 +467,7 @@ function eventModerator( $meta_boxes ) {
 
 	return $meta_boxes;
 }
-add_filter( 'rwmb_meta_boxes', 'eventModerator' );
+//add_filter( 'rwmb_meta_boxes', 'eventModerator' );
 
 function eventHonoree( $meta_boxes ) {
 	$prefix = '';
@@ -497,7 +497,7 @@ function eventHonoree( $meta_boxes ) {
 
 	return $meta_boxes;
 }
-add_filter( 'rwmb_meta_boxes', 'eventHonoree' );
+//add_filter( 'rwmb_meta_boxes', 'eventHonoree' );
 
 
 
@@ -529,7 +529,7 @@ function eventSponsor( $meta_boxes ) {
 
 	return $meta_boxes;
 }
-add_filter( 'rwmb_meta_boxes', 'eventSponsor' );
+//add_filter( 'rwmb_meta_boxes', 'eventSponsor' );
 
 
 
@@ -659,7 +659,7 @@ function setProfileURL( $meta_boxes ) { // this shows the box were
 	$meta_boxes[] = array(
 		'id' => 'profile_info',
 		'title' => esc_html__( 'PROFILE INFO', 'omniscience-profiler' ),
-		'post_types' => array('profile' ),
+		'post_types' => array('profile','resource' ),
 		'context' => 'side',
 		'priority' => 'high',
 		'autosave' => 'false',
@@ -743,6 +743,17 @@ function setProfileURL( $meta_boxes ) { // this shows the box were
 				'name' => esc_html__( 'Logo', 'omniscience-profiler' ),
 				//'desc' => esc_html__( 'Size to 1920x1280', 'metabox-online-generator' ),
 			),
+			array(
+				'id' => $prefix . '3Dlogo',
+				'type' => 'image_advanced',
+				'name' => esc_html__( '3D Logo', 'omniscience-profiler' ),
+				'desc' => esc_html__( '.glb format only', 'metabox-online-generator' ),
+				'force_delete' => false,
+				'max_file_uploads' => '10',
+				'options' => array(),
+				'attributes' => array(),
+			),
+
 
 			array(
 				'id' => 'screenshot',
@@ -1280,3 +1291,41 @@ add_filter( 'rwmb_meta_boxes', 'timezoneList' );
 
 
 
+/* AWARDS */
+function awards_metabox( $meta_boxes ) {
+	$prefix = '';
+
+	$meta_boxes[] = array(
+		'id' => 'awards',
+		'title' => esc_html__( 'Screen Image', 'metabox-online-generator' ),
+		'post_types' => array( 'resource', 'event','profile' ),
+		'context' => 'side',
+		'priority' => 'high',
+		'autosave' => false,
+		'fields' => array(
+			array(
+				'id' => 'laurel',
+				'type' => 'image_advanced',
+				'name' => esc_html__( '2D Laurel', 'metabox-online-generator' ),
+				'desc' => esc_html__( 'Image Laurel For Nominations', 'metabox-online-generator' ),
+				'force_delete' => false,
+				'max_file_uploads' => '10',
+				'options' => array(),
+				'attributes' => array(),
+			),
+			array(
+				'id' => '3Dlaurel',
+				'type' => 'image_advanced',
+				'name' => esc_html__( '3D Laurel', 'metabox-online-generator' ),
+				'desc' => esc_html__( '3D Laurel GLB file', 'metabox-online-generator' ),
+				'force_delete' => false,
+				'max_file_uploads' => '10',
+				'options' => array(),
+				'attributes' => array(),
+			),
+		),
+	);
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'awards_metabox' );

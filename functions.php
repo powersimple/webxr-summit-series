@@ -1,5 +1,5 @@
 <?php
-
+ require_once "webxr/functions-aframe.php";
 //enqueues scripts and styles
 require_once("functions/functions-enqueue.php");
 require_once("functions/functions-ballot.php");
@@ -22,6 +22,7 @@ require_once("functions/functions-metabox.php");
 	require_once("functions/functions-navigation.php");
 	require_once("functions/functions-entities.php");	   
 	require_once("functions/parsers.php");
+	
 	require_once("profiler/profiler.php");
 
 	require_once("scraper/simple_html_dom.php");
@@ -35,7 +36,8 @@ add_theme_support('post-thumbnails', array(
 'social',
 'profile',
 'resource',
-'sponsor'
+'sponsor',
+'event'
 ));
 function add_mimes($mime_types){
 	$mime_types['gltf'] = 'model/gltf+json';
@@ -161,7 +163,14 @@ function register_video_meta() {
 }
 
 
+function get_attachment($id){
+	$url = wp_upload_dir();
+	
+    $uploads_path =  $url['baseurl']."/";
+	return  $uploads_path . get_post_meta($id,"_wp_attached_file",true);
 
+
+}
 
 
 function display_videos($videos){

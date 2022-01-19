@@ -113,20 +113,95 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
 
  if(count($events)){
 ?>
-<style>
-    .bs-example{
-    	margin: 20px;
-    }
-    .modal-dialog iframe{
-        margin: 0 auto;
-        display: block;
-    }
-</style>
+<div class="event-list order-sm-1 col-sm-5 col-md-4 col-lg-3 col-xl-2 <?=$section_class?>">
+<div class="video-wrap"> 
+             
+             <iframe id="session-video" src="<?=$default_video_url?>"></iframe>
+             </div>
 <?php
     $summit_profiles = [];
 
 
-    print"
+    print "<ul>". $tense;
+    foreach($events as $key => $event){
+        extract($event);
+        $embed_video_url = '';
+        
+        extract( $event_meta = getEventMeta($event));
+        $link = get_permalink($ID);
+        $children = getChildList($event['ID'],$post_type,$sort='menu_order');
+        
+
+        $honorees = get_post_meta($event['ID'],"event_honoree");    
+        $moderator = get_post_meta($event['ID'],"event_moderator");    
+        $guests = get_post_meta($event['ID'],"event_guest");    
+
+        $summit_profiles = array_merge($summit_profiles,$honorees,$moderator,$guests);
+
+        //if($utc_start)
+       
+        print "<li>";
+      
+        print "<a href='$link'>";
+
+        if($embed_video_url == ''){
+    //        print "<a href='$link'>";
+        } else {
+
+            //        print "<a href='#' onclick=\"document.getElementById('session-video').setAttribute('src','$embed_video_url')\">";
+        }
+       // print $ID."|";
+            print $post_title;
+          
+
+            print "</a>";
+          
+       if(count($children)){
+        print "<ul>";
+       }
+       
+        foreach($children as $c =>$child) {
+            
+            $embed_video_url = '';
+            $link = get_permalink($child['ID']);
+            extract( $event_meta = getEventMeta($child));
+
+            $honorees = get_post_meta($child['ID'],"event_honoree");    
+            $moderator = get_post_meta($child['ID'],"event_moderator");    
+            $guests = get_post_meta($child['ID'],"event_guest");    
+
+            $summit_profiles = array_merge($summit_profiles,$honorees,$moderator,$guests);
+
+
+            print "<li>$tense";
+            print "<a href='$link'>"; 
+        if($embed_video_url == ''){
+            print "<a href='$link'>";
+
+        } else {
+      //      print "<a href='#' onclick=\"setVideo('$embed_video_url');>";
+        }
+       // print $child['ID']."|";
+        
+            print $child['post_title'];
+            
+       
+
+            print "</a>";
+            print "</li>
+            ";
+            }
+//       if(count($children)){  }
+            if(count($children)){
+                print "</ul>";
+            }
+            
+        print "</li>";
+       
+
+   
+   
+    } print "</ul>
     </div>";
 } else {
 
@@ -135,9 +210,7 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
 
 
     ?>
-        <?php
-    }
-        ?>
+    
     <div class="event-content order-sm-12 col-sm-7 col-md-8 col-lg-9 col-xl-10">
      
 
@@ -158,11 +231,11 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
                 <div id="sessions"></div>
                 <script>
 
-             //   console.log("show ros")
+                console.log("show ros")
                     jQuery(document).ready(function() {
                         //triggers Run of show script when event menu param is present
                     var run_of_show = runOfShow('<?=$_GET['event_menu']?>');
-                   // console.log("ROS",run_of_show)
+                    console.log("ROS",run_of_show)
                     displayRunOfShow(run_of_show)
                     displayRunOfShowTable(run_of_show)
                 });
@@ -186,20 +259,10 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
      
      </div>
  </div>
- <div class="container">
-     <div class="row pin-bottom">
-    
-        <div class="video-wrap">
-    <?php
-        if($default_video_url != ''){
-
+        <?php
+    }
         ?>
-        <iframe id="video-player" src="<?=$default_video_url?>"  frameborder="0" allowfullscreen></iframe>
-            <?php
-        }
-    ?> 
-        </div> 
-    </div>            
+
 </div>    
   </main>
   <?php

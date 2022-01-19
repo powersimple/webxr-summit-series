@@ -1,210 +1,221 @@
 <?php
+    get_header();
 
-//phpinfo(); die();
+   
 
+      $pedestals = get_pedestals('polys2');
+    //    var_dump($pedestals);
+      $assets = [];
+     
 
+   if(@$_GET['dump'] == 'awards'){
+     
+?>
 
+<div id="dump" style="position:absolute;top:0px; height:100vh;width:20%;background-color:rgba(10,10,10,0.4);color:#fff;z-index:100;overflow-y:scroll;">
+    <?php 
+    
 
-
-
-//require_once "webxr/model/awards.php"; die();
-get_header();
-//    get_eventsFromTable(15);
-
-    require_once "webxr/functions-aframe.php";
-    $speed = "0.2";
-    if(@$_GET['speed']){
-        $speed = $_GET['speed'];    
-    }
-    $menu = 'bizsummit21';
-    $model='';
-
-    if(@$_GET['event_menu']){
-        $menu = $_GET['event_menu'];
-    }
-
-    $summit_square_model = 'business-summmit-square';
-    if(@$_GET['summit_model']){
-        $summit_square_model = $_GET['summit_model'];
-    }
-  
-    $cam_x = 0;
-$cam_y = 1.6;
-$cam_z = 0;
-
-if(@$_GET['camera']){
-  $cam_coords =  explode("~",$_GET['camera']);
-  if(count($cam_coords) == 3){
-    $cam_x = $cam_coords[0];
-    $cam_y = $cam_coords[1];
-    $cam_z = $cam_coords[2];
-  }
+    
+    
+    
+    ?>
+   </div>
+<?php
 }
+   include "webxr/polys2/drawer-experiences.php";
+ //   include "webxr/polys2/drawer-nominations.php";
+?>
 
-    $thumbnail =getThumbnail(get_post_thumbnail_id($post->ID),"Full");
-     ?>
+   
+
+<a-scene gltf-model="dracoDecoderPath: assets/draco/;" grab-panels item-grab device-set nomination-link anti-drop
+    device-orientation-permission-ui physics="iterations: 30;"
+    inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
+    loading-screen="backgroundColor: #12171a" renderer="colorManagement: true; foveationLevel: 2;"
+    background="color: #000000">
+    <a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
+    <a-entity tracked-controls="controller: 1; idPrefix: OpenVR"></a-entity>
+    <a-assets timeout="800000">
+        <!-- Loads assets -->
+        <?php
+            include "webxr/polys2/assets.php";
+            include "webxr/polys2/mixins.php";
+            
+        ?>
+
+    </a-assets>
+    <a-sky src="#sky"></a-sky>
+
+    <?php
+            include "webxr/polys2/rigging.php";
+            include "webxr/polys2/lights.php";
+
+?>
+<a-entity id="awards-2021" position="0.05 0 -21.2" rotation="0 0 0" scale="1 1 1" visible="true">
+    <a-entity id="platform-wrap" visible="true" scale="2 2 2" 
+    position="0 -2 0"
+                rotation="0 0 0">
+
+                <!--
+                <a-image id="12-point" mixin="scale-label" src="/assets/images/bg/12Point2.png"
+               
+                                                position="0.12 1.145 3.973" scale="14.5 14.5 14.5"  rotation="90 0 0"></a-image>
+              <a-image id="6-point" mixin="scale-label" src="/assets/images/bg/6Point.png"
+               
+                                                position="0.280 1.33 4.344" scale="12 12 12"  rotation="90 30 0"></a-image>-->is_array
+
+            <a-entity id="outer-ring" class="center-obj-zone" static-body
+                full-gltf-model="#ring" class="collision" visible="true"
+                scale="1 1 1"
+                position="0.11 0.069 3.97"
+                static-body="shape: box;" 
+                ></a-entity><!-- outer ring -->
+
+                <a-entity id="inner-ring" class="center-obj-zone" static-body
+                full-gltf-model="#ring" class="collision" visible="true"
+                scale=".8 .8 .8"
+                position="0.126 0.569 3.97"
+                static-body="shape: box;" 
+                ><!-- inner ring -->
+            <!--
+                <a-entity id="emblem-model" class="center-obj-zone" static-body
+                full-gltf-model="#emblem" class="collision" visible="true"
+                scale="5 5 5"
+                position="-0.41 3.25 0"
+                static-body="shape: box;" 
+                animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 24000; loop: true;"
+                >
+                <a-entity id="Polys2-logo-model" class="center-obj-zone" static-body
+                        full-gltf-model="#polys2" class="collision" visible="true"
+                        scale="5 5 5"
+                        position="0 -0.5  0"
+
+                        static-body="shape: box;" 
+                    
+                        ></a-entity>
+
+            </a-entity>-->
+
+            <a-entity id="trophy-model" class="center-obj-zone" static-body
+                full-gltf-model="#2nd-polys-trophy" class="collision" visible="true"
+                scale="25 25 25"
+                position="0 -49 0"
+                rotation="0 0 0" 
+                animation="property: object3D.rotation.y; to: -360; easing: linear; dur: 24000; loop: true;">
+                <a-entity id="Polys2-logo-model" class="center-obj-zone" static-body
+                        full-gltf-model="#polys2" class="collision" visible="true"
+                        scale="1 1 1  "
+                        position="0 2.05  0"
+                        rotation="0  -30 0"
+                        static-body="shape: box;" 
+                    
+                        ></a-entity>
+
+            </a-entity>
+
+            
+            <a-entity id="logo-wrap"  animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 24000; loop: true;" position="0 -.75 0">
+
+               
+                    <a-entity id="futurewei-logo-model" class="center-obj-zone" static-body
+                        full-gltf-model="#futurewei" class="collision" visible="true"
+                        scale=".7 .7 .7"
+                        position="-0.3 1.43 5.2"
+                        rotation="0 180 0"
+                        static-body="shape: box;" 
+                    
+                        ></a-entity>
+                        <a-entity id="powersimple-logo-model" class="center-obj-zone" static-body
+                        full-gltf-model="#powersimple" class="collision" visible="true"
+                        scale=".9 .9 2"
+                        position="-4.5 1.45 -2.4"
+                        rotation="0 -300 0"
+                        static-body="shape: box;">
+                    
+                    </a-entity>
+                        
+                    
+
+                    <a-entity id="point-cloud-model" class="center-obj-zone" static-body
+                        full-gltf-model="#point-cloud" class="collision" visible="true"
+                        scale="2 2 2"
+                        position="0 2.128 0"
+                        rotation="0 45 0"
+                        static-body="shape: box;" 
+                        >
+                    
+                    </a-entity>
+                   
+                    <a-entity id="metavrse-logo-model" class="center-obj-zone" static-body
+                        full-gltf-model="#metavrse" class="collision" visible="true"
+                        scale=".9 .9 .9"
+                        position="4.5 1.5 -2.4"
+                        rotation="0 300 0"
+
+                        static-body="shape: box;" 
+                    
+                        ></a-entity>
+                </a-entity>
+
+
+            </a-entity><!-- /inner ring -->
 
 
 
-    
+                <!--
+                <a-entity id="nav" class="center-obj-zone" static-body
+                scale=".6 .6 .6 "
+                position="0.124 .8 3.97"
+                material="shader: standard; metalness: 0.8;" 
+                full-gltf-model="#ring" class="collision" visible="true"></a-entity>-->
+    </a-entity><!-- platform-->
+    <a-entity id="pedestals" position="0 0 20" rotation="0 0 0">
+  <?php
 
-    <script>
-        if (location.protocol !== 'https:') {
-            location.replace(`https:${location.href.substring(location.protocol.length)}`);
-        }
-    </script>
+            include "webxr/polys2/pedestals.php";
+
+
+        ?>
+        </a-entity><!-- pedestals -->
+
+    </a-entity><!-- awards 2021-->
+
+
+
   
 
- 
+
+     
 
 
 
 
-    <a-scene look-switch anti-drop grab-panels burial-grab item-grab device-set device-orientation-permission-ui gltf-model="dracoDecoderPath: assets/draco/;" grab-panels item-grab device-set nomination-link 
-        device-orientation-permission-ui physics="iterations: 30;"
-        inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
-        loading-screen="backgroundColor: #12171a" renderer="colorManagement: true; foveationLevel: 2;"
-        background="color: #000000">
-        <a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
-        <a-entity tracked-controls="controller: 1; id Prefix: OpenVR"></a-entity>
 
-        <a-assets timeout="800000">
-             <!-- Loads models -->
-    <a-asset-item id="2nd-polys-trophy" response-type="arraybuffer"
-    src="/assets/models/polys/2021-Poly.glb"></a-asset-item>
-
-    <a-asset-item id="pedestal" response-type="arraybuffer" src="/assets/models/polys/pedestal.glb"></a-asset-item>
-    
-    <img id="sky" src="/assets/images/skybox/Polys2Skybox.jpg">
+<!--
 
 
-            <?php// include "webxr/summits/assets.php";?>
-            <?php include "webxr/summits/mixins.php";?>
-            <a-asset-item id="platform" response-type="arraybuffer" src="/assets/models/polys/platform.glb"></a-asset-item>
-        </a-assets>
 
 
-        <a-sky src="#sky"></a-sky>
-        <a-entity>
-            <a-text id="GL-VR" visible="false" position="2.55 -0.1 0.01" value="" color="white" width="4"
-                line-height="50" text="wrapCount: 30"></a-text>
-            <a-text id="GL-PC" visible="false" position="2.55 -0.1 0.1" value="" color="black" width="5"
-                line-height="50" text="wrapCount: 30"></a-text>
-            <a-text id="GL-SP" visible="false" position="2.55 -0.1 0.1" value="" color="black" width="5"
-                line-height="50" text="wrapCount: 30"></a-text>
-
-
-            <a-text id="SMH-VR" visible="false" position="-6.65 -0.57 0.01" value="" color="black" width="5"
-                line-height="60" text="wrapCount: 30"></a-text>
-            <a-text id="SMH-PC" visible="false" position="-6.65 -0.75 0.01" value="" color="black" width="5"
-                line-height="40" text="wrapCount: 30"></a-text>
-            <a-text id="SMH-SP" visible="false" position="-6.65 -0.6 0.01" value="" color="black" width="5"
-                line-height="50" text="wrapCount: 25"></a-text>
+        <a-entity position="0 -.2  -5.658" id="projector">
+            <a-cylinder color="gray" rotation="0 30 0" segments-radial="8" segments-height="1" height="0.15"
+                geometry="radius: 0.1"></a-cylinder>
+            <a-entity id="holoartproj" visible="false">
+                <a-entity mixin="holoprojector"></a-entity>
+                <a-entity id="holoartifact" scale="7 7 7" rotation="0 0 0" class="center-obj-zone" static-body
+                    position="0 1.25 0" full-gltf-model=""
+                    animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 12000; loop: true;"
+                    visible="false"></a-entity>
+            </a-entity>
         </a-entity>
 
 
-        <a-entity id="rig" rotation-reader thumbstick-logging
-            movement-controls="speed: <?=$speed?>; constrainToNavMesh: true;fly: true" position="<?=$cam_x?> <?=$cam_y?> <?=$cam_z?>" rotation="0 0 0">
-           
-            <a-box id="body" plane-hit aabb-collider="collideNonVisible: true; objects: .zone" static-body="shape: box"
-                position="0 0.05 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
-
-            <a-entity id="camera" camera look-controls capture-mouse cursor="rayOrigin:mouse" camera="zoom: 1"
-                raycaster="far: 5; objects: .clickable" super-hands="colliderEvent: raycaster-intersection;
-                             colliderEventProperty: els;
-                             colliderEndEvent:raycaster-intersection-cleared;
-                             colliderEndEventProperty: clearedEls;" position="0 0 0" rotation="0 0 0"></a-entity>
-
-            <a-entity mixin="hand" hand-controls="hand: left; handModelStyle: highPoly; color: #ffcccc"></a-entity>
-            <a-entity mixin="hand" hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc"></a-entity>
-
-            <a-entity oculus-touch-controls="hand: left" vive-controls="hand: left" thumb-controls="hand: left" blink-controls="cameraRig: #rig; teleportOrigin: #camera; collisionEntities: #nav; hitCylinderColor: #e9974c; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8">
-            </a-entity>
-            <a-entity oculus-touch-controls="hand: right" vive-controls="hand: right " thumb-controls="hand: right">
-            </a-entity><!---->
-
-            
-        </a-entity>  
-
-       
-    
-
-            <a-entity id="2nd-polys-trophy-model" class="center-obj-zone" static-body
-                gltf-model="#2nd-polys-trophy" visible="true" scale="20 20 20" position="0.183 -0.29 -132"
-                rotation="0 -90 0">
-                    <a-light id="trophy-spot1" type="spot" color="#fff" distance="105" intensity="40" position="3.5 1.3 0" angle="22" rotation="0 90 0"></a-light>
-                   
-                    <a-light id="trophy-spot2" type="spot" color="#f00" distance="105" intensity="40" position="3 028 0" angle="20" rotation="-14.1 90 0"></a-light>
-
-                    <a-light id="trophy-spot3" type="spot" color="#f0f" distance="157" intensity="40" position="7 1.5 0" angle="50" rotation="-34.2 90 0"></a-light></a-entity>
-
-                    <a-image id="hosts-png" material="side:front" mixin="scale-label"
-                            src="<?=$thumbnail?>" scale="75 75 75" position="3.746 37.81 -142"
-                rotation="0 0 0"
-                            ></a-image>
-                
-
-
-        <a-entity id="platform-wrap" visible="true" scale="250 100 250" position="0 -2.36 -90"
-                rotation="0 0 0">
-            <a-entity id="platform-model" class="center-obj-zone" static-body
-                full-gltf-model="#platform" >
-                <a-light id="platform-spot1" type="spot" color="#fff" distance="200" intensity="15" position="0 0 0.56" angle="25" rotation="-30 0 0"></a-light>
-           
-            </a-entity>
-            <a-entity id="nav" class="center-obj-zone" static-body
-                full-gltf-model="#platform" visible="false"></a-entity>
-
-
-            
-            </a-entity>
-            
-            
-        
-            <a-entity id="pedestals"> 
-        
-                <?php 
-                    require_once "webxr/polys2/pedestals.php";
-
-
-                ?>
-            
-            </a-entity>
-            
-            
-
-    </a-entity>
-
-    <a-entity id="light-rig" position="0 60 0">
-
-    <a-light id="Spin-spot1" type="spot" color="#fff" distance="150" intensity="15" position="0 0 0" animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 12000; loop: true;"angle="250" rotation="0 0 0"></a-light></a-entity>
-    
 
 
 
 
 
-
-
-        <?php 
-        
-    
-        ?>
-
-
-
-
-
-
-<a-entity id="partner-events">   </a-entity>
-        
-        <?php 
-            require_once "webxr/polys2/partners.php";
-
-            
-        ?>
-    
-  
+-->
 
 
 
@@ -223,17 +234,7 @@ if(@$_GET['camera']){
 
 
 
-
-
-
-
-
-
-
-
-    </a-scene>
-    <script src="<?php echo get_stylesheet_directory_uri();?>/polys2.js?i=<?=rand(5, 1005)?>"></script>
-</body>
-
-<?php get_footer();?>
-</html>
+</a-scene>
+<?php
+     get_footer();
+?>

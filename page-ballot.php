@@ -78,7 +78,7 @@ vertical-align:middle;
   if(!@$_POST['juror_email']){
 
   
-?><p>You have been invited to participate in the jury to select winners of the WebXR Awards on February 20th. </p>
+?><p>You have been invited to participate in the jury to select winners of the 2<sup>nd</sup> Polys WebXR Awards on February 12<sup>th</sup>. </p>
     <form action="/ballot/" method="post" class="sign-in">
     <label>Please enter the email address where you received your invitation.
     <input type="text" name="juror_email" value="" placeholder="email" size="30"><br>
@@ -90,13 +90,47 @@ vertical-align:middle;
 
 <?php
 
+$awards = get_nominations('polys2');
 
+
+function getNomineeCard($awards){
+
+}
+function getNomineeCards($awards){
+
+    print "<div id='cards'>";
+
+    foreach($awards as $i =>$award){
+        extract($award);
+        if(!in_array("nomination",explode(" ",$classes[0]))){
+            continue;
+          }
+
+          foreach($nominees as $c => $nominee){
+            print "<div class='nominee-card'>";
+            print "<h2>$award[title]</h2>";
+            print "</div>";
+
+          }
+          
+
+
+          
+    }
+
+
+
+    print "</div>";
+
+
+}
+getNomineeCards($awards);
 
   } else {
    $id = getJurorID();
      if(@$_POST['award']){
     
-      updateJurorBallot($id);
+     //updateJurorBallot($id);
 
     }
      
@@ -120,7 +154,7 @@ If that doesn't work, please email nominees AT webxrawards.com";
 
   
 
-      getBallot($id);
+      get_ballot("polys2");
 
 
     }

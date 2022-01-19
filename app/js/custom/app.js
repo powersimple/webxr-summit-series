@@ -1,7 +1,7 @@
 jQuery(document).ready(function() {
 
-
-
+    openDrawer()
+    $("body").css("margin-left:0px !important") //RUDE HACK
 });
 $( window ).scroll(function() {
     pinFooter()

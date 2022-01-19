@@ -30,10 +30,10 @@ if($post->post_parent==0){
 <div class="title-bar">
     <h1 class="title"><?=$post->post_title?></h1>
     <?php
-    if(@$post->post_excerpt){
+    if(@$post->post_content){
     ?>
     <h2 class="featuring">
-        <?=$post->post_excerpt?></h1>
+        <?=$post->post_content?></h1>
     
     <?php
     }
@@ -57,15 +57,7 @@ if($post->post_parent==0){
   $hosts = getProfileChildrenIDs(598);
 ?>
 
-<h2>The Team</h2>
-         <?=displayProfiles($team,$post->ID,"about",'team');?>
-     
 
-
-
-     <h2>Hosts</h2>
-
-<?=displayProfiles($hosts,$post->ID,"about",'hosts');?>
 
 
 
