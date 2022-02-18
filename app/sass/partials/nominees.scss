@@ -10,78 +10,153 @@
         background:url(images/bg/NomineeCardBG.jpg) no-repeat top left;
         position: relative;
         h2{
-            font-family: "AgencyFB";
+            font-family: "Zen Dots";
+            font-weight: normal;
+            color:#a2c1ef;
+            text-align:center;
+            font-size:48px;
+            margin:32px 0px 0px;
+        }
+        h3{
+            font-family: "CreamCake";
+            font-weight: normal;
+            text-align: center;
+            font-size: 64px;
+            color: #feffb0;
+        }
+        .laurels{
+            position: relative;
+            z-index: 1000;
+            width:1000px;
+            height:600px;
+            top:-190px;
+            .laurel{
+                margin-bottom:30px;
+            }
         }
         svg{
-            width:773px;
+            width:100%;
             position: relative;
             left:157px;
             top:173px;
-           
+            z-index: 10000;
            
             path, polygon, rect{
                 fill:#fff;
-                -webkit-box-shadow: 5px 5px 9px 13px #FFF275; 
-                box-shadow: 5px 5px 9px 13px #FFF275;
-                
+                -webkit-filter: drop-shadow( 5px 5px 15px 5px #FF1CD8);
+                filter: drop-shadow( 5px 5px 15px 5px #FF1CD8);
+            }
+        }
+        .nominee-card-credits{
+            position: absolute;
+           bottom:25px;
+            left:50px;
+            font-size:24px;
+            line-height: 30px;
+            font-weight: normal;
+            max-width:550px;
+
+            li{
+                font-family: "Zen Dots";
+                list-style: none;
+                font-size:24px;
+                font-weight: normal;
+                ul li{
+                    font-size:20px;
+                }
+    
+                a{
+                    color:#feffb0;
+                    overflow-wrap:anywhere;
+                }
             }
         }
     }
     
- 
+    .showbrand{
+        margin-bottom:10px;
+        padding-bottom:15px;
+        display: block;
+        border-bottom: 1px dashed #a2c1ef;
+        font-size:42px;
+        color: #feffb0;
+    }
     .showtime{
  
-        position: relative;
-        left: 0px;
-        top: 125px;
-        font-size: 36px;
-        line-height: 48px;
+        position: absolute;
+        left: 665px;
+        top: 810px;
+        font-size: 30px;
+        line-height: 36px;
         text-align: center;
         font-family: "Zen Dots";
-
+        color:$light_blue;
     }
     .social{
         width: 350px;
         font-family: "Zen Dots";
-        position: relative;
-        left: 1537px;
-        top: 32px;
-        font-size: 36px;
+        position: absolute;
+        left: 1542px;
+        bottom: 25px;
+        font-size: 24px;
         font-weight: normal;
-        line-height: 48px;
+        line-height: 30px;
         text-align: center;
+        color:$light_blue;
+        .watch-parties{
+            font-family: "CreamCake";
+            color:#feffb0;
+            font-size:150%;
+        }
     }
     
 
 }
+
 @font-face {
     font-family: 'CreamCake'; /*a name to be used later*/
     src: url('fonts/CreamCake.otf'); /*URL to font*/
 }
 .hosts{
     font-family:"CreamCake";
-    position: relative;
-    left:700px;
-    top:300px;
+    position: absolute;
+    left: 675px;
+    top: 945px;
     font-size:48px;
     color:#fff;
+    .julie-sophia{
+     background: url(/wp-content/uploads/2022/01/JulieAndSophia.png) no-repeat bottom center;
+     background-size: cover;
+    width: 166px;
+    height: 131px;  
+    }
     .host{ 
         position: relative;
         span{
         display: block;
-        text-align: center;
-        height:36px;
+        
+        height:24px;
         } 
         .by{
-            font-size: 36px;
+            font-size: 32px;
+        }
+        .hostsocial{
+            font-family: "AgencyFB";
+            font-size: 24px;
+            display: inline-block;
+        
+            padding-top: 34px;
+            text-align: center;
         }
     }
     .julie{
-        left:0px;
+        left: 0px;
+    width: 212px;
+    text-align: left;
 
     }
     .sophia{
-        left:100px;
+        
     }
 
 }
@@ -93,3 +168,19 @@
 model-viewer#reveal {
     --poster-color: transparent;
   }
+.thepolys{
+    font-family: "CreamCake";
+    font-size:200%;
+    sup{
+        font-size: 50%;
+        margin-top: -10px;
+        display: table-caption;
+        padding: 4px;
+    }
+}
+.webxrawards{
+    font-family: "AgencyFB";
+    font-weight: bold;
+    font-size:150%;
+    
+}

@@ -205,7 +205,7 @@ if (location.protocol !== 'https:') {
         
             <div id="main-menu"></div>
             <div id="social-menu">
-      <a href="https://www.eventbrite.com/e/2021-webxr-developer-summit-tickets-149418602061" target="_blank"
+      <a href="https://twitter.com/webxrawards" target="_blank"
                 class="fa fa-twitter" title="Follow us on Twitter"></a>
             <a href="https://www.instagram.com/webxrawards/" target="_blank" class="fa fa-instagram"
                 title="Follow us on Instagram"></a>
@@ -241,6 +241,7 @@ if(@$_GET['disappear']==1){
             display: none !important;
             
         } 
+
 <?php
   } 
 ?>

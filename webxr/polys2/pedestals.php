@@ -72,7 +72,16 @@
 function setCardCoords($count){
     $coords = [];
     if($count){
-        $x=(0-(($count/2)*3));
+       // print $count."SHOWCOUNT";
+        if($count == 4){
+            $offset = 1.25;
+        } else if($count == 4){
+            $offset = 2;
+         } else {
+            $offset = 3;
+        }
+
+        $x=(0-(($count/2)*2));
             for($i=0;$i<$count;$i++){
                 $coords[$i] = $x;
              $x=$x+3;   
@@ -138,6 +147,8 @@ function setCardCoords($count){
         <a-entity troika-text='value:2021 WebXR Awards; color:#fff; fontSize:.04;align:center;'
                     material="shader: standard; metalness: 0.8;" position="0 0.09 0.01" rotation="0 0.111 0">
                 </a-entity>-->
+
+                        <?php if(!@$_GET['hidelabels']){?> 
                 <a-entity troika-text='value:<?=$title?>; color:#f5f5f5; align:center; color:#fff; fontSize:.08;align:center;maxWidth:0.8'
                     material="shader: standard; metalness: 0.8;" position="0 0.01 0.01" rotation="0 0 0">
                 </a-entity>
@@ -148,7 +159,9 @@ function setCardCoords($count){
 <!--                <a-entity troika-text='value:; color:#fff; fontSize:.025;align:center;' material="shader: standard; metalness: 0.8;"
                     position="0 -0.089 0.01" rotation="0 0 0"></a-entity>-->
             </a-plane>
+            <?php }?>
         </a-entity>
+        
 
 
 
@@ -179,6 +192,15 @@ function setCardCoords($count){
 
         $counter = 0;                
         foreach($nominees as $n => $nomination){
+            if ((@$nomination['classes'][0] == 'presenter')){
+                continue;
+            }
+            $winner=0;
+            if ((@$nomination['classes'][0] == 'winner')){
+                $winner=1;
+                
+            }
+
             $coordinates = $card_coordinates_x[$counter];
            
             $px = "px_".$card_coordinates_x[$counter];
@@ -255,10 +277,24 @@ fontSize:.2;align:left; anchor:left;'material="shader: standard; metalness: 0.8;
                             ?>
                              <a-entity troika-text='value: <?=$nominee['title'] ?> ; color:#f5f5f5; align:center; color:#fff; fontSize:.2;align:center;'
                     material="shader: standard; metalness: 0.8;" position="0 <?=$y?> 0" rotation="0 -0.1 0"></a-entity>
+
+
                             
                                 <?php
+                                
+
+
                                 $y=$y-.3;
                                     }
+                                    if($winner){
+                                        if(!@$_GET['hidewinners']){
+                                        ?>
+         <a-entity troika-text='value:WINNER ; color:#fff000; align:center; color:#fff000; fontSize:.2;align:center;'
+                        material="shader: standard; metalness: 0.8;" position="0 <?=$y?> 0" rotation="0 -0.1 0"></a-entity>
+                                        <?php
+                                        }
+                                    }
+
                                 ?>
 </a-entity><!--nomination-->
             

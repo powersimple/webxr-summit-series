@@ -1,5 +1,5 @@
 footer {
-    position: relative;
+    position: fixed;
     display: table;
    background-color: rgba(10,10,10,0.8);
     width: 100%;
@@ -7,6 +7,7 @@ footer {
     text-align: center;
     padding: 10px 0;
    top:100vh;
+   margin-top:-36px;
     min-height:50px;
     max-height: 2vh;
     color:$gray_text;

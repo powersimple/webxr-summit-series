@@ -904,7 +904,7 @@ blockquote {
     display: block; }
 
 #site-title {
-  color: #8fa2c6;
+  color: #a2c1ef;
   font-weight: 600;
   padding-top: 3px;
   display: none; }
@@ -951,7 +951,7 @@ blockquote {
   opacity: .8; }
 
 footer {
-  position: relative;
+  position: fixed;
   display: table;
   background-color: rgba(10, 10, 10, 0.8);
   width: 100%;
@@ -959,6 +959,7 @@ footer {
   text-align: center;
   padding: 10px 0;
   top: 100vh;
+  margin-top: -36px;
   min-height: 50px;
   max-height: 2vh;
   color: #8A8A8A; }
@@ -1081,7 +1082,7 @@ footer ul {
 input[type=checkbox].form-checkbox {
   width: 22px;
   height: 22px;
-  border: 3px solid #8fa2c6;
+  border: 3px solid #a2c1ef;
   background-color: #10161a;
   margin-right: 5px; }
 
@@ -1090,10 +1091,10 @@ input[type=checkbox].form-checkbox {
   border-radius: 1em;
   margin-bottom: 2em; }
   .filters h3, #hardware-filters h3 {
-    color: #8fa2c6;
+    color: #a2c1ef;
     font-size: 14px;
     text-transform: uppercase;
-    border-bottom: #8fa2c6;
+    border-bottom: #a2c1ef;
     border-bottom-width: 1px;
     border-bottom-style: dotted;
     border-bottom-color: currentcolor;
@@ -1144,7 +1145,7 @@ input[type=checkbox].form-checkbox {
   box-shadow: -5px 2px 5px 3px rgba(0, 0, 0, 0.3);
   margin-bottom: 20px; }
   #directory-filters h4 {
-    color: #8fa2c6;
+    color: #a2c1ef;
     padding-top: 1em;
     padding-bottom: .5em;
     text-align: center;
@@ -1368,7 +1369,7 @@ body::-webkit-scrollbar-thumb {
   color: #183369; }
 
 #registration {
-  background: #8fa2c6;
+  background: #a2c1ef;
   border-bottom: 10px solid #101619; }
   #registration h2.module-title {
     color: #183369; }
@@ -3014,6 +3015,47 @@ a.watch {
   .pin-bottom .video-wrap {
     border: 3px dotted #fff; }
 
+table.segment td {
+  vertical-align: middle;
+  padding: 5px; }
+  table.segment td a {
+    color: #fff; }
+
+table.segment td.name {
+  font-weight: bold; }
+
+table.segment img {
+  width: 150px;
+  border-radius: 150px; }
+
+table.segment .thumbnail {
+  background-color: transparent;
+  width: 100px;
+  border: none; }
+
+table.segment .designation {
+  width: 75px; }
+
+table.segment .meta {
+  overflow: hidden; }
+
+.ros-event {
+  float: left;
+  text-align: left;
+  position: relative; }
+
+.ros-time {
+  float: right;
+  text-align: left;
+  position: relative;
+  display: inline; }
+
+.show-journal {
+  padding: 25px;
+  font-family: monospace;
+  background: #e7e7e7;
+  color: #333; }
+
 #cards {
   position: absolute;
   left: 0; }
@@ -3025,34 +3067,85 @@ a.watch {
     background: url(images/bg/NomineeCardBG.jpg) no-repeat top left;
     position: relative; }
     #cards .nominee-card h2 {
-      font-family: "AgencyFB"; }
+      font-family: "Zen Dots";
+      font-weight: normal;
+      color: #a2c1ef;
+      text-align: center;
+      font-size: 48px;
+      margin: 32px 0px 0px; }
+    #cards .nominee-card h3 {
+      font-family: "CreamCake";
+      font-weight: normal;
+      text-align: center;
+      font-size: 64px;
+      color: #feffb0; }
+    #cards .nominee-card .laurels {
+      position: relative;
+      z-index: 1000;
+      width: 1000px;
+      height: 600px;
+      top: -190px; }
+      #cards .nominee-card .laurels .laurel {
+        margin-bottom: 30px; }
     #cards .nominee-card svg {
-      width: 773px;
+      width: 100%;
       position: relative;
       left: 157px;
-      top: 173px; }
+      top: 173px;
+      z-index: 10000; }
       #cards .nominee-card svg path, #cards .nominee-card svg polygon, #cards .nominee-card svg rect {
         fill: #fff;
-        -webkit-box-shadow: 5px 5px 9px 13px #FFF275;
-        box-shadow: 5px 5px 9px 13px #FFF275; }
+        -webkit-filter: drop-shadow(5px 5px 15px 5px #FF1CD8);
+        filter: drop-shadow(5px 5px 15px 5px #FF1CD8); }
+    #cards .nominee-card .nominee-card-credits {
+      position: absolute;
+      bottom: 25px;
+      left: 50px;
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: normal;
+      max-width: 550px; }
+      #cards .nominee-card .nominee-card-credits li {
+        font-family: "Zen Dots";
+        list-style: none;
+        font-size: 24px;
+        font-weight: normal; }
+        #cards .nominee-card .nominee-card-credits li ul li {
+          font-size: 20px; }
+        #cards .nominee-card .nominee-card-credits li a {
+          color: #feffb0;
+          overflow-wrap: anywhere; }
+  #cards .showbrand {
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+    display: block;
+    border-bottom: 1px dashed #a2c1ef;
+    font-size: 42px;
+    color: #feffb0; }
   #cards .showtime {
-    position: relative;
-    left: 0px;
-    top: 125px;
-    font-size: 36px;
-    line-height: 48px;
+    position: absolute;
+    left: 665px;
+    top: 810px;
+    font-size: 30px;
+    line-height: 36px;
     text-align: center;
-    font-family: "Zen Dots"; }
+    font-family: "Zen Dots";
+    color: #a2c1ef; }
   #cards .social {
     width: 350px;
     font-family: "Zen Dots";
-    position: relative;
-    left: 1537px;
-    top: 32px;
-    font-size: 36px;
+    position: absolute;
+    left: 1542px;
+    bottom: 25px;
+    font-size: 24px;
     font-weight: normal;
-    line-height: 48px;
-    text-align: center; }
+    line-height: 30px;
+    text-align: center;
+    color: #a2c1ef; }
+    #cards .social .watch-parties {
+      font-family: "CreamCake";
+      color: #feffb0;
+      font-size: 150%; }
 
 @font-face {
   font-family: 'CreamCake';
@@ -3062,23 +3155,33 @@ a.watch {
 
 .hosts {
   font-family: "CreamCake";
-  position: relative;
-  left: 700px;
-  top: 300px;
+  position: absolute;
+  left: 675px;
+  top: 945px;
   font-size: 48px;
   color: #fff; }
+  .hosts .julie-sophia {
+    background: url(/wp-content/uploads/2022/01/JulieAndSophia.png) no-repeat bottom center;
+    background-size: cover;
+    width: 166px;
+    height: 131px; }
   .hosts .host {
     position: relative; }
     .hosts .host span {
       display: block;
-      text-align: center;
-      height: 36px; }
+      height: 24px; }
     .hosts .host .by {
-      font-size: 36px; }
+      font-size: 32px; }
+    .hosts .host .hostsocial {
+      font-family: "AgencyFB";
+      font-size: 24px;
+      display: inline-block;
+      padding-top: 34px;
+      text-align: center; }
   .hosts .julie {
-    left: 0px; }
-  .hosts .sophia {
-    left: 100px; }
+    left: 0px;
+    width: 212px;
+    text-align: left; }
 
 @font-face {
   font-family: 'AgencyFB';
@@ -3088,6 +3191,20 @@ a.watch {
 
 model-viewer#reveal {
   --poster-color: transparent; }
+
+.thepolys {
+  font-family: "CreamCake";
+  font-size: 200%; }
+  .thepolys sup {
+    font-size: 50%;
+    margin-top: -10px;
+    display: table-caption;
+    padding: 4px; }
+
+.webxrawards {
+  font-family: "AgencyFB";
+  font-weight: bold;
+  font-size: 150%; }
 
 /*
 @import "partials/admin";
@@ -4275,7 +4392,7 @@ General Styles - Owlcarousel
   background-color: #101619;
   color: #fff; }
   .darkbg h2 {
-    color: #8fa2c6; }
+    color: #a2c1ef; }
   .darkbg input,
   .darkbg textarea,
   .darkbg select option {
@@ -5771,17 +5888,58 @@ div.developer-summit {
   background-color: #fff;
   color: #000;
   padding: 40px;
-  border: 3px outset #fff; }
+  border: 3px outset #fff;
+  border-radius: 10px;
+  border: 2px outset #CCCC;
+  font-weight: 400;
+  list-style: disc; }
   .post strong {
-    font-weight: 600; }
+    font-weight: 800; }
   .post h2 {
     font-weight: 600;
     font-size: 1.5rem; }
   .post a {
     color: #00a; }
+  .post p, .post li {
+    color: #000;
+    display: block;
+    font-weight: 600;
+    font-size: 1em;
+    line-height: 150%; }
+
+#experiences li {
+  list-style-type: disc;
+  width: 84px;
+  display: inline-block;
+  margin: 5px;
+  font-size: 10px; }
 
 #experiences img {
   border-radius: 50%;
   width: 150px;
   margin: 0px auto;
   display: block; }
+
+#ballot {
+  margin-top: 70px; }
+
+#ballot-faq {
+  height: 350px;
+  overflow-y: auto;
+  margin-bottom: 25px; }
+
+.winners {
+  background-color: #323232;
+  padding: 5px;
+  font-weight: bold; }
+
+ul.nominee-list li {
+  list-style: none; }
+
+#nomineeAccordion h3 {
+  text-align: left;
+  background: #000;
+  color: #fff; }
+
+#nomineeAccordion li {
+  padding: 3px; }

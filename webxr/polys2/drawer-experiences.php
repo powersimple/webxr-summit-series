@@ -25,13 +25,37 @@
       }
      
     $experiences = get_experiences('experiences');
+
+  
+
+
+
+
+
+
      //var_dump($experiences); die();
 ?>
 <div class="sidedrawer vh"> 
 
     <div id="menuclose"></div>
     
-         
+    <div id="nominations">
+    <span class="experiences-header">2021 Nominees and WInners.</span>
+        <?php
+            $awards = get_nominations('polys2');
+            nomineeAccordion($awards);
+   
+
+   
+          
+      ?>
+      
+    </div>
+
+
+
+
+
             <div id="experiences">
             <span class="experiences-header">NOMINATED EXPERIENCES</span>
                 <ul>

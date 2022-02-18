@@ -1,5 +1,56 @@
 <?php 
 
+/* AWARDS */
+function awards_metabox( $meta_boxes ) {
+	$prefix = '';
+
+	$meta_boxes[] = array(
+		'id' => 'awards',
+		'title' => esc_html__( 'Awards', 'metabox-online-generator' ),
+		'post_types' => array( 'resource', 'event','profile' ),
+		'context' => 'side',
+		'priority' => 'high',
+		'autosave' => false,
+		'fields' => array(
+		
+			array(
+				'id' => '3Dlaurel_screenshots',
+				'type' => 'image_advanced',
+				'name' => esc_html__( '3D Laurel Screenshots', 'metabox-online-generator' ), 
+				'desc' => esc_html__( '3D Laurel Screenshot', 'metabox-online-generator' ),
+				'force_delete' => false,
+				'max_file_uploads' => '10',
+				'options' => array(),
+				'attributes' => array(),
+			),
+			array(
+				'id' => '3Dlaurel',
+				'type' => 'image_advanced',
+				'name' => esc_html__( '3D Laurel', 'metabox-online-generator' ), 
+				'desc' => esc_html__( '3D Laurel GLB file', 'metabox-online-generator' ),
+				'force_delete' => false,
+				'max_file_uploads' => '10',
+				'options' => array(),
+				'attributes' => array(),
+			),
+			array(
+				'id' => 'laurel',
+				'type' => 'image_advanced',
+				'name' => esc_html__( '2D Laurel', 'metabox-online-generator' ),
+				'desc' => esc_html__( 'Image Laurel For Nominations', 'metabox-online-generator' ),
+				'force_delete' => false,
+				'max_file_uploads' => '10',
+				'options' => array(),
+				'attributes' => array(),
+			),
+			
+		),
+	);
+
+	return $meta_boxes;
+	
+}
+add_filter( 'rwmb_meta_boxes', 'awards_metabox' );
 
 function section_class( $meta_boxes ) {
 	$prefix = '';
@@ -26,6 +77,334 @@ function section_class( $meta_boxes ) {
 
 	return $meta_boxes;
 }
+function profile_info( $meta_boxes ) {
+	$prefix = '';
+
+	$meta_boxes[] = array(
+		'id' => 'profile_info',
+		'title' => esc_html__( 'Profile Info', 'metabox-online-generator' ),
+		'post_types' => array('profile' ),
+		'context' => 'side',
+		'priority' => 'default',
+		'autosave' => 'false',
+		'fields' => array(
+			array(
+				'id' => 'profile_title',
+				'type' => 'text',
+				'name' => esc_html__( 'Title', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'profile_company',
+				'type' => 'text',
+				'name' => esc_html__( 'Organization', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'profile_website',
+				'type' => 'url',
+				'name' => esc_html__( 'Website', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'email',
+				'type' => 'text',
+				'name' => esc_html__( 'Email', 'metabox-online-generator' ),
+			),
+
+			array(
+				'id' => 'profile_wikipedia',
+				'type' => 'url',
+				'name' => esc_html__( 'Wikipedia URL', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'profile_linkedin',
+				'type' => 'url',
+				'name' => esc_html__( 'LinkedIn URL', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'profile_twitter',
+				'type' => 'url',
+				'name' => esc_html__( 'Twitter URL', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'profile_facebook',
+				'type' => 'url',
+				'name' => esc_html__( 'Facebook URL', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'profile_flickr',
+				'type' => 'url',
+				'name' => esc_html__( 'Flickr URL', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'profile_instagram',
+				'type' => 'url',
+				'name' => esc_html__( 'Instagram URL', 'metabox-online-generator' ),
+			),
+			
+		),
+	);
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'profile_info' );
+function setProfileURL( $meta_boxes ) { // this shows the box were 
+	$prefix = '';
+
+	$meta_boxes[] = array(
+		'id' => 'profile_info',
+		'title' => esc_html__( 'PROFILE INFO', 'omniscience-profiler' ),
+		'post_types' => array('profile','resource' ),
+		'context' => 'side',
+		'priority' => 'high',
+		'autosave' => 'false',
+		'fields' => array(
+			array(
+				'id' => 'company',
+				'type' => 'text',
+				'name' => esc_html__( 'Company', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'profile_title',
+				'type' => 'text',
+				'name' => esc_html__( 'Contact Title', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'email',
+				'type' => 'text',
+				'name' => esc_html__( 'email', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => $prefix . 'website',
+				'type' => 'website',
+				'name' => esc_html__( 'Website', 'omniscience-profiler' ),
+				'desc' => esc_html__( 'Enter URL for the Resource to Profile', 'omniscience-profiler' ),
+			),
+			array(
+				'id' =>  'linkedin',
+				'type' => 'url',
+				'name' => esc_html__( 'LinkedIn URL', 'omniscience-profiler' ),
+			),
+			array(
+				'id' =>  'twitter',
+				'type' => 'url',
+				'name' => esc_html__( 'Twitter URL', 'omniscience-profiler' ),
+			),
+			array(
+				'id' =>  'facebook',
+				'type' => 'url',
+				'name' => esc_html__( 'Facebook URL', 'omniscience-profiler' ),
+			),
+			
+			array(
+				'id' =>  'instagram',
+				'type' => 'url',
+				'name' => esc_html__( 'Instagram URL', 'omniscience-profiler' ),
+			),
+			array(
+				'id' =>  'discord',
+				'type' => 'text',
+				'name' => esc_html__( 'Discord Handle', 'omniscience-profiler' ),
+			),
+			array(
+				'id' =>  'youtube',
+				'type' => 'url',
+				'name' => esc_html__( 'YouTube Channel', 'omniscience-profiler' ),
+			),
+			[
+                'type' => 'textarea',
+                'name' => esc_html__( 'blurb', 'online-generator' ),
+                'id'   => $prefix . 'blurb',
+            ],
+			[
+                'type' => 'textarea',
+                'name' => esc_html__( 'resources', 'online-generator' ),
+                'id'   => $prefix . 'blurb',
+            ],
+			[
+                'type' => 'textarea',
+                'name' => esc_html__( 'Talk Title', 'online-generator' ),
+                'id'   => $prefix . 'talk_title',
+            ],
+			[
+                'type' => 'textarea',
+                'name' => esc_html__( 'Talk Description', 'online-generator' ),
+                'id'   => $prefix . 'talk_description',
+            ],
+
+			array(
+				'id' => $prefix . 'logo',
+				'type' => 'image_advanced',
+				'name' => esc_html__( 'Logo', 'omniscience-profiler' ),
+				//'desc' => esc_html__( 'Size to 1920x1280', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => $prefix . '3Dlogo',
+				'type' => 'image_advanced',
+				'name' => esc_html__( '3D Logo', 'omniscience-profiler' ),
+				'desc' => esc_html__( '.glb format only', 'metabox-online-generator' ),
+				'force_delete' => false,
+				'max_file_uploads' => '10',
+				'options' => array(),
+				'attributes' => array(),
+			),
+
+
+			array(
+				'id' => 'screenshot',
+				'type' => 'image_advanced',
+				'name' => esc_html__( 'Screenshots', 'metabox-online-generator' ),
+				'desc' => esc_html__( 'submitted with', 'metabox-online-generator' ),
+				'force_delete' => false,
+				'max_file_uploads' => '10',
+				'options' => array(),
+				'attributes' => array(),
+			),
+
+					array(
+					'id' =>  'demo_video',
+					'type' => 'url',
+					'name' => esc_html__( 'Demo Video', 'omniscience-profiler' ),
+				),
+
+
+
+           				array(
+					'id' =>  'wikipedia',
+					'type' => 'url',
+					'name' => esc_html__( 'Wikipedia URL', 'omniscience-profiler' ),
+				),
+
+				
+				array(
+					'id' =>  'flickr',
+					'type' => 'url',
+					'name' => esc_html__( 'Flickr URL', 'omniscience-profiler' ),
+				),
+				array(
+					'id' =>  'Tumblr',
+					'type' => 'url',
+					'name' => esc_html__( 'Tumblr', 'omniscience-profiler' ),
+				),
+			
+
+				array(
+					'id' =>  'pinterest',
+					'type' => 'url',
+					'name' => esc_html__( 'Pinterest', 'omniscience-profiler' ),
+				),
+
+
+					array(
+					'id' =>  'GitHub',
+					'type' => 'url',
+					'name' => esc_html__( 'Github', 'omniscience-profiler' ),
+				),
+				array(
+					'id' =>  'medium',
+					'type' => 'url',
+					'name' => esc_html__( 'Medium', 'omniscience-profiler' ),
+				),
+
+				//comms
+				array(
+					'id' =>  'telegram',
+					'type' => 'url',
+					'name' => esc_html__( 'Telegram ', 'omniscience-profiler' ),
+				),
+
+
+
+				array(
+					'id' =>  'slack',
+					'type' => 'url',
+					'name' => esc_html__( 'Slack', 'omniscience-profiler' ),
+				),
+				array(
+					'id' =>  'skype',
+					'type' => 'url',
+					'name' => esc_html__( 'Skype', 'omniscience-profiler' ),
+				),
+
+				//video
+				array(
+					'id' =>  'youtube',
+					'type' => 'url',
+					'name' => esc_html__( 'YouTube Channel', 'omniscience-profiler' ),
+				),
+				array(
+					'id' =>  'vimeo',
+					'type' => 'url',
+					'name' => esc_html__( 'Vimeo', 'omniscience-profiler' ),
+				),
+
+			array(
+				'id' =>  'crunchbase',
+				'type' => 'url',
+				'name' => esc_html__( 'crunchbase URL', 'omniscience-profiler' ),
+			),
+							array(
+					'id' =>  'rss',
+					'type' => 'url',
+					'name' => esc_html__( 'RSS Feed URL', 'omniscience-profiler' ),
+				),
+		
+				
+
+
+
+// URLs
+			array(
+				'id' => 'logo_url',
+				'type' => 'text',
+				'name' => esc_html__( 'Logo URL', 'omniscience-profiler' ),
+			),
+			array(
+				'id' => 'logo_svgtag',
+				'type' => 'text',
+				'name' => esc_html__( 'Logo SVG', 'omniscience-profiler' ),
+			),
+			array(
+				'id' =>  'contact_url',
+				'type' => 'url',
+				'name' => esc_html__( 'Contact URL', 'omniscience-profiler' ),
+			),
+			array(
+				'id' =>  'blog_url',
+				'type' => 'url',
+				'name' => esc_html__( 'Blog URL', 'omniscience-profiler' ),
+			),
+			array(
+				'id' =>  'apply_url',
+				'type' => 'url',
+				'name' => esc_html__( 'Apply URL', 'omniscience-profiler' ),
+			),
+			array(
+				'id' =>  'jobs_url',
+				'type' => 'url',
+				'name' => esc_html__( 'Jobs URL', 'omniscience-profiler' ),
+			),
+			array(
+				'id' =>  'events_url',
+				'type' => 'url',
+				'name' => esc_html__( 'Events URL', 'omniscience-profiler' ),
+			),
+			array(
+				'id' =>  'conference_url',
+				'type' => 'url',
+				'name' => esc_html__( 'Conference URL', 'omniscience-profiler' ),
+			),
+				array(
+				'id' =>  'developers_url',
+				'type' => 'url',
+				'name' => esc_html__( 'Developers URL', 'omniscience-profiler' ),
+			),
+			
+		),
+	);
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'setProfileURL' );
+
 add_filter( 'rwmb_meta_boxes', 'section_class' );
 function selectLayoutTemplate( $meta_boxes ) {
 	$prefix = '';
@@ -238,75 +617,7 @@ function selectScreenImage( $meta_boxes ) {
 }
 add_filter( 'rwmb_meta_boxes', 'selectScreenImage' );
 
-function profile_info( $meta_boxes ) {
-	$prefix = '';
 
-	$meta_boxes[] = array(
-		'id' => 'profile_info',
-		'title' => esc_html__( 'Profile Info', 'metabox-online-generator' ),
-		'post_types' => array('profile' ),
-		'context' => 'side',
-		'priority' => 'default',
-		'autosave' => 'false',
-		'fields' => array(
-			array(
-				'id' => 'profile_title',
-				'type' => 'text',
-				'name' => esc_html__( 'Title', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'profile_company',
-				'type' => 'text',
-				'name' => esc_html__( 'Organization', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'profile_website',
-				'type' => 'url',
-				'name' => esc_html__( 'Website', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'email',
-				'type' => 'text',
-				'name' => esc_html__( 'Email', 'metabox-online-generator' ),
-			),
-
-			array(
-				'id' => 'profile_wikipedia',
-				'type' => 'url',
-				'name' => esc_html__( 'Wikipedia URL', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'profile_linkedin',
-				'type' => 'url',
-				'name' => esc_html__( 'LinkedIn URL', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'profile_twitter',
-				'type' => 'url',
-				'name' => esc_html__( 'Twitter URL', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'profile_facebook',
-				'type' => 'url',
-				'name' => esc_html__( 'Facebook URL', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'profile_flickr',
-				'type' => 'url',
-				'name' => esc_html__( 'Flickr URL', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'profile_instagram',
-				'type' => 'url',
-				'name' => esc_html__( 'Instagram URL', 'metabox-online-generator' ),
-			),
-			
-		),
-	);
-
-	return $meta_boxes;
-}
-add_filter( 'rwmb_meta_boxes', 'profile_info' );
 
 function eventProperties( $meta_boxes ) {
 	$prefix = '';
@@ -314,7 +625,7 @@ function eventProperties( $meta_boxes ) {
 	$meta_boxes[] = array(
 		'id' => 'event_Properties',
 		'title' => esc_html__( 'Event Properties', 'metabox-online-generator' ),
-		'post_types' => array('event'),
+		'post_types' => array('event','profile','resource'),
 		'context' => 'side',
 		'priority' => 'high',
 		'autosave' => 'false',
@@ -653,264 +964,6 @@ function current_status( $meta_boxes ) {
 }
 add_filter( 'rwmb_meta_boxes', 'current_status' );
 
-function setProfileURL( $meta_boxes ) { // this shows the box were 
-	$prefix = '';
-
-	$meta_boxes[] = array(
-		'id' => 'profile_info',
-		'title' => esc_html__( 'PROFILE INFO', 'omniscience-profiler' ),
-		'post_types' => array('profile','resource' ),
-		'context' => 'side',
-		'priority' => 'high',
-		'autosave' => 'false',
-		'fields' => array(
-			array(
-				'id' => 'company',
-				'type' => 'text',
-				'name' => esc_html__( 'Company', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'profile_title',
-				'type' => 'text',
-				'name' => esc_html__( 'Contact Title', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'email',
-				'type' => 'text',
-				'name' => esc_html__( 'email', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => $prefix . 'website',
-				'type' => 'website',
-				'name' => esc_html__( 'Website', 'omniscience-profiler' ),
-				'desc' => esc_html__( 'Enter URL for the Resource to Profile', 'omniscience-profiler' ),
-			),
-			array(
-				'id' =>  'linkedin',
-				'type' => 'url',
-				'name' => esc_html__( 'LinkedIn URL', 'omniscience-profiler' ),
-			),
-			array(
-				'id' =>  'twitter',
-				'type' => 'url',
-				'name' => esc_html__( 'Twitter URL', 'omniscience-profiler' ),
-			),
-			array(
-				'id' =>  'facebook',
-				'type' => 'url',
-				'name' => esc_html__( 'Facebook URL', 'omniscience-profiler' ),
-			),
-			
-			array(
-				'id' =>  'instagram',
-				'type' => 'url',
-				'name' => esc_html__( 'Instagram URL', 'omniscience-profiler' ),
-			),
-			array(
-				'id' =>  'discord',
-				'type' => 'text',
-				'name' => esc_html__( 'Discord Handle', 'omniscience-profiler' ),
-			),
-			array(
-				'id' =>  'youtube',
-				'type' => 'url',
-				'name' => esc_html__( 'YouTube Channel', 'omniscience-profiler' ),
-			),
-			[
-                'type' => 'textarea',
-                'name' => esc_html__( 'blurb', 'online-generator' ),
-                'id'   => $prefix . 'blurb',
-            ],
-			[
-                'type' => 'textarea',
-                'name' => esc_html__( 'resources', 'online-generator' ),
-                'id'   => $prefix . 'blurb',
-            ],
-			[
-                'type' => 'textarea',
-                'name' => esc_html__( 'Talk Title', 'online-generator' ),
-                'id'   => $prefix . 'talk_title',
-            ],
-			[
-                'type' => 'textarea',
-                'name' => esc_html__( 'Talk Description', 'online-generator' ),
-                'id'   => $prefix . 'talk_description',
-            ],
-
-			array(
-				'id' => $prefix . 'logo',
-				'type' => 'image_advanced',
-				'name' => esc_html__( 'Logo', 'omniscience-profiler' ),
-				//'desc' => esc_html__( 'Size to 1920x1280', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => $prefix . '3Dlogo',
-				'type' => 'image_advanced',
-				'name' => esc_html__( '3D Logo', 'omniscience-profiler' ),
-				'desc' => esc_html__( '.glb format only', 'metabox-online-generator' ),
-				'force_delete' => false,
-				'max_file_uploads' => '10',
-				'options' => array(),
-				'attributes' => array(),
-			),
-
-
-			array(
-				'id' => 'screenshot',
-				'type' => 'image_advanced',
-				'name' => esc_html__( 'Screenshots', 'metabox-online-generator' ),
-				'desc' => esc_html__( 'submitted with', 'metabox-online-generator' ),
-				'force_delete' => false,
-				'max_file_uploads' => '10',
-				'options' => array(),
-				'attributes' => array(),
-			),
-
-					array(
-					'id' =>  'demo_video',
-					'type' => 'url',
-					'name' => esc_html__( 'Demo Video', 'omniscience-profiler' ),
-				),
-
-
-
-           				array(
-					'id' =>  'wikipedia',
-					'type' => 'url',
-					'name' => esc_html__( 'Wikipedia URL', 'omniscience-profiler' ),
-				),
-
-				
-				array(
-					'id' =>  'flickr',
-					'type' => 'url',
-					'name' => esc_html__( 'Flickr URL', 'omniscience-profiler' ),
-				),
-				array(
-					'id' =>  'Tumblr',
-					'type' => 'url',
-					'name' => esc_html__( 'Tumblr', 'omniscience-profiler' ),
-				),
-			
-
-				array(
-					'id' =>  'pinterest',
-					'type' => 'url',
-					'name' => esc_html__( 'Pinterest', 'omniscience-profiler' ),
-				),
-
-
-					array(
-					'id' =>  'GitHub',
-					'type' => 'url',
-					'name' => esc_html__( 'Github', 'omniscience-profiler' ),
-				),
-				array(
-					'id' =>  'medium',
-					'type' => 'url',
-					'name' => esc_html__( 'Medium', 'omniscience-profiler' ),
-				),
-
-				//comms
-				array(
-					'id' =>  'telegram',
-					'type' => 'url',
-					'name' => esc_html__( 'Telegram ', 'omniscience-profiler' ),
-				),
-
-
-
-				array(
-					'id' =>  'slack',
-					'type' => 'url',
-					'name' => esc_html__( 'Slack', 'omniscience-profiler' ),
-				),
-				array(
-					'id' =>  'skype',
-					'type' => 'url',
-					'name' => esc_html__( 'Skype', 'omniscience-profiler' ),
-				),
-
-				//video
-				array(
-					'id' =>  'youtube',
-					'type' => 'url',
-					'name' => esc_html__( 'YouTube Channel', 'omniscience-profiler' ),
-				),
-				array(
-					'id' =>  'vimeo',
-					'type' => 'url',
-					'name' => esc_html__( 'Vimeo', 'omniscience-profiler' ),
-				),
-
-			array(
-				'id' =>  'crunchbase',
-				'type' => 'url',
-				'name' => esc_html__( 'crunchbase URL', 'omniscience-profiler' ),
-			),
-							array(
-					'id' =>  'rss',
-					'type' => 'url',
-					'name' => esc_html__( 'RSS Feed URL', 'omniscience-profiler' ),
-				),
-		
-				
-
-
-
-// URLs
-			array(
-				'id' => 'logo_url',
-				'type' => 'text',
-				'name' => esc_html__( 'Logo URL', 'omniscience-profiler' ),
-			),
-			array(
-				'id' => 'logo_svgtag',
-				'type' => 'text',
-				'name' => esc_html__( 'Logo SVG', 'omniscience-profiler' ),
-			),
-			array(
-				'id' =>  'contact_url',
-				'type' => 'url',
-				'name' => esc_html__( 'Contact URL', 'omniscience-profiler' ),
-			),
-			array(
-				'id' =>  'blog_url',
-				'type' => 'url',
-				'name' => esc_html__( 'Blog URL', 'omniscience-profiler' ),
-			),
-			array(
-				'id' =>  'apply_url',
-				'type' => 'url',
-				'name' => esc_html__( 'Apply URL', 'omniscience-profiler' ),
-			),
-			array(
-				'id' =>  'jobs_url',
-				'type' => 'url',
-				'name' => esc_html__( 'Jobs URL', 'omniscience-profiler' ),
-			),
-			array(
-				'id' =>  'events_url',
-				'type' => 'url',
-				'name' => esc_html__( 'Events URL', 'omniscience-profiler' ),
-			),
-			array(
-				'id' =>  'conference_url',
-				'type' => 'url',
-				'name' => esc_html__( 'Conference URL', 'omniscience-profiler' ),
-			),
-				array(
-				'id' =>  'developers_url',
-				'type' => 'url',
-				'name' => esc_html__( 'Developers URL', 'omniscience-profiler' ),
-			),
-			
-		),
-	);
-
-	return $meta_boxes;
-}
-add_filter( 'rwmb_meta_boxes', 'setProfileURL' );
 
 
 function setProfileEvents( $meta_boxes ) { // this shows the box where the scrape and search results
@@ -1291,41 +1344,34 @@ add_filter( 'rwmb_meta_boxes', 'timezoneList' );
 
 
 
+
+
 /* AWARDS */
-function awards_metabox( $meta_boxes ) {
+function team_metabox( $meta_boxes ) {
 	$prefix = '';
 
 	$meta_boxes[] = array(
-		'id' => 'awards',
-		'title' => esc_html__( 'Screen Image', 'metabox-online-generator' ),
+		'id' => 'run-of-show',
+		'title' => esc_html__( 'Team Stations', 'metabox-online-generator' ),
 		'post_types' => array( 'resource', 'event','profile' ),
-		'context' => 'side',
+		
 		'priority' => 'high',
 		'autosave' => false,
 		'fields' => array(
-			array(
-				'id' => 'laurel',
-				'type' => 'image_advanced',
-				'name' => esc_html__( '2D Laurel', 'metabox-online-generator' ),
-				'desc' => esc_html__( 'Image Laurel For Nominations', 'metabox-online-generator' ),
-				'force_delete' => false,
-				'max_file_uploads' => '10',
-				'options' => array(),
-				'attributes' => array(),
-			),
-			array(
-				'id' => '3Dlaurel',
-				'type' => 'image_advanced',
-				'name' => esc_html__( '3D Laurel', 'metabox-online-generator' ),
-				'desc' => esc_html__( '3D Laurel GLB file', 'metabox-online-generator' ),
-				'force_delete' => false,
-				'max_file_uploads' => '10',
-				'options' => array(),
-				'attributes' => array(),
-			),
+			[
+                'type' => 'wysiwyg',
+                'name' => esc_html__( 'Show Journal', 'online-generator' ),
+                'id'   => $prefix . 'show_journal',
+			
+            ],
+		
+		
+		
+			
 		),
 	);
 
 	return $meta_boxes;
+	
 }
-add_filter( 'rwmb_meta_boxes', 'awards_metabox' );
+add_filter( 'rwmb_meta_boxes', 'team_metabox' );

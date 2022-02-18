@@ -68,6 +68,15 @@ jQuery(function () {
         heightStyle: "content" 
     });
 });
+
+
+jQuery(function () {
+    jQuery("#nomineeAccordion").accordion({
+        autoHeight: true,
+        heightStyle: "content" 
+    });
+});
+
 function openDrawer(){
     jQuery(".sidedrawer").animate({
         left: 0,

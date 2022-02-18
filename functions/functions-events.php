@@ -215,11 +215,9 @@ function get_pedestals($menu){
               
               "title"=>@$award['title'],
               "content"=>@$award['content'],
-              
               "slug"=>@str_replace("2021-","",$award['slug']),
               "classes"=>$award['classes'],
-              "coords"=>$award['coords'],
-              
+              "coords"=>$award['coords'],              
               "nominees" => $award['children'],
               "meta" => $award['meta']
               
@@ -233,7 +231,7 @@ function get_pedestals($menu){
 function get_nominations($menu){
     $awards = get_menu_array($menu);
       $pedestals = [];
-      
+     
      foreach($awards as $key =>$award){
          if($award['classes'] != null){
         $class_array = $award['classes'];
@@ -242,12 +240,14 @@ function get_nominations($menu){
 
                 array_push($pedestals,[
                     
-                    
+                    "id"=>@$award['ID'],
                     "title"=>@$award['title'],
                     "content"=>@$award['content'],
                     "slug"=>@str_replace("2021-","",$award['slug']),
                     "classes"=>$award['classes'],
                     "coords"=>$award['coords'],
+                    "duration"=>$award['duration'],
+                    
                     "nominees" => $award['children'],
                     "meta" => $award['meta']
                     
@@ -268,3 +268,59 @@ function getGLB($id){
 	}
 	
   }
+
+  
+function getNomineeImage($thumbnail_id,$class){
+    $src = getThumbnail($thumbnail_id);
+    
+
+}
+function getMetaLink($data,$field,$wrap='span'){
+    $prefix ='';
+    $link = '';
+    $label = '';
+    $value = trim(@$data[$field][0]);
+   
+    if($value){
+
+        if($field == 'email'){
+          
+            $link = "mailto:$value";
+            $label = $value;
+        } else if($field == 'twitter'){
+            $link = $value;
+            $label = str_replace("https://twitter.com/","@",$value);
+        }else if($field == 'linkedin'){
+            $link = $value;
+            $label = str_replace("	https://www.linkedin.com/in/","/",$value);
+        }
+        
+        else {
+            $link = $value;
+            $label = $value;
+        }
+
+
+
+        print "<$wrap class='meta'><a href='$link'>$label</a></$wrap>";
+    } else {
+
+     //   print " <span class='alert'>no $field</span>";
+    }
+
+}
+function getPostMeta($meta_key){
+    global $wpdb;
+    $q= $wpdb->get_results("select distinct meta_value, post_id from wp_postmeta where meta_key = '$meta_key'");
+    $children=[];
+
+    foreach($q as $key=>$value){
+        extract((array) $value);
+        //print "$value->ID | $value->post_title<br>";
+ //  $i = insertProfile($name,$bio,$parent);
+     array_push($children,(array) $value);
+
+
+    }
+    return $children;
+}

@@ -12,7 +12,18 @@
 </a-asset-item>
 
 <!--2021-->
-<a-asset-item id="2nd-polys-trophy" response-type="arraybuffer" src="/assets/models/polys/2021-Poly.glb"></a-asset-item>
+
+<?php
+    $trophy = '2021-Poly';
+    if(@$_GET['trophy']){
+        $trophy =$_GET['trophy'];
+    }
+?>
+
+<a-asset-item id="2nd-polys-trophy" response-type="arraybuffer" src="/assets/models/polys/trophies/<?=$trophy?>.glb"></a-asset-item>
+
+
+
 <a-asset-item id="pedestal" response-type="arraybuffer" src="/assets/models/polys/pedestal.glb"></a-asset-item>
 <a-asset-item id="polys2" response-type="arraybuffer" src="/assets/models/polys/Polys2Logo.glb"></a-asset-item>
 

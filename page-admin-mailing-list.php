@@ -1,13 +1,5 @@
 <?php
-require_once "functions/functions-awards.php";
-function url(){
-  return sprintf(
-    "%s://%s%s",
-    isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
-    $_SERVER['SERVER_NAME'],
-    $_SERVER['REQUEST_URI']
-  );
-}
+
 get_header(); 
 $section_class = get_post_meta($post->ID,'section_class',true);
 print $default_video_url = get_post_meta($post->ID,"embed_video_url",true);
@@ -25,7 +17,6 @@ if($post->post_parent==0){
 }
 */
 ?>
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <section class="home-section home-parallax home-fade home-full-height" id="home" style="background:url(<?=$hero_image?>) center center no-repeat;background-size:cover;">
     
@@ -33,7 +24,7 @@ if($post->post_parent==0){
 
 <?php
 }
-
+require_once("functions/functions-mailing-list.php");
 ?>
 
 <div class="title-bar">
@@ -46,33 +37,53 @@ if($post->post_parent==0){
     
     <?php
     }
-    
+ 
     ?>
 </div>
 
 
-<main  role="main" class="main <?=$section_class?>">
+<main role="main" class="main <?=$section_class?>">
 
   <section class="module" id="<?php echo @$slug?>" role="region">
-    <div class="row">
-      <div class="container">
+<div class="row">
+<div class="container">
+ <table>
+<?php
+  $contacts = getProfileContactInfo();
+    foreach($contacts as $key =>$contact){
+      extract($contact);
+      print "<tr>
+      <td>$id</td>
+      <td>$title</td>
+      <td>$email</td>
+      <td>$website</td>
+      <td>$twitter</td>
+      <td>$linkedin</td>
+      <td>$instagram</td>
       
-        <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-offset-1 col-10 ">
-       
-      <?php 
+      </tr>";
 
-          $awards = get_nominations('polys2');
-          nomineeAccordion($awards);
+    }
 
-          print do_blocks(do_shortcode($post->post_content));
-        ?>
-        
-          </div>  
-        </div>
-      </div>
+?>
+</table>
 
-    </div>
-  </section>
+
+    
+
+
+
+<?php
+
+
+
+ // print do_blocks(do_shortcode($post->post_content));
+?>
+</div>
+</div>
+
+</div>
+</section>
 
 </main>
-<?php get_footer(); ?>
+  <?php get_footer(); ?>

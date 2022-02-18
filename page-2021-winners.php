@@ -1,7 +1,8 @@
 <?php
     get_header();
 
-    require_once "functions/functions-awards.php";
+   
+
       $pedestals = get_pedestals('polys2');
     //    var_dump($pedestals);
       $assets = [];

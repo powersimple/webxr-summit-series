@@ -91,7 +91,7 @@
            width:20% !important;
            .profile-name{
             width: 100%;
-            display: block;
+            display: block;  
             margin-left: 0px;
             font-size: 14px;
             height:30px;
@@ -453,6 +453,7 @@ a.watch{
   }
 }
 .pin-bottom{
+
   position: fixed;
   width: 60%;
   height: 25vh;
@@ -469,4 +470,54 @@ a.watch{
     border:3px dotted #fff;
 
   }
+}
+table.segment{
+  td{
+    vertical-align:middle;
+    padding:5px;
+    a{
+      color:#fff;
+    }
+  }
+  td.name{
+    font-weight: bold;
+  }
+  img{
+    width:150px;
+    border-radius:150px;
+  }
+  .presenter{
+    
+  }
+  .thumbnail{
+    background-color: transparent;
+    width:100px;
+    border:none;
+  }
+  .designation{
+    width:75px;
+  }
+  .meta{
+    overflow:hidden;
+  }
+
+
+}
+.ros-event{
+float:left;
+text-align: left;
+position: relative;
+
+}
+.ros-time{
+  float:right;
+  text-align: left;
+  position: relative;
+  display: inline;
+  }
+.show-journal{
+  padding:25px;
+  font-family:monospace;
+  background: #e7e7e7;
+  color:#333;
 }

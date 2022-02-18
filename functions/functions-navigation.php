@@ -130,6 +130,7 @@
 				$menu[$m->ID]['classes'] = $m->classes;
 				$menu[$m->ID]['description'] = $m->description;//coords
 				$menu[$m->ID]['coords'] = $m->_coords;
+				$menu[$m->ID]['duration'] = $m->_duration;
 				$menu[$m->ID]['post'] = $post;
 				$menu[$m->ID]['post_type'] = $m->object;
 				$menu[$m->ID]['meta'] = $meta;
@@ -159,7 +160,7 @@
 					$children[$m->ID]['url'] = $m->url;
 					$children[$m->ID]['slug'] = $post->post_name;
 					$children[$m->ID]['coords'] = $m->_coords;
-					
+					$children[$m->ID]['duration'] = $m->_duration;
 					$children[$m->ID]['classes'] = $m->classes;
 					//$children[$m->ID]['embed_video_url'] = get_post_meta($m->ID,"embed_video_url",true);
 				
@@ -187,7 +188,7 @@
 * @params obj $item - the menu item
 * @params array $args
 */
-function kia_custom_fields( $item_id, $item ) {
+function kia_custom_fields_coords( $item_id, $item ) {
 
 	wp_nonce_field( '_coords_nonce', '_coords_nonce_name' );
 	$_coords = get_post_meta( $item_id, '_coords', true );
@@ -207,15 +208,15 @@ function kia_custom_fields( $item_id, $item ) {
 
 	<?php
 }
-add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields', 10, 2 );
+add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_coords', 10, 2 );
 
 /**
-* Save the menu item meta
+* COORDINATESave the menu item meta
 * 
 * @param int $menu_id
 * @param int $menu_item_db_id	
 */
-function kia_nav_update( $menu_id, $menu_item_db_id ) {
+function kia_nav_update_coords( $menu_id, $menu_item_db_id ) {
 
 	// Verify this came from our screen and with proper authorization.
 	if ( ! isset( $_POST['_coords_nonce_name'] ) || ! wp_verify_nonce( $_POST['_coords_nonce_name'], '_coords_nonce' ) ) {
@@ -229,7 +230,7 @@ function kia_nav_update( $menu_id, $menu_item_db_id ) {
 		delete_post_meta( $menu_item_db_id, '_coords' );
 	}
 }
-add_action( 'wp_update_nav_menu_item', 'kia_nav_update', 10, 2 );
+add_action( 'wp_update_nav_menu_item', 'kia_nav_update_coords', 10, 2 );
 
 
 
@@ -240,7 +241,7 @@ add_action( 'wp_update_nav_menu_item', 'kia_nav_update', 10, 2 );
 * @param WP_Post  $item  The current menu item.
 * @return string      
 */
-function kia_custom_menu_title( $title, $item ) {
+function kia_custom_menu_title_coords( $title, $item ) {
 
 	if( is_object( $item ) && isset( $item->ID ) ) {
 
@@ -252,6 +253,100 @@ function kia_custom_menu_title( $title, $item ) {
 	}
 	return $title;
 }
-add_filter( 'nav_menu_item_title', 'kia_custom_menu_title', 10, 2 );
+add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_coords', 10, 2 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function kia_custom_fields_duration( $item_id, $item ) {
+
+	wp_nonce_field( '_duration_nonce', '_duration_nonce_name' );
+	$_duration = get_post_meta( $item_id, '_duration', true );
+	?>
+	<div class="field-_duration description-wide" style="margin: 5px 0;">
+	    <span class="description"><?php _e( "Duration", 'coordinates' ); ?></span>
+	    <br />
+
+	    <input type="hidden" class="nav-menu-id" value="<?php echo $item_id ;?>" />
+
+	    <div class="logged-input-holder">
+	        <input type="text" name="_duration[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>" size="40" value="<?php echo esc_attr( $_duration ); ?>" />
+	      
+	    </div>
+
+	</div>
+
+	<?php
+}
+add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_duration', 10, 2 );
+
+/**
+* COORDINATESave the menu item meta
+* 
+* @param int $menu_id
+* @param int $menu_item_db_id	
+*/
+function kia_nav_update_duration( $menu_id, $menu_item_db_id ) {
+
+	// Verify this came from our screen and with proper authorization.
+	if ( ! isset( $_POST['_duration_nonce_name'] ) || ! wp_verify_nonce( $_POST['_duration_nonce_name'], '_duration_nonce' ) ) {
+		return $menu_id;
+	}
+
+	if ( isset( $_POST['_duration'][$menu_item_db_id]  ) ) {
+		$sanitized_data = $_POST['_duration'][$menu_item_db_id];
+		update_post_meta( $menu_item_db_id, '_duration', $sanitized_data );
+	} else {
+		delete_post_meta( $menu_item_db_id, '_duration' );
+	}
+}
+add_action( 'wp_update_nav_menu_item', 'kia_nav_update_duration', 10, 2 );
+
+
+
+/**
+* Displays text on the front-end.
+*
+* @param string   $title The menu item's title.
+* @param WP_Post  $item  The current menu item.
+* @return string      
+*/
+function kia_custom_menu_title_duration( $title, $item ) {
+
+	if( is_object( $item ) && isset( $item->ID ) ) {
+
+		$_duration = get_post_meta( $item->ID, '_duration', true );
+
+		if ( ! empty( $_duration ) ) {
+			$title .= ' - ' . $_duration;
+		}
+	}
+	return $title;
+}
+add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_duration', 10, 2 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ?>

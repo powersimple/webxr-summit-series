@@ -48,7 +48,7 @@ We are both thrilled and grateful for your participation in the WebXR Design Sum
 Thank you for joining our panel <strong>[SESSION]</strong> at the <strong>WebXR Design Summit on the 12th of October, </strong>[MODERATION]<BR><BR>[WITH]
 $instructions";
 
-$presentation_script = "Dear [NAME],<br><br>
+$presentation_script = "Dear [NAMEd],<br><br>
 We are excited for your presentation titled [SESSION] at the <strong>WebXR Design Summit on the 12th of October</strong>.<br><br>
 $instructions";
 
@@ -93,8 +93,12 @@ $instructions";
 function getNominee($nominee,$nominations,$current_award,$current_nomination){
 
     if(count(@$nominee['children'])){
-        print "<ol>";
+//     
+        
         foreach($nominee['children'] as $n => $child){
+            print "<tr>";
+        //    var_dump($child);
+            extract($child);
             $id = $child['post']->ID;
             $type=$child['post']->post_type;
             if($type == 'profile' || $type == 'resource'){
@@ -113,13 +117,18 @@ function getNominee($nominee,$nominations,$current_award,$current_nomination){
             
          //           array_push($nominations[$current_nomination],$nominee);
             }
-
-
-            print "<li>";
+         
+            $src = getThumbnail(get_post_thumbnail_id($child['post']->ID));
+            print "<td>".@$class[0]."</td>";   
+        print "<td>";
+        if($src != ''){
+        print "<img src='$src' alt='".$nominee['post']->post_title."'></td>";
+    }
+            print "<td>";
            
             print "<a href='/wp-admin/post.php?post=$id&action=edit' target='_blank'>$child[title]</a>";
-
-            print " | ". @$type. " | ";
+            print "</td>";
+        //    print " | ". @$type. " | ";
 
 
             // $child[slug]
@@ -128,23 +137,41 @@ function getNominee($nominee,$nominations,$current_award,$current_nomination){
           
 
 
-           getMetaLink($child['meta'],'email');
+           getMetaLink($child['meta'],'email','td');
 
-           getMetaLink($child['meta'],'twitter');
-           getMetaLink($child['meta'],'website');
-           getMetaLink($child['meta'],'resource_url');
-            print "</li>";
+           getMetaLink($child['meta'],'twitter','td');
+           getMetaLink($child['meta'],'website','td');
+           getMetaLink($child['meta'],'resource_url','td');
+            print "<td>";
+            
+            print "</td>";
+            print "</tr>";
             $nominations = getNominee(@$child,$nominations,$current_award,$current_nomination);
+            
         }
-        print "</ol>";
+//        print "</tr>";
 
     }
     return $nominations;
 
 }
 
-$awards = get_nominations('polys2');
 
+
+//$ros = get_nominations('polys2');
+
+
+
+function showCounter($counter){
+    if($counter<10){
+        return "0".$counter;
+    }
+    return $counter;
+}
+
+function getNominees(){
+
+}
 
 
 
@@ -154,16 +181,214 @@ $nominees = [];
 $nominee_list = [];
 $award_list = [];
 $counter=0;
-foreach($awards as $i =>$item){
+function getRunOfShowAccordion($ros){
+    
+    $nominations = [];
+    $nominees = [];
+    $nominee_list = [];
+    $award_list = [];
+    $counter = 0;
+    
+    foreach($ros as $i =>$item){ // outer loop.
+        extract($item);
+    
+
+        $current_award = $slug;
+        $awards_list[$current_award] = $item['title'];
+        
+        if(!in_array("nomination",explode(" ",$classes[0]))){
+           // continue;
+          }
+         // var_dump($duration = @$item['meta']);
+         if( $duration = @$item['meta']['duration'][0]){
+          
+         } else {
+             $duration = 210;
+          }
+          $length = gmdate("i:s", $duration);
+          $start = @$meta['utc_start'][0];
+           
+          if($start != '' && $start != 0){
+            $start_date_time = date("m-d h:ia",$start);  
+            $current_time = $start;
+          }  else {
+
+          
+            $start_date_time = date("h:ia",$current_time);
+          }
+          @$current_time = $current_time + $duration;
+          
+          $the_time = date("H:m",$current_time);
+
+        print "<h3><span class='ros-event'>".showCounter($counter)." | $title </span><span class='ros-time'>$start_date_time | $length</span></h3>";
+        print "<div>"; 
+    if(@$meta['show_journal'][0]){
+        if(@$_GET['cues']){
+
+       
+        print "<div class='show-journal'>". @$meta['show_journal'][0]."</div>";
+    }
+
+    }
+
+        
+
+        
+        if(is_array($nominees)){
+        print "<table class='segment'>";
+        foreach($nominees as $c => $nominee){
+            extract($nominee);
+            
+
+            $class= explode(" ",$classes[0]);
+            //var_dump($class);
+            
+           $current_nomination = $nominee['slug'];
+          
+           $id = $nominee['post']->ID;
+           $type=$nominee['post']->post_type;
+          $thumbnail = @$nominee['meta']['_thumbnail_id'][0];
+       
+    
+           if($type == 'profile'|| $type == 'resource'){
+        }
+            if(!in_array($current_nomination,$nominations)){
+            }
+                $nominations[$current_nomination] = ["nominations"=>[],"nominee"=>[
+                    "name"=>$nominee['title'],
+                    "email"=>@$nominee['meta']['email'][0],
+                    "website"=>@$nominee['meta']['website'][0],
+                    "resource_url"=>@$nominee['meta']['resource_url'][0],
+                    "_thumbnail_id"=>@$nominee['meta']['_thumbnail_id'][0],
+                    
+                    
+                ]];
+                
+            
+    
+            array_push($nominations[$current_nomination]['nominations'],$current_award . " ". $current_nomination);
+    
+          
+            print "<tr><td colspan='9'><hr></td></tr>";
+          
+           print "<tr class='$classes[0]'>";
+      
+           if(in_array('presenter',$class)){
+        
+            }  
+
+        $src = getThumbnail(get_post_thumbnail_id($nominee['post']->ID));
+
+            print "<td class='designation'>".ucfirst($class[0])."</td>";   
+        print "<td class='thumbnail'>";
+        if($src){
+        print "<img src='$src' alt='".$nominee['post']->post_title."'>";
+    
+        
+        }
+        print "</td>";
+           print"<td class='name' ><a href='/wp-admin/post.php?post=$id&action=edit' target='_blank'>$nominee[title]</a></td>";
+        //    print " | ". $type. " | ";
+    
+
+            getMetaLink($nominee['meta'],'email','td');
+    
+            getMetaLink($nominee['meta'],'twitter','td');
+            getMetaLink($nominee['meta'],'website','td');
+            getMetaLink($nominee['meta'],'linkedin','td');
+            getMetaLink($nominee['meta'],'instagram','td');
+            
+
+            getMetaLink($nominee['meta'],'resource_url','td');
+            
+            print "</tr>";
+           
+            if(@$_GET['credential']){
+                print "<tr><td>";
+                print "<td colspan='9'>";
+                print "<textarea cols='30' rows='5'>";
+print $nominee['post']->post_title;
+print "
+";
+                if(@$nominee['meta']['profile_title'][0]){
+print $nominee['meta']['profile_title'][0].", ";
+                }
+                if(@$nominee['meta']['company'][0]){
+print $nominee['meta']['company'][0];
+                 }
+                 
+                 if(@$nominee['meta']['twitter'][0]){
+print "
+";
+                    
+print str_replace("https://twitter.com/","@",$nominee['meta']['twitter'][0]);
+                 }
+                 print "</textarea>";
+
+ 
+              // var_dump($nominee['meta']);
+                print "</td>";
+                print "</td></tr>";
+
+            }
+    
+    
+           $nominations = getNominee(@$nominee,$nominations,$current_award,$current_nomination);
+    
+     
+       
+        }
+    print "</table>";
+    } else {//not an array of nominees
+
+    }
+   
+
+        print"</div>";
+        
+
+        $counter++;
+
+        }//run of show
+}
+
+?>
+<div id="accordion" class="run-of-show">
+   
+    <?php
+    $vrc = get_nominations('virtual-red-carpet-2');
+    getRunOfShowAccordion($vrc);
+    ?>
+
+    <?php
+    $ceremony = get_nominations('polys2');
+    getRunOfShowAccordion($ceremony);
+    ?>
+</div>
+<?Php
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+foreach($ros as $i =>$item){ // outer loop.
     extract($item);
     if(!in_array("nomination",explode(" ",$classes[0]))){
-        continue;
+       // continue;
       }
-    print "<h2>$counter | $title</h3>";
+    print "<h3>".showCounter($counter)." | $title</h3>";
    // print "<strong>$slug</strong>";
-    $current_award = $slug; 
+    $current_award = $slug;
     $awards_list[$current_award] = $item['title'];
-
+/*
 print "<ol>";
     foreach($nominees as $c => $nominee){
        $current_nomination = $nominee['slug'];
@@ -194,7 +419,7 @@ print "<ol>";
 
       
        print "<li><a href='/wp-admin/post.php?post=$id&action=edit' target='_blank'>$nominee[title]</a>";
-        print " | ". $type. " | ";
+    //    print " | ". $type. " | ";
 
         getMetaLink($nominee['meta'],'email');
 
@@ -217,7 +442,7 @@ print "</ol>";
 $counter++;
 
 
-}
+}*/
 
 
 aggregateNominations($nominations);
@@ -243,7 +468,9 @@ function aggregateNominations($nominations){
     
     
         }
-
+    
+    
+    
     
         if($email != ''){
         print "SUBJECT= $subject<BR>";

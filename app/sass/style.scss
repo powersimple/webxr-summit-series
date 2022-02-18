@@ -3273,8 +3273,12 @@ transform: scale(0.5) translate(-100%, -100%);
     color:#000;
     padding:40px;
     border:3px outset #fff;
+   
+    border-radius:10px;
+    border:2px outset #CCCC;
+    font-weight:400;
     strong{
-        font-weight: 600;
+        font-weight: 800;
     }
     h2{
         font-weight: 600;
@@ -3284,13 +3288,55 @@ transform: scale(0.5) translate(-100%, -100%);
         color:#00a;
        
     }
-    
+    p, li {
+        color:#000;
+        display: block;
+        font-weight:600;
+        font-size:1em;
+        line-height:150%;
+    }    
+    list-style: disc;
   }
   #experiences{
+      li{
+        list-style-type: disc;
+        width: 84px;
+        display: inline-block;
+        margin: 5px;
+        font-size:10px;
+      }
     img{
         border-radius:50%;
         width:150px;
         margin:0px auto;
         display: block;
+    }
+}
+#ballot{
+    margin-top:70px;
+}
+#ballot-faq {
+    height:350px;
+    overflow-y: auto;
+    margin-bottom:25px;
+
+}   
+
+.winners{
+    background-color: rgba(50,50,50,08);
+    padding:5px;
+    font-weight:bold;
+}
+ul.nominee-list li{
+    list-style:none;
+}
+#nomineeAccordion{
+    h3{
+        text-align: left;
+        background:#000;
+        color:#fff;
+    }
+    li{
+        padding:3px;
     }
 }
