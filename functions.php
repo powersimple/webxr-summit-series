@@ -15,6 +15,8 @@ require_once("functions/functions-metabox.php");
 	require_once("functions/functions-post-types.php");
 	require_once("functions/functions-profiles.php");
 	require_once("functions/functions-events.php");
+	require_once("functions/functions-awards.php");
+	
 	require_once("functions/functions-rest-menus.php");
 	// custom functions to register fields into the restapi
 	require_once("functions/functions-rest-register.php");

@@ -23,7 +23,7 @@
    </div>
 <?php
 }
-  include "webxr/polys2/laurel-viewer.php";
+  //include "webxr/polys2/laurel-viewer.php";
 //   include "webxr/polys2/drawer-experiences.php";
  //   include "webxr/polys2/drawer-nominations.php";'
 
@@ -42,7 +42,7 @@ if(@$_GET['animation']){
 
 $laurel_props = "
   scale='25 25 35'
-  position='0 -1.66 -6.5'
+  position='0 -.2 -6.5'
   rotation='0 20 0' 
 ";
 if(@$_GET['left']){
@@ -73,7 +73,8 @@ if(@$_GET['left']){
     <?php 
         if(@$_GET['laurel']){
 ?>
-  <a-asset-item id="laurel" response-type="arraybuffer" position="0 0 -5" src="/assets/models/laurels/unminted/<?=$_GET['laurel']?>.glb"></a-asset-item>
+  <a-asset-item id="laurel" response-type="arraybuffer" position="0 0 0" src="/assets/models/<?=$_GET['laurel']?>.glb"></a-asset-item>
+
 <?php
 
         }
@@ -89,11 +90,25 @@ if(@$_GET['left']){
 
     <?php
             include "webxr/polys2/rigging.php";
-            include "webxr/polys2/lights.php";
+           // include "webxr/polys2/lights.php";
 
 ?>
-<a-light id="white-d4" type="directional" color="white" intensity="5" position="0 3 8" rotation="0 0 0" angle="90"></a-light>
+<a-light id="white-d4" type="directional" color="white" intensity="1" position="0 0  8" rotation="0 0 0" angle="90"></a-light>
+<a-light id="red1" type="spot" color="#900" intensity="25 " position="-16 0 -17.5" rotation="0 -60 0" angle="90"></a-light>
 
+<!--
+<a-light id="green1" type="point" intensity="1" position="0 -120 10" rotation="0 0 0" angle="90"></a-light>
+<a-light id="red1" type="point" color="#900" color="#090" intensity="1" position="-25 -80 -10" rotation="0 0 0" angle="90"></a-light>
+<a-light id="red1" type="point" color="#900" color="#090" intensity="1" position="-25 -80 10" rotation="0 0 0" angle="90"></a-light>
+
+
+<a-light id="yellow1" type="point" color="#Ff0" intensity="1" position="0 -140 100" rotation="0 0 0" angle="90"></a-light>
+
+<a-light id="red1" type="spot" color="#009" intensity="25 " position="16 0 -17.5" rotation="0 300 0" angle="90"></a-light>
+-->
+
+
+<a-light id="white" type="point" color="909" intensity="5" position="0 0 10" rotation="0 0 0" angle="90"></a-light>
 <a-entity id="laurel-model" class="center-obj-zone" static-body
                 full-gltf-model="#laurel" class="collision" visible="true"
                 <?=$laurel_props?> 
@@ -106,6 +121,7 @@ if(@$_GET['left']){
 
 
 
+            
   
 
 

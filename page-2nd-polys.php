@@ -1,7 +1,29 @@
 <?php
     get_header();
 
-  
+    require_once "functions/functions-awards.php";
+      $pedestals = get_pedestals('polys2');
+    //    var_dump($pedestals);
+      $assets = [];
+     
+
+   if(@$_GET['dump'] == 'awards'){
+     
+?>
+
+<div id="dump" style="position:absolute;top:0px; height:100vh;width:20%;background-color:rgba(10,10,10,0.4);color:#fff;z-index:100;overflow-y:scroll;">
+    <?php 
+    
+
+    
+    
+    
+    ?>
+   </div>
+<?php
+}
+   include "webxr/polys2/drawer-experiences.php";
+ //   include "webxr/polys2/drawer-nominations.php";
 ?>
 
    
@@ -29,7 +51,7 @@
             include "webxr/polys2/lights.php";
 
 ?>
-<a-entity id="summmits-2022" position="0.05 0 -21.2" rotation="0 0 0" scale="1 1 1" visible="true">
+<a-entity id="awards-2021" position="0.05 0 -21.2" rotation="0 0 0" scale="1 1 1" visible="true">
     <a-entity id="platform-wrap" visible="true" scale="2 2 2" 
     position="0 -2 0"
                 rotation="0 0 0">

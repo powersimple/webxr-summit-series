@@ -151,8 +151,8 @@ function nomineeAccordion($awards){
           continue;
         }
         
-        
-        print "<h3>$title</h3>";
+        $title = str_replace("2021 – ","",$title);
+        print "<h3 class=>$title</h3>";
         print "<div class='nominees'>";
         print "<ul class='nominee-list'>";
         foreach($nominees as $c => $nominee){
@@ -172,20 +172,20 @@ function nomineeAccordion($awards){
          $presented = "";
          $nominee_class=""; 
          $id = $nominee['post']->ID;
-         $title = str_replace("2021 – ","",$nominee['title']);
-
+         //
+         $title =  htmlentities($nominee['title']);
          if($nominee['classes'][0] == 'presenter'){
           continue; 
           $presented = 'Presented by'; 
 
            $nominee_class="presenter"; 
-           print "<li class='presenter'>Presented by $title</li>";
+           print "<li class='presenter'>Presented by $nominee[title]</li>";
           } else if($nominee['classes'][0] == 'winner'){
               $presented = 'Winner'; 
               $nominee_class="winner2021"; 
-              print "<li class='winners'>Winner<br><a href='$url' target='blank'>$title</a></li>";
+              print "<li class='winners'>Winner<br><a href='$url' target='blank'>$nominee[title]</a></li>";
           } else{
-            print "<li class='$nominee_class'>$presented  <a href='$url' target='blank'>$title</a></li>";
+            print "<li class='$nominee_class'>$presented  <a href='$url' target='blank'>$nominee[title]</a></li>";
           }
           
          

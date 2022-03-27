@@ -40,8 +40,9 @@
     <div id="menuclose"></div>
     
     <div id="nominations">
-    <span class="experiences-header">2021 Nominees and WInners.</span>
+    <span class="experiences-header webxrawards">Nominees and Winners</span>
         <?php
+            
             $awards = get_nominations('polys2');
             nomineeAccordion($awards);
    

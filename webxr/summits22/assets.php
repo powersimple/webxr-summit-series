@@ -7,7 +7,7 @@
 
 <a-asset-item id="emblem" response-type="arraybuffer" src="/assets/models/polys/emblem22.glb"></a-asset-item>
 
-<img id="sky" src="/assets/images/skybox/MilkyWaySkybox.jpg">
+<img id="sky" src="/assets/images/skybox/bluegreenparabola.jpg">
 <a-asset-item id="ring" response-type="arraybuffer" position="0 0 -5" src="/assets/models/polys/ring.glb">
 </a-asset-item>
 

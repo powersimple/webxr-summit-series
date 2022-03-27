@@ -88,6 +88,8 @@ function displayTextSeries($label_array,$coords){
 
 
 
+
+
 function displayModelSeries($model_series,$coords){
     // this function renders in a series of models label with offsets
         extract($coords);
@@ -105,7 +107,7 @@ function displayModelSeries($model_series,$coords){
       $z_counter = $start_z;
     
        
-        print "<a-entity id='model_series' position='$pos_x $pos_y $pos_z' rotation='$rot_x $rot_y $rot_z' scale='$scale $scale $scale'>";
+      print "<a-entity id='model_series' position='$pos_x $pos_y $pos_z' rotation='$rot_x $rot_y $rot_z' scale='$scale $scale $scale'>";
         
         print "<a-light id='series-spot1' type='spot' color='#fff'  intensity='10' distance='200'
         position='-37 1.5 66' angle='60' rotation='0 0 0'>

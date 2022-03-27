@@ -63,6 +63,7 @@ function setVideoPath(video_path) {
 }
 
 function initSite() {
+    console.log("megamenu");
     megaMenu()
    // sponsorFooter()
 

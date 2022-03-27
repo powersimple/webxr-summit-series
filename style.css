@@ -5928,18 +5928,32 @@ div.developer-summit {
   overflow-y: auto;
   margin-bottom: 25px; }
 
-.winners {
-  background-color: #323232;
-  padding: 5px;
-  font-weight: bold; }
-
 ul.nominee-list li {
   list-style: none; }
 
 #nomineeAccordion h3 {
   text-align: left;
   background: #000;
-  color: #fff; }
+  padding: 10px 5px;
+  color: #fff;
+  margin: 0px;
+  border-bottom: 0.5px solid #222; }
+
+#nomineeAccordion .nominees {
+  background-color: rgba(10, 10, 10, 0.5); }
+
+#nomineeAccordion .winners {
+  background-color: #323232;
+  padding: 15px;
+  font-weight: bold;
+  color: #ffff5f;
+  border: 3px dashed #ffff5f;
+  margin-bottom: 5px;
+  border-radius: 15px; }
 
 #nomineeAccordion li {
-  padding: 3px; }
+  padding: 10px;
+  text-align: center; }
+
+#nomineeAccordion a:visited {
+  color: #aaa; }
