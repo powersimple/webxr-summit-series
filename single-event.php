@@ -33,7 +33,7 @@ urlParams.set('collapse', 'all')
 urlParams.set('cards', 'show')
 
 </script>
-<section class="home-section home-parallax home-fade home-full-height" id="home" style="background:url(<?=$hero_image?>) center center no-repeat">
+<section class="home-section home-parallax home-fade home-full-height" id="home" style="background:url(<?=$hero_image?>) top center no-repeat">
     
     </section>
 
@@ -49,7 +49,9 @@ urlParams.set('cards', 'show')
 
 <main class="main" role="main">
 
-
+<?php
+    
+?>
 
 
 <div class="title-bar">
@@ -69,7 +71,14 @@ urlParams.set('cards', 'show')
  
     ?>
 </div>
+<?php
+if(@$_GET['ros-list']){
+    ?>
+<div id="ros-list"></div>
 
+    <?php
+}
+?>
 
 <section class="module" id="ros-table" >
     <?php
@@ -77,6 +86,8 @@ urlParams.set('cards', 'show')
 ?>
 
 </section>
+
+
     <div class="row">
     <?php
 if(($post->ID!=13) || (@$_GET['cards'] == 'show')){
@@ -148,7 +159,7 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
          </div>
          <div class="order-xs-1 col-sm-12  col-xl-4 col-xxl-5" >
              <div class="text-wrap">
-         <?=do_blocks($post->post_content)?>
+         <?php do_blocks($post->post_content)?>
 
         <?php
             if(@$_GET['event_menu']){
@@ -164,7 +175,12 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
                     var run_of_show = runOfShow('<?=$_GET['event_menu']?>');
                    // console.log("ROS",run_of_show)
                     displayRunOfShow(run_of_show)
+
+                    printdisplayRunOfShowList(run_of_show)
+
                     displayRunOfShowTable(run_of_show)
+                    
+                    
                 });
                 </script>
 
@@ -186,21 +202,22 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
      
      </div>
  </div>
+<?php if($default_video_url != ''){?>
  <div class="container">
      <div class="row pin-bottom">
     
         <div class="video-wrap">
-    <?php
-        if($default_video_url != ''){
 
-        ?>
+      
         <iframe id="video-player" src="<?=$default_video_url?>"  frameborder="0" allowfullscreen></iframe>
-            <?php
-        }
-    ?> 
+            
         </div> 
     </div>            
 </div>    
+<?php
+    }
+?> 
+
   </main>
   <?php
     

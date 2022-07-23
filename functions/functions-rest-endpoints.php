@@ -10,6 +10,7 @@ Otherwise, the results you want, may not be the results it returns.
 Sort: For sanity's sake, it's best that you sort posts by ID, so when inspecting your endpoint, they are in order
 Hence, the REST_post_filter variable below.
 */
+
 $GLOBALS['REST_post_filter'] = "filter[orderby]=ID&order=asc&per_page=100";// handles order and pagination
 $GLOBALS['REST_post_filter_name_sort'] = "filter[orderby]=post_title&order=asc&per_page=100";
 $GLOBALS['REST_tax_filter'] = "filter[orderby]=name&order=asc&per_page=100";
@@ -32,6 +33,8 @@ function iterateEndpoint($field,$name,$query){
            $iterations = 2;
            $sql = "select id from wp_posts where post_status='publish' and $field='$name'";
            $q = $wpdb->get_results($sql);
+          
+          
         } else {
 
         }
@@ -39,22 +42,21 @@ function iterateEndpoint($field,$name,$query){
             
         if((count($q)/100) > floor(count($q)/100)){
                         //print   $iterations = count($q);
-             $iterations = floor((count($q)/100))+1;
+              $iterations = floor((count($q)/100))+1;
+            
             
 
-
         } else {
-            $iterations = 1;
+           $iterations = 1;
         }
-
+       
        
 
         for($i=1;$i<=$iterations;$i++){
              
            array_push($endpoint_array,$query."&page=$i");
         }    
-       // var_dump($endpoint_array);
-        //die();
+     
             return $endpoint_array;
         
 
@@ -62,7 +64,7 @@ function iterateEndpoint($field,$name,$query){
 
 $GLOBALS['REST_CONFIG'] =array(//An array of url arguments
             "posts"=>"fields=id,type,title,content,slug,excerpt,languages,post_media,featured_media,screen_images,video,type,cats,tags&".$GLOBALS['REST_post_filter'],
-            "pages"=>"fields=id,type,title,content,slug,excerpt,languages,post_media,featured_media,screen_images,featured_video,cats,tags,type&".$GLOBALS['REST_post_filter'],
+            "pages"=>"fields=id,type,title,content,slug,excerpt,languages,post_media,featured_media,screen_images,properties_3D,featured_video,cats,tags,type&".$GLOBALS['REST_post_filter'],
             "profile"=>iterateEndpoint('post_type','profile',"fields=id,type,title,content,slug,excerpt,post_media,languages,meta,info,seo,featured_media,screen_images,featured_video,type,industry,support_hardware,feature,thumbnail_url,collaboration_type,platform,cats,tags&".$GLOBALS['REST_post_filter_name_sort']),
 
            // "profile"=>iterateEndpoint('post_type','profile',"fields=id,type,title,content,slug,excerpt,post_media,languages,info,seo,featured_media,screen_images,featured_video,type,industry,support_hardware,feature,thumbnail_url,collaboration_type,platform,cats,tags&".$GLOBALS['REST_post_filter_name_sort']),
@@ -99,14 +101,15 @@ require_once("functions-wpml-languages.php");
  
         if(@$_GET['endpoints']){//header for list of endpoints
                 print "<strong>ENDPOINTS:</strong>
+               
                 <ul>";
         }
       //  $url = $url_path.$key;
         foreach($GLOBALS['REST_CONFIG'] as $key => $value){//loops through the array of endpoints above
              if(is_array($value)){
            
-                
-               
+              //  var_dump($value);
+                $url = $url_path.$key."?".$value[0];
            } else {
                $url = $url_path.$key."?".$value; // default, value passes params in REST_CONFIG array
 
@@ -244,12 +247,13 @@ require_once("functions-wpml-languages.php");
        //stuff here for allowed roles
      
         
-    if(@$_GET['publish'] || @$_GET['endpoints']){
-        getEndpoints();
-       
-    }
+    
 } 
-
+if(@$_GET['publish'] || @$_GET['endpoints']){
+   
+    getEndpoints();
+   
+}
 function slugify_tax($start,$end){
     global $wpdb;
     $sql = "select term_id, name from wp_terms where (term_id >= $start) and (term_id<=$end)";

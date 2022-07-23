@@ -155,7 +155,7 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
                             "menu_order"=>$value->menu_order,
                             "title"=>$value->title,
                             "content"=>get_post( $value->object_id )->post_content,
-                            
+                            'attr' => $value->attr_title,
                             "url"=>$url,
                             "slug"=>sanitize_title($value->title),
                             "coords" => $value->_coords,
@@ -445,6 +445,8 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
                 'order'       => (int) $item['menu_order'],
                 'parent'      => abs( $item['menu_item_parent'] ),
                 'title'       => $item['title'],
+                'title_attr'  => $item['title'],
+
                 'content'       => get_post( $item['object_id'] )->post_content,
                 
                 'slug'       => $item['slug'],

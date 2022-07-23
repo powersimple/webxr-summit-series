@@ -30,12 +30,7 @@
       $pedestals = get_nominations('polys2');
     //    var_dump($pedestals);
       $assets = [];
-      function getGLB($id){
-        if(strpos(get_post($id)->guid,"/wp-content")){
-          return '/wp-content'.explode('/wp-content',get_post($id)->guid)[1];
-        }
-        
-      }
+      
 
    if(@$_GET['dump'] == 'awards'){
      

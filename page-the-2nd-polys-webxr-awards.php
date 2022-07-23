@@ -65,28 +65,28 @@
                                                 position="0.280 1.33 4.344" scale="12 12 12"  rotation="90 30 0"></a-image>-->
 
             <a-entity id="outer-ring" class="center-obj-zone" static-body
-                full-gltf-model="#ring" class="collision" visible="true"
+                gltf-model="#ring" class="collision" visible="true"
                 scale="1 1 1"
                 position="0.11 0.069 3.97"
                 static-body="shape: box;" 
                 ></a-entity><!-- outer ring -->
 
                 <a-entity id="inner-ring" class="center-obj-zone" static-body
-                full-gltf-model="#ring" class="collision" visible="true"
+                gltf-model="#ring" class="collision" visible="true"
                 scale=".8 .8 .8"
                 position="0.126 0.569 3.97"
                 static-body="shape: box;" 
                 ><!-- inner ring -->
             <!--
                 <a-entity id="emblem-model" class="center-obj-zone" static-body
-                full-gltf-model="#emblem" class="collision" visible="true"
+                gltf-model="#emblem" class="collision" visible="true"
                 scale="5 5 5"
                 position="-0.41 3.25 0"
                 static-body="shape: box;" 
                 animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 24000; loop: true;"
                 >
                 <a-entity id="Polys2-logo-model" class="center-obj-zone" static-body
-                        full-gltf-model="#polys2" class="collision" visible="true"
+                        gltf-model="#polys2" class="collision" visible="true"
                         scale="5 5 5"
                         position="0 -0.5  0"
 
@@ -97,7 +97,7 @@
             </a-entity>-->
 
             <a-entity id="trophy-model" class="center-obj-zone" static-body
-                full-gltf-model="#2nd-polys-trophy" class="collision" visible="true"
+                gltf-model="#2nd-polys-trophy" class="collision" visible="true"
                 scale="25 25 25"
                 position="0 -49 0"
                 rotation="0 0 0" 
@@ -105,7 +105,7 @@
                 
                 
                 <a-entity id="Polys2-logo-model" class="center-obj-zone" static-body
-                        full-gltf-model="#polys2" class="collision" visible="true"
+                        gltf-model="#polys2" class="collision" visible="true"
                         scale="1 1 1  "
                         position="0 2.05  0"
                         rotation="0  -30 0"
@@ -120,7 +120,7 @@
 
                
                     <a-entity id="futurewei-logo-model" class="center-obj-zone" static-body
-                        full-gltf-model="#futurewei" class="collision" visible="true"
+                        gltf-model="#futurewei" class="collision" visible="true"
                         scale=".7 .7 .7"
                         position="-0.3 1.43 5.2"
                         rotation="0 180 0"
@@ -128,7 +128,7 @@
                     
                         ></a-entity>
                         <a-entity id="powersimple-logo-model" class="center-obj-zone" static-body
-                        full-gltf-model="#powersimple" class="collision" visible="true"
+                        gltf-model="#powersimple" class="collision" visible="true"
                         scale=".9 .9 2"
                         position="-4.5 1.45 -2.4"
                         rotation="0 -300 0"
@@ -139,7 +139,7 @@
                     
 
                     <a-entity id="point-cloud-model" class="center-obj-zone" static-body
-                        full-gltf-model="#point-cloud" class="collision" visible="true"
+                        gltf-model="#point-cloud" class="collision" visible="true"
                         scale="2 2 2"
                         position="0 2.128 0"
                         rotation="0 45 0"
@@ -149,7 +149,7 @@
                     </a-entity>
                    
                     <a-entity id="metavrse-logo-model" class="center-obj-zone" static-body
-                        full-gltf-model="#metavrse" class="collision" visible="true"
+                        gltf-model="#metavrse" class="collision" visible="true"
                         scale=".9 .9 .9"
                         position="4.5 1.5 -2.4"
                         rotation="0 300 0"
@@ -169,7 +169,7 @@
                 scale=".6 .6 .6 "
                 position="0.124 .8 3.97"
                 material="shader: standard; metalness: 0.8;" 
-                full-gltf-model="#ring" class="collision" visible="true"></a-entity>-->
+                gltf-model="#ring" class="collision" visible="true"></a-entity>-->
     </a-entity><!-- platform-->
     <a-entity id="pedestals" position="0 0 20" rotation="0 0 0">
   <?php
@@ -204,7 +204,7 @@
             <a-entity id="holoartproj" visible="false">
                 <a-entity mixin="holoprojector"></a-entity>
                 <a-entity id="holoartifact" scale="7 7 7" rotation="0 0 0" class="center-obj-zone" static-body
-                    position="0 1.25 0" full-gltf-model=""
+                    position="0 1.25 0" gltf-model=""
                     animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 12000; loop: true;"
                     visible="false"></a-entity>
             </a-entity>

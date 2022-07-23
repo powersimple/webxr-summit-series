@@ -34,29 +34,45 @@ if(is_front_page()){
     $page_title = '🆂🆃🅰🅶🅸🅽🅶 '.$page_title;// doesn't work
   }
   wp_head(); 
-?>
-<!---
-<script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+
+  ?>
+
+
+
+
+
+  <?php
+
+  // 
   
-    <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js">
-    </script>
-    
+    // INCLUDES AFRAME JS TAGES ONLY IF IT IS ENABLED.
 
-    <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
-    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+  //
+  $aframe =    get_post_meta($post->ID,"use_aframe",true);
+  if(@$aframe == 1){
+    //hacks
+    $speed = "0.2";
+    if(@$_GET['speed']){
+        $speed = $_GET['speed'];    
+    }
+    if($post->ID == 13){ 
+      $_GET['event_menu'] = 'bizsummit21';
+  
+  }
+    $menu = 'bizsummit21';
+    $model='';
 
-    <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
-    <script src="https://unpkg.com/aframe-fps-look-controls-component/dist/aframe-fps-look-controls-component.min.js">
-    </script>
-    </script>
-    <script src="https://unpkg.com/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
-    <script src="/assets/js/msc_basis_transcoder.js"></script>
-    <script src="/assets/js/full-gltf-model.js"></script>
-    <script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>
-       <script src="https://unpkg.com/aframe-fps-look-controls-component/dist/aframe-fps-look-controls-component.min.js"></script>
--->
+    if(@$_GET['event_menu']){
+        $menu = $_GET['event_menu'];
+    }
+
+    $summit_square_model = 'business-summmit-square';
+    if(@$_GET['summit_model']){
+        $summit_square_model = $_GET['summit_model'];
+    }
+
+?>
+<!--
 <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
@@ -76,8 +92,67 @@ if(is_front_page()){
     <script src="/assets/js/msc_basis_transcoder.js"></script>
     <script src="/assets/js/full-gltf-model.js"></script>
     <script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>
-    
+-->
+<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r134/examples/js/deprecated/Geometry.js"></script>
+<script src="/assets/js/aframe-extras.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="/assets/js/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js">
+    </script>
+    <script src="/assets/js/aframe-look-controls.js"></script>
 
+
+    <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
+   
+    </script>
+    <script src="/assets/js/aframe-troika-text.min.js"></script>
+    <script src="/assets/js/msc_basis_transcoder.js"></script>
+
+    <script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>
+
+
+    <style>
+  .a-enter-ar-button{
+            display: none !important;
+            
+        }       
+            <?php
+              /// 
+              //DISAPPEARS THE HEADER AND FOOTER FOR PURE AFRAME
+              //USED IN VIRTUALPRODUCTION
+              ///
+
+            if(@$_GET['disappear']==1){
+            ?>
+              
+                    .a-enter-ar-button, .a-enter-vr-button, .toggle-edit, .sidedrawer
+                  {
+                        display: none !important;
+                        
+                    } 
+                    header, footer {
+                        display: none !important;
+                        
+                    } 
+
+            <?php
+              } 
+            ?>
+    </style>
+
+<?php
+  }
+  // 
+  
+    // END AFRAME
+
+  //
+
+?>
     <script src="/assets/js/jquery.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!--  -->
@@ -139,10 +214,7 @@ if (location.protocol !== 'https:') {
          ]
       <?php
       // post specific hacks
-      if($post->ID == 13){ 
-        $_GET['event_menu'] = 'bizsummit21';
-    
-    }
+     
     
           if(function_exists('icl_object_id')){
               global $sitepress;
@@ -153,21 +225,7 @@ if (location.protocol !== 'https:') {
 
         
    
-    $speed = "0.2";
-    if(@$_GET['speed']){
-        $speed = $_GET['speed'];    
-    }
-    $menu = 'bizsummit21';
-    $model='';
-
-    if(@$_GET['event_menu']){
-        $menu = $_GET['event_menu'];
-    }
-
-    $summit_square_model = 'business-summmit-square';
-    if(@$_GET['summit_model']){
-        $summit_square_model = $_GET['summit_model'];
-    }
+   
   
 
     $thumbnail =getThumbnail(get_post_thumbnail_id($post->ID),"Full");
@@ -223,27 +281,4 @@ if (location.protocol !== 'https:') {
       
 
 
-<style>
-  .a-enter-ar-button{
-            display: none !important;
-            
-        }       
-<?php
-if(@$_GET['disappear']==1){
-?>
-   
-        .a-enter-ar-button, .a-enter-vr-button, .toggle-edit, .sidedrawer
-       {
-            display: none !important;
-            
-        } 
-        header, footer {
-            display: none !important;
-            
-        } 
-
-<?php
-  } 
-?>
-    </style>
 

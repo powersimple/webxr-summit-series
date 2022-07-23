@@ -36,7 +36,7 @@ add_theme_support('post-thumbnails', array(
 			global $post;
 			
 			
-			$img = wp_get_attachment_image_src(  $id, $use);
+			$img = wp__image_src(  $id, $use);
 			if($img[0] !=""){
 			} 
 			return $img;//$img[0];

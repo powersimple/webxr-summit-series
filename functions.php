@@ -16,7 +16,7 @@ require_once("functions/functions-metabox.php");
 	require_once("functions/functions-profiles.php");
 	require_once("functions/functions-events.php");
 	require_once("functions/functions-awards.php");
-	
+	require_once("functions/functions-virtual-production.php");
 	require_once("functions/functions-rest-menus.php");
 	// custom functions to register fields into the restapi
 	require_once("functions/functions-rest-register.php");
@@ -24,7 +24,7 @@ require_once("functions/functions-metabox.php");
 	require_once("functions/functions-navigation.php");
 	require_once("functions/functions-entities.php");	   
 	require_once("functions/parsers.php");
-	
+	require_once("functions/import.php");
 	require_once("profiler/profiler.php");
 
 	require_once("scraper/simple_html_dom.php");
@@ -50,7 +50,16 @@ function add_mimes($mime_types){
 add_filter('upload_mimes', 'add_mimes');
 
 
-
+function is_gutenberg() {
+    
+    global $post;
+    
+    if ( function_exists( 'has_blocks' ) && has_blocks( $post->ID ) ){
+        return true;    
+    } else {
+        return false;
+    }
+}
 
 
 		/* OLD RELIABLE!
@@ -175,6 +184,7 @@ function get_attachment($id){
 }
 
 
+
 function display_videos($videos){
 		ob_start();
 	$default_video = $videos[0]['video_url'];
@@ -261,5 +271,8 @@ $children = get_children( array("post_parent"=>$parent_id,'post_type'=>'hardware
 		return $child_list;
 
 }
+
+
+
 
 ?>

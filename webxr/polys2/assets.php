@@ -4,8 +4,8 @@
 <a-asset-item id="buttonupmodel" response-type="arraybuffer" src="/assets/models/button-up.glb">
 </a-asset-item>
 
-
 <a-asset-item id="emblem" response-type="arraybuffer" src="/assets/models/polys/emblem22.glb"></a-asset-item>
+
 
 <img id="sky" src="/assets/images/skybox/MilkyWaySkybox.jpg">
 <a-asset-item id="ring" response-type="arraybuffer" position="0 0 -5" src="/assets/models/polys/ring.glb">

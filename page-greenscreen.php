@@ -64,7 +64,7 @@ if(@$_GET['camera']){
         <a-assets timeout="800000">
              <!-- Loads models -->
     <a-asset-item id="2nd-polys-trophy" response-type="arraybuffer"
-    src="/assets/models/polys/2021-Poly.glb"></a-asset-item>
+    src="/assets/models/polys/trophies/VEOTY-WINNER-TheMagicOfFlight.glb"></a-asset-item>
 
     <a-asset-item id="pedestal" response-type="arraybuffer" src="/assets/models/polys/pedestal.glb"></a-asset-item>
     
@@ -78,7 +78,41 @@ if(@$_GET['camera']){
 
 
         <a-sky src="#sky"></a-sky>
- 
+        <a-entity id="lighting" visible="true" static-body position="0 15 -25" rotation="0 0 0" >
+
+
+
+<a-light id="white-d1" type="directional" color="white" intensity="5" position="0 10 -50" rotation="0 180 0" angle="90"></a-light>
+
+
+<a-light id="white-d2" type="directional" color="white" intensity="5" position="-50 10 0" rotation="90 -90 0" angle="90"></a-light>
+
+
+<a-light id="white-d3" type="directional" color="white" intensity="5" position="50 10 0" rotation="-90 90 0" angle="90"></a-light>
+
+
+<a-light id="white-d4" type="directional" color="white" intensity="5" position="0 10 50" rotation="0 0 0" angle="90"></a-light>
+
+
+
+
+
+
+<a-light id="green1" type="point" intensity="1" position="0 -120 10" rotation="0 0 0" angle="90"></a-light>
+<a-light id="red1" type="point" color="#900" color="#090" intensity="1" position="-25 -80 -10" rotation="0 0 0" angle="90"></a-light>
+<a-light id="blue1" type="point" color="#009" intensity="1" position="24 -80 -10" rotation="0 0 0" angle="90"></a-light>
+
+
+<a-light id="yellow1" type="point" color="#Ff0" intensity="1" position="0 -140 100" rotation="0 0 0" angle="90"></a-light>
+
+<a-light id="purple1" type="point" color="909" intensity="1" position="0 100 10" rotation="0 0 0" angle="90"></a-light>
+
+
+
+
+
+<a-light id="yellow1" type="spot" color="#fff" intensity="15" position="0 5 30" rotation="-90 0 0" angle="90"></a-light>
+
 
         <a-entity id="rig" rotation-reader thumbstick-logging
             movement-controls="speed: <?=$speed?>; constrainToNavMesh: true;fly: true" position="<?=$cam_x?> <?=$cam_y?> <?=$cam_z?>" rotation="0 0 0">

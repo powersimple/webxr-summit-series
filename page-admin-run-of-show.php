@@ -90,88 +90,9 @@ $instructions";
 <?php
 
 
-function getNominee($nominee,$nominations,$current_award,$current_nomination){
-
-    if(count(@$nominee['children'])){
-//     
-        
-        foreach($nominee['children'] as $n => $child){
-            print "<tr>";
-        //    var_dump($child);
-            extract($child);
-            $id = $child['post']->ID;
-            $type=$child['post']->post_type;
-            if($type == 'profile' || $type == 'resource'){
-                if(!is_array(@$nominations[$child['slug']])){
-                    $nominations[$child['slug']] = ["nominations"=>[],"nominee"=>[
-                        "name"=>$child['title'],
-                        "email"=>@$child['meta']['email'][0],
-                        "website"=>@$child['meta']['website'][0],
-                        "resource_url"=>@$child['meta']['resource_url'][0],
-                        "_thumbnail_id"=>@$child['meta']['_thumbnail_id'][0],
-                    ]];
-                  
-                 }
-                 array_push($nominations[$child['slug']]["nominations"],$current_award);
-           
-            
-         //           array_push($nominations[$current_nomination],$nominee);
-            }
-         
-            $src = getThumbnail(get_post_thumbnail_id($child['post']->ID));
-            print "<td>".@$class[0]."</td>";   
-        print "<td>";
-        if($src != ''){
-        print "<img src='$src' alt='".$nominee['post']->post_title."'></td>";
-    }
-            print "<td>";
-           
-            print "<a href='/wp-admin/post.php?post=$id&action=edit' target='_blank'>$child[title]</a>";
-            print "</td>";
-        //    print " | ". @$type. " | ";
-
-
-            // $child[slug]
-           // var_dump($child['meta']);
-           
-          
-
-
-           getMetaLink($child['meta'],'email','td');
-
-           getMetaLink($child['meta'],'twitter','td');
-           getMetaLink($child['meta'],'website','td');
-           getMetaLink($child['meta'],'resource_url','td');
-            print "<td>";
-            
-            print "</td>";
-            print "</tr>";
-            $nominations = getNominee(@$child,$nominations,$current_award,$current_nomination);
-            
-        }
-//        print "</tr>";
-
-    }
-    return $nominations;
-
-}
-
-
-
 //$ros = get_nominations('polys2');
 
 
-
-function showCounter($counter){
-    if($counter<10){
-        return "0".$counter;
-    }
-    return $counter;
-}
-
-function getNominees(){
-
-}
 
 
 
@@ -181,188 +102,19 @@ $nominees = [];
 $nominee_list = [];
 $award_list = [];
 $counter=0;
-function getRunOfShowAccordion($ros){
-    
-    $nominations = [];
-    $nominees = [];
-    $nominee_list = [];
-    $award_list = [];
-    $counter = 0;
-    
-    foreach($ros as $i =>$item){ // outer loop.
-        extract($item);
-    
 
-        $current_award = $slug;
-        $awards_list[$current_award] = $item['title'];
-        
-        if(!in_array("nomination",explode(" ",$classes[0]))){
-           // continue;
-          }
-         // var_dump($duration = @$item['meta']);
-         if( $duration = @$item['meta']['duration'][0]){
-          
-         } else {
-             $duration = 210;
-          }
-          $length = gmdate("i:s", $duration);
-          $start = @$meta['utc_start'][0];
-           
-          if($start != '' && $start != 0){
-            $start_date_time = date("m-d h:ia",$start);  
-            $current_time = $start;
-          }  else {
-
-          
-            $start_date_time = date("h:ia",$current_time);
-          }
-          @$current_time = $current_time + $duration;
-          
-          $the_time = date("H:m",$current_time);
-
-        print "<h3><span class='ros-event'>".showCounter($counter)." | $title </span><span class='ros-time'>$start_date_time | $length</span></h3>";
-        print "<div>"; 
-    if(@$meta['show_journal'][0]){
-        if(@$_GET['cues']){
-
-       
-        print "<div class='show-journal'>". @$meta['show_journal'][0]."</div>";
-    }
-
-    }
-
-        
-
-        
-        if(is_array($nominees)){
-        print "<table class='segment'>";
-        foreach($nominees as $c => $nominee){
-            extract($nominee);
-            
-
-            $class= explode(" ",$classes[0]);
-            //var_dump($class);
-            
-           $current_nomination = $nominee['slug'];
-          
-           $id = $nominee['post']->ID;
-           $type=$nominee['post']->post_type;
-          $thumbnail = @$nominee['meta']['_thumbnail_id'][0];
-       
-    
-           if($type == 'profile'|| $type == 'resource'){
-        }
-            if(!in_array($current_nomination,$nominations)){
-            }
-                $nominations[$current_nomination] = ["nominations"=>[],"nominee"=>[
-                    "name"=>$nominee['title'],
-                    "email"=>@$nominee['meta']['email'][0],
-                    "website"=>@$nominee['meta']['website'][0],
-                    "resource_url"=>@$nominee['meta']['resource_url'][0],
-                    "_thumbnail_id"=>@$nominee['meta']['_thumbnail_id'][0],
-                    
-                    
-                ]];
-                
-            
-    
-            array_push($nominations[$current_nomination]['nominations'],$current_award . " ". $current_nomination);
-    
-          
-            print "<tr><td colspan='9'><hr></td></tr>";
-          
-           print "<tr class='$classes[0]'>";
-      
-           if(in_array('presenter',$class)){
-        
-            }  
-
-        $src = getThumbnail(get_post_thumbnail_id($nominee['post']->ID));
-
-            print "<td class='designation'>".ucfirst($class[0])."</td>";   
-        print "<td class='thumbnail'>";
-        if($src){
-        print "<img src='$src' alt='".$nominee['post']->post_title."'>";
-    
-        
-        }
-        print "</td>";
-           print"<td class='name' ><a href='/wp-admin/post.php?post=$id&action=edit' target='_blank'>$nominee[title]</a></td>";
-        //    print " | ". $type. " | ";
-    
-
-            getMetaLink($nominee['meta'],'email','td');
-    
-            getMetaLink($nominee['meta'],'twitter','td');
-            getMetaLink($nominee['meta'],'website','td');
-            getMetaLink($nominee['meta'],'linkedin','td');
-            getMetaLink($nominee['meta'],'instagram','td');
-            
-
-            getMetaLink($nominee['meta'],'resource_url','td');
-            
-            print "</tr>";
-           
-            if(@$_GET['credential']){
-                print "<tr><td>";
-                print "<td colspan='9'>";
-                print "<textarea cols='30' rows='5'>";
-print $nominee['post']->post_title;
-print "
-";
-                if(@$nominee['meta']['profile_title'][0]){
-print $nominee['meta']['profile_title'][0].", ";
-                }
-                if(@$nominee['meta']['company'][0]){
-print $nominee['meta']['company'][0];
-                 }
-                 
-                 if(@$nominee['meta']['twitter'][0]){
-print "
-";
-                    
-print str_replace("https://twitter.com/","@",$nominee['meta']['twitter'][0]);
-                 }
-                 print "</textarea>";
-
- 
-              // var_dump($nominee['meta']);
-                print "</td>";
-                print "</td></tr>";
-
-            }
-    
-    
-           $nominations = getNominee(@$nominee,$nominations,$current_award,$current_nomination);
-    
-     
-       
-        }
-    print "</table>";
-    } else {//not an array of nominees
-
-    }
-   
-
-        print"</div>";
-        
-
-        $counter++;
-
-        }//run of show
-}
 
 ?>
 <div id="accordion" class="run-of-show">
    
     <?php
-    $vrc = get_nominations('virtual-red-carpet-2');
-    getRunOfShowAccordion($vrc);
+ //   $vrc = get_nominations('virtual-red-carpet-2');
+   // getRunOfShowAccordion($vrc);
     ?>
 
     <?php
-    $ceremony = get_nominations('polys2');
-    getRunOfShowAccordion($ceremony);
+    $edsummit = get_nominations('EdSummit22');
+    getRunOfShowAccordion($edsummit);
     ?>
 </div>
 <?Php

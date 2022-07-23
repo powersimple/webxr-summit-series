@@ -38,13 +38,16 @@ h6 {
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
+    text-align:center;
+    font-family: "AgencyFB";
 }
 
 h2 {
     font-size: 1.618rem;
     font-weight: 700;
+    font-family: "AgencyFB";
 }
 
 h3 {
@@ -71,7 +74,7 @@ p,
 ol,
 ul,
 blockquote {
-    margin: 0 0 20px;
+    margin: 0 0 0px;
     font-size: 1em;
 }
 

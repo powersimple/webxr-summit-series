@@ -186,4 +186,188 @@ print "</a-entity><!--model-series-->
 
 
 
+
+    function getCoords($coords,$counter=0){
+     
+     
+     
+     //defaults
+     $coordinates = [
+                "position"=>["x"=>0,"y"=>0,"z"=>0],
+                "rotation"=>["x"=>0,"y"=>0,"z"=>0],
+                "scale"=>["x"=>1,"y"=>1,"z"=>1]
+                ];
+ 
+                //$classes is already an array
+  
+   if(is_array($coords)){
+    foreach($coords as $key => $class){
+        
+        $coordinates = setCoord($coordinates,$class);
+      
+     }
+    }
+     $position =  $coordinates['position']['x']." ".$coordinates['position']['y']." ".$coordinates['position']['z'];
+     $rotation =  $coordinates['rotation']['x'] ." ". $coordinates['rotation']['y'] ." ". $coordinates['rotation']['z'];
+     $scale =  $coordinates['scale']['x'] ." ". $coordinates['scale']['y'] ." ". $coordinates['scale']['z'];
+ 
+ 
+ 
+ 
+     return " position='$position' rotation='$rotation' scale='$scale'";
+ 
+ 
+ 
+ 
+ }
+ function setCoord($coords,$class){
+    $class = explode("_",$class);//single class parsed with _
+  
+    switch($class[0]){//sets coord
+        case "px":
+            $coords['position']['x'] = $class[1];
+            break;
+        case "py":
+            $coords['position']['y'] = $class[1];
+            break;
+        case "pz":
+            $coords['position']['z'] = $class[1];
+            break;
+         case "rx":
+            $coords['rotation']['x'] = $class[1];
+            break;
+        case "ry":
+            $coords['rotation']['y'] = $class[1];
+            break;
+        case "rz":
+            $coords['rotation']['z'] = $class[1];
+            break;
+        case "sx":
+            $coords['scale']['x'] = $class[1];
+            break;
+        case "sy":
+            $coords['scale']['y'] = $class[1];
+            break;
+        case "sz":
+            $coords['scale']['z'] = $class[1];
+            break;
+ 
+        }
+    return $coords;
+ }
+ function setCardCoords($count){
+    $coords = [];
+    if($count){
+       // print $count."SHOWCOUNT";
+        if($count == 4){
+            $offset = 1.25;
+        } else if($count == 4){
+            $offset = 2;
+         } else {
+            $offset = 3;
+        }
+ 
+        $x=(0-(($count/2)*2));
+            for($i=0;$i<$count;$i++){
+                $coords[$i] = $x;
+             $x=$x+3;   
+            }
+ 
+        
+        
+ 
+    }
+    return $coords;
+ 
+ }
+ function get_default_3D_content($id){
+
+    $defaults = [];
+  
+    $defaults['skybox'] = get_attachment_path(get_post_meta($id,"skybox",true));
+    $defaults['logo_3D'] = get_attachment_path(get_post_meta($id,"logo_3D",true));
+    $defaults['logo_wide_3D'] = get_attachment_path(get_post_meta($id,"logo_wide_3D",true));
+    $defaults['button_3D'] = get_attachment_path(get_post_meta($id,"button_3D",true));
+    
+
+
+    return $defaults;
+
+}
+
+function get_child_paths($children){
+    $assets = [];
+    foreach($children as $key => $child){
+        $asset = $assets[$child['slug']] =         get_3D_asset_paths($child['post']->ID,$child);
+
+    }
+    return $assets;
+}
+
+
+
+function get_3D_asset_paths($id,$item){
+    $url = wp_upload_dir();
+	$path = $url['baseurl']."/";
+    $defaults['path'] = $path;
+
+    $assets = [];
+    $defaults = get_default_3D_content($id);
+    $assets[$item['slug']] = [];
+
+    foreach($defaults as $key => $default){
+      
+        if($default != ''){
+
+          $assets[$item['slug']]['assets'][$key] = $default;
+        }
+       
+      
+
+    }
+  
+    return $assets;
+
+
+}
+
+function get_ros_3D_assets($ros){
+    $ros_assets = [];
+   
+    foreach($ros as $k => $item){
+     
+        $content_3D = get_3D_asset_paths($item['post']->ID,$item);
+        array_push($ros_assets,$content_3D);
+        if(count(@$item['children'])){
+            
+            $content_3D = get_child_paths($item['children']);
+            array_push($ros_assets,$content_3D);
+         } 
+    }
+    return $ros_assets;
+
+}
+
+function unpack_ros_3D_assets($ros_assets_array){
+    $assets = [];
+    foreach($ros_assets_array as $key => $item){
+        foreach($item as $key=>$value){
+            $assets[$key]=$value;
+
+        }
+    }
+    return $assets; 
+}
+function append_3D_assets($ros_assets_array){
+    $assets = [];
+    foreach($ros_assets_array as $key => $item){
+        foreach($item as $key=>$value){
+            array_push($assets,$key);
+
+        }
+    }
+    return $assets; 
+}
+
+
 ?>

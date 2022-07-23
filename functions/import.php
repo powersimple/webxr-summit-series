@@ -63,4 +63,99 @@
 
         return $new_post;
     }
+    function insertNewProfile($profile,$fields){
+        extract( $profile);
+        $table = "wp_posts";
+       
+        $new_post = array(
+            
+            'post_content' => "$post_content",
+           
+            'post_title' => "$post_title",
+            //'post_excerpt' => "$post_content",
+            'post_status' => 'publish',
+            'post_type' => 'profile',
+        );
+        $fields = explode(",",$fields);
+        $new_post = wp_insert_post( $new_post,$wp_error = false );
+//      
+        foreach($fields as $k =>$v){
+           add_post_meta($new_post,$v,$profile[$v]);
+        }
+
+
+      /*  $new_post = wp_insert_post( $new_post,$wp_error = false );
+        global $wpdb;
+        $sql = "UPDATE `omni_data` SET `wp_post_id` = '$new_post' WHERE `omni_data`.`id` = $id;";
+        $wpdb->query($sql);*/
+
+        return $new_post;
+    }
+    function insertNewEvent($event,$fields){
+        extract( $event);
+        $table = "wp_posts";
+       
+        $new_post = array(
+            
+            'post_content' => "$post_content",
+           
+            'post_title' => "$post_title",
+            //'post_excerpt' => "$post_content",
+            'post_status' => 'publish',
+            'post_type' => 'event',
+        );
+        $fields = explode(",",$fields);
+     
+        $new_post = wp_insert_post( $new_post,$wp_error = false );
+//      
+        foreach($fields as $k =>$v){
+         //var_dump()
+              add_post_meta($new_post,$v,$event[$v]);
+        }
+        die();
+
+      /*  $new_post = wp_insert_post( $new_post,$wp_error = false );
+        global $wpdb;
+        $sql = "UPDATE `omni_data` SET `wp_post_id` = '$new_post' WHERE `omni_data`.`id` = $id;";
+        $wpdb->query($sql);*/
+
+        return $new_post;
+        die();
+    }
+    function get_profiles_for_import(){
+        global $wpdb;
+        $sql = "select * from _profiles where id>1";
+        $q = $wpdb->get_results($sql);
+        foreach($q as $key => $value){
+            extract ((array) $value);
+           $profile = array("post_title"=>$name,"post_content"=>$bio,"profile_title"=>$title);
+           
+           $profile = array_merge($profile,(array)$value);
+       //    var_dump($profile);
+          insertNewProfile($profile,"profile_title,company,linkedin");
+        }
+
+
+
+    }
+    function get_profiles_for_event_import($parent){
+        global $wpdb;
+        $sql = "select * from _profiles where id=2";
+        $q = $wpdb->get_results($sql);
+        foreach($q as $key => $value){
+            extract ((array) $value);
+           $profile = array("post_title"=>$name,"post_content"=>$description,"post_parent"=>$parent);
+           
+           $event = array_merge($profile,(array)$value);
+          // var_dump($profile);
+        //   die();
+         insertNewEvent($event,"duration");
+        }
+
+
+
+    }
+ //   get_profiles_for_event_import(1317);
+
+
 ?>

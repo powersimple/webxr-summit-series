@@ -26,3 +26,35 @@
 .social-icon {
     margin-right: 3px;
 }
+.profile-thumbnail {
+  
+    margin: 0 auto 20px;
+    img {
+        width: 100%;
+       
+        display: block;
+        margin: 0 auto;
+
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: 0 0 10px 10px rgba(255, 173, 2, 0.4);
+    }
+    @media(max-width:768px){
+        img{
+            max-width: 50%;
+        }
+    }
+}
+.profile-meta{
+    text-align:center;
+    h4{
+        text-align: center;
+    }
+}
+.profile-title{
+  h5{
+      text-align:center;
+      margin-bottom:2rem;
+  }
+  margin-bottom:2rem;
+}

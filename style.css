@@ -171,12 +171,15 @@ h6 {
   color: #4173D8; }
 
 h1 {
-  font-size: 2rem;
-  font-weight: 700; }
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  font-family: "AgencyFB"; }
 
 h2 {
   font-size: 1.618rem;
-  font-weight: 700; }
+  font-weight: 700;
+  font-family: "AgencyFB"; }
 
 h3 {
   font-size: 1.382rem;
@@ -198,7 +201,7 @@ p,
 ol,
 ul,
 blockquote {
-  margin: 0 0 20px;
+  margin: 0 0 0px;
   font-size: 1em; }
 
 main p,
@@ -594,7 +597,8 @@ blockquote {
   #megamenu a:visited,
   #megamenu a:focus {
     color: #fefefe;
-    text-decoration: none; }
+    text-decoration: none;
+    padding: 5px; }
   #megamenu a:hover,
   #megamenu a.active {
     background-color: #4173D8 !important; }
@@ -893,8 +897,8 @@ blockquote {
 
 #logo {
   position: relative;
-  width: 130px;
-  background-image: url(images/logo/PolysLogo.png); }
+  width: 260px;
+  background-image: url(images/logo/Polys-SummitsLogo.png); }
   @media (min-width: 768px) {
     #logo {
       top: -15px; } }
@@ -951,9 +955,10 @@ blockquote {
   opacity: .8; }
 
 footer {
-  position: fixed;
+  position: relative;
   display: table;
-  background-color: rgba(10, 10, 10, 0.8);
+  z-index: 100;
+  background-color: black;
   width: 100%;
   height: 100px;
   text-align: center;
@@ -963,6 +968,9 @@ footer {
   min-height: 50px;
   max-height: 2vh;
   color: #8A8A8A; }
+  @media (max-width: 768px) {
+    footer {
+      margin-top: -100px; } }
   footer .xri-logo {
     width: 100px;
     margin-top: 10px;
@@ -972,15 +980,13 @@ footer {
     line-height: 120%;
     vertical-align: top;
     margin: 0;
-    font-size: .8em;
-    margin-top: 15px;
+    font-size: 9;
     padding-bottom: .5em; }
     footer span.copyright span {
       margin-top: 5px;
       display: inline-block; }
       @media (max-width: 768px) {
         footer span.copyright span {
-          display: block;
           margin-top: 0px; } }
   footer .footer-social-links {
     text-align: right; }
@@ -1006,7 +1012,6 @@ footer ul {
       text-decoration: none; }
     @media (max-width: 767px) {
       footer ul li {
-        display: block;
         border: none !important; } }
   footer ul li:first-child {
     border-left: none; }
@@ -1038,8 +1043,6 @@ footer ul {
   background-color: #000;
   display: inline-block;
   padding-right: 25px;
-  width: 100%;
-  position: absolute;
   bottom: 0px;
   left: 0px; }
   .partners .container {
@@ -1070,6 +1073,20 @@ footer ul {
   background-size: contain;
   padding-left: 25px; }
 
+.metavrse {
+  background: url(images/logo/metavrse-logo.png) center center no-repeat transparent;
+  background-size: contain;
+  height: 14px;
+  display: block;
+  position: relative;
+  top: 1px;
+  width: 150px; }
+
+.point-cloud {
+  font-family: 'Zen Dots', cursive;
+  font-size: 12px;
+  text-transform: none; }
+
 .experiences-header {
   font-weight: bold;
   display: block;
@@ -1078,6 +1095,9 @@ footer ul {
   list-style: none;
   margin: 0px auto;
   color: white; }
+
+#rights {
+  font-size: .5rem; }
 
 input[type=checkbox].form-checkbox {
   width: 22px;
@@ -1268,6 +1288,8 @@ body::-webkit-scrollbar-thumb {
   padding-bottom: 2em; }
 
 .main {
+  max-width: 1280px;
+  margin: 100px auto 60vh;
   color: #fff; }
   .main h1.title {
     color: #fff;
@@ -1284,6 +1306,8 @@ body::-webkit-scrollbar-thumb {
     font-weight: 600; }
   .main a {
     color: cyan; }
+  .main p {
+    margin-bottom: 1em; }
 
 .light-mode {
   background-color: #f8f8f8; }
@@ -1313,6 +1337,12 @@ body::-webkit-scrollbar-thumb {
     font-size: 1.2rem;
     text-align: center;
     font-weight: 400; }
+
+.whitebg {
+  background-color: #fff !important;
+  color: #000 !important; }
+  .whitebg p, .whitebg li, .whitebg strong {
+    color: #000 !important; }
 
 #agenda {
   background: linear-gradient(to bottom, #102246 0%, #183369 25%, #183369 75%, #102246 100%);
@@ -2432,6 +2462,30 @@ table.authors {
 .social-icon {
   margin-right: 3px; }
 
+.profile-thumbnail {
+  margin: 0 auto 20px; }
+  .profile-thumbnail img {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 10px 10px rgba(255, 173, 2, 0.4); }
+  @media (max-width: 768px) {
+    .profile-thumbnail img {
+      max-width: 50%; } }
+
+.profile-meta {
+  text-align: center; }
+  .profile-meta h4 {
+    text-align: center; }
+
+.profile-title {
+  margin-bottom: 2rem; }
+  .profile-title h5 {
+    text-align: center;
+    margin-bottom: 2rem; }
+
 #guide strong {
   font-weight: 700; }
 
@@ -2675,7 +2729,6 @@ table.authors {
 #ros-accordion h3.ros {
   padding: 3px !important;
   margin-top: 3px;
-  padding-top: 3px;
   border-top: 1px dashed #f1c40f;
   line-height: 1;
   font-weight: 600;
@@ -2695,7 +2748,7 @@ table.authors {
 
 #ros-accordion .profile-card {
   line-height: 120%;
-  font-size: .8rem; }
+  font-size: 0.8rem; }
   #ros-accordion .profile-card .social-icon {
     color: #fff;
     display: table-cell;
@@ -2703,11 +2756,11 @@ table.authors {
   #ros-accordion .profile-card span {
     display: block;
     text-align: center;
-    font-size: .7rem; }
+    font-size: 0.7rem; }
   #ros-accordion .profile-card span.profile-name {
     font-weight: 600;
     font-family: 'Zen Dots';
-    font-size: .8rem;
+    font-size: 0.8rem;
     padding-bottom: 5px;
     border-bottom: 1px dashed #ccc;
     margin-bottom: 5px; }
@@ -2723,11 +2776,11 @@ table.authors {
   #ros-accordion .profile-thumbnail img {
     width: 150px;
     display: block;
-    margin: 0px auto;
+    margin: 0 auto;
     height: 100%;
     border-radius: 50%;
     border: 2px solid #fff;
-    box-shadow: 0px 0px 10px 10px rgba(176, 2, 255, 0.3); }
+    box-shadow: 0 0 10px 10px rgba(176, 2, 255, 0.3); }
 
 #ros-accordion .card-info {
   visibility: hidden; }
@@ -2736,35 +2789,48 @@ table.authors {
   width: 20% !important; }
 
 #ros-accordion.cards {
-  width: 1200px !important; }
+  width: 1200px !important;
+  margin-left: 25px; }
   #ros-accordion.cards span.blurb {
     visibility: hidden; }
   #ros-accordion.cards #speaker-list {
-    width: 80%;
-    margin-left: 23%; }
+    width: 100%;
+    position: absolute;
+    top: 100px;
+    overflow: hidden; }
     #ros-accordion.cards #speaker-list .fifth {
       width: 20% !important; }
       #ros-accordion.cards #speaker-list .fifth .profile-name {
         width: 100%;
         display: block;
-        margin-left: 0px;
+        margin-left: 0;
         font-size: 14px;
         height: 30px; }
-      #ros-accordion.cards #speaker-list .fifth .sophia-moshasha, #ros-accordion.cards #speaker-list .fifth .atsushi-shimono, #ros-accordion.cards #speaker-list .fifth .daniel-ljunggren, #ros-accordion.cards #speaker-list .fifth .yu-yuan, #ros-accordion.cards #speaker-list .fifth .neil-trevett {
+      #ros-accordion.cards #speaker-list .fifth .sophia-moshasha,
+      #ros-accordion.cards #speaker-list .fifth .atsushi-shimono,
+      #ros-accordion.cards #speaker-list .fifth .daniel-ljunggren,
+      #ros-accordion.cards #speaker-list .fifth .yu-yuan,
+      #ros-accordion.cards #speaker-list .fifth .neil-trevett {
         height: 50px !important; }
     #ros-accordion.cards #speaker-list .presentation {
       width: 80% !important;
+      margin-top: -25px;
+      overflow-y: hidden;
       margin-left: 10% !important; }
       #ros-accordion.cards #speaker-list .presentation span.blurb {
         visibility: visible;
-        display: none;
-        width: 100%;
+        display: block;
+        width: 65%;
         text-align: left;
-        margin-left: 0%;
-        font-size: 14px;
-        line-height: 150%; }
+        margin-left: 0;
+        font-size: 20px;
+        line-height: 150%;
+        position: absolute;
+        top: 175px;
+        text-shadow: 1px 1px #000;
+        overflow-y: hidden; }
         #ros-accordion.cards #speaker-list .presentation span.blurb p {
-          padding-left: 0px;
+          padding-left: 0;
           font-size: 16px; }
       #ros-accordion.cards #speaker-list .presentation .profile-card {
         margin-top: 30px; }
@@ -2772,7 +2838,7 @@ table.authors {
         width: 30%;
         display: inline-block; }
         #ros-accordion.cards #speaker-list .presentation .profile-thumbnail img {
-          margin-left: 0px;
+          margin-left: 0;
           width: 100%; }
       #ros-accordion.cards #speaker-list .presentation .profile-info {
         width: 65%;
@@ -2781,7 +2847,7 @@ table.authors {
         #ros-accordion.cards #speaker-list .presentation .profile-info .social {
           display: block; }
           #ros-accordion.cards #speaker-list .presentation .profile-info .social a {
-            margin-right: .5em; }
+            margin-right: 0.5em; }
         #ros-accordion.cards #speaker-list .presentation .profile-info span.credential span {
           font-size: 16px !important;
           line-height: 150% !important;
@@ -2795,13 +2861,23 @@ table.authors {
           height: 30px; }
       #ros-accordion.cards #speaker-list .presentation .samantha-mathews {
         font-size: 20px !important; }
+    #ros-accordion.cards #speaker-list .interview {
+      overflow: hidden;
+      position: relative; }
+      #ros-accordion.cards #speaker-list .interview span.blurb {
+        top: 25px;
+        visibility: visible; }
+        #ros-accordion.cards #speaker-list .interview span.blurb p {
+          margin-top: 20px;
+          padding-left: 20%;
+          text-shadow: 2px 2px 2px black; }
     #ros-accordion.cards #speaker-list .pair {
       width: 35% !important;
       margin-left: 10%; }
       #ros-accordion.cards #speaker-list .pair .profile-card .profile-name {
         width: 100%;
         display: block;
-        margin-left: 0px;
+        margin-left: 0;
         font-size: 20px;
         height: 30px; }
       #ros-accordion.cards #speaker-list .pair .profile-card span.credential span {
@@ -2810,6 +2886,8 @@ table.authors {
         font-weight: 600; }
       #ros-accordion.cards #speaker-list .pair .profile-card .samantha-mathews {
         font-size: 20px !important; }
+    #ros-accordion.cards #speaker-list .three {
+      width: 33.33333% !important; }
     #ros-accordion.cards #speaker-list .samantha-mathews {
       font-size: 15px !important; }
   #ros-accordion.cards .card-mode {
@@ -2818,28 +2896,57 @@ table.authors {
     height: 630px;
     padding: 20px;
     margin-bottom: 50px;
-    background: url(images/bg/DesignSummitCardBG.jpg) center center no-repeat;
+    position: relative;
+    overflow: hidden;
+    color: #fff; }
+  #ros-accordion.cards .trans-card {
+    color: #fff;
+    width: 100%;
+    height: 630px;
+    padding: 20px;
+    margin-bottom: 50px;
     position: relative;
     overflow: hidden; }
+    #ros-accordion.cards .trans-card .panel-blurb {
+      top: 70%;
+      position: relative; }
+      #ros-accordion.cards .trans-card .panel-blurb p {
+        padding: 0px 10%; }
+    #ros-accordion.cards .trans-card .sponsor-logo {
+      display: none; }
+    #ros-accordion.cards .trans-card .card-footer, #ros-accordion.cards .trans-card .session-times, #ros-accordion.cards .trans-card h4 {
+      display: none; }
   #ros-accordion.cards h3.ros {
     display: none; }
   #ros-accordion.cards h3 {
-    font-weight: 600;
-    font-family: 'Zen Dots';
+    font-weight: bold;
+    font-family: 'AgencyFB';
     text-align: right;
     font-size: 24px;
-    padding-left: 25%;
-    margin: 0px auto 25px;
-    text-shadow: 3px 3px 7px rgba(176, 2, 255, 0.5);
+    margin: 0 auto 25px;
+    position: absolute;
+    top: 25px;
+    width: 100%;
+    text-align: center; }
+  #ros-accordion.cards h4 {
+    font-weight: bold;
+    font-family: 'AgencyFB';
+    color: #fff;
+    font-size: 36px;
+    padding-left: 30%;
+    margin: 0 auto 25px;
+    position: absolute;
+    width: 100%;
+    top: 425px;
     text-align: center;
-    color: #ff6b18; }
+    text-shadow: 3px 3px 3px #530066, -3px -3px 3px #530066; }
   #ros-accordion.cards p {
     font-size: 20px;
     padding-left: 23%; }
   #ros-accordion.cards .card-info {
     visibility: visible; }
   #ros-accordion.cards h3.card-info {
-    font-size: 36px; }
+    font-size: 48px; }
   #ros-accordion.cards .social {
     visibility: hidden; }
   #ros-accordion.cards .profile-card span.credential span {
@@ -2868,46 +2975,85 @@ table.authors {
   #ros-accordion.cards .session-times {
     display: block;
     text-align: right;
-    margin: 0px auto 25px; }
+    margin: 0 auto 25px;
+    position: absolute;
+    top: 470px;
+    left: 35%;
+    font-family: "AgencyFB"; }
     #ros-accordion.cards .session-times li {
       display: inline-block;
-      padding: 0px 10px;
+      padding: 0 10px;
       text-align: center;
       font-weight: 900;
       border-right: 1px dashed #ccc;
-      font-size: 24px;
+      font-size: 36px;
       line-height: 24px;
-      letter-spacing: 1px; }
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 2px #000, -2px -2px 2px #000; }
       #ros-accordion.cards .session-times li span {
         font-weight: 600;
-        font-size: 50%; }
+        font-size: 50%;
+        margin-bottom: 5px;
+        display: inline-table; }
     #ros-accordion.cards .session-times li:last-child {
       border-right: none; }
   #ros-accordion.cards .card-footer {
     position: absolute;
     bottom: 7px;
-    left: 25%;
+    left: 30%;
     height: 80px;
     width: 75%;
     overflow: hidden;
     line-height: 35px;
     padding-top: 9px; }
     #ros-accordion.cards .card-footer .event-info .rsvp-link {
-      text-shadow: 0px 0px 7px black;
+      text-shadow: 2px 2px 2px #000, -2px -2px 2px #000;
       font-size: 20px;
       display: inline-block; }
     #ros-accordion.cards .card-footer .event-info a {
       visibility: visible !important;
       font-size: 24px;
       font-weight: 600; }
-    #ros-accordion.cards .card-footer .sponsor-logo {
-      top: 0px;
-      width: 240px;
-      height: 80px;
-      position: absolute;
-      right: 10px; }
-      #ros-accordion.cards .card-footer .sponsor-logo a img {
-        width: 240px; }
+  #ros-accordion.cards .sponsor-logo {
+    width: 240px;
+    height: 80px;
+    position: absolute;
+    right: -20px;
+    top: 550px; }
+    #ros-accordion.cards .sponsor-logo a img {
+      width: 200px; }
+  #ros-accordion.cards .host {
+    position: absolute;
+    font-family: "AgencyFB";
+    font-size: 24px;
+    top: 575px;
+    left: 40px;
+    color: #d96af1; }
+  #ros-accordion.cards .education-summit {
+    background: url("images/bg/EdSummitCardBG.jpg") center center no-repeat; }
+    #ros-accordion.cards .education-summit h3.card-info {
+      color: #fff !important;
+      text-shadow: 9px 9px 10px #530066, -8px -9px 10px #530066;
+      letter-spacing: .8px; }
+    #ros-accordion.cards .education-summit .profile-card.img {
+      box-shadow: 0 0 10px 10px #530003; }
+    #ros-accordion.cards .education-summit a {
+      color: #fff; }
+
+#ros-list {
+  background-color: #fff;
+  color: #000;
+  padding: 3em; }
+  #ros-list p {
+    color: #000; }
+  #ros-list li {
+    color: #000;
+    list-style: none;
+    font-family: "Montserrat"; }
+  #ros-list .linkedin, #ros-list .twitter {
+    color: #009; }
+  #ros-list strong {
+    font-weight: 600; }
 
 #schedule .session-times {
   display: table-row; }
@@ -2932,48 +3078,53 @@ table.authors {
 #schedule .profile-info {
   padding-bottom: 20px; }
   #schedule .profile-info .social a {
-    margin-right: .5em; }
+    margin-right: 0.5em; }
 
 #schedule .profile-thumbnail {
   width: 80%;
-  margin: 0px auto 20px; }
+  margin: 0 auto 20px; }
   #schedule .profile-thumbnail img {
     width: 100%;
     max-width: 150px;
     display: block;
-    margin: 0px auto;
+    margin: 0 auto;
     border-radius: 50%;
     border: 2px solid #fff;
-    box-shadow: 0px 0px 10px 10px rgba(255, 173, 2, 0.4); }
+    box-shadow: 0 0 20px 10px rgba(255, 173, 2, 0.4); }
 
 #schedule .profile-name {
   font-size: 1rem;
   border-bottom: 1px dashed #ccc; }
 
 #schedule .credential {
-  font-size: .8rem;
+  font-size: 0.8rem;
   line-height: 150%; }
 
-#schedule .profile-card .samantha-mathews, #schedule .profile-info .samantha-mathews {
+#schedule .profile-card .samantha-mathews,
+#schedule .profile-info .samantha-mathews {
   font-size: 15px !important; }
 
-#schedule .profile-card .terry-schussler, #schedule .profile-info .terry-schussler {
+#schedule .profile-card .terry-schussler,
+#schedule .profile-info .terry-schussler {
   font-size: 14px !important; }
 
-#schedule .profile-card span, #schedule .profile-info span {
+#schedule .profile-card span,
+#schedule .profile-info span {
   display: block;
   text-align: center; }
 
 #schedule .session {
-  margin: 40px 0px;
-  border-bottom: 5px dashed #4173D8;
-  padding-bottom: 10px !important; }
+  margin: 40px 0 !important;
+  border-top: 5px dashed #4173D8;
+  padding: 10px 0 !important; }
+  #schedule .session div:first-child {
+    margin-top: 10px; }
 
 #schedule .blurb {
-  font-size: .8rem;
+  font-size: 12px;
   line-height: 120%;
   padding-bottom: 20px;
-  display: none; }
+  display: block; }
 
 #schedule .talk-blurb {
   padding-bottom: 20px; }
@@ -3186,7 +3337,7 @@ table.segment .meta {
 @font-face {
   font-family: 'AgencyFB';
   /*a name to be used later*/
-  src: url("fonts/AGENCYR.ttf");
+  src: url("fonts/AGENCYB.ttf");
   /*URL to font*/ }
 
 model-viewer#reveal {
@@ -4425,9 +4576,11 @@ General Styles - Owlcarousel
   background: rgba(10, 10, 10, 0.9);
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: contain  !important;
   width: 100%;
   z-index: 0;
-  height: 50vh; }
+  height: 50vh;
+  margin-top: 50px; }
 
 .titan-title-size-1 {
   letter-spacing: 4px;
@@ -5746,6 +5899,25 @@ Google map
   background: #62e8ff;
   background: linear-gradient(0deg, #62e8ff 0%, #3fafff 12%, #0b6486 34%, #095175 69%, #1184dd 86%, #a8fefd 100%) !important; }
 
+#megamenu .education-summit {
+  color: #c800f5 !important;
+  text-shadow: linear-gradient(90deg, #530066 0%, #82069f 20%, #b80ddf 47%, #81069d 80%, #530066 100%); }
+  #megamenu .education-summit h3.card-info {
+    color: #9A00BD !important; }
+  #megamenu .education-summit img {
+    box-shadow: 0 0 10px 10px #530003; }
+  #megamenu .education-summit a {
+    background: #530066;
+    background: linear-gradient(90deg, #530066 0%, #82069f 20%, #b80ddf 47%, #81069d 80%, #530066 100%); }
+
+#megamenu .brand-summit a {
+  background: #610000;
+  background: linear-gradient(90deg, #610000 0%, #bf0000 20%, red 47%, #d80000 80%, #610000 100%); }
+
+#megamenu .production-summit a {
+  background: #062c73;
+  background: linear-gradient(90deg, #062c73 0%, #0b4ac0 19%, #0f62ff 47%, #0b4dc8 80%, #062c73 100%); }
+
 #megamenu .summit-series a:hover {
   background-color: #3a5825;
   background: linear-gradient(0deg, #8cb273 0%, #4b8b1d 13%, #335e17 33%, #366e0e 65%, #46960f 82%, #afe28d 100%) !important; }
@@ -5957,3 +6129,59 @@ ul.nominee-list li {
 
 #nomineeAccordion a:visited {
   color: #aaa; }
+
+#megamenu .polys {
+  background: url(images/icons/Trophy.png) left top no-repeat transparent !important; }
+
+#megamenu .polys a {
+  padding-left: 25px !important;
+  height: 50px !important; }
+
+#megamenu .polys a:hover {
+  background: #c945cc;
+  background: linear-gradient(0deg, #9245cc 1%, #4e157a 19%, #1a073a 35%, #200642 60%, #600a7c 85%, #a034d9 100%) !important; }
+
+#megamenu .polys2 a {
+  background: #e750cd;
+  background: linear-gradient(0deg, #fa5af4 1%, #c2118e 21%, #af1e89 48%, #d50194 60%, #991380 85%, #db11b8 100%) !important; }
+
+#megamenu .polys2 a sup {
+  font-size: 80%; }
+
+#megamenu .red-carpet a {
+  background: #fe4c4a;
+  background: linear-gradient(0deg, #fe4c4a 0%, #fa0001 16%, #8e0e17 33%, #7e030c 60%, #fc0000 84%, #eb2d37 100%) !important; }
+
+#megamenu .award-ceremony a {
+  background: #50dce7;
+  background: linear-gradient(0deg, #50dce7 1%, #1f8887 19%, #0e6e7e 35%, #095c7c 60%, #137499 85%, #11d6db 100%) !important; }
+
+#megamenu .business-summit a {
+  background: #ffff04;
+  background: linear-gradient(0deg, #ffff04 0%, #df7101 13%, #884b02 41%, #985202 62%, #df7101 78%, #f79801 100%) !important; }
+
+#megamenu .design-summit a {
+  background: #ff464f;
+  background: linear-gradient(0deg, #ff4aa6 0%, #ff290e 14%, #d52712 36%, #bd1704 61%, #bd2a1b 81%, #e66d39 100%) !important; }
+
+#megamenu .developer-summit a {
+  background: #62e8ff;
+  background: linear-gradient(0deg, #62e8ff 0%, #3fafff 12%, #0b6486 34%, #095175 69%, #1184dd 86%, #a8fefd 100%) !important; }
+
+#megamenu .education-summit a {
+  background: linear-gradient(0deg, #a513c7 0%, #68057e 20%, #530066 48%, #630479 80%, #a513c7 100%) !important; }
+
+#megamenu .brand-summit a {
+  background: #610000;
+  background: linear-gradient(0deg, red 0%, #760000 19%, #610000 48%, #760000 80%, red 100%) !important; }
+
+#megamenu .production-summit a {
+  background: #062c73;
+  background: linear-gradient(0deg, #1357d6 0%, #08317f 20%, #062c73 48%, #083384 80%, #1357d6 100%) !important; }
+
+#megamenu .summit-series a:hover {
+  background-color: #3a5825;
+  background: linear-gradient(0deg, #8cb273 0%, #4b8b1d 13%, #335e17 33%, #366e0e 65%, #46960f 82%, #afe28d 100%) !important; }
+
+em {
+  font-style: italic; }

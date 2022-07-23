@@ -69,8 +69,17 @@ function section_class( $meta_boxes ) {
 				'type' => 'text',
 				'name' => esc_html__( 'section-class', 'ps-social' ),
 			),
-
-			
+		
+			[
+                'type'       => 'taxonomy',
+                'name'       => esc_html__( 'Taxonomy', 'online-generator' ),
+                'id'         => 'section_menu',
+                'taxonomy'   => 'nav_menu',
+                'field_type' => 'select_advanced',
+                'query_args' => [
+                    '' => '',
+                ],
+			],
 			
 		),
 	);
@@ -130,7 +139,7 @@ function profile_info( $meta_boxes ) {
 				'name' => esc_html__( 'Facebook URL', 'metabox-online-generator' ),
 			),
 			array(
-				'id' => 'profile_flickr',
+				'id' => 'profile_tiktok',
 				'type' => 'url',
 				'name' => esc_html__( 'Flickr URL', 'metabox-online-generator' ),
 			),
@@ -155,8 +164,18 @@ function setProfileURL( $meta_boxes ) { // this shows the box were
 		'post_types' => array('profile','resource' ),
 		'context' => 'side',
 		'priority' => 'high',
-		'autosave' => 'false',
+		'autosave' => 'true',
 		'fields' => array(
+			array(
+                'type' => 'checkbox',
+                'name' => esc_html__( 'SUPPRESS PROFILE PAGE', 'online-generator' ),
+                'id'   => $prefix . 'suppress_profile_page',
+			),
+			array(
+                'type' => 'checkbox',
+                'name' => esc_html__( 'Ph.D.', 'online-generator' ),
+                'id'   => $prefix . 'PhD',
+			),
 			array(
 				'id' => 'company',
 				'type' => 'text',
@@ -236,6 +255,7 @@ function setProfileURL( $meta_boxes ) { // this shows the box were
 				'name' => esc_html__( 'Logo', 'omniscience-profiler' ),
 				//'desc' => esc_html__( 'Size to 1920x1280', 'metabox-online-generator' ),
 			),
+
 			array(
 				'id' => $prefix . '3Dlogo',
 				'type' => 'image_advanced',
@@ -617,7 +637,73 @@ function selectScreenImage( $meta_boxes ) {
 }
 add_filter( 'rwmb_meta_boxes', 'selectScreenImage' );
 
+function siteProperties3D( $meta_boxes ) {
+	$prefix = '';
 
+	$meta_boxes[] = array(
+		'id' => 'site_properties_3D',
+		'title' => esc_html__( '3D Properties', 'metabox-online-generator' ),
+		'post_types' => array( 'post', 'event','page','profile','resource' ),
+		'context' => 'side',
+		'priority' => 'default',
+		'autosave' => false,
+		'fields' => array(
+			[
+                'type' => 'checkbox',
+                'name' => esc_html__( 'Use A-Frame', 'online-generator' ),
+                'id'   => $prefix . 'use_aframe',
+            ],
+			array(
+				'id' => 'skybox',
+				'type' => 'image_advanced',
+				'name' => esc_html__( 'Skybox', 'metabox-online-generator' ),
+				'desc' => esc_html__( 'I got your reticulum right here.', 'metabox-online-generator' ),
+				'force_delete' => false,
+				'max_file_uploads' => '1',
+				'options' => array(),
+				'attributes' => array(),
+			),
+			array(
+				'id' => 'logo_3D',
+				'type' => 'image_advanced',
+				'name' => esc_html__( '3D Event Logo', 'metabox-online-generator' ), 
+				'desc' => esc_html__( '3D Event Logo', 'metabox-online-generator' ),
+				'force_delete' => true,
+				'max_file_uploads' => '1',
+				'options' => array(),
+				'attributes' => array(),
+			),
+			array(
+				'id' => 'logo_wide_3D',
+				'type' => 'image_advanced',
+				'name' => esc_html__( '3D Event Logo - Wide', 'metabox-online-generator' ), 
+				'desc' => esc_html__( '3D Event Logo - Wide', 'metabox-online-generator' ),
+				'force_delete' => true,
+				'max_file_uploads' => '1',
+				'options' => array(),
+				'attributes' => array(),
+			),
+			array(
+				'id' => 'button_3D',
+				'type' => 'image_advanced',
+				'name' => esc_html__( '3D Trigger Model', 'metabox-online-generator' ), 
+				'desc' => esc_html__( 'This is what you grab or click on to trigger this Page', 'metabox-online-generator' ),
+				'force_delete' => true,
+				'max_file_uploads' => '1',
+				'options' => array(),
+				'attributes' => array(),
+			),
+
+
+
+
+
+		),
+	);
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'siteProperties3D' );
 
 function eventProperties( $meta_boxes ) {
 	$prefix = '';
@@ -625,7 +711,7 @@ function eventProperties( $meta_boxes ) {
 	$meta_boxes[] = array(
 		'id' => 'event_Properties',
 		'title' => esc_html__( 'Event Properties', 'metabox-online-generator' ),
-		'post_types' => array('event','profile','resource'),
+		'post_types' => array('event','resource'),
 		'context' => 'side',
 		'priority' => 'high',
 		'autosave' => 'false',
@@ -641,11 +727,21 @@ function eventProperties( $meta_boxes ) {
                 'name'      => esc_html__( 'Event Start Time UTC', 'online-generator' ),
                 'id'        => 'utc_start',
                 'timestamp' => 'false',
+			],
+			[
+                'type' => 'url',
+                'name' => esc_html__( 'Tickets URL', 'online-generator' ),
+                'id'   => $prefix . 'tickets_url',
             ],
 			[
                 'type' => 'url',
                 'name' => esc_html__( 'Embed Video URL', 'online-generator' ),
                 'id'   => $prefix . 'embed_video_url',
+			],
+			[
+                'type' => 'text',
+                'name' => esc_html__( 'Event Style Class', 'online-generator' ),
+                'id'   => $prefix . 'event_style_class',
 			],
 			[
                 'type' => 'url',
@@ -657,7 +753,12 @@ function eventProperties( $meta_boxes ) {
                 'name' => esc_html__( 'Release Form URL', 'online-generator' ),
                 'id'   => $prefix . 'release_form_url',
             ],
-	
+			[
+                'type' => 'checkbox',
+                'name' => esc_html__( 'Suppress Speaker List', 'online-generator' ),
+                'id'   => $prefix . 'suppress_speaker_list',
+			],
+
 			[
                 'type'    => 'select',
                 'name'    => esc_html__( 'Session Type', 'online-generator' ),
@@ -675,6 +776,7 @@ function eventProperties( $meta_boxes ) {
 					'town_hall' => esc_html__( 'Town Hall','online-generator' ),
                 ],
             ],
+		
 			array(
 				'id' => 'hero',
 				'type' => 'image_advanced',
@@ -718,7 +820,7 @@ function eventResources( $meta_boxes ) {
 
 	return $meta_boxes;
 }
-add_filter( 'rwmb_meta_boxes', 'eventResources' );
+//add_filter( 'rwmb_meta_boxes', 'eventResources' );
 
 function eventGuest( $meta_boxes ) {
 	$prefix = '';
@@ -942,6 +1044,16 @@ function current_status( $meta_boxes ) {
 		'priority' => 'high',
 		'autosave' => 'true',
         'fields'  => [
+			[
+                'type' => 'checkbox',
+                'name' => esc_html__( 'Registration Pending', 'online-generator' ),
+                'id'   => $prefix . 'registration_pending',
+            ],
+			[
+                'type' => 'checkbox',
+                'name' => esc_html__( 'Invitation Sent', 'online-generator' ),
+                'id'   => $prefix . 'invitation_sent',
+            ],
             [
                 'type' => 'checkbox',
                 'name' => esc_html__( 'Sent Calendar', 'online-generator' ),
@@ -956,6 +1068,16 @@ function current_status( $meta_boxes ) {
                 'type' => 'checkbox',
                 'name' => esc_html__( 'Signed Release', 'online-generator' ),
                 'id'   => $prefix . 'signed_release',
+			],
+			[
+                'type' => 'checkbox',
+                'name' => esc_html__( 'Request Profile Update', 'online-generator' ),
+                'id'   => $prefix . 'request_profile_update',
+			],
+			[
+                'type' => 'checkbox',
+                'name' => esc_html__( 'No Profile Link', 'online-generator' ),
+                'id'   => $prefix . 'no_profile_link',
             ],
         ],
     ];
@@ -994,53 +1116,6 @@ function setProfileEvents( $meta_boxes ) { // this shows the box where the scrap
 	return $meta_boxes;
 }
 add_filter( 'rwmb_meta_boxes', 'setProfileEvents' );
-
-function setProfileResearch( $meta_boxes ) { // this shows the box where the scrape and search results
-	$prefix = '';
-
-	$meta_boxes[] = array(
-		'id' => 'profiler',
-		'title' => esc_html__( 'PROFILE RESEARCH', 'omniscience-profiler' ),
-		'post_types' => array('profile' ),
-		'context' => 'advanced',
-		'priority' => 'high',
-		'autosave' => 'false',
-		'fields' => array(
-			array(
-				'id' => $prefix . 'card',
-				'type' => 'custom_html',
-				 //'std'  => '<div class="alert alert-warning">This is a custom HTML content</div>',
-				 'callback' => 'profile_menu',
-			),
-            array(
-				'id' => $prefix . 'profile_results',
-				'type' => 'custom_html',
-				 //'std'  => '<div class="alert alert-warning">This is a custom HTML content</div>',
-				 'callback' => 'profiler',
-			),
-			array(
-				'id' => 'search_content',
-				'type' => 'textarea',
-				'name' => esc_html__( 'Saved Search', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'scraped_content',
-				'type' => 'textarea',
-				'name' => esc_html__( 'Saved Scrape', 'metabox-online-generator' ),
-			),
-			array(
-				'id' => 'lang',
-				'type' => 'text',
-				'name' => esc_html__( 'Language', 'metabox-online-generator' ),
-				'size' => 5,
-			),
-		),
-	);
-
-	return $meta_boxes;
-}
-add_filter( 'rwmb_meta_boxes', 'setProfileResearch' );
-
 
 function setResourceProperties( $meta_boxes ) { // this shows the box where the scrape and search results
 	$prefix = '';
@@ -1345,6 +1420,52 @@ add_filter( 'rwmb_meta_boxes', 'timezoneList' );
 
 
 
+function setProfileResearch( $meta_boxes ) { // this shows the box where the scrape and search results
+	$prefix = '';
+
+	$meta_boxes[] = array(
+		'id' => 'profiler',
+		'title' => esc_html__( 'PROFILE RESEARCH', 'omniscience-profiler' ),
+		'post_types' => array('profile' ),
+		'context' => 'normal',
+		'autosave' => 'false',
+		'fields' => array(
+			array(
+				'id' => $prefix . 'card',
+				'type' => 'custom_html',
+				 //'std'  => '<div class="alert alert-warning">This is a custom HTML content</div>',
+				 'callback' => 'profile_menu',
+			),
+            array(
+				'id' => $prefix . 'profile_results',
+				'type' => 'custom_html',
+				 //'std'  => '<div class="alert alert-warning">This is a custom HTML content</div>',
+				 'callback' => 'profiler',
+			),
+			array(
+				'id' => 'search_content',
+				'type' => 'textarea',
+				'name' => esc_html__( 'Saved Search', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'scraped_content',
+				'type' => 'textarea',
+				'name' => esc_html__( 'Saved Scrape', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'lang',
+				'type' => 'text',
+				'name' => esc_html__( 'Language', 'metabox-online-generator' ),
+				'size' => 5,
+			),
+		),
+	);
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'setProfileResearch' );
+
+
 
 /* AWARDS */
 function team_metabox( $meta_boxes ) {
@@ -1374,4 +1495,4 @@ function team_metabox( $meta_boxes ) {
 	return $meta_boxes;
 	
 }
-add_filter( 'rwmb_meta_boxes', 'team_metabox' );
+//add_filter( 'rwmb_meta_boxes', 'team_metabox' );

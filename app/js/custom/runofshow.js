@@ -4,6 +4,7 @@ var ros_meta = {
 function runOfShow(menu){
     var show = menu.menu_levels;
     
+    
         if(show.length != undefined){
         
         for (var s = 0; s < show.length; s++) {
@@ -53,7 +54,7 @@ function displayMeta(){
     var meta = ''
     for(m in ros_meta){
             meta+='<h4>'+m+'</h4>'
-            console.log("meta",m,ros_meta[m])
+//            console.log("meta",m,ros_meta[m])
         for(i=0;i<ros_meta[m].length;i++){
             meta+=ros_meta[m][i].id+'|'+ros[m][i].name+"<br>"
 
@@ -123,9 +124,11 @@ function getProfileCard(this_profile,event_time){
             social +='<a target="_new" class="linkedin" href="'+info.linkedin+'"><i class="fa fa-linkedin social-icon" title="'+this_profile.title+' on LinkedIn"></i></a>'
         }
         if(info.github != undefined){
-            social +='<a target="_new" class="github" href="'+info.linkedin+'"><i class="fa fa-github social-icon" title="'+this_profile.title+' on GitHub"></i></a>'
+            social +='<a target="_new" class="github" href="'+info.github+'"><i class="fa fa-github social-icon" title="'+this_profile.title+' on GitHub"></i></a>'
         }
+        
         if(social != ''){
+
             card+='<span class="social">'+social+'</span>'
         }
        
@@ -142,33 +145,44 @@ function getProfileCard(this_profile,event_time){
 
     
 } 
-
-
-function displayRunOfShowTable(runOfShow){
-
- //   console.log(runOfShow)
-   
-    var show = '<h2>'+runOfShow.title+'</h2>'
+function displayRunOfShowList(runOfShow){
+    var list = '<div class="ros-list">'
+  
     var now = new Date()
     var showtime = runOfShow.info.event_info.utc_start;
+    
+    var duration = 0;
     var tense = "future";
-    if(now>showtime){
+    var seconds =  Math.floor(Date.now() / 1000)
+    if(seconds>showtime){
         tense = "past"
     }
-    console.log("TENSE", tense)
-    $("#show").html(show)
-    var duration = 0;
-    var sessions = '<div id="schedule">'
-    var this_profile = ''
-    var width_override = ''
-    var card_size = 1
-    var cell_width = '100%';
-    var cols = '';
+    var event_date = new Date(parseInt(showtime))
+  //  console.log(event_date)
+    var session;
+    var this_profile;
+    var info = {};
+    var credential; 
+    var session_number = 0;
+    var session_order;
+    var description;
+    var display_event_time
+
+
+    list += '<h2>'+runOfShow.title+'</h2>'
+//    list += '<h2>'+runOfShow.title+'</h2>'
+    
+    //list +=  event_date
+
     for (var n = 0; n < runOfShow.sessions.length; n++) { 
-      //  console.log("session-info",runOfShow.sessions[n].info,showtime)
-        if(runOfShow.sessions[n].info != undefined){
-            
-            if(runOfShow.sessions[n].info.event_info.duration != ''){
+        session = runOfShow.sessions[n];
+        session_order = session_number
+        if(session_number<10){
+            session_order = '0'+session_number
+        }
+        
+
+        if(runOfShow.sessions[n].info.event_info.duration != ''){
             duration = parseInt(runOfShow.sessions[n].info.event_info.duration)*60
             event_time = showtime// this passes it below
             
@@ -177,13 +191,138 @@ function displayRunOfShowTable(runOfShow){
             showtime = parseInt(showtime)+duration; //add duration for next 
             //console.log("duration",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
                 
-                }
+                
             // console.log("info not undefined",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
             }
-    //        console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
-            sessions += '<div class="row session">'
+
+        list+= '<hr><h4>'
+        list += '<span class="session-time">'+display_event_time+' </span><BR>'
+        list+= '<span>'+session_order+" - </span> "
+     
             
-            sessions += '<div class="col-sm-2 col-md-1">'
+        list+= session.title+'</h4>'
+    
+        description = session.info.content.replace(/(<([^>]+)>)/gi, "")
+    
+
+        list+= '<em style="font-style:italic !important">'+description+'</em><br>'
+//        list+='<ul>'
+        //list+='<li><strong>Invited Speakers</strong></li>'
+        
+        for (var p = 0; p < runOfShow.sessions[n].profiles.length; p++) { //speakers
+            credential = '' 
+         //  credential += '|'   
+            this_profile = runOfShow.sessions[n].profiles[p]
+            info = this_profile.profile.meta
+            if(info.profile_title != undefined){
+                credential +=  '<span>'+info.profile_title.trim()+", "+'</span> '
+            }
+            //credential += '|'
+            if(info.company != undefined){
+                credential += '<span>'+info.company.trim()+'</span> '
+            }
+           // credential += '|'
+
+           
+
+            if(info.linkedin != undefined){
+              // credential +=' <a target="_new" class="linkedin" href="'+info.linkedin+'"><i class="fa fa-linkedin social-icon" title="'+this_profile.title+' on LinkedIn"></i></a> '
+
+               credential +='<br><a target="_new" class="linkedin" href="'+info.linkedin+'">'
+                credential += info.linkedin
+//                credential += 'Linkedin'
+                credential +='</a> '
+
+            }
+            if(info.twitter != undefined){
+                   credential +=' <a target="_new" class="twitter" href="'+info.twitter+'"><i class="fa fa-twitter social-icon" title="'+this_profile.title+' on Twitter"></i></a> '
+               //credential +='<a target="_new" class="twitter" href="'+info.twitter+'">Twitter</a> '
+               }
+               
+          //     credential += '|'
+    
+
+            list+= '<li>'
+      //  list+= this_profile.object_id+'|'
+            list+= '<strong>'
+            
+            list+= this_profile.title+", "
+        //    list+='|'
+            list+= '</strong>'
+            list+= credential+'</li>'
+        }
+  //      list+='</ul>'
+
+        session_number++;
+    }
+    list+='</div>'
+  
+    $("#ros-list").html(list)
+
+}
+
+function displayRunOfShowTable(runOfShow){
+
+ //   console.log(runOfShow)
+   
+    var show = '<h2>'+runOfShow.title+'</h2>'
+    var now = new Date()
+    var showtime = runOfShow.info.event_info.utc_start;
+    var duration = 0;
+    var tense = "future";
+    var seconds =  Math.floor(Date.now() / 1000)
+    if(seconds>showtime){
+        tense = "past"
+    }
+    //console.log("event time",tense, showtime);
+    //console.log("TENSE", tense)
+    $("#show").html(show)
+
+    var duration = 0;
+    var sessions = '<div id="schedule" class="'+event_class+'">'
+    var this_profile = ''
+    var width_override = ''
+    var card_size = 1
+    var cell_width = '100%';
+    var cols = '';
+    var suppress_speaker_list = 0 // session level
+    var suppress_event_speaker_list = 0 //event level
+
+    var suppress_unconfimred_speakers = 0 //session level
+    var suppress_event_unconfimred_speakers = 1 // event level
+    var section_class = ''
+    
+    var show_speakers = getUrlParameter('show_speakers')
+    var show_unconfirmed_speakers = getUrlParameter('show_unconfirmed_speakers')
+    for (var n = 0; n < runOfShow.sessions.length; n++) { 
+       
+       //
+      //  console.log("Suppress list",suppress_event_speaker_list)
+
+      //  console.log("session-info",runOfShow.sessions[n].info,showtime)
+        if(runOfShow.sessions[n].info != undefined){
+        //    console.log("Suppress it",runOfShow.sessions[n].title,suppress_event_speaker_list)
+             suppress_event_speaker_list = runOfShow.info.meta.suppress_speaker_list
+            section_class = ''
+             if(runOfShow.sessions[n].info.meta.section_class != undefined){
+                section_class = ''            
+            }
+            if(runOfShow.sessions[n].info.event_info.duration != ''){
+                duration = parseInt(runOfShow.sessions[n].info.event_info.duration)*60
+                event_time = showtime// this passes it below
+                
+                display_event_time = localTime(showtime)//converst
+                start_time = showtime
+                showtime = parseInt(showtime)+duration; //add duration for next 
+                //console.log("duration",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
+                    
+                    }
+                // console.log("info not undefined",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
+            }
+    //        console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
+            sessions += '<div class="row session '+section_class+'">'
+            
+            sessions += '<div class="col-sm-3 col-md-2">'
             if(tense == 'future'){
             sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time">'+display_event_time+' </span></h3>'
             } else {
@@ -207,13 +346,23 @@ function displayRunOfShowTable(runOfShow){
         */
         sessions+= '</div>'
       
-        sessions+= '<div class="col-sm-3 col-md-2">'
+        sessions+= '<div class="col-sm-9 col-md-10">'
         
-        sessions += '<h3 class="session-title ">'+runOfShow.sessions[n].title+'</h3>'
+        sessions += '<h3 class="session-title ">'+runOfShow.sessions[n].info.title+'</h3>'
+      //  sessions += '<h5 class="session-blurb ">'+runOfShow.sessions[n].info.content+'</h3>'
+        if(runOfShow.sessions[n].info.content != undefined){
+
+            if(runOfShow.sessions[n].info.content != ''){
+                sessions += '<div class="session-content ">'+runOfShow.sessions[n].info.content+'</div>'
+            }
+        }
+
+
     //   
 
-    sessions+= '</div>'
-        sessions +='<div class="col-sm-6 col-md-8">'//session
+    sessions+= '</div>'//time title content
+    sessions+= '</div>'//row
+        sessions +='<div class="row"><div class="col-12">'//session
 
             sessions += '<div class="row" class="speaker-list">'
             width_override = ''
@@ -228,7 +377,7 @@ function displayRunOfShowTable(runOfShow){
                 cols='col-sm-6 col-md-3'
 
             } else if(runOfShow.sessions[n].profiles.length == 2){
-                width_override = 'pair'
+                width_override = 'interview'
                 card_size = 2
                 cols='col-sm-6 col-md-3'
 
@@ -238,65 +387,78 @@ function displayRunOfShowTable(runOfShow){
                 cols='col-sm-6 col-md-3'
 
             }
-
+            //suppress_speaker_list = 0;
             
-        
-
-cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
-
-        for (var p = 0; p < runOfShow.sessions[n].profiles.length; p++) { //speakers
-            
-            this_profile = runOfShow.sessions[n].profiles[p]
-               
-                    sessions += '<div  class="profile-card '+cols+' '+ this_profile.classes +'">'
-
-               // console.log("THIS PROFILE",this_profile)
-                if(this_profile.profile != undefined){
-                    sessions += getProfileThumbnail(this_profile,'thumbnail');
-                 /*                   if(card_size == 1){
-                      
-                    } else {
-                        
-                        sessions += getProfileThumbnail(this_profile,'medium');
-
-                    }*/
-                    if((width_override == 'presentation') || (width_override == 'pair')){
-                        sessions += '</div><div class="col-sm-6 col-md-3">'
-                    }
-                    sessions += '<span class="profile-info">'
+            if(runOfShow.sessions[n].info.meta.suppress_speaker_list != undefined){
+                suppress_speaker_list = runOfShow.sessions[n].info.meta.suppress_speaker_list;
                 
-                    sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title+'</span>'
-                    
-                   
-                sessions += getProfileCard(this_profile,event_time);
-                
-                if(width_override == 'presentation'){
-                   sessions += '</div><div class="col-sm-12 col-md-8 talk-blurb">'
-                
-             //       console.log(this_profile.profile);
-                if(this_profile.profile.meta.talk_description != undefined){
-                    sessions += '<span class="blurb">'+this_profile.profile.meta.talk_description+'</span>'
-                }
             }
-                sessions += '</span>'
+            
+
+        cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
+        
+//        console.log("show speakers",show_speakers)
+        if(suppress_event_speaker_list == 0||show_speakers == 1){
+            for (var p = 0; p < runOfShow.sessions[n].profiles.length; p++) { //speakers
                 
-                } else {
-                    if(getUrlParameter('hold') == 'show'){
-                        sessions += '<span class="profile-name">'+this_profile.title+'</span>'
-                   }
-                   
-                }
+                this_profile = runOfShow.sessions[n].profiles[p]
+             //   console.log('THumb',this_profile.profile,this_profile.profile.thumbnail_url.length)
+             
 
+                        sessions += '<div  class="profile-card '+cols+' '+ this_profile.classes +'">'
+
+                // console.log("THIS PROFILE",this_profile)
+                    if(this_profile.profile != undefined){
+                        if(this_profile.profile.thumbnail_url.length != 0 || show_unconfirmed_speakers == 1){
+                                sessions += getProfileThumbnail(this_profile,'thumbnail');
+                            /*                   if(card_size == 1){
+                                
+                                } else {
+                                    
+                                    sessions += getProfileThumbnail(this_profile,'medium');
+
+                                }*/
+                                if((width_override == 'presentation')){
+                                    sessions += '</div><div class="col-sm-6 col-md-3">'
+                                } else if (width_override == 'inteview'){
+                                    
+                                }
+                                sessions += '<span class="profile-info">'
+                            
+                                sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title+'</span>'
+                                
+                            
+                            sessions += getProfileCard(this_profile,event_time);
+                        } 
                 
+                    if(width_override == 'presentation'){
+                    sessions += '</div><div class="col-sm-12 col-md-8 talk-blurb">'
+                    
+                //       console.log(this_profile.profile);
+                    if(this_profile.profile.meta.talk_description != undefined){
+                        sessions += '<span class="blurb">'+this_profile.profile.meta.talk_description+'</span>'
+                    }
+                     }
+                    sessions += '</span>'
                 
+                    } else {
+                        if(getUrlParameter('hold') == 'show'){
+                            sessions += '<span class="profile-name">'+this_profile.title+'</span>'
+
+                    }
+                    
+                    }
+
+                    
+                    
 
 
 
-                sessions += '</div>'
+                    sessions += '</div>'
 
 
            }
-           
+        }           
            sessions += '</div>'
            sessions += '</div>'
 
@@ -315,7 +477,7 @@ cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
     //    activateAccordion("#ros-accordion")
     }
     if(getUrlParameter('cards') == 'show'){
-    //    $('#ros-accordion').addClass('cards')
+        $('#ros-accordion').addClass('cards')
 
    }
 
@@ -341,11 +503,11 @@ function getProfileThumbnail(this_profile,size){
 }
 
 function displayRunOfShow(runOfShow){
-    displayRunOfShowTable(runOfShow)
+   // displayRunOfShowTable(runOfShow)
     displayRunOfShowCards(runOfShow)
     if(getUrlParameter('cards') != 'show'){
        
-        //    activateAccordion("#ros-accordion")
+            activateAccordion("#ros-accordion")
         }
     
    
@@ -353,7 +515,12 @@ function displayRunOfShow(runOfShow){
 
 function displayRunOfShowCards(runOfShow){
         
+    var transparent_cards = getUrlParameter('transcard')
+    var card_class = 'card-mode'
+    if(card_class != 'trans-card'){
     var show = '<h2>'+runOfShow.title+'</h2>'
+    }
+    console.log("ROS",runOfShow)
 
     var showtime = runOfShow.info.event_info.utc_start;
     console.log("SHOWTIME",showtime)
@@ -363,9 +530,16 @@ function displayRunOfShowCards(runOfShow){
     var this_profile = ''
     var width_override = ''
     var card_size = 1
-    
+    var event_date = convertDate(showtime);
+    console.log("event date",event_date)
+    var counter=0
+    var counter_label
     for (var n = 0; n < runOfShow.sessions.length; n++) { 
-
+        if(counter<10){
+            counter_label="0"+counter;
+        } else {
+            counter_label = counter;
+        }
         if(runOfShow.sessions[n].info != undefined){
             
             if(runOfShow.sessions[n].info.event_info.duration != ''){
@@ -381,11 +555,24 @@ function displayRunOfShowCards(runOfShow){
         }
 //        console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
       //  console.log("title time",display_event_time,runOfShow.sessions[n].title)
-        sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time"> </span> '+runOfShow.sessions[n].title+'</h3>'
-        sessions += '<div class="card-mode">'
+      if(!transparent_cards){ 
+            sessions+='<input type="text" value="'+counter_label+'-'+runOfShow.sessions[n].slug+'" size="0"><BR><BR>'
+        }
+      counter++
+      sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time"> </span> '+runOfShow.sessions[n].title+'</h3>'
+
+      var card_style= runOfShow.info.meta.event_style_class
+      if(transparent_cards){
+        card_class = 'trans-card'
+        card_style = ''
+      } 
+        sessions += '<div class="'+card_class+' '+card_style+'">'
+
       //  sessions += '<img src="/wp-content/uploads/2021/09/BusinessSummitBrandCard.png"+ alt="'+runOfShow.title+'">'
+      sessions += '<h4>WebXR Education Summit</h4>'
+      
       sessions += '<ul class="session-times card-info">'
-        sessions += '<li class="event-date">12 October 2021</li>'
+        sessions += '<li class="event-date">'+event_date+'</li>'
        sessions += '<li><span>Los Angeles</span><BR>'+convertDateTime(start_time,-7) +'</li>'
         sessions += '<li><span>New York</span><BR>'+convertDateTime(start_time,-4) +'</li>'
         sessions += '<li><span>UTC</span><BR>'+convertDateTime(start_time,0) +'</li>'
@@ -407,13 +594,18 @@ function displayRunOfShowCards(runOfShow){
             width_override = 'presentation'
             card_size = 2
         } else if(runOfShow.sessions[n].profiles.length == 2){
-            width_override = 'pair'
+            width_override = 'interview'
+            card_size = 2
+        } else if(runOfShow.sessions[n].profiles.length == 3){
+            width_override = 'three'
             card_size = 2
         } else {
             width_override = ''
             card_size = 1
         }
-
+        if (width_override == 'interview'){
+            sessions += '<div class="col-sm-6 '+ width_override+'"><span class="blurb">'+runOfShow.sessions[n].info.content+'</span></div>'
+            }
         for (var p = 0; p < runOfShow.sessions[n].profiles.length; p++) { 
             
             this_profile = runOfShow.sessions[n].profiles[p]
@@ -423,6 +615,8 @@ function displayRunOfShowCards(runOfShow){
                 if(this_profile.profile != undefined){
                     if(card_size == 1){
                         sessions += getProfileThumbnail(this_profile,'thumbnail');
+                    } else if (card_class == 'trans-card'){
+                        sessions += getProfileThumbnail(this_profile,'medium_large');
                     } else {
                         
                         sessions += getProfileThumbnail(this_profile,'medium');
@@ -435,11 +629,12 @@ function displayRunOfShowCards(runOfShow){
     
                 sessions += getProfileCard(this_profile,event_time);
                 
-                
+                console.log("wo",width_override)
                     if(width_override == 'presentation'){
 
-                        if(this_profile.profile.meta.talk_description != undefined){
-                            sessions += '<span class="blurb">'+this_profile.profile.meta.talk_description+'</span>'
+                        if(runOfShow.sessions[n].info.content != undefined){
+
+                            sessions += '<span class="blurb">'+runOfShow.sessions[n].info.content+'</span>'
                         }
                     }
                 sessions += '</span>'
@@ -452,7 +647,7 @@ function displayRunOfShowCards(runOfShow){
                 }
 
                 
-                
+
 
 
 
@@ -461,22 +656,30 @@ function displayRunOfShowCards(runOfShow){
                 sessions += '</div>'
 
            }
+         
            sessions += '</div>'
+
+           if(card_class == 'trans-card'){
+               if(width_override != 'interview' && width_override!='presentation'){
+                    sessions += '<div class="panel-blurb">'+runOfShow.sessions[n].info.content+'</div>'
+                }
+           }
+
 
            sessions += '<div class="card-footer">'
            sessions += '<span class="event-info">'
-           sessions += '<a class="rsvp-link" href"https://bit.ly/WebXRDesignSummit21" target="_new">RSVP: https://bit.ly/WebXRDesignSummit21</a><br>'
+           sessions += '<a class="rsvp-link" href"'+runOfShow.info.meta.tickets_url+'" target="_new">RSVP: '+runOfShow.info.meta.tickets_url+'</a><B'
            sessions += '<a class="rsvp-link" href"https://webxr.events/" target="_new">//webxr.events</a> | '
            sessions += '<a class="rsvp-link" href"https://twitter.com/webxrawards" target="_new">@webxrawards</a> | '
            sessions += '<a class="rsvp-link" href"https://twitter.com/#webxrsummit" target="_new">#webxrsummit</a><br>'
            sessions += '</span>'
-           sessions += '<span class="sponsor-logo futurewei-logo"><a href="https://futurewei.com" target="_new"  title="Futurewei Technologies"><img src="/wp-content/uploads/2021/09/Futurewei-White.png" alt="Futurewei Technologies Logo"></a></span>'
+           
            
 
            sessions += '</div>'
-           
-
-          
+           //sessions += '<span class="host">Hosted by Dr. Karen Alexander</span>'
+           sessions += '<span class="sponsor-logo futurewei-logo"><a href="https://futurewei.com" target="_new"  title="Futurewei Technologies"><img src="/wp-content/themes/webxrsummits/images/logo/Futurewei-White-shadow.png" alt="Futurewei Technologies Logo"></a></span>'
+       
         sessions += '</div>'
     }
     sessions +='</div>'
@@ -488,7 +691,7 @@ function displayRunOfShowCards(runOfShow){
     //    activateAccordion("#ros-accordion")
     }
     if(getUrlParameter('cards') == 'show'){
-    //    $('#ros-accordion').addClass('cards')
+        $('#ros-accordion').addClass('cards')
 
    }
 
@@ -564,8 +767,10 @@ function localTime(unix_timestamp){
     // Will display time in 10:30:23 format
     return hours + ':' + minutes.substr(-2);
 }
-function convertDate(unix_timestamp,offset){
-
+function convertDate(unix_timestamp){
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    var date = new Date(unix_timestamp * 1000);
+    return date.getDate()+" "+months[date.getMonth()]+" "+date.getFullYear()
 }
 function convertDateTime(unix_timestamp,offset){
     

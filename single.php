@@ -28,6 +28,7 @@ if($post->post_parent==0){
 ?>
 
 <div class="title-bar">
+ 
     <h1 class="title"><?=$post->post_title?></h1>
     <?php
     if(@$post->post_excerpt){
@@ -53,6 +54,7 @@ if($post->post_parent==0){
 
 <?php
 
+//match_profilesFromTable('_profile_import');
   print do_blocks(do_shortcode($post->post_content));
 ?>
     </div>

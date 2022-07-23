@@ -1,523 +1,658 @@
-#ros-accordion{
-    h3.ros{
-        padding:3px !important;
-        margin-top:3px;
-        padding-top:3px;
-        border-top:1px dashed $hot-yellow;
+#ros-accordion {
+    h3.ros {
+        padding: 3px !important;
+        margin-top: 3px;
+        border-top: 1px dashed $hot-yellow;
         line-height: 1;
         font-weight: 600;
         font-family: 'Zen Dots';
-        font-size:20px;
-        letter-spacing: 1px;
-        
-        span.spacer{
-            height:5px;
-            display: block;
-        }
-    }
-    div{
-        overflow-x: hidden;
-        margin-bottom:3px;
-    }
-    .session-times{
-      display: none;
-    }
-    .profile-card{
-        
-        line-height: 120%;
-        font-size: .8rem;
-        .social-icon{
-            color:#fff;
-            display: table-cell;
-            padding:10px;
-            
-        }
-        span{
-            display: block;
-            text-align: center;
-            font-size: .7rem;
-           
-        }
-        span.profile-name{
-            font-weight: 600;
-            font-family: 'Zen Dots';
-            font-size: .8rem;
-            padding-bottom:5px;
-            border-bottom: 1px dashed #ccc;
-            margin-bottom:5px;
-        }
-        .blurb{
-          display: none;
-        }
-    }
-    p{
         font-size: 20px;
-       
-    }
-    .profile-thumbnail{
-      
-        overflow:hidden;
-;       padding:15px;
-        img{
-            width:150px;
+        letter-spacing: 1px;
+
+        span.spacer {
+            height: 5px;
             display: block;
-            margin:0px auto;
-            height:100%;
-            border-radius: 50%;
-            border:2px solid #fff;
-            box-shadow: 0px 0px 10px 10px rgba(176,2,255,0.3);
         }
     }
-    .card-info{
-       visibility: hidden;
+    div {
+        overflow-x: hidden;
+        margin-bottom: 3px;
     }
-
-    .fifth{
-        width:20% !important;
-    }
-    .sponsor-card{
-      
-    }
-}
-#ros-accordion.cards{
-   width:1200px !important;
-    span.blurb{
-      visibility: hidden;
-    }
-    #speaker-list{
-        width:80%;
-        margin-left:23%;
-       .fifth{
-           width:20% !important;
-           .profile-name{
-            width: 100%;
-            display: block;  
-            margin-left: 0px;
-            font-size: 14px;
-            height:30px;
-           
-          }
-           .sophia-moshasha, .atsushi-shimono, .daniel-ljunggren, .yu-yuan, .neil-trevett{
-              height:50px !important;
-            }
-       }
-       //PRESENTATION OVERRIDES
-       .presentation{
-           width:80% !important;
-         
-           span.blurb{
-            visibility: visible;
-            display: none;
-            width: 100%;
-            text-align: left;
-            margin-left: 0%;
-            font-size: 14px;
-            line-height: 150%; 
-          
-            p{
-              padding-left: 0px;
-              font-size: 16px; 
-
-            }
-           
-          }
-          .profile-card{
-            margin-top:30px;
-          }
-           margin-left: 10% !important;
-           .profile-thumbnail {
-             width:30%;
-             display: inline-block;
-              img{
-                margin-left:0px;
-                width:100%;
-             } 
-           
-           }
-           .profile-info{
-             width: 65%;
-             display: inline;
-             float:right;
-             .social{
-               display: block;
-                a{
-                  margin-right:.5em;
-                }
-              }
-
-            span.credential span{
-              font-size:16px !important;
-              line-height: 150% !important;
-              font-weight: 600;
-            }
-        
-            span.profile-name{
-              text-decoration: underline;
-              display: block;
-              text-align: center;
-              border-bottom: none;
-              font-size: 24px;
-              height:30px;
-            }
-            
-
-            
-           }
-           .samantha-mathews{
-            font-size:20px !important;
-            
-          }
-       }
-       //PAIR OVERRIDES
-       .pair{ width:35% !important;
-        margin-left:10%;
-
-         .profile-card{
-         
-          .profile-name{
-            width: 100%;
-            display: block;
-            margin-left: 0px;
-            font-size: 20px;
-            height:30px;
-          }
-          span.credential span{
-            font-size:16px !important;
-            line-height: 150% !important;
-            font-weight: 600;
-          }
-          .samantha-mathews{
-            font-size:20px !important;
-            
-          }
-         }
-
-       }
-  .samantha-mathews{
-            font-size:15px !important;
-            
-          }
-    }
-    .card-mode{
-        border: 3px solid #fff;
-        width:1200px;
-        height:630px;
-        padding: 20px;
-        margin-bottom:50px;
-        background: url(images/bg/DesignSummitCardBG.jpg) center center no-repeat;
-        position: relative;
-        overflow: hidden;
-    }
-    h3.ros{
+    .session-times {
         display: none;
     }
-    h3{
-        font-weight: 600;
-        font-family: 'Zen Dots';
-        text-align: right;
-        font-size: 24px;
-        padding-left:25%;
-        margin:0px auto 25px;
-        text-shadow: 3px 3px 7px rgba(176,2,255, 0.5);
-        text-align: center;
-        color:#ff6b18;
+    .profile-card {
+
+        line-height: 120%;
+        font-size: 0.8rem;
+        .social-icon {
+            color: #fff;
+            display: table-cell;
+            padding: 10px;
+
+        }
+        span {
+            display: block;
+            text-align: center;
+            font-size: 0.7rem;
+
+
+        }
+        span.profile-name {
+            font-weight: 600;
+            font-family: 'Zen Dots';
+            font-size: 0.8rem;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #ccc;
+            margin-bottom: 5px;
+        }
+        .blurb {
+            display: none;
+        }
     }
-    p{
+    p {
         font-size: 20px;
-        padding-left:23%;
+
     }
-    .card-info{
+    .profile-thumbnail {
+
+        overflow: hidden;
+        padding: 15px;
+        img {
+            width: 150px;
+            display: block;
+            margin: 0 auto;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 10px 10px rgba(176, 2, 255, 0.3);
+        }
+    }
+    .card-info {
+        visibility: hidden;
+    }
+
+    .fifth {
+        width: 20% !important;
+    }
+    .sponsor-card {}
+}
+#ros-accordion.cards {
+    width: 1200px !important;
+    margin-left:25px;
+    span.blurb {
+        visibility: hidden;
+    }
+    #speaker-list {
+        width: 100%;
+        //margin-left: 23%;
+        position: absolute;
+        top:100px;
+        overflow:hidden;
+        .fifth {
+            width: 20% !important;
+            .profile-name {
+                width: 100%;
+                display: block;
+                margin-left: 0;
+                font-size: 14px;
+                height: 30px;
+
+            }
+            .sophia-moshasha,
+            .atsushi-shimono,
+            .daniel-ljunggren,
+            .yu-yuan,
+            .neil-trevett {
+                height: 50px !important;
+            }
+        }
+        // PRESENTATION OVERRIDES
+        .presentation {
+            width: 80% !important;
+            margin-top:-25px;
+            overflow-y: hidden;
+            span.blurb {
+                visibility: visible;
+                display: block;
+                width: 65%;
+                text-align: left;
+                margin-left: 0;
+                font-size: 20px;
+                line-height: 150%;
+                position: absolute;
+                top: 175px;
+                text-shadow: 1px 1px #000;
+                overflow-y: hidden;
+
+                p {
+                    padding-left: 0;
+                    font-size: 16px;
+
+                }
+
+            }
+            .profile-card {
+                margin-top: 30px;
+            }
+            margin-left: 10% !important;
+            .profile-thumbnail {
+                width: 30%;
+                display: inline-block;
+                img {
+                    margin-left: 0;
+                    width: 100%;
+                }
+
+            }
+            .profile-info {
+                width: 65%;
+                display: inline;
+                float: right;
+                .social {
+                    display: block;
+                    a {
+                        margin-right: 0.5em;
+                    }
+                }
+
+                span.credential span {
+                    font-size: 16px !important;
+                    line-height: 150% !important;
+                    font-weight: 600;
+                }
+
+                span.profile-name {
+                    text-decoration: underline;
+                    display: block;
+                    text-align: center;
+                    border-bottom: none;
+                    font-size: 24px;
+                    height: 30px;
+                }
+
+
+            }
+            .samantha-mathews {
+                font-size: 20px !important;
+
+            }
+        }
+        .interview{
+            overflow:hidden;
+            position: relative;
+            
+            span.blurb{
+                top:25px;
+
+                visibility: visible;
+                p{
+                    margin-top:20px;
+                    padding-left:20%;
+                    text-shadow: 2px 2px 2px black;
+                }
+            }
+        }
+        // PAIR OVERRIDES
+        .pair {
+            width: 35% !important;
+            margin-left: 10%;
+
+            .profile-card {
+
+                .profile-name {
+                    width: 100%;
+                    display: block;
+                    margin-left: 0;
+                    font-size: 20px;
+                    height: 30px;
+                }
+                span.credential span {
+                    font-size: 16px !important;
+                    line-height: 150% !important;
+                    font-weight: 600;
+                }
+                .samantha-mathews {
+                    font-size: 20px !important;
+
+                }
+            }
+
+        }
+        .three{
+            width:33.33333% !important;
+        }
+        .samantha-mathews {
+            font-size: 15px !important;
+
+        }
+    }
+    .card-mode {
+        border: 3px solid #fff;
+        width: 1200px;
+        height: 630px;
+        padding: 20px;
+        margin-bottom: 50px;
+      //  background: url('images/bg/DesignSummitCardBG.jpg') center center no-repeat;
+        position: relative;
+        overflow: hidden;
+        color:#fff;
+    }
+    .trans-card {
+//        border: 3px solid #fff;
+color:#fff;
+        width: 100%;
+        height: 630px;
+        padding: 20px;
+        margin-bottom: 50px;
+      //  background: url('images/bg/DesignSummitCardBG.jpg') center center no-repeat;
+        position: relative;
+        overflow: hidden;
+        //transform: scale(1.5);
+       // margin-bottom: 300px;
+        .panel-blurb{
+            top:70%;
+            position: relative;
+            p{
+                padding:0px 10%;
+            }
+        }
+        h4{
+            
+        }
+        .sponsor-logo{
+            display:none;
+        }
+        .card-footer, .session-times, h4{
+            display:none;
+        }
+    }
+    h3.ros {
+        display: none;
+    }
+    h3 {
+        font-weight: bold;
+        font-family: 'AgencyFB';
+        text-align: right;
+  
+        font-size: 24px;
+       // padding-left: 25%;
+        margin: 0 auto 25px;
+        position: absolute;
+        top:25px;
+        width:100%;
+        text-align: center;
+    }
+    h4 {
+        font-weight: bold;
+        font-family: 'AgencyFB';
+        color:#fff;
+        font-size: 36px;
+        padding-left: 30%;
+        margin: 0 auto 25px;
+        position: absolute;
+        width:100%;
+        top:425px;
+        text-align: center;
+        text-shadow: 3px 3px 3px #530066, -3px -3px 3px #530066;
+
+    }
+    p {
+        font-size: 20px;
+        padding-left: 23%;
+    }
+    .card-info {
         visibility: visible;
-     }
-     h3.card-info{
-      
-      font-size: 36px;
-     }
-     .social{
-         visibility: hidden;
-     }
-     .profile-card{
-        
-        span.credential span{
-          font-size:14px !important;
-          line-height: 150% !important;
-          font-weight: 600;
-          text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+    }
+    h3.card-info {
+
+        font-size: 48px;
+    }
+    .social {
+        visibility: hidden;
+    }
+    .profile-card {
+
+        span.credential span {
+            font-size: 14px !important;
+            line-height: 150% !important;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
         }
 
-        
-        span.profile-name{
-           
+
+        span.profile-name {
+
             font-weight: 600;
             font-size: 16px;
-            padding-bottom:5px;
+            padding-bottom: 5px;
             border-bottom: 1px dashed #ccc;
-            margin:10px auto 5px;
+            margin: 10px auto 5px;
             line-height: 150%;
             letter-spacing: 1px;
             width: 100%;
             text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
-        
+
 
             display: block;
-          
-        }
-        .samantha-mathews{
-          font-size:15px !important;
-          
-        }
-        .terry-schussler{
-          font-size:14px !important;
-          
-        }
-        .chris-duffey .credentials{
-          width:90%;
-          margin-left:5%;
-        }
-       
-    }
-    .session-times{
-      display: block;
-      text-align: right;
-      margin:0px auto 25px;
-      
-      li{
-        display: inline-block;
-        padding:0px 10px;
-        text-align: center;
-        font-weight: 900;
-        border-right:1px dashed #ccc;
-        font-size:24px;
-        line-height: 24px;
-        letter-spacing: 1px;
-        span{
-          font-weight: 600;
-          font-size:50%;
-        }
-      }
-      li:last-child{
-        border-right:none;
-      }
-    }
-    .card-footer{
-      position: absolute;
-      bottom: 7px;
-      left: 25%;
-      height: 80px;
-      width: 75%;
-      overflow: hidden;
-      line-height: 35px;
-      padding-top: 9px;
-      .event-info{
-        .rsvp-link{
-          text-shadow: 0px 0px 7px rgba(0, 0, 0, 1);
-          font-size:20px;
-          display: inline-block;
 
-          
-          
         }
-        a{
-          visibility: visible !important;
-          font-size: 24px;
-          font-weight: 600;
+        .samantha-mathews {
+            font-size: 15px !important;
+
         }
-      }
-        .sponsor-logo{
-         top:0px;
-          width: 240px;
-          height:80px;
-          position: absolute;
-          right: 10px;
-          a{ 
-            img{
-              width:240px;
+        .terry-schussler {
+            font-size: 14px !important;
+
+        }
+        .chris-duffey .credentials {
+            width: 90%;
+            margin-left: 5%;
+        }
+
+    }
+    .session-times {
+        display: block;
+        text-align: right;
+        margin: 0 auto 25px;
+        position: absolute;
+        top: 470px;
+        left: 35%;
+        font-family: "AgencyFB";
+        li {
+            display: inline-block;
+            padding: 0 10px;
+            text-align: center;
+            font-weight: 900;
+            border-right: 1px dashed #ccc;
+            font-size: 36px;
+            line-height: 24px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 2px #000, -2px -2px 2px #000;
+            span {
+                font-weight: 600;
+                font-size: 50%;    
+                margin-bottom: 5px;
+                display: inline-table;
             }
-         }
+        }
+        li:last-child {
+            border-right: none;
         }
     }
+    .card-footer {
+        position: absolute;
+        bottom: 7px;
+        left: 30%;
+        height: 80px;
+        width: 75%;
+        overflow: hidden;
+        line-height: 35px;
+        padding-top: 9px;
+        .event-info {
+            .rsvp-link {
+                text-shadow: 2px 2px 2px #000, -2px -2px 2px #000;
+                font-size: 20px;
+                display: inline-block;
 
+
+            }
+            a {
+                visibility: visible !important;
+                font-size: 24px;
+                font-weight: 600;
+            }
+        }
+        
+    }
+    .sponsor-logo {
+        width: 240px;
+        height: 80px;
+        position: absolute;
+        right: -20px;
+        top:550px;
+        a {
+            img {
+                width: 200px;
+            }
+        }
+    }
+    .host{
+        position: absolute;
+        font-family: "AgencyFB";
+        font-size: 24px;
+        top: 575px;
+        left: 40px;
+        color: #d96af1;
+    }
+    .education-summit{
+        
+        background: url('images/bg/EdSummitCardBG.jpg') center center no-repeat;
+        h3.card-info{
+          color:#fff !important;
+         text-shadow: 9px 9px 10px #530066, -8px -9px 10px #530066;
+          letter-spacing:.8px;
+        }
+        
+        .profile-card.img{
+            box-shadow:0 0 10px 10px rgb(83, 0, 102 / 30%)
+        }
+        a {
+
+        color:#fff;
+      
+        }
+    }
 }
+
+#ros-list{
+  background-color: #fff;
+  color:#000;
+  padding:3em;
+  p{
+    color:#000;
+  }
+  li{
+    color:#000;
+    list-style: none;
+    font-family: "Montserrat";
+  } 
+  .linkedin,.twitter{
+    color:#009;
+  }
+  strong{
+    font-weight: 600;
+  }
+}
+
+
+
 
 #schedule{
-  
 
-    .session-times{
-      display: table-row;
-      li{
-        display: table-cell;
-        list-style: none;
-      }
+
+    .session-times {
+        display: table-row;
+        li {
+            display: table-cell;
+            list-style: none;
+        }
     }
 
- 
-  .session-title{
-  padding:10px;
-  }
-  .fifth{
-    float:left;
-    width: 20%;
-    @media(max-width:975px){
-      width: 50%;
-    
+
+    .session-title {
+        padding: 10px;
     }
-  }
-  .profile-name{
-    font-family: 'Zen Dots';
-    font-size:1rem;
-  }
-  .profile-info{
-    padding-bottom: 20px;
-      .social{
-             //  display: none;
-                a{
-                  margin-right:.5em;
-                }
-              }
-  }
-  .profile-thumbnail{
-    width:80%;
-    margin: 0px auto 20px;
-    img{
-      width: 100%;
-      max-width: 150px;
-      display: block;
-      margin:0px auto;
+    .fifth {
+        float: left;
+        width: 20%;
+        @media(max-width:975px) {
+            width: 50%;
 
-      border-radius: 50%;
-      border:2px solid #fff;
-      box-shadow: 0px 0px 10px 10px rgba(255,173,2,0.4);     }
-  }
-  .profile-name{
-    font-size: 1rem;
-    border-bottom: 1px dashed #ccc;
-  }
-  .credential{
-    font-size: .8rem;
-    line-height: 150%;
-    
-  }
-
-  .profile-card, .profile-info{
-    .samantha-mathews{
-      font-size:15px !important;
-      
+        }
     }
-    .terry-schussler{
-      font-size:14px !important;
-      
+    .profile-name {
+        font-family: 'Zen Dots';
+        font-size: 1rem;
     }
-   
-    span{
-    
-
-      display: block;
-      text-align: center;
+    .profile-info {
+        padding-bottom: 20px;
+        .social {
+            // display: none;
+            a {
+                margin-right: 0.5em;
+            }
+        }
     }
-  }
-  .session{
-  margin:40px 0px;
-  border-bottom: 5px dashed #4173D8;
-  padding-bottom: 10px !important;
-  }
-  .blurb{
-    font-size:.8rem;
-    line-height: 120%;
-    padding-bottom:20px;display: none;
-  }
-  .talk-blurb{
-    padding-bottom:20px;
-  }
-  .ricardo-cabello{
-    width:90%;
-    margin-left:5%;
-  }
-}
+    .profile-thumbnail {
+        width: 80%;
+        margin: 0 auto 20px;
+        img {
+            width: 100%;
+            max-width: 150px;
+            display: block;
+            margin: 0 auto;
 
-.twitter i.fa{
-  color:#1DA1F2;
-}
-.linkedin i.fa{
-  color:#0077b5;
-}
-.github i.fa{
-  color:#4078c0;
-}
-a.watch{
-  font-size:16px;
-  color:#fff;
-  display: block;
-    text-align:center;
-  i{
-    font-size:36px;
-  }
-}
-.pin-bottom{
-
-  position: fixed;
-  width: 60%;
-  height: 25vh;
-  bottom: 0;
-  left: 50%;
-  margin-left: -30%;
-  z-index: 100;;
-  @media(max-width:767px){
-    width:100%;
-    margin-left: -50%;
-  }
-  display: inline-table;
-  .video-wrap{
-    border:3px dotted #fff;
-
-  }
-}
-table.segment{
-  td{
-    vertical-align:middle;
-    padding:5px;
-    a{
-      color:#fff;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 20px 10px rgba(255, 173, 2, 0.4);
+        }
     }
-  }
-  td.name{
-    font-weight: bold;
-  }
-  img{
-    width:150px;
-    border-radius:150px;
-  }
-  .presenter{
-    
-  }
-  .thumbnail{
-    background-color: transparent;
-    width:100px;
-    border:none;
-  }
-  .designation{
-    width:75px;
-  }
-  .meta{
-    overflow:hidden;
-  }
+    .profile-name {
+        font-size: 1rem;
+        border-bottom: 1px dashed #ccc;
+    }
+    .credential {
+        font-size: 0.8rem;
+        line-height: 150%;
+
+    }
+
+    .profile-card,
+    .profile-info {
+        .samantha-mathews {
+            font-size: 15px !important;
+
+        }
+        .terry-schussler {
+            font-size: 14px !important;
+
+        }
+
+        span {
+
+
+            display: block;
+            text-align: center;
+        }
+    }
+    .session {
+        margin: 40px 0 !important;
+        border-top: 5px dashed #4173D8;
+        padding: 10px 0 !important;
+        div:first-child {
+            margin-top: 10px;
+        }
+
+
+    }
+    .blurb {
+        font-size: 12px;
+        line-height: 120%;
+        padding-bottom: 20px;
+        display: block;
+    }
+    .talk-blurb {
+        padding-bottom: 20px;
+    }
+    .ricardo-cabello {
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
+.twitter i.fa {
+    color: #1DA1F2;
+}
+.linkedin i.fa {
+    color: #0077b5;
+}
+.github i.fa {
+    color: #4078c0;
+}
+a.watch {
+    font-size: 16px;
+    color: #fff;
+    display: block;
+    text-align: center;
+    i {
+        font-size: 36px;
+    }
+}
+.pin-bottom {
+
+    position: fixed;
+    width: 60%;
+    height: 25vh;
+    bottom: 0;
+    left: 50%;
+    margin-left: -30%;
+    z-index: 100;
+    @media(max-width:767px) {
+        width: 100%;
+        margin-left: -50%;
+    }
+    display: inline-table;
+    .video-wrap {
+        border: 3px dotted #fff;
+
+    }
+}
+table.segment {
+    td {
+        vertical-align: middle;
+        padding: 5px;
+        a {
+            color: #fff;
+        }
+    }
+    td.name {
+        font-weight: bold;
+    }
+    img {
+        width: 150px;
+        border-radius: 150px;
+    }
+    .presenter {}
+    .thumbnail {
+        background-color: transparent;
+        width: 100px;
+        border: none;
+    }
+    .designation {
+        width: 75px;
+    }
+    .meta {
+        overflow: hidden;
+    }
 
 
 }
-.ros-event{
-float:left;
-text-align: left;
-position: relative;
+.ros-event {
+    float: left;
+    text-align: left;
+    position: relative;
 
 }
-.ros-time{
-  float:right;
-  text-align: left;
-  position: relative;
-  display: inline;
-  }
-.show-journal{
-  padding:25px;
-  font-family:monospace;
-  background: #e7e7e7;
-  color:#333;
+.ros-time {
+    float: right;
+    text-align: left;
+    position: relative;
+    display: inline;
+}
+.show-journal {
+    padding: 25px;
+    font-family: monospace;
+    background: #e7e7e7;
+    color: #333;
 }

@@ -117,7 +117,7 @@
 
             <a-entity id="trophy-model" class="center-obj-zone" static-body
                 full-gltf-model="#2nd-polys-trophy" class="collision" visible="true"
-                
+                scale="20 20 20" 
                 rotation="0 -90 0" animation="property: object3D.rotation.y; to: -360; easing: linear; dur: 24000; loop: true;">
                 
                 <a-entity id="Polys2-logo-model" class="center-obj-zone" static-body

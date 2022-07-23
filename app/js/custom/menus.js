@@ -25,17 +25,39 @@ var menu_config = {
         'menu_type': 'run-of-show',
         'location': '#run-of-show'
 
+    },
+    'edsummit22': {
+        'menu_type': 'run-of-show',
+        'location': '#run-of-show'
+
+    }
+    ,
+    'brandsummit22': {
+        'menu_type': 'run-of-show',
+        'location': '#run-of-show'
+
+    },
+    'summits': {
+        'menu_type': 'summits',
+        'location': '#summits'
+
+    }
+    ,
+    'prodsummit22': {
+        'menu_type': 'run-of-show',
+        'location': '#run-of-show'
+
     }
 }
 function runOfShow(id){
-    console.log("run of show"+id)
-       console.log(menus[id])
+ //   console.log("run of show"+id)
+  //     console.log(menus[id])
     var show = menus[id]
     for (var i = 0; i < show.length; i++) {
         show[show[i].slug] = {}
 
     }
-    console.log(show)
+   // console.log(show)
 
 
 
@@ -54,10 +76,10 @@ function setMenus(data) {
         menus[data[i].slug].slug = data[i].slug
         menus[data[i].slug].items = setMenu(data[i].slug, data[i].items)
 
-        //console.log("slug", data[i].slug)
+        
     }
     buildMenuData();
-       //console.log("raw menu data", menus)
+     //  console.log("raw menu data", menus)
 
 }
 
@@ -106,9 +128,9 @@ function setMenuItem(slug, item) {
 jQuery(document).ready(function() {
     if ( $.isFunction(window.localTrigger) ) {
         localTrigger();
-        console.log("triggered")
+        //console.log("triggered")
     } else {
-        console.log("not triggered")
+      //  console.log("not triggered")
     }
 
 
@@ -226,7 +248,7 @@ function buildMenuData() {
 
         for (var m in menus) { // 
             var data = [];
-            //console.log('menu loop',m)
+          //  console.log('menu loop',m)
             if (menu_config[m] != undefined) {
                 var items = ''
 
@@ -259,6 +281,7 @@ function buildMenuData() {
                         var nested_children = menus[m].items[this_menu[a].children[c]].children;
                         for (var g = 0; g < nested_children.length; g++) {
                             slug = getSlug(menus[m].items[nested_children[g]], g, "g", nested_children, g)
+                           // console.log(m,slug)
                             grandchildren.push( // data for childe menus
                                 {
                                     "title": menus[m].items[nested_children[g]].title,
@@ -312,8 +335,7 @@ function buildMenuData() {
 
                 }
                 menus[m].menu_levels = data
-                console.log("menu level data",m,menus[m].menu_levels)
-
+             
                 menu_levels = data;
                
                 setLinearDataNav(m, data);

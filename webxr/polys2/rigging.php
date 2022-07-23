@@ -6,7 +6,7 @@ if(@$_GET['speed']){
 }
 $cam_x =0;
 $cam_y =2;
-$cam_z =0;
+$cam_z =10;
 if(@$_GET['camera']){
     $cam_coords =  explode("~",$_GET['camera']);
     if(count($cam_coords) == 3){
@@ -49,7 +49,7 @@ if(@$_GET['camera']){
             <a-entity id="camera"  wasd-controls camera look-controls raycaster="far: 5; objects: .clickable"
                 super-hands="colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
                 
-                position="<?=$cam_x?> <?=$cam_y?> <?=$cam_z?>" 
+                position="<?=$cam_x?> 2 <?=$cam_z?>" 
             
                 rotation="0 0 0"
                 

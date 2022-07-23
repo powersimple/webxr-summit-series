@@ -4,6 +4,7 @@ get_header();
 
 
 
+
 $section_class = get_post_meta($post->ID,'section_class',true);
 print $default_video_url = get_post_meta($post->ID,"embed_video_url",true);
 
@@ -40,38 +41,14 @@ strong {
 <?php
 }
 
-$instructions = 'Sophia Moshasha and Daniel Dyboski-Bryant are looking forward to welcoming you to our Green Room at<br><a href="[GREEN_ROOM_URL]" target="_blank">[GREEN_ROOM_URL]</a> at <strong>[GREEN_ROOM_TIME]</strong> PDT</strong> to test your mic and camera, and ability to sceen share if applicable.<br>
-<br>
-The session will begin promptly at [START_TIME] Pacific Daylight Time (UTC-7) and ends at [END_TIME] PDT<br>
-<strong>Please accept this calendar invite to confirm your engagement.</strong><br>
-<br>
-
-If possible, please use a 1080p webcam and sit in a well-lit and quiet area. We will be using the Restream platform, which supports virtual backgrounds. Please be advised that this may cause undesired blurring effects when you move. Real world backgrounds are preferred. You are welcome to use a custom 1920x1080 jpg or png image file as your background. it also has a blur feature similar to Zoom<BR><BR>
-
-For sound, we would prefer that you not wear a headset for aesthetic reasons, unless you are in a location with unavoidable background noise or sound check reveals an echo.<br>
-<br>
-We are excited for you to share your expertise with our global audience.<br>
-If you have any questions, please don\'t hesitate to reach out to us at <a href="mailto:webxrevents@gmail.com">webxrevents@gmail.com</a><br>
-
-<br>
-See you on July 21st!<br><br>
-Your friends,<br>
-The Polys – WebXR Awards and WebXR Summit Series Team';
-    
+$instructions = 'AWARD INFO';
 
 
-$panel_script = "Dear [NAME],<br><br>
-Thank you for joining our panel <strong>[SESSION]</strong> [MODERATION] at the <strong>WebXR Education Summit on the 21st of July</strong>.<br><br>
-$instructions";
+$panel_script =  do_blocks($post->post_content);
 
-$presentation_script = "Dear [NAME],<br><br>
-We are excited for your presentation titled [SESSION] at the <strong>WebXR Education Summit on the 21st of July</strong>.<br><br>
-Please notify us if you have any special requirements other than screen sharing, such as playing video. If you will be screen sharing, it is helpful to share on a second screen if possible so you can monitor the session on the first monitor.<br><br> 
-$instructions";
+$presentation_script = do_blocks($post->post_content);
 
-$interview_script = "Dear [NAME],<br><br>
-We are excited for your interview with Dr. Karen Alexander at the <strong>WebXR Education Summit on the 21st of July</strong>.<br><br>
-$instructions";
+$interview_script =do_blocks($post->post_content);
 
 
 ?>
@@ -107,20 +84,242 @@ $instructions";
 <?php
 
 
+$nominations = [];
+$nominees = [];
+$nominee_list = [];
+$award_list = [];
+$counter=0;
+
+?>
+<div id="accordion" class="run-of-show">
+   
+   
+
+ 
+</div>
+
+<?Php
 
 
-$ros = get_menu_array('EdSummit22'); // located in functions-navigation.php
+
+
+
+
+
+
+/*
+
+
+
+
+foreach($ros as $i =>$item){ // outer loop.
+    extract($item);
+    if(!in_array("nomination",explode(" ",$classes[0]))){
+       // continue;
+      }
+    print "<h3>".showCounter($counter)." | $title</h3>";
+   // print "<strong>$slug</strong>";
+    $current_award = $slug;
+    $awards_list[$current_award] = $item['title'];
+/*
+print "<ol>";
+    foreach($nominees as $c => $nominee){
+       $current_nomination = $nominee['slug'];
+      
+       $id = $nominee['post']->ID;
+       $type=$nominee['post']->post_type;
+      
+
+
+       if($type == 'profile'|| $type == 'resource'){
+    }
+        if(!in_array($current_nomination,$nominations)){
+            $nominations[$current_nomination] = ["nominations"=>[],"nominee"=>[
+                "name"=>$nominee['title'],
+                "email"=>@$nominee['meta']['email'][0],
+                "website"=>@$nominee['meta']['website'][0],
+                "resource_url"=>@$nominee['meta']['resource_url'][0],
+                "_thumbnail_id"=>@$nominee['meta']['_thumbnail_id'][0],
+                
+                
+            ]];
+            
+         }
+
+        array_push($nominations[$current_nomination]['nominations'],$current_award . " ". $current_nomination);
+
+      
+
+      
+       print "<li><a href='/wp-admin/post.php?post=$id&action=edit' target='_blank'>$nominee[title]</a>";
+    //    print " | ". $type. " | ";
+
+        getMetaLink($nominee['meta'],'email');
+
+        getMetaLink($nominee['meta'],'twitter');
+        getMetaLink($nominee['meta'],'website');
+        getMetaLink($nominee['meta'],'resource_url');
+        
+        print "</li>";
+
+
+       $nominations = getNominee(@$nominee,$nominations,$current_award,$current_nomination);
+
+ 
+   
+    }
+print "</ol>";
+
+
+
+$counter++;
+
+
+}
+
+
+aggregateNominations($nominations);
+
+function aggregateNominations($nominations){
+
+
+    foreach($nominations as $n => $nominee){
+        print $name= $nominee['nominee']['name'];
+     print $email= $nominee['nominee']['email'];
+        print"<BR>";
+        $subject = "Poly Award Nomination";
+        if(count($nominee['nominations'])>1){
+            $subject = "Poly Award Nominations";
+        }
+        $body="test";
+    
+        foreach($nominee['nominations'] as $nom => $award){
+         //  print $award;
+            print @$awards_list[$award];
+            
+            print"<BR>";
+    
+    
+        }
+    
+    
+    
+    
+        if($email != ''){
+        print "SUBJECT= $subject<BR>";
+        print "<a href='mailto:$email?subject=$subject&body=$body'>EMAIL</a>";
+            // print @var_dump($nominee);
+        }
+    
+        print "<BR><BR>";
+    }
+
+}
+
+
+
+
+
+
+
+
+
+*/
+
+$ros = get_menu_array('edsummit22'); // located in functions-navigation.php
 $offset = 0;
 if(@$_GET['offset']){
     $offset = $_GET['offset'];
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+function get_other_speakers($this_speaker,$session){
+    $panelists = [];
+    if(in_array('panel',explode(" ",$session['classes'][0]))){
+       
+        foreach($session['children'] as $p => $speaker){
+           
+            if($this_speaker != $speaker['title']){
+                array_push($panelists,$speaker['title']);
+
+            //$with .="<li>$this_speaker".$session['post']->title;
+        //    $with .= $session['post']->post_title;
+
+               
+            if(in_array('moderator',explode(" ",$speaker['classes'][0]))){
+
+
+            }
+            if($session['post']->post_title != $speaker['post']->post_title){
+              //  $with .= $speaker['post']->post_title;
+            }
+            //$with .= "<a href='mailto:".@$speaker['meta']['email'][0]."'>".@$speaker['meta']['email'][0]."</a>";
+            ///$with .= wrapSocial('website',@$speaker['meta']['website'][0]);
+            //$with .= wrapSocial('twitter',@$speaker['meta']['twitter'][0]);
+            //$with .= wrapSocial('linkedin',@$speaker['meta']['linkedin'][0]);
+           // $with .= wrapSocial('github',@$speaker['meta']['github'][0]);
+            
+            
+            
+           
+        }
+
+        }
+        $with = "Other invited panelists include: ";
+        foreach($panelists as $key=>$panelist){
+            if($key == (count($panelists)-1)){
+                $with .= " and ";
+            }
+            if($panelist == 'Karen Alexander'){
+                $with .= "myself, ";
+            } else {
+                $with .= "$panelist, ";
+            }
+
+            
+
+            
+            
+            
+        }
+        return $with;
+        
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 foreach($ros as $i =>$item){ // this is the top level of the event itself
-    
-   print $item['post']->post_title;
+    //AWARD
+    $item['post']->post_title;
    $link = get_permalink($item['post']->post_title);
    $green_room_url = @$item['meta']['green_room_url'][0];
-   $start = intval($item['meta']['utc_start'][0]);
+   $start = intval(@$item['meta']['utc_start'][0]);
    $start = $start-(($offset*3600)*-1);// corrects timezone to minue hours
        
    
@@ -129,7 +328,6 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
     $speaker_status = [];
     $holds = [];
    foreach($sessions as $s => $session){
-    //   var_dump($session);
         if($session['post']->post_title == 'Break'){
           //  continue;
         }
@@ -145,10 +343,10 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                 
         ];
         
+
         
 
-
-
+    
         $session_slug=sanitize_title($session['post']->post_title);
         $session_blurb= do_blocks($session['post']->post_content);
         $green_room_time = $start - (15*60);
@@ -157,7 +355,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
         print "</h3>";
         
         print "GREEN ROOM TIME: ".date("H:i",$green_room_time)."<BR>";
-        print "START TIME: " .date("H:i",$start)."<BR>";
+        print "START TIME: " .date("H:i",$start);
         print "DURATION: ".$session['meta']['duration'][0]." Minutes<BR>";
     }
         
@@ -170,14 +368,21 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
         
         $moderator = '';
         $moderator_email = '';
+        $with = '';
+     
+        // var_dump($session);
         
-        //*speakerS*/
+        //*speakerS
+       
+
        
        foreach($session['children'] as $p => $speaker){
-        if(@$speaker['meta']['registration_pending'] == 1){
-            continue;
-        }
+
+
+
            $moderated = '';
+           $with = get_other_speakers($speaker['title'],$session) ;
+           
            $speaker_name = $speaker['post']->post_title;
             $profile_admin_url = '/wp-admin/post.php?post='.$speaker['post']->ID.'&action=edit';
 
@@ -185,19 +390,21 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
             $is_profile = false;
             if(@$speaker['post']->post_type == 'profile'){
             $is_profile == true;
-            $reg_status = get_post_meta($session['post']->ID,"registration_pending",true);
+            
             $speaker_status[$session['post']->ID]['speakers'][$speaker['post']->ID] = [
-                "id"=> $speaker['post']->ID,
-                    
+               
                     "speaker"=> $speaker_name,
-
                     "email"=> @$speaker['meta']['email'][0],
-                    "registration_pending"=>  @$speaker['meta']['registration_pending'],
+                    "twitter"=> @$speaker['meta']['twitter'][0],
+                    "linkedin"=> @$speaker['meta']['linkedin'][0],
+                    "github"=> @$speaker['meta']['github'][0],
+                    "invitation_sent"=>  @$speaker['meta']['invitation_sent'],
                     "signed_release"=>  @$speaker['meta']['signed_release'],
                     "calendar_sent"=>  @$speaker['meta']['calendar_sent'],
                     "calendar_confirmed"=>  @$speaker['meta']['calendar_confirmed'],
                     
                 ];
+                $send_calendar =  @$speaker['meta']['calendar_sent'][0];
             } else {
                 array_push($holds,
                     [  "session_time"=> date("H:i",$start),
@@ -206,18 +413,20 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                     ]
                 );
             }
-          // var_dump($speaker_name, $speaker_status[$session['post']->ID]['speakers'][$speaker['post']->ID]);
+           
 
 
            if(in_array('panel',explode(" ",$session['classes'][0]))){
+            
             
             if(in_array('moderator',explode(" ",$speaker['classes'][0]))){
                 $moderator = $speaker_name;
                 $moderator_email = $speaker['meta']['email'][0];
             } else {
-                
+             
 
             }
+
  
 
 
@@ -227,17 +436,18 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                
                     if(@$moderator == $speaker_name){
 
-                        $moderated = " moderated by you";
+                        $moderated = "moderated by you.";
 
                     } else {
-                        $moderated = "moderated by ".@$moderator." &lt;<a href='mailto:".@$moderator_email."&gt;'>".@$moderator_email."</a>&gt;, ";
+                        $moderated = "moderated by ".@$moderator.".";
                     }
-                
+                    
+                   
                 
                 $script = $panel_script;
             } else if(in_array('presentation',explode(" ",$session['classes'][0]))){
                 $moderated = "";
-
+                $with="";
                 $session_type='Presentation';
                 $session_script = $presentation_script;
 
@@ -245,6 +455,8 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                 
             
                 if(in_array('interviewer',explode(" ",$speaker['classes'][0]))){
+                    $with="";
+
                     $moderator = $speaker_name;
                     $moderator_email = $speaker['meta']['email'][0];
                 } else {
@@ -260,8 +472,10 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                    
                         if(@$moderator == $speaker_name){
     
+                            $with="";
                             $moderated = ", with you";
     
+
                         } else {
                             $moderated = " with ".@$moderator." &lt;<a href='mailto:".@$moderator_email."&gt;'>".@$moderator_email."</a>&gt;, ";
                         }
@@ -270,29 +484,37 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                     $script = $interview_script;
 
             }
-            
-            if(!@$speaker['meta']['calendar_sent'][0] && $is_profile && @$speaker['meta']['registration_pending'] != 1){
-            } else {
+          
 
-            }
-                print "regstatus:".$reg_status;
-                print '<BR>Title:
-                <input type="text" size="50" value="WebXR Education Summit '.@$session_type.'"><Br>';
-                print "<BR>Location:";
-                print '<input type="text" size="50" value="Restream: '.$green_room_url.'"><Br>';
+           // var_dump($send_calendar, $is_profile);
+            if(@$send_calendar == 0){
+              
+                //print '<BR>Title:
+                //<input type="text" size="50" value="'.@$session_type." | ".$session['post']->post_title.' "><Br>';
+                //print "<BR>Location:";
+                //print '<input type="text" size="50" value="Restream: '.$green_room_url.'"><Br>';
 
-            
+                print "<h3>".$speaker['title']."</h3><BR>";
+                
+                    $end_time =  + $start+(@$session['meta']['duration'][0]*60);
+                    $session_script = personalizeScript($session_script,$session['post']->post_title,$speaker_name,$green_room_url,$start,$end_time,$green_room_time,$moderated,$with);
+
+                    array_push($speaker_emails,$speaker['title']. '&lt;'.@$speaker['meta']['email'][0].'&gt;');
+                    $to = $speaker['title']. '&lt;'.@$speaker['meta']['email'][0].'&gt';
+                    $subject = 'Invitation to the WebXR Education Summit '.@$session_type." | ".$session['post']->post_title;
                 if(array_key_exists('email',$speaker['meta'])){
-                    $end_time =  + $start+($session['meta']['duration'][0]*60);
-                    $session_script = personalizeScript($session_script,$session['post']->post_title,$speaker_name,$green_room_url,$start,$end_time,$green_room_time,$moderated);
-
-                    array_push($speaker_emails,$speaker['title']. '&lt;'.$speaker['meta']['email'][0].'&gt;');
-                    print '<BR>Emails:
-                    <input type="text" size="50" value="'.$speaker['title']. '&lt;'.$speaker['meta']['email'][0].'&gt;'.'"><Br>';
+                    print '<BR>Email:
+                    <input type="text" size="50" value="'.$to.'"><Br>';
                 } else {
+                   // continue;
+                 
                     print "<span style='color:red'>NO EMAIL</span><BR>";
                 }
-            
+
+                print '<BR>Subject:
+                <input type="text" size="75" value="'.@$subject.'"><Br>
+                <a href="mailto:'.@$to.'?cc=webxrevents@gmail.com&subject='.htmlentities(@$subject).'">Email</a>
+                ';
             
                 
                 
@@ -300,32 +522,72 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
 
 
 
-                $end = $green_room_time + (($session['meta']['duration'][0]+15)*60);
-                ?>
-            <form method="post" action="<?php echo get_stylesheet_directory_uri();?>/download-ics.php">
+               
+                $status = $speaker_status[$session['post']->ID]['speakers'][$speaker['post']->ID];
+                //       print "<hr>";
+                       ?>
+                <table width="100%">
+                
+                
+                       <?php
+                   print "<tr>";
+                        print "<td></td>";
+                        print "<td></td>";
+                        print "<td>$speaker_name </td>";
+                
+                        if(!statusBoolField($status['invitation_sent'],'Invitation Sent')){
+                          
+                        }
+                        if(!statusBoolField($status['calendar_sent'],'Calendar Sent')){
+                           
+                        }
+                        if(!statusBoolField($status['calendar_sent'],'Calendar Confirmed')){
+                           
+                        }
+                        if(!statusBoolField($status['signed_release'],'Signed Release')){
+                           
+                        }
+                
+                
+                        print "</tr>";
+                
+                ?></table>
+                </hr>
+                <BR><BR><BR>
+                <?php
+
+                print "<BR><BR>";
+            } else {
+
+            }?>
+
+<!--
+ICS
+ <form method="post" action="<?php echo get_stylesheet_directory_uri();?>/download-ics.php">
                 <input type="hidden" name="appt" value="<?=sanitize_title($speaker_name)."-".$session_slug?>">
                 <input type="hidden" name="date_start" value="<?=getIcalDate($green_room_time)?>">
                 <input type="hidden" name="date_end" value="<?=getIcalDate($end)?>">
                 <input type="hidden" name="location" value="Restream <?=$green_room_url?>">
                 <textarea style="visibility:hidden;" name="description"><?=addslashes($session_script)?></textarea>
-                <input type="hidden" name="summary" value="WebXR Education Summit - Green Room">
+                <input type="hidden" name="summary" value="WebXR Design Summit - Green Room">
                 <input type="hidden" name="url" value="<?=$link?>">
                 <input type="submit" value="Download ICS">
                 
-            </form>
-                <?php
-
-                print "<BR><BR>";
-            
+            </form>-->
+            <?php
 
        }// partcipants loop
+
        if(@$_GET['moderators']==1){
 
        print '<BR>ALL Emails:<BR><textarea cols="80" rows="2">'.implode(",",$speaker_emails).'</textarea><BR>';
        }
-       $start = $start + ($session['meta']['duration'][0]*60);
 
-//       print "<hr>";
+
+
+       $start = $start + (@$session['meta']['duration'][0]*60);
+     
+
    }
    
     
@@ -341,8 +603,6 @@ $_REQUEST['status'] = [
 
 
 
-
-
 ?>
 
 
@@ -350,7 +610,8 @@ $_REQUEST['status'] = [
 <div class="row">
     <div class="container">
     <?php
-
+    var_dump($speaker_status);
+/*
 //STATUS
 print "<table id='speaker-status'>";
 print "<tr>";
@@ -364,7 +625,7 @@ print "<th>RELEASE</th>";
 
 
 print "</tr>";
-
+*/
 
 $last_session = '';
 foreach($speaker_status as $key => $value){
@@ -383,7 +644,7 @@ foreach($speaker_status as $key => $value){
 
         print "<tr>";
         print "<td></td>";
-        print "<td>".$speaker['id']."</td>";
+        print "<td></td>";
         print "<td>".$speaker['speaker']."</td>";
 
 
@@ -414,11 +675,13 @@ foreach($speaker_status as $key => $value){
     }
 }
 
+/*
 
-
+*/
 
 
 ?>
+<!--
 </table>
 <hr>
 <?php
@@ -465,5 +728,5 @@ foreach($speaker_status as $key => $value){
 </div>
 
 
-  </main>
+  </main>-->
   <?php get_footer(); ?>

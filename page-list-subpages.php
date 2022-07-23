@@ -65,6 +65,8 @@ function getRunOfShow($summit="DevSummit21"){
 
 
 
+
+
             
                 $speaker_emails = [];
                 

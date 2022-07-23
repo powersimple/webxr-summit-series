@@ -21,18 +21,15 @@
             </a-mixin>
             <a-mixin id="table-label" position="0 0 -1" rotation="0 -90 0" visible="false"
                 text="width: 2; color: black; lineHeight: 60; wrap-count: 35"></a-mixin>
-            <a-mixin id="burial-label" position="0 0 -1" text="width: 2; color: black; lineHeight: 60; wrap-count: 35">
-            </a-mixin>
+          
             <a-mixin id="table-caption" text="align: right; color: black; lineHeight: 55; wrap-count: 50"></a-mixin>
             <a-mixin id="scale-box" visible="false"></a-mixin>
-            <a-mixin id="scale-label-border" geometry="primitive: plane; height: 1.05; width: 1.05; buffer: false"
+            <a-mixin id="scale-label-border" geometry="primitive: plane;  buffer: false"
                 material="color: #375719; shader: flat;"></a-mixin>
-            <a-mixin id="scale-label" geometry="primitive: plane; height: 1; width: 1; buffer: false"
+            <a-mixin id="scale-label" geometry="primitive: plane;  buffer: false"
                 material="color: #dadada; shader: flat;"></a-mixin>
-            <a-mixin id="scale-text" text="color: black; width: 2; wrapCount: 45"></a-mixin>
-            <a-mixin id="credit-text" text=" color: black; width: 2; wrapCount: 70; lineHeight: 55">
+            <a-mixin id="scale-text" text="color: black; wrapCount: 45"></a-mixin>
+            <a-mixin id="credit-text" text=" color: black; wrapCount: 70; lineHeight: 55">
                 
             </a-mixin>
-            <a-mixin id="mapmarker" scale="0.17 0.17 0.17" rotation="-90 0 0"
-                geometry="primitive: cone; radiusBottom: 0.2; radiusTop: 0.01; segmentsRadial: 6"
-                material="color: #ffaa00"> </a-mixin>
+            

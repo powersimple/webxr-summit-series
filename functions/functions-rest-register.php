@@ -297,6 +297,73 @@ function get_screen_images( $object ) {
 
 
 /* 
+	3D Properties
+*/
+
+add_action( 'rest_api_init', 'register_properties_3D' );
+ function register_properties_3D() {
+ 
+
+	register_rest_field( array('profile','post','page','event','profile','resource'), 'properties_3D', array(
+		'get_callback' => 'get_properties_3D',
+		'schema' => null,
+		)
+	);
+}
+
+function get_attachment_path($id){
+
+	$url = wp_upload_dir();
+	$path = $url['baseurl']."/";
+    $uploads_path =  $url['baseurl']."/";
+	$attachment_path = str_replace($path,"",wp_get_attachment_url($id));
+	$attachment_path= str_replace("-scaled","",$attachment_path);
+	return $attachment_path;
+
+
+}
+
+
+function get_properties_3D( $object ) {
+	$post_id = $object['id'];
+	$use_aframe = get_post_meta($post_id,"use_aframe",true);
+	$url = wp_upload_dir();
+	$path = $url['baseurl']."/";
+	
+
+	// 3d skybox 
+	$skybox_id = get_post_meta($post_id,"skybox",true);
+	$skybox_src = get_attachment_path($skybox_id);
+
+	// 3d logo wide 
+	$logo_3D_id =get_post_meta($post_id,"logo_3D",true);
+	$logo_3D_src = get_attachment_path($logo_3D_id);
+
+	// 3d logo wide 
+	$logo_wide_3D_id =get_post_meta($post_id,"logo_wide_3D",true);
+	$logo_wide_3D_src =get_attachment_path($logo_wide_3D_id);
+
+	// 3d trigger
+	$button_3D_id =get_post_meta($post_id,"button_3D",true);
+	$button_3D_src = get_attachment_path($button_3D_id);
+
+
+		$properties_3D = array(
+			"use_aframe"=>$use_aframe,
+			//"path"=>$path,
+			
+			"skybox_src"=>$skybox_src,
+			"logo_3D_src"=>$logo_3D_src,
+			"logo_wide_3D_src" =>$logo_wide_3D_src,
+			"button_3D"=>$button_3D_src,
+		);
+
+
+	return @$properties_3D;//from functions.php,
+}
+
+
+/* 
 	FEATURED VIDEO
 */
 

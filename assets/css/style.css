@@ -1450,6 +1450,7 @@ General Styles - Owlcarousel
     width: 100%;
     z-index: 0;
     background-size: cover;
+    margin-top:50px;
 }
 
 .titan-title-size-1 {

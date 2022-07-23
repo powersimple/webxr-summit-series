@@ -1,8 +1,13 @@
-<a-entity id="lighting" visible="true" static-body position="0 15 -25" rotation="0 0 0" >
 
+  
+<a-entity id="lighting" visible="true" static-body position="0 0 0" rotation="0 0 0" >
+
+<a-light id="white-d4" type="spot" color="white" intensity="30" angle="180" position="0 10 0" rotation="0 0 0" angle="90"></a-light>
 
 
 <a-light id="white-d1" type="directional" color="white" intensity="5" position="0 10 -50" rotation="0 180 0" angle="90"></a-light>
+
+ 
 
 
 <a-light id="white-d2" type="directional" color="white" intensity="5" position="-50 10 0" rotation="90 -90 0" angle="90"></a-light>
@@ -10,10 +15,7 @@
 
 <a-light id="white-d3" type="directional" color="white" intensity="5" position="50 10 0" rotation="-90 90 0" angle="90"></a-light>
 
-
-<a-light id="white-d4" type="directional" color="white" intensity="5" position="0 10 50" rotation="0 0 0" angle="90"></a-light>
-
-
+<!--
 
 
 
@@ -46,7 +48,7 @@
 
 
 
-           <!-- 
+       
         <a-light type="spot" color="blue" intensity="1" position="15 -4.5 10"></a-light>
 
 
@@ -80,5 +82,5 @@
 
 
         <a-light id="light-side" type="point" color="#d00" intensity="1" position="-35 10 -15" rotation="0 0 0">
-        </a-light>-->
+        </a-light>  -->
 </a-entity>

@@ -1,11 +1,11 @@
 <?php
 
-$speed = "1.4";
+$speed = "0.4";
 if(@$_GET['speed']){
     $speed = $_GET['speed'];    
 }
 $cam_x =0;
-$cam_y =2;
+$cam_y =0;
 $cam_z =0;
 if(@$_GET['camera']){
     $cam_coords =  explode("~",$_GET['camera']);
@@ -16,6 +16,8 @@ if(@$_GET['camera']){
     }
   }
 ?>
+
+
 
 <a-entity>
             <a-text id="GL-VR" visible="false" position="2.55 -0.1 0.01" value="" color="white" width="4"
@@ -36,7 +38,7 @@ if(@$_GET['camera']){
 
 
         <a-entity id="rig" rotation-reader thumbstick-logging
-            movement-controls="speed:<?=$speed?>; constrainToNavMesh: true;fly: true " position="0 0.1 1">
+            movement-controls="speed:<?=$speed?>;" position="0 0.1 1">
             <!-- Player Character -->
             <a-box id="body" plane-hit aabb-collider="collideNonVisible: true; objects: .zone" static-body="shape: box"
                 position="0 0.05 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
@@ -46,7 +48,7 @@ if(@$_GET['camera']){
 
                 -->
                 
-            <a-entity id="camera"  wasd-controls camera look-controls raycaster="far: 5; objects: .clickable"
+            <a-entity id="camera"  wasd-controls="fly: true" camera look-controls raycaster="far: 5; objects: .clickable"
                 super-hands="colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
                 
                 position="<?=$cam_x?> <?=$cam_y?> <?=$cam_z?>" 

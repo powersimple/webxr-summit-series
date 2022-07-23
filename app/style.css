@@ -5224,6 +5224,32 @@ div.developer-summit {
     box-shadow: -1px 2px 8px 8px #095175;
     transform: scale(0.5) translate(-100%, -100%); }
 
+
+
+
+    div.education-summit {
+      background: rgb(132,29,230);
+background: linear-gradient(90deg, rgba(132,29,230,1) 0%, rgba(105,39,167,1) 25%, rgba(69,30,106,1) 50%, rgba(102,29,172,1) 75%, rgba(69,30,106,1) 100%) }
+      div.developer-summit a:hover {
+        background-color: rgb(132,29,230);
+        -webkit-box-shadow: -1px 2px 8px 8px rgb(132,29,230);
+        box-shadow: -1px 2px 8px 8px rgb(132,29,230);
+        transform: scale(0.5) translate(-100%, -100%); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .event-list {
   border-radius: 10px; }
   .event-list ul {

@@ -1,4 +1,19 @@
 <?php
+  function getProfileEvents($id){
+    global $wpdb;
+    $sql = "select post_id from wp_postmeta where meta_value = $id and meta_key like 'event_%'";
+    return $wpdb->get_results($sql);
+    
+
+  }
+  function getProfileSession($id){
+    global $wpdb;
+    $sql = "select ID, post_title, post_excerpt, post_content, post_parent from wp_posts where ID = $id";
+    return $wpdb->get_results($sql);
+    
+
+  }
+ 
 
     function displayProfiles($profile_array,$event,$profile_context,$session_type){
 
@@ -34,9 +49,23 @@
         print "</div>";
         return ob_get_clean();
     }
+    function displayProfileMeta($profile_id){
+        
+         $profile_meta = get_post_meta($profile_id);
+         ?>
+        <div class="speaker-meta">
+        <?= wrapMeta($profile_meta,'profile_title','h5');?>
+        <?= wrapMeta($profile_meta,'company','h5');?>
+        <?= wrapMeta($profile_meta,'twitter','a');?>
+        <?= wrapMeta($profile_meta,'linkedin','a');?>
+        <?= wrapMeta($profile_meta,'github','a');?>
+        <?= wrapMeta($profile_meta,'website','a');?>
+        <?php
+
+    }
     function displayProfile($profile_id,$profile_context){
         $profile_post = get_post($profile_id);
-        $profile_meta = get_post_meta($profile_id);
+        
      
         $profile_name = $profile_post->post_title;
         $profile_about = $profile_post->post_content;
@@ -54,13 +83,7 @@
 
         </div>
         <h4><?=$profile_post->post_title?></h4>
-        <div class="speaker-meta">
-        <?= wrapMeta($profile_meta,'profile_title','h5');?>
-        <?= wrapMeta($profile_meta,'company','h5');?>
-        <?= wrapMeta($profile_meta,'twitter','a');?>
-        <?= wrapMeta($profile_meta,'linkedin','a');?>
-        <?= wrapMeta($profile_meta,'github','a');?>
-        <?= wrapMeta($profile_meta,'website','a');?>
+        <?=displayProfileMeta($profile_id)?>
         <?php 
         if($profile_context == 'about'){?>
         <p class="profile-excerpt"><?=nl2br($profile_excerpt)?></p>

@@ -53,9 +53,9 @@
 		}
 		return $child_list;
     }
-    
-
-
+    function get_menu_slug($menu_name){
+		return	get_term_by('name',$menu_name,'nav_menu')->slug;
+	}
     function linkThis($url,$label,$blank_target=true){
         $target = '';  
         $absolute = '';
@@ -110,12 +110,13 @@
 		$menu_array = wp_get_nav_menu_items($current_menu);
 	
 		$menu = array();
-		
+	
 		
 	
 		foreach ($menu_array as $m) {
-			if (empty($m->menu_item_parent)) {
-			
+		//	
+			if (empty($m->menu_item_parent)) { // HACK CHECK HERE TO MAKE SURE THIS DOESN"T FUCK SOMETHING UP
+			//	var_dump("attr_title",$m->attr_title);
 				$post = get_post($m->object_id);
 				$meta = get_post_meta($m->object_id);
 				$menu[$m->ID] = array();
@@ -123,8 +124,9 @@
 				$menu[$m->ID]['ID'] = $m->ID;
 				$menu[$m->ID]['title'] = $m->title;
 				$menu[$m->ID]['content'] = $post->post_content;
-				
 				$menu[$m->ID]['slug'] = $post->post_name;
+				$menu[$m->ID]['parent'] = $m->menu_item_parent;
+				$menu[$m->ID]['attr'] = $m->attr_title;
 				
 				$menu[$m->ID]['url'] = $m->url;
 				$menu[$m->ID]['classes'] = $m->classes;
@@ -140,6 +142,7 @@
 				$menu[$m->ID]['children'] = populate_children($menu_array, $m);
 			}
 		}
+
 		;
 	return $menu;
 	
@@ -156,9 +159,11 @@
 					$children[$m->ID]['ID'] = $m->ID;
 					$children[$m->ID]['title'] = $m->title;
 					$children[$m->ID]['content'] = $m->content;
-					
+					$children[$m->ID]['attr_title'] = $m->attr_title;
 					$children[$m->ID]['url'] = $m->url;
 					$children[$m->ID]['slug'] = $post->post_name;
+					$children[$m->ID]['parent'] = $m->menu_item_parent;
+					
 					$children[$m->ID]['coords'] = $m->_coords;
 					$children[$m->ID]['duration'] = $m->_duration;
 					$children[$m->ID]['classes'] = $m->classes;

@@ -58,10 +58,11 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
 
 function setVideoPath(video_path) {
-    console.log('set video', video_path)
+   // console.log('set video', video_path)
     jQuery("#bg-video" + ' video source').attr("src", video_path);
 }
 
+var event_class = ''
 function initSite() {
     console.log("megamenu");
     megaMenu()
@@ -70,21 +71,47 @@ function initSite() {
     getVideo();
 
     var menu_name = getUrlParameter('event_menu')
-
-  console.log('url',window.location.pathname,getUrlParameter('event_menu'))
+    
+  //console.log('url',window.location.pathname,getUrlParameter('event_menu'))
     if(window.location.pathname == '/event/webxr-business-summit/'){
         menu_name = 'bizsummit21'
+        event_class = 'business_summit'
     } else if (window.location.pathname == '/event/webxr-design-summit/'){
+
         menu_name = 'designsummit21'
+        event_class = 'design_summit'
+
     } else if (window.location.pathname == '/event/webxr-developer-summit/'){
+        event_class = 'developer_summit'
+
         menu_name = 'devsummit21'
+    } else if (window.location.pathname == '/event/webxr-education-summit/'){
+        menu_name = 'edsummit22'
+        event_class = 'education_summit'
+        console.log(event_class)
+
+    } else if (window.location.pathname == '/event/webxr-brand-summit/'){
+        menu_name = 'brandsummit22'
+        event_class = 'brand_summit'
+
+    } else if (window.location.pathname == '/event/webxr-production-summit/'){
+        menu_name = 'prodsummit22'
+        event_class = 'production_summit'
+
     } 
+
 
   
     if(menu_name != false){
-       
+        //console.log("menu",menu_name,menus[menu_name])
         var run_of_show = runOfShow(menus[menu_name]);
+      //  console.log("Run of Show",run_of_show)
         displayRunOfShow(run_of_show)
+        var ros_list = getUrlParameter('ros-list')
+
+        if(ros_list != false){
+            displayRunOfShowList(run_of_show)
+        }
         displayRunOfShowTable(run_of_show)
     }
 
@@ -100,7 +127,7 @@ function initSite() {
     //    console.log("profiles", profile_posts);
     //  console.log("hardware", hardware_posts);
 
-    console.log("PROFILE TEMPLATE","style:background:#000;color:#f00;")
+    //console.log("PROFILE TEMPLATE","style:background:#000;color:#f00;")
     jQuery("#filter-accordion").accordion({
         header: "h3",
         collapsible: true,

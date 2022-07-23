@@ -18,7 +18,7 @@ if($post->post_parent==0){
 */
 ?>
 
-<section class="home-section home-parallax home-fade home-full-height" id="home" style="background:url(<?=$hero_image?>) center center no-repeat;background-size:cover;">
+<section class="home-section home-parallax home-fade home-full-height" id="home" style="bakground:url(<?=$hero_image?>) center center no-repeat;background-size:cover;">
     
     </section>
 
@@ -42,13 +42,6 @@ if($post->post_parent==0){
 </div>
 
 
-<main role="main" class="main <?=$section_class?>">
-
-  <section class="module" id="<?php echo @$slug?>" role="region">
-<div class="row">
-<div class="container">
- 
-  <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-offset-1 col-10 ">
 
 
 <?php
@@ -75,12 +68,7 @@ if($post->post_parent==0){
 
 
 ?>
-</div>
-</section>
-</div>
 
-</div>
-  </main>
   <?php
   
   
