@@ -199,6 +199,106 @@ function nomineeAccordion($awards){
       print "</div>";
        
 }
+function nomineeListChildren($children){
+  foreach($children as $key=>$child){
+    extract($child);
+    print $title;
+    if(@$meta['twitter']){
+   //   var_dump(@$meta['twitter'][0]);
+      print " ".str_replace("https://twitter.com/","@",$meta['twitter']['0'])." ";
+    }
+    
+    if(count(@$children)){
+//        print "<BR>";
+        nomineeListChildren($children);
+      }
+    }
+
+}
+
+function nomineeList($awards){
+  $nominations = [];
+  print "<div id='nomineeList'>";
+  
+  foreach($awards as $i =>$award){
+      extract($award);
+      
+      $current_award = $slug;
+      
+      if(!in_array("nomination",explode(" ",$classes[0]))){
+     //     continue;
+        }
+        
+        $title = str_replace("2021 – ","",$title);
+        print "<h3 class=>".strtoupper($title)."</h3>";
+        print "<div class='nominees'>";
+        print "<ul class='nominee-list'>";
+        foreach($nominees as $c => $nominee){
+          extract($nominee);         
+         
+
+          $current_nomination = $nominee['slug'];
+          $type= $nominee['post']->post_type;
+          if($type == 'resource'){
+              $url = @$nominee['meta']['resource_url'][0];
+          } else {
+              $url = @$nominee['meta']['website'][0];
+          }
+
+
+
+          
+          
+         $presented = "";
+         $nominee_class=""; 
+         $id = $nominee['post']->ID;
+         //
+         $title =  htmlentities($nominee['title']);
+       
+         if($nominee['classes'][0] == 'presenter'){
+       //   continue; 
+          $presented = 'Presented by'; 
+
+           $nominee_class="presenter"; 
+           print "<li class='presenter'>Presented by $nominee[title] ";
+            if(@$meta['twitter']){
+            //   var_dump(@$meta['twitter'][0]);
+               print " ".str_replace("https://twitter.com/","@",$nominee['meta']['twitter']['0']);
+             }
+
+           print "</li>";
+          } else if($nominee['classes'][0] == 'winner'){
+              $presented = 'Winner'; 
+              $nominee_class="winner2021"; 
+              print "<li class='winners'><strong>Winner <span href='$url' target='blank'>$nominee[title]</strong></span> ";
+              if(@$meta['twitter']){
+                //   var_dump(@$meta['twitter'][0]);
+                   print " ".str_replace("https://twitter.com/","@",$nominee['meta']['twitter']['0']);
+                 }
+              nomineeListChildren(@$children);
+              print "</li>";
+          } else{
+            print "<li class='$nominee_class'>$presented  <span href='$url' target='blank'>$nominee[title]</span> ";
+            if(@$meta['twitter']){
+              //   var_dump(@$meta['twitter'][0]);
+                 print " ".str_replace("https://twitter.com/","@",$nominee['meta']['twitter']['0']);
+               }
+            
+            nomineeListChildren(@$children);
+            print"</li>";
+          }
+          
+         
+      
+         
+        }
+          print "</ul>";
+        print "</div><BR>";
+        
+      }
+      print "</div>";
+       
+}
 
 
 function nomineeOutreach($awards){

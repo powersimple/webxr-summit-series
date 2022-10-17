@@ -103,7 +103,6 @@ function setMenu(slug, items) {
 }
 
 function setMenuItem(slug, item) {
-    //console.log("setMenuItem",item)
     this_item = {}
     this_item.menu_id = item.ID
     this_item.title = item.title
@@ -117,11 +116,12 @@ function setMenuItem(slug, item) {
     this_item.description = item.description
     this_item.slug = slug
     this_item.xfn = item.xfn
+    this_item.cf = item.confirmation_status
 
 
 
     this_item.children = [] //this array is populated in Set Menu
-
+   // console.log(this_item)
     return this_item
 }
 
@@ -268,7 +268,7 @@ function buildMenuData() {
 
                 }
                 menus[m].menu_array.sort(menu_order);
-
+              
 
                 var children = [];
                 var this_menu = menus[m].menu_array
@@ -282,6 +282,7 @@ function buildMenuData() {
                         for (var g = 0; g < nested_children.length; g++) {
                             slug = getSlug(menus[m].items[nested_children[g]], g, "g", nested_children, g)
                            // console.log(m,slug)
+                          // console.log(menus[m].items[nested_children[g]])
                             grandchildren.push( // data for childe menus
                                 {
                                     "title": menus[m].items[nested_children[g]].title,
@@ -291,7 +292,9 @@ function buildMenuData() {
                                     "object_id": menus[m].items[nested_children[g]].object_id, // the post id
                                     "classes": menus[m].items[nested_children[g]].classes,
                                     "description": menus[m].items[nested_children[g]].description,
-                                    "description": menus[m].items[nested_children[g]].xfn,
+                                    "xfn": menus[m].items[nested_children[g]].xfn,
+                                    "cf": menus[m].items[nested_children[g]].cf,
+                                    
                                     
                                 }
                             )
@@ -310,6 +313,8 @@ function buildMenuData() {
                                 "classes": menus[m].items[this_menu[a].children[c]].classes,
                                 "description": menus[m].items[this_menu[a].children[c]].description,
                                 "xfn": menus[m].items[this_menu[a].children[c]].xfn,
+                                "cf": menus[m].items[this_menu[a].children[c]].cf,
+                                
                                 
                                 "children": grandchildren
 
@@ -330,7 +335,9 @@ function buildMenuData() {
                         "children": children,
                         "classes": this_menu[a].classes,
                         "description": this_menu[a].description,
-                        "xfn": this_menu[a].xfn
+                        "xfn": this_menu[a].xfn,
+                        "cf": this_menu[a].cf
+                        
                     })
 
                 }

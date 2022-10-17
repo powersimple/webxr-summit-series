@@ -173,7 +173,7 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
                     jQuery(document).ready(function() {
                         //triggers Run of show script when event menu param is present
                     var run_of_show = runOfShow('<?=$_GET['event_menu']?>');
-                   // console.log("ROS",run_of_show)
+                    //console.log("ROS",run_of_show)
                     displayRunOfShow(run_of_show)
 
                     printdisplayRunOfShowList(run_of_show)

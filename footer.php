@@ -14,13 +14,13 @@
                         
                         <li><a class="awe" target="_blank"
                                     href="https://augmentedworldexpo.secure.force.com/BuyTicket?id=7018V000001dCau">AWE EU, Lisbon Oct 20-21</a></li>
-                        <li><a class="gatherverse" target="_blank" href="https://gatherversesummit.com/">Gatherverse MMM Summit Jul 19</a></li>
+                       <!-- <li><a class="gatherverse" target="_blank" href="https://gatherversesummit.com/">Gatherverse MMM Summit Jul 19</a></li>-->
                       
                             
                         <!-- <li><a target="_blank" class="awe" href="https://www.awexr.com/usa-2021/auggie/">
                                     Auggies Nomination Deadline September 8</a></li>-->
                             
-                                    <li><a class="vrara" target="_blank" href="https://www.immerseglobalnetwork.com/">Immerse Global Summit - Madeira Sept 28-30, Miami Dec 5-7</a></li>
+                                    <li><a class="vrara" target="_blank" href="https://www.immerseglobalnetwork.com/">Immerse Global Summit - Miami Dec 5-7</a></li>
                                     <li><a target="_blank" class="futurewei" href="https://futurewei.com/">Futurewei
                                     Technologies</a></li>
 

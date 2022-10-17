@@ -159,6 +159,8 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
                             "url"=>$url,
                             "slug"=>sanitize_title($value->title),
                             "coords" => $value->_coords,
+                            "confirmation_status" => $value->_confirmation_status,
+                            
                             "post_parent" => $value->post_parent,
                             "classes" => implode(" ",$value->classes),       
                             "description" => $value->description,
@@ -359,6 +361,8 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
 					'attr'        => $item->attr_title,
 					'target'      => $item->target,
                     'coords'      => $item->_coords,
+                    'confirmation_status'      => $item->_confirmation_status,
+                    
                     'classes'     => implode( ' ', $item->classes ),
 					'xfn'         => $item->xfn,
 					'description' => $item->description,
@@ -454,7 +458,7 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
                 'attr'        => $item['attr_title'],
                 'target'      => $item['target'],
                 'coords'      => $item['_coords'],
-                
+                'confirmation_status' => $item['_confirmation_status'],     
                 'classes'     => implode( ' ', $item['classes'] ),
                 'xfn'         => $item['xfn'],
                 'description' => $item['description'],

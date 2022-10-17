@@ -306,6 +306,99 @@ blockquote {
   padding: 40px 0px;
   letter-spacing: 8px; }
 
+#admin {
+  max-width: 90%;
+  font-size: .7em;
+  margin: 0px auto;
+  background-color: white;
+  overflow: scroll; }
+  #admin table {
+    border: 1px solid #000; }
+    #admin table tr.evenrow {
+      background-color: #ccc; }
+    #admin table td a {
+      color: #009;
+      text-decoration: none; }
+    #admin table td table tr td {
+      border: 3px double #999; }
+
+#scraper {
+  position: relative;
+  margin-top: 75px;
+  z-index: 1000; }
+
+.session-name {
+  font-size: 125%;
+  display: block;
+  padding-top: 5px; }
+
+.team {
+  color: #fff; }
+
+.needs-invite {
+  color: #f00;
+  font-weight: bold;
+  font-size: 125%; }
+  .needs-invite a {
+    color: #f00; }
+
+.invited {
+  color: #f90; }
+
+.agreed {
+  color: #ff0; }
+
+.registered-no-release {
+  color: cyan; }
+
+.registered {
+  color: #66f; }
+
+.no-status {
+  font-size: 150%;
+  text-decoration: underline;
+  color: #944; }
+
+.confirmation-notes {
+  font-weight: bold;
+  font-size: 90%;
+  font-style: italic;
+  color: #ccc; }
+
+.calendar-sent {
+  color: #0f0; }
+
+.calendar-sent-no-release {
+  color: #f0f; }
+
+.calendar-sent-no-registration {
+  color: #a0a;
+  font-weight: bold; }
+
+.confirmed-no-registration {
+  color: #0aa;
+  font-weight: bold; }
+
+.confirmed-no-release {
+  color: cyan; }
+
+.prerecord {
+  color: brown; }
+
+.complete {
+  color: #090; }
+
+.complete::after {
+  content: "✅"; }
+
+.admin-invitation {
+  background: rgba(3, 3, 3, 0.3);
+  padding: 10px;
+  box-shadow: -2px 2px 15px 9px rgba(194, 180, 180, 0.91);
+  padding-bottom: 25px;
+  border-bottom: 1px dashed #fff;
+  margin-bottom: 50px; }
+
 #guide strong {
   font-weight: 700; }
 
@@ -598,7 +691,8 @@ blockquote {
   #megamenu a:focus {
     color: #fefefe;
     text-decoration: none;
-    padding: 5px; }
+    padding: 10px;
+    display: block; }
   #megamenu a:hover,
   #megamenu a.active {
     background-color: #4173D8 !important; }
@@ -1343,6 +1437,51 @@ body::-webkit-scrollbar-thumb {
   color: #000 !important; }
   .whitebg p, .whitebg li, .whitebg strong {
     color: #000 !important; }
+
+#nomination-ballot {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: relative;
+  margin-top: -500px;
+  padding: 25px;
+  border-radius: 10px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0px -1px 33px 4px rgba(193, 230, 86, 0.86);
+  overscroll-behavior: auto; }
+  #nomination-ballot h3 {
+    font-family: 'AgencyFB';
+    font-size: 2.5em;
+    line-height: 160%; }
+    #nomination-ballot h3 .polys {
+      font-family: "CreamCake";
+      font-size: 150%;
+      font-weight: normal; }
+      #nomination-ballot h3 .polys sup {
+        font-size: 75%;
+        margin: 0px -8px; }
+        #nomination-ballot h3 .polys sup sup {
+          font-size: 75%;
+          margin: 0px; }
+  #nomination-ballot p {
+    display: block;
+    position: relative; }
+  #nomination-ballot textarea {
+    height: 225px;
+    width: 100%;
+    z-index: 10000;
+    position: relative; }
+  #nomination-ballot input {
+    width: 100%;
+    display: table-cell;
+    margin: 5px;
+    z-index: 10000;
+    position: relative; }
+  #nomination-ballot .wp-block-contact-form-7-contact-form-selector {
+    display: -webkit-inline-box; }
+  #nomination-ballot .wpcf7-list-item label {
+    display: table-row; }
+    #nomination-ballot .wpcf7-list-item label span.wpcf7-list-item-label {
+      display: table-cell;
+      font-size: 80%; }
 
 #agenda {
   background: linear-gradient(to bottom, #102246 0%, #183369 25%, #183369 75%, #102246 100%);
@@ -2779,14 +2918,22 @@ table.authors {
     margin: 0 auto;
     height: 100%;
     border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 0 0 10px 10px rgba(176, 2, 255, 0.3); }
+    border: 2px solid #fff; }
 
 #ros-accordion .card-info {
   visibility: hidden; }
 
 #ros-accordion .fifth {
   width: 20% !important; }
+
+#ros-accordion .education-summit .profile-thumbnail img {
+  box-shadow: 0 0 10px 10px rgba(176, 2, 255, 0.3); }
+
+#ros-accordion .brand-summit .profile-thumbnail img {
+  box-shadow: 0 0 10px 10px rgba(176, 0, 0, 0.3); }
+
+#ros-accordion .production-summit .profile-thumbnail img {
+  box-shadow: 0 0 10px 10px rgba(0, 0, 176, 0.3); }
 
 #ros-accordion.cards {
   width: 1200px !important;
@@ -2799,24 +2946,19 @@ table.authors {
     top: 100px;
     overflow: hidden; }
     #ros-accordion.cards #speaker-list .fifth {
-      width: 20% !important; }
+      width: 20% !important;
+      text-shadow: 8px 6px 26px #000; }
       #ros-accordion.cards #speaker-list .fifth .profile-name {
         width: 100%;
         display: block;
         margin-left: 0;
         font-size: 14px;
         height: 30px; }
-      #ros-accordion.cards #speaker-list .fifth .sophia-moshasha,
-      #ros-accordion.cards #speaker-list .fifth .atsushi-shimono,
-      #ros-accordion.cards #speaker-list .fifth .daniel-ljunggren,
-      #ros-accordion.cards #speaker-list .fifth .yu-yuan,
-      #ros-accordion.cards #speaker-list .fifth .neil-trevett {
-        height: 50px !important; }
     #ros-accordion.cards #speaker-list .presentation {
-      width: 80% !important;
+      width: 90% !important;
       margin-top: -25px;
       overflow-y: hidden;
-      margin-left: 10% !important; }
+      margin-left: 8% !important; }
       #ros-accordion.cards #speaker-list .presentation span.blurb {
         visibility: visible;
         display: block;
@@ -2826,24 +2968,26 @@ table.authors {
         font-size: 20px;
         line-height: 150%;
         position: absolute;
-        top: 175px;
+        top: 160px;
         text-shadow: 1px 1px #000;
-        overflow-y: hidden; }
+        overflow-y: hidden;
+        padding: 10px; }
         #ros-accordion.cards #speaker-list .presentation span.blurb p {
-          padding-left: 0;
-          font-size: 16px; }
+          padding-left: 10%;
+          font-size: 20px; }
       #ros-accordion.cards #speaker-list .presentation .profile-card {
         margin-top: 30px; }
       #ros-accordion.cards #speaker-list .presentation .profile-thumbnail {
-        width: 30%;
+        width: 25%;
         display: inline-block; }
         #ros-accordion.cards #speaker-list .presentation .profile-thumbnail img {
           margin-left: 0;
           width: 100%; }
       #ros-accordion.cards #speaker-list .presentation .profile-info {
-        width: 65%;
+        width: 70%;
         display: inline;
-        float: right; }
+        float: right;
+        height: 350px; }
         #ros-accordion.cards #speaker-list .presentation .profile-info .social {
           display: block; }
           #ros-accordion.cards #speaker-list .presentation .profile-info .social a {
@@ -2851,7 +2995,8 @@ table.authors {
         #ros-accordion.cards #speaker-list .presentation .profile-info span.credential span {
           font-size: 16px !important;
           line-height: 150% !important;
-          font-weight: 600; }
+          font-weight: 600;
+          border-radius: 10px; }
         #ros-accordion.cards #speaker-list .presentation .profile-info span.profile-name {
           text-decoration: underline;
           display: block;
@@ -2866,6 +3011,7 @@ table.authors {
       position: relative; }
       #ros-accordion.cards #speaker-list .interview span.blurb {
         top: 25px;
+        background: rgba(0, 0, 0, 0.5);
         visibility: visible; }
         #ros-accordion.cards #speaker-list .interview span.blurb p {
           margin-top: 20px;
@@ -2880,10 +3026,12 @@ table.authors {
         margin-left: 0;
         font-size: 20px;
         height: 30px; }
-      #ros-accordion.cards #speaker-list .pair .profile-card span.credential span {
-        font-size: 16px !important;
-        line-height: 150% !important;
-        font-weight: 600; }
+      #ros-accordion.cards #speaker-list .pair .profile-card span.credential {
+        border-radius: 10px; }
+        #ros-accordion.cards #speaker-list .pair .profile-card span.credential span {
+          font-size: 16px !important;
+          line-height: 150% !important;
+          font-weight: 600; }
       #ros-accordion.cards #speaker-list .pair .profile-card .samantha-mathews {
         font-size: 20px !important; }
     #ros-accordion.cards #speaker-list .three {
@@ -2938,8 +3086,11 @@ table.authors {
     position: absolute;
     width: 100%;
     top: 425px;
-    text-align: center;
+    text-align: center; }
+  #ros-accordion.cards .education-summit h4 {
     text-shadow: 3px 3px 3px #530066, -3px -3px 3px #530066; }
+  #ros-accordion.cards .production-summit h4 {
+    text-shadow: 3px 3px 3px #0000aa, -3px -3px 3px #0000aa; }
   #ros-accordion.cards p {
     font-size: 20px;
     padding-left: 23%; }
@@ -2949,11 +3100,13 @@ table.authors {
     font-size: 48px; }
   #ros-accordion.cards .social {
     visibility: hidden; }
-  #ros-accordion.cards .profile-card span.credential span {
-    font-size: 14px !important;
-    line-height: 150% !important;
-    font-weight: 600;
-    text-shadow: 1px 1px 2px black; }
+  #ros-accordion.cards .profile-card span.credential {
+    border-radius: 10px; }
+    #ros-accordion.cards .profile-card span.credential span {
+      font-size: 14px !important;
+      line-height: 150% !important;
+      font-weight: 600;
+      text-shadow: 2px 2px 4px #000, -2px -2px 2px #000; }
   #ros-accordion.cards .profile-card span.profile-name {
     font-weight: 600;
     font-size: 16px;
@@ -2978,7 +3131,7 @@ table.authors {
     margin: 0 auto 25px;
     position: absolute;
     top: 470px;
-    left: 35%;
+    left: 50%;
     font-family: "AgencyFB"; }
     #ros-accordion.cards .session-times li {
       display: inline-block;
@@ -2989,7 +3142,7 @@ table.authors {
       font-size: 36px;
       line-height: 24px;
       letter-spacing: 1px;
-      text-shadow: 2px 2px 2px #000, -2px -2px 2px #000; }
+      text-shadow: 2px 2px 4px #000, -2px -2px 2px #000; }
       #ros-accordion.cards .session-times li span {
         font-weight: 600;
         font-size: 50%;
@@ -3014,14 +3167,6 @@ table.authors {
       visibility: visible !important;
       font-size: 24px;
       font-weight: 600; }
-  #ros-accordion.cards .sponsor-logo {
-    width: 240px;
-    height: 80px;
-    position: absolute;
-    right: -20px;
-    top: 550px; }
-    #ros-accordion.cards .sponsor-logo a img {
-      width: 200px; }
   #ros-accordion.cards .host {
     position: absolute;
     font-family: "AgencyFB";
@@ -3039,6 +3184,245 @@ table.authors {
       box-shadow: 0 0 10px 10px #530003; }
     #ros-accordion.cards .education-summit a {
       color: #fff; }
+  #ros-accordion.cards .brand-summit {
+    background: url("images/bg/BrandSummitCardBG.jpg") center center no-repeat; }
+    #ros-accordion.cards .brand-summit .show-title {
+      width: 438px;
+      position: absolute;
+      top: 409px;
+      height: 250px; }
+    #ros-accordion.cards .brand-summit h3.card-info {
+      color: #fff !important;
+      text-shadow: 9px 9px 10px #aa0000, -8px -9px 10px #aa0000;
+      letter-spacing: .8px;
+      font-size: 56px; }
+    #ros-accordion.cards .brand-summit .profile-card.img {
+      box-shadow: 0 0 15px 15px #530003; }
+    #ros-accordion.cards .brand-summit a {
+      color: #fff; }
+    #ros-accordion.cards .brand-summit span.series-logo {
+      width: 316px;
+      left: 30px;
+      position: absolute;
+      top: -25px;
+      height: 250px;
+      background-size: 100% !important;
+      background: url("images/logo/2022WebXRSummitSeriesBrand.png") top center no-repeat; }
+    #ros-accordion.cards .brand-summit h4 {
+      position: absolute;
+      top: 62px;
+      font-size: 56px;
+      padding-left: 0px;
+      text-shadow: 3px 3px 3px #aa0000, -3px -3px 3px #aa0000;
+      margin-bottom: 0px; }
+    #ros-accordion.cards .brand-summit h5.the-host {
+      font-size: 24px;
+      display: block;
+      border-right: none;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 24px;
+      font-family: 'AgencyFB';
+      margin-bottom: 0px;
+      position: absolute;
+      top: 128px;
+      width: 100%;
+      text-shadow: 0px 0px 9px rgba 0, 0, 0, 0.5; }
+    #ros-accordion.cards .brand-summit h5.event-date {
+      font-size: 36px;
+      display: block;
+      border-right: none;
+      color: #fff;
+      text-align: center;
+      position: absolute;
+      width: 100%;
+      top: 156px;
+      text-shadow: 0px 0px 9px rgba 0, 0, 0, 0.5;
+      margin-bottom: 0px;
+      font-family: 'AgencyFB'; }
+    #ros-accordion.cards .brand-summit .session-times {
+      left: 45%;
+      top: 460px;
+      scale: 120%; }
+    #ros-accordion.cards .brand-summit .card-footer {
+      left: 50px;
+      top: 25%;
+      scale: 100%;
+      padding-top: 0px; }
+
+.production-summit {
+  background: url("images/bg/ProdSummitCardBG.jpg") center center no-repeat; }
+  .production-summit .profile-info {
+    margin-top: -10px; }
+  .production-summit .show-title {
+    width: 438px;
+    position: absolute;
+    top: 409px;
+    height: 250px;
+    overflow-x: unset !important; }
+  .production-summit .speaker-list {
+    top: 85px; }
+  .production-summit h3.card-info {
+    color: #fff !important;
+    text-shadow: 5px 5px 8px #0084ff, -5px -5px 8px #0084ff;
+    letter-spacing: .8px;
+    font-size: 56px; }
+  .production-summit .profile-card.img {
+    box-shadow: 0 0 15px 15px #530003; }
+  .production-summit a {
+    color: #fff; }
+  .production-summit .session-times {
+    top: 490px !important;
+    left: 35% !important;
+    scale: 90%; }
+    .production-summit .session-times li span {
+      display: block !important; }
+  .production-summit span.series-logo {
+    width: 316px;
+    left: 30px;
+    position: absolute;
+    top: -25px;
+    height: 250px;
+    background-size: 100% !important;
+    background: url("images/logo/2022WebXRSummitSeriesProduction.png") top center no-repeat; }
+  .production-summit h4 {
+    position: absolute;
+    top: -3% !important;
+    left: 62% !important;
+    font-size: 48px !important;
+    padding-left: 0px;
+    text-shadow: 3px 3px 3px #0084ff, -3px -3px 3px #0084ff;
+    margin-bottom: 0px;
+    width: 700px !important; }
+  .production-summit h5.the-host {
+    font-size: 24px;
+    display: block;
+    border-right: none;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 24px;
+    font-family: 'AgencyFB';
+    margin-bottom: 0px;
+    position: absolute;
+    top: 45px !important;
+    width: 700px !important;
+    text-shadow: 0px 0px 9px rgba 0, 0, 0, 0.5;
+    left: 337px !important; }
+  .production-summit h5.event-date {
+    font-size: 36px;
+    display: block;
+    border-right: none;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    top: 155px;
+    text-shadow: 0px 0px 9px rgba 0, 0, 0, 0.5;
+    margin-bottom: 0px;
+    font-family: 'AgencyFB';
+    left: -30px; }
+  .production-summit .card-footer {
+    left: 35% !important;
+    top: 87% !important;
+    scale: 90% !important;
+    padding-top: 0px; }
+  .production-summit .futurewei-logo {
+    scale: 65%;
+    position: absolute;
+    top: 535px;
+    right: -30px; }
+  .production-summit span.blurb p {
+    font-size: 18px !important; }
+  .production-summit .presentation span.blurb p {
+    padding-left: 5% !important; }
+
+#speaker-list .fifth .daniel-dyboski-bryant {
+  height: 50px !important; }
+
+#ros-accordion.hd .card-mode {
+  height: 675px !important;
+  background-position-x: 0; }
+
+#ros-accordion.hd h4.show-title {
+  font-size: 72px;
+  margin-top: 4px; }
+
+#ros-accordion.hd ul.session-times {
+  width: 61.8%;
+  margin-top: 54px;
+  text-align: center; }
+  #ros-accordion.hd ul.session-times li.the-host {
+    font-size: 24px;
+    display: block;
+    border-right: none;
+    margin-bottom: 24px; }
+
+#ros-accordion.hd span.event-info {
+  margin-top: 25px;
+  display: block; }
+
+#ros-accordion.hd .card-footer {
+  left: 38%;
+  height: 163px; }
+  #ros-accordion.hd .card-footer .event-info .rsvp-link {
+    font-size: 18px; }
+  #ros-accordion.hd .card-footer .presenter-info {
+    top: -14px;
+    display: block;
+    position: relative;
+    font-size: 12px;
+    font-family: 'Zen Dots';
+    font-weight: 300;
+    text-align: left;
+    z-index: 1;
+    text-shadow: 0px 0px 6px black; }
+
+#ros-accordion.hd .brand-summit .card-footer {
+  left: 0;
+  width: 62%; }
+
+#ros-accordion.hd .galaxy-sponsor {
+  width: 240px;
+  margin: 0px auto 4em;
+  top: -17px;
+  display: block;
+  position: relative;
+  font-size: 10px;
+  font-family: 'Zen Dots';
+  font-weight: 300;
+  text-align: center; }
+
+#ros-accordion.hd .education-summit {
+  background: url("images/bg/EdSummitCardBG-HD.jpg") center center no-repeat;
+  background-size: contain; }
+
+#ros-accordion.hd .brand-summit {
+  background: url("images/bg/BrandSummitCardBG-HD.jpg") center center no-repeat;
+  background-size: contain; }
+  #ros-accordion.hd .brand-summit .show-title {
+    width: 100%; }
+    #ros-accordion.hd .brand-summit .show-title h4 {
+      width: 100%;
+      max-width: 100%;
+      top: 0px !important; }
+    #ros-accordion.hd .brand-summit .show-title .the-host {
+      top: 65px; }
+    #ros-accordion.hd .brand-summit .show-title .event-date {
+      top: 100px; }
+  #ros-accordion.hd .brand-summit .card-footer {
+    top: 86% !important;
+    width: 1100px;
+    left: 25px; }
+  #ros-accordion.hd .brand-summit span.presenters-logo {
+    width: 300px;
+    left: 76%;
+    position: absolute;
+    background-size: 100% !important;
+    background: url("images/logo/powersimple-metavrse-xrwomen-futurewei.png") top center no-repeat;
+    top: 400px;
+    width: 200px; }
+    #ros-accordion.hd .brand-summit span.presenters-logo a img {
+      width: 100%; }
 
 #ros-list {
   background-color: #fff;
@@ -3050,7 +3434,7 @@ table.authors {
     color: #000;
     list-style: none;
     font-family: "Montserrat"; }
-  #ros-list .linkedin, #ros-list .twitter {
+  #ros-list .linkedin, #ros-list .twitter, #ros-list a {
     color: #009; }
   #ros-list strong {
     font-weight: 600; }
@@ -3356,6 +3740,10 @@ model-viewer#reveal {
   font-family: "AgencyFB";
   font-weight: bold;
   font-size: 150%; }
+
+#event-index {
+  background: #fff;
+  color: #000; }
 
 /*
 @import "partials/admin";

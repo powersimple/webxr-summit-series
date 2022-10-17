@@ -61,12 +61,16 @@ function setVideoPath(video_path) {
    // console.log('set video', video_path)
     jQuery("#bg-video" + ' video source').attr("src", video_path);
 }
+var maxHeight = $(window).height() - $('#nomination-ballot').offset();
+$('#nomination-ballot').css({ "max-height" :maxHeight})
 
+var hide_social_icons = getUrlParameter('hide-social-icons')
 var event_class = ''
 function initSite() {
     console.log("megamenu");
     megaMenu()
    // sponsorFooter()
+
 
     getVideo();
 
@@ -97,22 +101,33 @@ function initSite() {
     } else if (window.location.pathname == '/event/webxr-production-summit/'){
         menu_name = 'prodsummit22'
         event_class = 'production_summit'
-
+        console.log("prod")
     } 
 
-
-  
     if(menu_name != false){
-        //console.log("menu",menu_name,menus[menu_name])
+      //  console.log("menu",menu_name,menus[menu_name])
         var run_of_show = runOfShow(menus[menu_name]);
-      //  console.log("Run of Show",run_of_show)
-        displayRunOfShow(run_of_show)
+       console.log("Run of Show",run_of_show)
+        //displayRunOfShow(run_of_show)
         var ros_list = getUrlParameter('ros-list')
 
         if(ros_list != false){
+            
             displayRunOfShowList(run_of_show)
         }
-        displayRunOfShowTable(run_of_show)
+
+        var monolith_view = getUrlParameter('monolith-view')
+        var cards = getUrlParameter('cards')
+        
+        if(monolith_view){
+            hide_social_icons = 1
+            displayRunOfShowMonolith(run_of_show)
+        } else if(cards){
+            displayRunOfShowCards(run_of_show)
+           
+        } else {
+            displayRunOfShowTable(run_of_show)
+        }
     }
 
 

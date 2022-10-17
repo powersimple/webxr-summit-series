@@ -40,7 +40,7 @@ strong {
 <?php
 }
 
-$instructions = 'Sophia Moshasha and Daniel Dyboski-Bryant are looking forward to welcoming you to our Green Room at<br><a href="[GREEN_ROOM_URL]" target="_blank">[GREEN_ROOM_URL]</a> at <strong>[GREEN_ROOM_TIME]</strong> PDT</strong> to test your mic and camera, and ability to sceen share if applicable.<br>
+$instructions = 'Karen Alexander and Daniel Dyboski-Bryant are looking forward to welcoming you to our Green Room at<br><a href="[GREEN_ROOM_URL]" target="_blank">[GREEN_ROOM_URL]</a> at <strong>[GREEN_ROOM_TIME]</strong> PDT</strong> to test your mic and camera, and ability to screen share if applicable.<br>
 <br>
 The session will begin promptly at [START_TIME] Pacific Daylight Time (UTC-7) and ends at [END_TIME] PDT<br>
 <strong>Please accept this calendar invite to confirm your engagement.</strong><br>
@@ -54,23 +54,23 @@ We are excited for you to share your expertise with our global audience.<br>
 If you have any questions, please don\'t hesitate to reach out to us at <a href="mailto:webxrevents@gmail.com">webxrevents@gmail.com</a><br>
 
 <br>
-See you on July 21st!<br><br>
+See you on September 15th!<br><br>
 Your friends,<br>
 The Polys – WebXR Awards and WebXR Summit Series Team';
     
 
 
 $panel_script = "Dear [NAME],<br><br>
-Thank you for joining our panel <strong>[SESSION]</strong> [MODERATION] at the <strong>WebXR Education Summit on the 21st of July</strong>.<br><br>
+Thank you for joining our panel <strong>[SESSION]</strong> [MODERATION] at the <strong>WebXR Brand Summit on the 15th of September</strong>.<br><br>
 $instructions";
 
 $presentation_script = "Dear [NAME],<br><br>
-We are excited for your presentation titled [SESSION] at the <strong>WebXR Education Summit on the 21st of July</strong>.<br><br>
+We are excited for your presentation titled [SESSION] at the <strong>WebXR Brand Summit on the 15th of September</strong>.<br><br>
 Please notify us if you have any special requirements other than screen sharing, such as playing video. If you will be screen sharing, it is helpful to share on a second screen if possible so you can monitor the session on the first monitor.<br><br> 
 $instructions";
 
 $interview_script = "Dear [NAME],<br><br>
-We are excited for your interview with Dr. Karen Alexander at the <strong>WebXR Education Summit on the 21st of July</strong>.<br><br>
+We are excited for your interview with Sophia at the <strong>WebXR Brand Summit on the  15th of September</strong>.<br><br>
 $instructions";
 
 
@@ -109,7 +109,7 @@ $instructions";
 
 
 
-$ros = get_menu_array('EdSummit22'); // located in functions-navigation.php
+$ros = get_menu_array('BrandSummit22'); // located in functions-navigation.php
 $offset = 0;
 if(@$_GET['offset']){
     $offset = $_GET['offset'];
@@ -120,6 +120,8 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
    print $item['post']->post_title;
    $link = get_permalink($item['post']->post_title);
    $green_room_url = @$item['meta']['green_room_url'][0];
+   $release_form_url = @$item['meta']['release_form_url'][0];
+   
    $start = intval($item['meta']['utc_start'][0]);
    $start = $start-(($offset*3600)*-1);// corrects timezone to minue hours
        
@@ -277,7 +279,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
             }
                 print "regstatus:".$reg_status;
                 print '<BR>Title:
-                <input type="text" size="50" value="WebXR Education Summit '.@$session_type.'"><Br>';
+                <input type="text" size="50" value="WebXR Brand Summit Summit '.@$session_type.': '. $session['post']->post_title.'"><Br>';
                 print "<BR>Location:";
                 print '<input type="text" size="50" value="Restream: '.$green_room_url.'"><Br>';
 
@@ -308,7 +310,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                 <input type="hidden" name="date_end" value="<?=getIcalDate($end)?>">
                 <input type="hidden" name="location" value="Restream <?=$green_room_url?>">
                 <textarea style="visibility:hidden;" name="description"><?=addslashes($session_script)?></textarea>
-                <input type="hidden" name="summary" value="WebXR Education Summit - Green Room">
+                <input type="hidden" name="summary" value="WebXR Brand Summit - Green Room">
                 <input type="hidden" name="url" value="<?=$link?>">
                 <input type="submit" value="Download ICS">
                 

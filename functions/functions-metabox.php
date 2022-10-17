@@ -739,20 +739,22 @@ function eventProperties( $meta_boxes ) {
                 'id'   => $prefix . 'embed_video_url',
 			],
 			[
+                'type' => 'url',
+                'name' => esc_html__( 'Video URL', 'online-generator' ),
+                'id'   => $prefix . 'video_url',
+			],
+			[
+                'type' => 'url',
+                'name' => esc_html__( 'YouTube Playlist', 'online-generator' ),
+                'id'   => $prefix . 'playslist_url',
+			],
+			[
                 'type' => 'text',
                 'name' => esc_html__( 'Event Style Class', 'online-generator' ),
                 'id'   => $prefix . 'event_style_class',
 			],
-			[
-                'type' => 'url',
-                'name' => esc_html__( 'Green Room URL', 'online-generator' ),
-                'id'   => $prefix . 'green_room_url',
-			],
-			[
-                'type' => 'url',
-                'name' => esc_html__( 'Release Form URL', 'online-generator' ),
-                'id'   => $prefix . 'release_form_url',
-            ],
+
+			
 			[
                 'type' => 'checkbox',
                 'name' => esc_html__( 'Suppress Speaker List', 'online-generator' ),
@@ -945,6 +947,63 @@ function eventSponsor( $meta_boxes ) {
 //add_filter( 'rwmb_meta_boxes', 'eventSponsor' );
 
 
+function eventCalendar( $meta_boxes ) {
+	$prefix = '';
+
+	$meta_boxes[] = array(
+		'id' => 'event_invite_templates',
+		'title' => esc_html__( 'Event Invite Templates', 'metabox-online-generator' ),
+		'post_types' => array('event'),
+		
+		'priority' => 'high',
+		'autosave' => 'false',
+		'fields' => [
+			[
+                'type' => 'url',
+                'name' => esc_html__( 'Green Room URL', 'online-generator' ),
+                'id'   => $prefix . 'green_room_url',
+			],
+			
+			[
+                'type' => 'url',
+                'name' => esc_html__( 'Release Form URL', 'online-generator' ),
+                'id'   => $prefix . 'release_form_url',
+            ],
+			[
+                'type' => 'wysiwyg',
+                'name' => esc_html__( 'Invitation Instructions', 'online-generator' ),
+                'id'   => $prefix . 'event_invite_instructions',
+            ],
+			[
+                'type' => 'wysiwyg',
+                'name' => esc_html__( 'Invitation Panel', 'online-generator' ),
+                'id'   => $prefix . 'event_invite_panel',
+            ],
+			[
+                'type' => 'wysiwyg',
+                'name' => esc_html__( 'Invitation Presentation', 'online-generator' ),
+                'id'   => $prefix . 'event_invite_presentation',
+            ],
+			[
+                'type' => 'wysiwyg',
+                'name' => esc_html__( 'Invitation Interview', 'online-generator' ),
+                'id'   => $prefix . 'event_invite_interview',
+            ],
+			[
+                'type' => 'wysiwyg',
+                'name' => esc_html__( 'Release Reminder', 'online-generator' ),
+                'id'   => $prefix . 'event_release_reminder',
+            ],
+			
+			
+        ],
+	);
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'eventCalendar' );
+
+
 
 // PROFILE METABOXES
 // PROFILE METABOXES
@@ -1084,7 +1143,7 @@ function current_status( $meta_boxes ) {
 
     return $meta_boxes;
 }
-add_filter( 'rwmb_meta_boxes', 'current_status' );
+//add_filter( 'rwmb_meta_boxes', 'current_status' );
 
 
 

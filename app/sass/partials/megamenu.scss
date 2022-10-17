@@ -86,8 +86,9 @@
     a:focus {
         color: #fefefe;
         text-decoration: none;
-        padding:5px;
-    
+        padding:10px;
+        display: block;
+        
     }
     a:hover,
     a.active {

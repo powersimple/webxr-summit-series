@@ -2,10 +2,11 @@
 
 
     <a-entity id="model-<?=$slug?>" class="clickable center-obj-zone" static-body 
-        position="0 4 0" mixin="obj" rotation="0 0 0" scale="10 10 10" gltf-model="#edtownhall">
+        position="0 4 0" mixin="obj" rotation="0 0 0" scale="10 10 10" gltf-model="#brandtownhall">
         
         </a-entity>
-        <a-entity id="date-town-hall" troika-text='value:Thursday, July 14th; color:#f5f5f5; align:center; color:#fff; fontSize:.3;align:center;maxWidth:8;font:/wp-content/themes/webxrsummits/fonts/AGENCYB.ttf'
+        
+        <a-entity id="date-town-hall" troika-text='value:Thursday, September 8th; color:#f5f5f5; align:center; color:#fff; fontSize:.3;align:center;maxWidth:8;font:/wp-content/themes/webxrsummits/fonts/AGENCYB.ttf'
 position="0 3.5 0"
             material="shader: standard; metalness: 0.8;"
             ></a-entity>

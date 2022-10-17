@@ -1,8 +1,433 @@
 <?php
 
+function titleCounterArray(){
+    $title_index = explode(",","Founder,Co-Founder,CEO|Chief Executive Officer|President|Principal,COO|Chief Operations Officer,CMO|Chief Marketing Officer,CFO|Chief Financial Officer,CTO|Chief Technology Officer,Chief|CEO|Chief Executive Officer|COO|Chief Operations Officer|CMO|Chief Marketing Officer|CFO|Chief Financial Officer|CTO|Chief Technology Officer|President|Principal,President,VP|VicePresident,SVP|Senior Vice President,Creative Director,Researcher,Product,Creative,|Dir|Director,Professor,Educator|Edu|Teacher|learning|Professor,Chair,Technical|Engineer|Programmer|Developer|Tech Lead,Head");
+    $title_counter = [];
+    foreach($title_index as $ti => $index){
+        $indexed = explode("|",$index);
+       //ß print "<STRONG>".$index[0]."</strong>";
+        $title_counter[$indexed[0]] = [
+            "titles"=>$indexed,//puts the parse title in here
+                "counter"=>0,// the counter that gets incremented
+                "strict_counter"=>0,// the counter that gets incremented on exact match
+                "counter_profiles"=>[],//stuff the name in to check
+                "strict_counter_profiles"=>[]//exact the name in to check
+                
+                
+        ];
+        
+        
+    }
+    return $title_counter;
+   // var_dump($title_counter);
+}
+
+function getCalendarInvite($session,$meta,$speaker,$start){
+   
+    $session_type = @$session['event_type'];
+ 
+    $offset = -7;
+    $moderated = '';
+
+    $speaker_name = $speaker['post']->post_title;
+     $profile_admin_url = '/wp-admin/post.php?post='.$speaker['post']->ID.'&action=edit';
+
+     // BUILD META STATUS ARRAY
+     $is_profile = false;
+     if(@$speaker['post']->post_type == 'profile'){
+     $is_profile == true;
+     $reg_status = get_post_meta($session['post']->ID,"registration_pending",true);
+     $speaker_status[$session['post']->ID]['speakers'][$speaker['post']->ID] = [
+         "id"=> $speaker['post']->ID,
+             
+             "speaker"=> $speaker_name,
+
+             "email"=> @$speaker['meta']['email'][0],
+             "registration_pending"=>  @$speaker['meta']['registration_pending'],
+             "signed_release"=>  @$speaker['meta']['signed_release'],
+             "calendar_sent"=>  @$speaker['meta']['calendar_sent'],
+             "calendar_confirmed"=>  @$speaker['meta']['calendar_confirmed'],
+             
+         ];
+     } else {
+         array_push($holds,
+             [  "session_time"=> date("H:i",$start),
+                     "session"=> @$session['post']->post_title,
+                 "speaker"=> $speaker_name
+             ]
+         );
+     }
+    
+      $green_room_url =  $meta['green_room_url'][0];
+      $release_form_url =  $meta['release_form_url'][0];
+   // $start = intval($meta['utc_start'][0]);
+    //$start = $start-(($offset*3600)*-1);
+    $invite = [
+        "instructions" => $meta['event_invite_instructions'],
+        "panel" => $meta['event_invite_panel'],
+        "presentation" => $meta['event_invite_presentation'],
+        "interview" => $meta['event_invite_interview'],
+        "reminder" => $meta['event_release_reminder'],
+        
+    ];
+       
+    $no_release = strpos($speaker['confirmation_status'],"no-release");
+    if($session_type != ''){
+        if(@$invite[$session_type]){
+            $script = $calendar_invite = $invite["$session_type"][0];
+            if($no_release){
+                $script .= $invite['reminder'][0]."";
+            }
+
+        
+           $script.= $invite['instructions'][0];
+         // $script = personalizeScript($script,$session['post']->post_title,$speaker_name,$green_room_url,$start,@$moderated);
+           if(!@$speaker['meta']['calendar_sent'][0] && $is_profile && @$speaker['meta']['registration_pending'] != 1){
+        } else {
+
+        }
+        $green_room_time = $start - (15*60);
+        print "<strong>GREEN ROOM TIME: ".date("H:i",$green_room_time);
+            print '</strong><BR>Title:
+            <input type="text" size="50" value="WebXR Production Summit Summit '.@$session_type.': '. $session['post']->post_title.'"><Br>';
+            print "<BR>Location:";
+            print '<input type="text" size="50" value="Restream: '.$green_room_url.'"><Br>';
+
+           
+            if(array_key_exists('email',$speaker['meta'])){
+                $end_time =  + $start+(@$session['meta']['duration'][0]*60); 
+              
+                $session_script = personalizeScript($script,$session['post']->post_title,$speaker_name,$green_room_url,$release_form_url,$start,$end_time,$moderated);
+
+                //array_push($speaker_emails,$speaker['title']. '&lt;'.$speaker['meta']['email'][0].'&gt;');
+                print '<BR>Emails:
+                <input type="text" size="50" value="'.$speaker['title']. '&lt;'.$speaker['meta']['email'][0].'&gt;'.'"><Br>';
+            } else {
+                print "<span style='color:red'>NO EMAIL</span><BR>";
+            }
+        
+        
+            
+            
+            print '<div class="invitation" cols="80" rows="5">'.@$session_script.'</div>';
+
+        
+
+        }
+    }
+// var_dump("SESSION<BR>",$session);
+// var_dump( "META<BR>",$meta['green_room_url'][0]);
+ //var_dump("SESSION<BR>"$meta);
+
+
+
+
+
+
+
+}
+
+function personalizeScript($script,$session,$name,$green_room_url,$release_form_url,$start,$end_time,$moderation="",$with="",$session_type=""){
+    
+    if($session_type != ""){
+        switch($session_type){
+            case "panel": 
+                $session = "in our panel \"$session\"";    
+                break;
+            case "presentation":                $session = "to make a presentation on $session";    
+            break;
+
+            case "interview": 
+                $session = "in an interview $session";    
+                break;
+            
+        }
+    }
+   
+    $green_room_time = $start - (15*60);
+    $script = str_replace('[SESSION]',$session.'.',$script);
+    $name = explode(" ",$name);
+    $script = str_replace('[NAME]',$name[0],$script);
+    $script = str_replace('[START_TIME]',date("H:i",$start),$script);
+  //  var_dump($end_time);
+    $script = str_replace('[END_TIME]',date("H:i",$end_time),$script);
+    $script = str_replace('[RELEASE_URL]',$release_form_url,$script);
+    $script = str_replace('[GREEN_ROOM_URL]',$green_room_url,$script);
+    $script = str_replace('[GREEN_ROOM_TIME]',date("H:i",$green_room_time),$script);
+    $script = str_replace('[MODERATION]',$moderation,$script);
+    $script = str_replace('[WITH]',$with,$script);
+    
+    
+    
+
+    return $script;
+
+}
+//DEPRECATED
+function replaceScriptVars($script,$session,$meta,$speaker,$start,$green_room_url){
+    extract($session);
+   // extract($meta);
+    
+   var_dump( "META<BR>",$meta);
+    $session_slug=sanitize_title($session['post']->post_title);
+    $session_blurb= do_blocks($session['post']->post_content);
+    $green_room_time = $start - (15*60);
+   
+
+    $script = str_replace('[SESSION]',$title.'.',$script);
+    $name = explode(" ",$speaker['title']);
+    $script = str_replace('[NAME]',$name[0],$script);
+
+    $script = str_replace('[START_TIME]',date("H:i",$start),$script);
+    $script = str_replace('[END_TIME]',date("H:i",$end_time),$script);
+    
+    $script = str_replace('[GREEN_ROOM_URL]',$meta['green_room_url'][0],$script);
+    $script = str_replace('[GREEN_ROOM_TIME]',date("H:i",$green_room_time),$script);
+    //$script = str_replace('[MODERATION]',$moderation,$script);
+    //$script = str_replace('[WITH]',$with,$script);
+    return $script;
+}
+
+
+function eventIndex($event_menus){
+    $event_menus = explode(",",$event_menus);
+    $event_list = [];
+    $sessions_list = [];
+    $company_list = [];
+    $title_counter = titleCounterArray();
+    $titles_list = [];
+    $profiles_list = [];
+    $sessions_list = [];
+    
+
+    
+
+
+
+    foreach($event_menus as $key => $event){
+        $event_list[$event] = get_menu_array($event);
+    }
+    foreach($event_list as $key => $events){// gets full array
+        foreach($events as $e => $event){// gets event_data
+          //  var_dump($event);
+           // print $event['title'];
+           // print "<br>";
+            array_push($sessions_list,$event['title']);
+//            print $event['content'];
+            
+          foreach($event['children'] as $s => $session){// gets event_data
+           //     print "-".$session['title'];
+                array_push($sessions_list,$session['title']);
+
+                foreach($session['children'] as $s => $profile){// gets event_data
+                    //var_dump($profile);
+                //    print "--".$profile['title'];
+                    $profile_companies = get_post_meta($profile['post']->ID,"company",true);
+                    array_push($profiles_list,$profile['title']);
+                    
+
+
+                    $companies = explode(";",$profile_companies);
+
+                    foreach($companies as $c =>$company){
+                        if(trim($company) != ''){
+                            if(strpos(trim($company),"The ",0) === 0){ // if starts with the, apppend
+                                 $company = str_replace("The ","",$company).", The";
+                            }
+
+                            
+                            array_push($company_list,$company);
+                        }
+                    }
+                    $profile_titles = get_post_meta($profile['post']->ID,"profile_title",true);
+                    $titles = explode(";",$profile_titles);
+                  
+                    foreach($titles as $t =>$title){//loops through the split profile's title;
+                  //    print $profile['title']."||".$title."<BR>";
+                        foreach($title_counter as $tc => $title_array){// lhas elements title and counter
+                            
+                           // var_dump($title_array);break;
+                            foreach($title_array['titles'] as $titlekey =>$title_match){
+                             //   print strtolower($profi).",".strtolower($title_match)."<BR>";
+                                if(str_contains(strtolower(trim($title)),strtolower(trim($title_match)))){
+
+                                    $title_counter[$tc]['counter']++;
+                                       array_push($title_counter[$tc]['counter_profiles'],$profile['title'].", ".$title);
+                                       
+                                }
+                                if(trim($title) == $title_match){
+
+                                    $title_counter[$tc]['strict_counter']++;
+                                       array_push($title_counter[$tc]['strict_counter_profiles'],$profile['title'].", ".$title);
+                                       
+                                }
+       
+                            }
+
+                        }
+                        
+                    }
+
+
+
+
+                  
+                //  print "<br>";
+                  
+                }
+
+          }
+
+        }
+        print "<br>";
+    }
+    print "<hr>Title Count<hr>";
+    foreach($title_counter as $tc => $title_array){
+        extract($title_array);
+     print "<strong>$tc</strong><br>";
+   // var_dump($title_array['titles']);
+    print "Matched:".implode(" or ",$titles);
+     print "<BR>"; 
+     print "Strict Count $strict_counter<BR>";
+     print "Strict Profiles:<ol>";
+        foreach($strict_counter_profiles as $scp =>$profile){
+            print "<li>".$profile."</li>";
+        }
+
+
+     print "</ol><BR>"; 
+     print "Matched Count Count $strict_counter<BR>";
+     print "Matched Profiles<ol>";
+     foreach(array_unique($counter_profiles) as $scp =>$profile){
+        print "<li>".$profile."</li>";
+    }
+    print "</ol><BR>";
+
+     print "<hr>";
+
+
+    }
+
+
+ //   var_dump($title_counter);
+    
+    print "<hr>Companies<hr><ol>";
+
+    natcasesort($company_list);
+//    $companies =;
+      // var_dump($cdompanies);
+    $counter=1;
+    foreach(array_unique($company_list) as $c => $company){
+       print "<li>$company</li>";
+        $counter++;
+    }
+    print $counter;
+    print "</ol><hr>Sessions<hr><ol>";
+
+    //natcasesort($sessions_list);
+//    $companies =;
+      // var_dump($cdompanies);
+    $counter=1;
+    foreach(array_unique($sessions_list) as $s => $session){
+       print "$session<BR>";
+        $counter++;
+    }
+    print $counter;
+
+
+    print "</ol><hr>Speakers<hr><ol>";
+
+    natcasesort($profiles_list);
+//    $companies =;
+      // var_dump($cdompanies);
+    $counter=1;
+    foreach(array_unique($profiles_list) as $p => $profile){
+       print "<li>$profile</li>";
+        $counter++;
+    }
+    print $counter;
+
+    print "</ol><hr>TITLES<hr>";
+
+    foreach($title_counter as $tc){
+        var_dump($tc);
+    }
+   
+   // var_dump($event_list);
+   natcasesort($titles_list);
+   //    $companies =;
+         // var_dump($cdompanies);
+       $counter=1;
+       foreach(array_unique($titles_list) as $t => $title){
+          print "$title<BR>";
+           $counter++;
+       }
+   
+
+}
+
+
 function getRoster($menu){
     
 }
+
+function get_other_speakers($this_speaker,$session){
+    $panelists = [];
+    if(in_array('panel',explode(" ",$session['classes'][0]))){
+       
+        foreach($session['children'] as $p => $speaker){
+           
+            if($this_speaker != $speaker['title']){
+                array_push($panelists,$speaker['title']);
+
+            //$with .="<li>$this_speaker".$session['post']->title;
+        //    $with .= $session['post']->post_title;
+
+               
+            if(in_array('moderator',explode(" ",$speaker['classes'][0]))){
+
+
+            }
+            if($session['post']->post_title != $speaker['post']->post_title){
+              //  $with .= $speaker['post']->post_title;
+            }
+            //$with .= "<a href='mailto:".@$speaker['meta']['email'][0]."'>".@$speaker['meta']['email'][0]."</a>";
+            ///$with .= wrapSocial('website',@$speaker['meta']['website'][0]);
+            //$with .= wrapSocial('twitter',@$speaker['meta']['twitter'][0]);
+            //$with .= wrapSocial('linkedin',@$speaker['meta']['linkedin'][0]);
+           // $with .= wrapSocial('github',@$speaker['meta']['github'][0]);
+            
+            
+            
+           
+        }
+
+        }
+        $with = "Other invited panelists include: ";
+        foreach($panelists as $key=>$panelist){
+            if($key == (count($panelists)-1)){
+                $with .= " and ";
+            }
+            if($panelist == 'Sophia Moshasha'){
+                $with .= "myself, ";
+            } else {
+                $with .= "$panelist, ";
+            }
+
+            
+
+            
+            
+            
+        }
+        return $with;
+        
+    }
+
+}
+
+
+
 
 
 function getNominee($nominee,$nominations,$current_award,$current_nomination){
@@ -465,7 +890,7 @@ function insertEvent($post_title,$post_content,$post_excerpt,$post_parent){
         if($service=="email"){
             $mail="mailto:";
             if($url = ''){
-                return "Confirme, Registration pending.";
+                return "Confirm, Registration pending.";
             }
         }
         if($url != ''){
@@ -504,25 +929,6 @@ function insertEvent($post_title,$post_content,$post_excerpt,$post_parent){
         }
     }
 
-
-  function personalizeScript($script,$session,$name,$green_room_url,$start_time,$end_time,$green_room_time,$moderation="",$with=""){
-    $script = str_replace('[SESSION]','"'.$session.',"',$script);
-    $name = explode(" ",$name);
-    $script = str_replace('[NAME]',$name[0],$script);
-    $script = str_replace('[START_TIME]',date("H:i",$start_time),$script);
-    $script = str_replace('[END_TIME]',date("H:i",$end_time),$script);
-    
-    $script = str_replace('[GREEN_ROOM_URL]',$green_room_url,$script);
-    $script = str_replace('[GREEN_ROOM_TIME]',date("H:i",$green_room_time),$script);
-    $script = str_replace('[MODERATION]',$moderation,$script);
-    $script = str_replace('[WITH]',$with,$script);
-    
-    
-    
-
-    return $script;
-
-}
 
 function getEventPanel($panel,$recurse=0){
     //var_dump($panel);die();

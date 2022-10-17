@@ -86,6 +86,9 @@ if($hero=get_post_meta($post->ID,'hero',true)){
           <div class="profile-meta">
           <?php
           $profile_meta = get_post_meta($post->ID);
+
+
+      
   
           if($post->post_excerpt !=''){
             ?>

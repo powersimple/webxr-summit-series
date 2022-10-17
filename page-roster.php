@@ -260,7 +260,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
             */
             
                 if(array_key_exists('email',$speaker['meta'])){
-                    $end_time =  + $start+($session['meta']['duration'][0]*60);
+                    $end_time =  + $start+(@$session['meta']['duration'][0]*60);
                     $session_script = personalizeScript($session_script,$session['post']->post_title,$speaker_name,$green_room_url,$start,$end_time,$green_room_time,$moderated);
 
                     array_push($speaker_emails,$speaker['title']. '&lt;'.$speaker['meta']['email'][0].'&gt;');
@@ -276,7 +276,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
 
 
 
-                $end = $green_room_time + (($session['meta']['duration'][0]+15)*60);
+                $end = $green_room_time + ((@$session['meta']['duration'][0]+15)*60);
            /*
            ?>
             <form method="post" action="<?php echo get_stylesheet_directory_uri();?>/download-ics.php">
@@ -301,7 +301,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
 
        print '<BR>ALL Emails:<BR><textarea cols="80" rows="2">'.implode(",",$speaker_emails).'</textarea><BR>';
        }
-       $start = $start + ($session['meta']['duration'][0]*60);
+       $start = $start + (@$session['meta']['duration'][0]*60);
 
 //       print "<hr>";
    }
@@ -326,7 +326,7 @@ u{
 
 <div class="row">
     <div class="container whitebg">
-<strong>WebXR Education Summit Agenda and Roster</strong><br>
+<strong>WebXR Production Summit Agenda and Roster</strong><br>
 (Times listed are Eastern Daylight Time)<BR>
 <BR>
 
@@ -358,8 +358,8 @@ print "</span><br>";
      	• <?=$speaker['speaker'];?> - <?=$speaker['profile_title'];?>, <?=$speaker['company'];?> 
          <?php if(!@$_GET['nocontactinfo']){
              ?>
-         <a href='mailto:<?=$speaker['email'];?>' target='_blank' style='color:#0000cc'>:<?=$speaker['email'];?></a> | 
-         <
+         <a href='mailto:<?=$speaker['email'];?>' target='_blank' style='color:#0000cc'> | <?=$speaker['email'];?></a> | 
+         
          <a href='<?=$speaker['twitter'];?>' target='_blank' style='color:#0000cc'><?=str_replace("https://twitter.com/","@",$speaker['twitter']);?></a> | 
 
          <a href='<?=$speaker['linkedin'];?>' target='_blank' style='color:#0000cc'>LinkedIn</a>
@@ -381,7 +381,7 @@ print "</span><br>";
 print"<BR>";
 
 
-
+/*
 ?>
 <BR><BR>
 <strong>PENDING REGISTRATION</strong>
@@ -393,7 +393,7 @@ print "&#x27A1;";
   <?=$speaker['speaker'];?> <?=$speaker['profile_title'];?>, <?=$speaker['company'];?><BR>
 <?php
 }
-
+*/
 ?>
 
 

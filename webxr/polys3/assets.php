@@ -6,7 +6,7 @@
 
 <a-asset-item id="platform" response-type="arraybuffer" position="0 0 -5" src="/assets/models/2022Summits/9SidedPlatform.glb">
 </a-asset-item>
-<a-asset-item id="brandtownhall" response-type="arraybuffer" src="/assets/models/2022Summits/2022_WebXR_Production_TownHall_Long.glb"></a-asset-item>
+<a-asset-item id="brandtownhall" response-type="arraybuffer" src="/assets/models/2022Summits/2022_WebXR_Brand_Summit_TownHall_Long.glb"></a-asset-item>
 <a-asset-item id="emblem" response-type="arraybuffer" src="/assets/models/emblem2022.glb"></a-asset-item>
 <a-asset-item id="chair" response-type="arraybuffer" src="/assets/models/chair.glb"></a-asset-item>
 <!--

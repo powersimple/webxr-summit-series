@@ -27,4 +27,76 @@
     z-index: 1000;
 }
 
-#globe {}
+.session-name {
+    font-size:125%;
+    display:block;
+    padding-top: 5px;
+}
+
+.team{
+    color:#fff;
+}
+.needs-invite{
+    color:#f00;
+    font-weight:bold;
+    font-size:125%;
+    a{
+        color:#f00;
+    }
+}
+.invited{
+    color:#f90;
+}
+.agreed{
+    color:#ff0;
+}
+.registered-no-release{
+    color:cyan;
+}
+.registered{
+    color:#66f;
+}
+.no-status{
+    font-size:150%;
+    text-decoration: underline;
+    color:#944;
+}
+.confirmation-notes{
+    font-weight:bold;
+    font-size:90%;
+    font-style: italic;
+    color:#ccc;
+}	
+.calendar-sent{
+    color:#0f0;
+}
+.calendar-sent-no-release{
+    color:#f0f;
+
+}
+.calendar-sent-no-registration {
+    color: #a0a; font-weight: bold;}
+  .confirmed-no-registration {
+    color: #0aa; font-weight: bold;}
+.confirmed-no-release{
+    color:cyan
+}
+.prerecord{
+    color:brown;
+}
+
+.complete{
+    color:#090;
+    
+}
+.complete::after{
+    content: "✅";   
+}
+.admin-invitation{
+    background:rgba(3,3,3,0.3);
+    padding:10px;
+    box-shadow: -2px 2px 15px 9px rgba(194,180,180,0.91);
+    padding-bottom:25px;
+    border-bottom:1px dashed #fff;
+    margin-bottom:50px;
+}

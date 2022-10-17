@@ -35,8 +35,7 @@
             display: block;
             text-align: center;
             font-size: 0.7rem;
-
-
+            
         }
         span.profile-name {
             font-weight: 600;
@@ -65,8 +64,11 @@
             height: 100%;
             border-radius: 50%;
             border: 2px solid #fff;
-            box-shadow: 0 0 10px 10px rgba(176, 2, 255, 0.3);
+          
         }
+
+    
+
     }
     .card-info {
         visibility: hidden;
@@ -76,7 +78,19 @@
         width: 20% !important;
     }
     .sponsor-card {}
+    .education-summit .profile-thumbnail img{
+
+        box-shadow: 0 0 10px 10px rgba(176, 2, 255, 0.3);
+    }
+    .brand-summit .profile-thumbnail img{
+        box-shadow: 0 0 10px 10px rgba(176, 0, 0, 0.3);
+    }
+    .production-summit .profile-thumbnail img{
+        box-shadow: 0 0 10px 10px rgba(0, 0, 176, 0.3);
+    }
 }
+
+
 #ros-accordion.cards {
     width: 1200px !important;
     margin-left:25px;
@@ -98,20 +112,21 @@
                 font-size: 14px;
                 height: 30px;
 
-            }
+            }    text-shadow: 8px 6px 26px #000;
             .sophia-moshasha,
             .atsushi-shimono,
             .daniel-ljunggren,
             .yu-yuan,
             .neil-trevett {
-                height: 50px !important;
+             //   height: 50px !important;
             }
         }
         // PRESENTATION OVERRIDES
         .presentation {
-            width: 80% !important;
+            width: 90% !important;
             margin-top:-25px;
             overflow-y: hidden;
+            margin-left: 8% !important;
             span.blurb {
                 visibility: visible;
                 display: block;
@@ -121,13 +136,14 @@
                 font-size: 20px;
                 line-height: 150%;
                 position: absolute;
-                top: 175px;
+                top: 160px;
                 text-shadow: 1px 1px #000;
                 overflow-y: hidden;
-
+                padding: 10px;
+           //     background: rgba(0,0,0,.5);
                 p {
-                    padding-left: 0;
-                    font-size: 16px;
+                    padding-left: 10%;
+                    font-size: 20px;
 
                 }
 
@@ -135,9 +151,9 @@
             .profile-card {
                 margin-top: 30px;
             }
-            margin-left: 10% !important;
+           
             .profile-thumbnail {
-                width: 30%;
+                width: 25%;
                 display: inline-block;
                 img {
                     margin-left: 0;
@@ -146,9 +162,10 @@
 
             }
             .profile-info {
-                width: 65%;
+                width: 70%;
                 display: inline;
                 float: right;
+                height:350px;
                 .social {
                     display: block;
                     a {
@@ -156,10 +173,13 @@
                     }
                 }
 
+
                 span.credential span {
                     font-size: 16px !important;
                     line-height: 150% !important;
                     font-weight: 600;
+                //    background: rgba(0,0,0,.5);
+            border-radius: 10px;
                 }
 
                 span.profile-name {
@@ -184,12 +204,14 @@
             
             span.blurb{
                 top:25px;
-
+                background: rgba(0, 0, 0, 0.5);
                 visibility: visible;
                 p{
                     margin-top:20px;
                     padding-left:20%;
                     text-shadow: 2px 2px 2px black;
+                    
+                    
                 }
             }
         }
@@ -207,11 +229,15 @@
                     font-size: 20px;
                     height: 30px;
                 }
-                span.credential span {
+                span.credential {
+                //    background: rgba(0,0,0,.5);
+                    border-radius: 10px;
+                    span {
                     font-size: 16px !important;
                     line-height: 150% !important;
                     font-weight: 600;
                 }
+            }
                 .samantha-mathews {
                     font-size: 20px !important;
 
@@ -238,6 +264,7 @@
         overflow: hidden;
         color:#fff;
     }
+
     .trans-card {
 //        border: 3px solid #fff;
 color:#fff;
@@ -294,9 +321,18 @@ color:#fff;
         width:100%;
         top:425px;
         text-align: center;
-        text-shadow: 3px 3px 3px #530066, -3px -3px 3px #530066;
+       
 
     }
+    .education-summit h4{
+
+        text-shadow: 3px 3px 3px #530066, -3px -3px 3px #530066;
+    }
+   
+    .production-summit h4{
+        text-shadow: 3px 3px 3px #0000aa, -3px -3px 3px #0000aa;
+    }
+
     p {
         font-size: 20px;
         padding-left: 23%;
@@ -313,16 +349,21 @@ color:#fff;
     }
     .profile-card {
 
-        span.credential span {
+        span.credential {
+
+           // background: rgba(0,0,0,.5);
+            border-radius: 10px;
+            span {
             font-size: 14px !important;
             line-height: 150% !important;
             font-weight: 600;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+            text-shadow: 2px 2px 4px #000, -2px -2px 2px #000;
+            
         }
+    }
 
 
-        span.profile-name {
-
+    span.profile-name {
             font-weight: 600;
             font-size: 16px;
             padding-bottom: 5px;
@@ -332,10 +373,7 @@ color:#fff;
             letter-spacing: 1px;
             width: 100%;
             text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
-
-
             display: block;
-
         }
         .samantha-mathews {
             font-size: 15px !important;
@@ -357,7 +395,7 @@ color:#fff;
         margin: 0 auto 25px;
         position: absolute;
         top: 470px;
-        left: 35%;
+        left: 50%;
         font-family: "AgencyFB";
         li {
             display: inline-block;
@@ -368,7 +406,7 @@ color:#fff;
             font-size: 36px;
             line-height: 24px;
             letter-spacing: 1px;
-            text-shadow: 2px 2px 2px #000, -2px -2px 2px #000;
+            text-shadow: 2px 2px 4px #000, -2px -2px 2px #000;
             span {
                 font-weight: 600;
                 font-size: 50%;    
@@ -405,18 +443,11 @@ color:#fff;
         }
         
     }
-    .sponsor-logo {
-        width: 240px;
-        height: 80px;
-        position: absolute;
-        right: -20px;
-        top:550px;
-        a {
-            img {
-                width: 200px;
-            }
-        }
+    .brand-summit {
+       
     }
+    
+    
     .host{
         position: absolute;
         font-family: "AgencyFB";
@@ -443,6 +474,333 @@ color:#fff;
       
         }
     }
+    .brand-summit{
+        .show-title{
+            width:438px;
+            position: absolute;
+            top:409px;
+            height:250px;
+        }
+        background: url('images/bg/BrandSummitCardBG.jpg') center center no-repeat;
+        h3.card-info{
+          color:#fff !important;
+         text-shadow: 9px 9px 10px #aa0000, -8px -9px 10px #aa0000;
+          letter-spacing:.8px;
+          font-size:56px;
+        }
+        
+        .profile-card.img{
+            box-shadow:0 0 15px 15px rgb(83, 0, 102 / 30%)
+        }
+        a {
+
+        color:#fff;
+      
+        }
+        
+        span.series-logo{
+            width:316px;
+            left:30px;
+            position: absolute;
+            top:-25px;
+            height: 250px;
+            background-size: 100% !important;
+            background: url('images/logo/2022WebXRSummitSeriesBrand.png') top center no-repeat;
+        }
+        h4{
+            position: absolute;
+            top:62px;
+            font-size: 56px;
+                padding-left:0px;
+                text-shadow: 3px 3px 3px #aa0000, -3px -3px 3px #aa0000;
+                margin-bottom:0px;
+            
+        }
+        h5.the-host{
+            font-size: 24px;
+            display: block;
+            border-right: none;
+            color:#fff;
+           text-align: center;
+            margin-bottom: 24px;
+            font-family: 'AgencyFB';
+            margin-bottom:0px;
+            position: absolute;
+            top:128px;
+            width: 100%;
+            text-shadow:0px 0px 9px rgba (0,0,0,0.5);
+
+        }
+        h5.event-date{
+            font-size: 36px;
+            display: block;
+            border-right: none;
+            color:#fff;
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            top:156px;
+            text-shadow:0px 0px 9px rgba (0,0,0,0.5);
+              margin-bottom:0px;
+        
+            font-family: 'AgencyFB';
+        }
+        .session-times{
+            left: 45%;
+        top: 460px;
+        scale: 120%;
+        }
+        .card-footer {
+            left:50px;
+            top:25%;
+            scale:100%;
+            padding-top:0px;
+            a.rsvp-link{
+              //  margin-bottom:10px;
+                }
+        }
+    }
+
+
+
+}
+
+
+.production-summit{
+    .profile-info{
+        margin-top:-10px;
+    }
+    .show-title{
+        width:438px;
+        position: absolute;
+        top:409px;
+        height:250px;
+        overflow-x:unset !important;
+
+    }
+    .speaker-list{
+        top:85px;
+    }
+    background: url('images/bg/ProdSummitCardBG.jpg') center center no-repeat;
+    h3.card-info{
+      color:#fff !important;
+     text-shadow: 5px 5px 8px #0084ff, -5px -5px 8px #0084ff;
+      letter-spacing:.8px;
+      font-size:56px;
+    }
+    
+    .profile-card.img{
+        box-shadow:0 0 15px 15px rgb(83, 0, 102 / 30%)
+    }
+    a {
+
+    color:#fff;
+  
+    }
+    .session-times{
+        top:490px !important;
+        left:35% !important;
+        scale:90%;
+        li span{
+            display: block !important;
+        }
+    }
+    span.series-logo{
+        width:316px;
+        left:30px;
+        position: absolute;
+        top:-25px;
+        height: 250px;
+        background-size: 100% !important;
+        background: url('images/logo/2022WebXRSummitSeriesProduction.png') top center no-repeat;
+    }
+    h4{
+        position: absolute;
+        top:-3% !important;
+    left:62% !important;
+        font-size: 48px !important;
+            padding-left:0px;
+            text-shadow: 3px 3px 3px #0084ff, -3px -3px 3px #0084ff;
+            margin-bottom:0px;
+            width: 700px !important;
+        
+    }
+    h5.the-host{
+        font-size: 24px;
+        display: block;
+        border-right: none;
+        color:#fff;
+       text-align: center;
+        margin-bottom: 24px;
+        font-family: 'AgencyFB';
+        margin-bottom:0px;
+        position: absolute;
+        top:45px !important;
+        width: 700px !important;
+        text-shadow:0px 0px 9px rgba (0,0,0,0.5);
+        left:337px !important;
+
+    }
+    h5.event-date{
+        font-size: 36px;
+        display: block;
+        border-right: none;
+        color:#fff;
+        text-align: center;
+        position: absolute;
+        width: 100%;
+        top:155px;
+        text-shadow:0px 0px 9px rgba (0,0,0,0.5);
+          margin-bottom:0px;
+    
+        font-family: 'AgencyFB';
+        left:-30px;
+
+    }
+    
+    .card-footer {
+        left:35% !important;
+        top:87% !important;
+    scale:90% !important;
+        padding-top:0px;
+        a.rsvp-link{
+          //  margin-bottom:10px;
+            }
+    }
+    .futurewei-logo{
+        scale: 65%;
+         position: absolute;
+        top: 535px;
+        right: -30px;
+    }
+    span.blurb p{
+        font-size:18px !important;
+    }
+    .presentation span.blurb p{
+        padding-left:5% !important;
+    }
+    
+}
+
+#speaker-list .fifth  .daniel-dyboski-bryant{
+    height:50px !important;
+}
+
+
+#ros-accordion.hd{
+    .card-mode {
+        height:675px !important;
+      
+        background-position-x: 0;
+    }
+
+    h4.show-title{
+        font-size:72px;
+        margin-top:4px;
+    }
+    ul.session-times{
+        width:61.8%;
+        margin-top:54px;
+        text-align: center;
+        li.the-host{
+            font-size: 24px;
+            display: block;
+            border-right: none;
+            margin-bottom: 24px;
+        }
+    }
+   
+    span.event-info{
+    margin-top: 25px;
+    display: block;
+    }
+    .card-footer{
+        left:38%;
+        height:163px;
+        .event-info{
+            .rsvp-link{
+            font-size:18px;
+            }
+        }
+        .presenter-info{
+            top: -14px;
+            display: block;
+            position: relative;
+            font-size: 12px;
+            font-family: 'Zen Dots';
+            font-weight: 300;
+            text-align: left;
+            z-index: 1;
+            text-shadow: 0px 0px 6px rgba(0, 0, 0, 1);
+        }
+    }
+    .brand-summit .card-footer{
+        left:0;
+        width:62%;
+    
+    }
+    
+    
+    .galaxy-sponsor{
+        width: 240px;
+        margin: 0px auto 4em;
+        top: -17px;
+        display: block;
+        position: relative;
+        font-size: 10px;
+        font-family: 'Zen Dots';
+        font-weight: 300;
+        text-align: center;
+    }
+    .education-summit{
+        
+        background: url('images/bg/EdSummitCardBG-HD.jpg') center center no-repeat;
+        background-size:contain;
+    }
+    .brand-summit{
+        
+        background: url('images/bg/BrandSummitCardBG-HD.jpg') center center no-repeat;
+        background-size:contain;
+        .show-title{
+         width:100%;
+         
+         h4{
+            width: 100%;
+            max-width: 100%;
+            top:0px !important;
+         }
+         .the-host{
+            top:65px;
+
+         }
+         .event-date{
+            top:100px
+         }
+
+        }
+        .card-footer{
+            top:86% !important;
+            width:1100px;
+            left:25px;
+        }
+        span.sponsor-logo{
+          
+        }
+        span.presenters-logo{
+            width:300px;
+            left:76%;
+            position: absolute;
+          
+            background-size: 100% !important;
+            background: url('images/logo/powersimple-metavrse-xrwomen-futurewei.png') top center no-repeat;
+            top:400px;
+            width:200px;
+            a img{
+                width:100%;
+
+            }
+        }
+    }
 }
 
 #ros-list{
@@ -452,12 +810,13 @@ color:#fff;
   p{
     color:#000;
   }
+
   li{
     color:#000;
     list-style: none;
     font-family: "Montserrat";
   } 
-  .linkedin,.twitter{
+  .linkedin,.twitter, a{
     color:#009;
   }
   strong{
