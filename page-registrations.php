@@ -30,6 +30,12 @@ if(@$_POST['post_id']){
     print $sql = "update wp_posts set post_content = '". esc_sql($_POST['post_content'])."' where ID = $_POST[post_id]";
   $wpdb->query($sql);
 
+/*
+    THIS CODE NEEDS AN UPATE query and to add the meta for the sort.
+*/
+
+
+  //get_last_name_first($name){
     foreach($_POST['meta'] as $key=>$value){
       print $sql= "insert into wp_postmeta (post_id,meta_key,meta_value) values($_POST[post_id],'$key','".esc_sql($value)."');";
         print "<BR><BR>";

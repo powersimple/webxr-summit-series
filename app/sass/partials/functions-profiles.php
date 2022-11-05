@@ -13,36 +13,13 @@
     
 
   }
+ 
   function getProfiles(){
     global $wpdb;
     $sql = "select ID, post_title, post_excerpt, post_content, post_parent from wp_posts where post_type='profile' and post_status='publish' order by post_title";
     return $wpdb->get_results($sql);
     
 
-  }
-  function indexProfiles($profiles){
-
-    foreach($profiles as $key=>$profile){
-        extract((array)$profile);
-        print  $ID ." ". get_last_name_first($post_title);
-    //    print "<br>";
-       // add_post_meta($ID,'sort_name',get_last_name_first($post_title));
-      // print "insert into wp_postmeta (post_id,meta_key,meta_value) values ($ID,'sort_name','".get_last_name_first($post_title)."');<BR>";
-    }
-
-
-
-
-  }
-
-
-  function get_last_name_first($name){
-    $name = explode(" ",$name);
-    $index_name = array_pop($name);
-    if(count($name)>=1){
-        $index_name .= ", ". implode(" ",$name);
-    }
-    return str_replace("'","\'",$index_name);
   }
 
 

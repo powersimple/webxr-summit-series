@@ -121,9 +121,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                     "linkedin"=> @$speaker['meta']['linkedin'][0],
                     "github"=> @$speaker['meta']['github'][0],
                     
-                    "signed_release"=>  @$speaker['meta']['signed_release'],
-                    "calendar_sent"=>  @$speaker['meta']['calendar_sent'],
-                    "calendar_confirmed"=>  @$speaker['meta']['calendar_confirmed'],
+                    
                     
                 ];
                 $send_calendar =  @$speaker['meta']['calendar_sent'][0];

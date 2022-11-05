@@ -584,7 +584,7 @@ color:#fff;
     background: url('images/bg/ProdSummitCardBG.jpg') center center no-repeat;
     h3.card-info{
       color:#fff !important;
-     text-shadow: 5px 5px 8px #0084ff, -5px -5px 8px #0084ff;
+     text-shadow: 3px 3px 3px #0084ff, -2px -3px 3px #0084ff;
       letter-spacing:.8px;
       font-size:56px;
     }
@@ -606,7 +606,7 @@ color:#fff;
         }
     }
     span.series-logo{
-        width:316px;
+        width:330px;
         left:30px;
         position: absolute;
         top:-25px;
@@ -679,8 +679,86 @@ color:#fff;
     .presentation span.blurb p{
         padding-left:5% !important;
     }
+   
     
 }
+#ros-accordion.hd .production-summit{
+    background: url('images/bg/ProdSummitCardBG-HD.jpg') center center no-repeat;
+    background-size: 160%;
+    scale: 160% !important;;
+    left:30% !important;
+    h4{
+        position: absolute;
+        top:-0% !important;
+    left:100% !important;
+        font-size: 60px !important;
+            padding-left:0px;
+            text-shadow: 2px 2px 2px #0084ff, -2px -2px 2px #0084ff;
+            margin-bottom:0px;
+            width: 700px !important;
+        
+    }
+    h5.the-host{
+        font-size: 24px;
+        display: block;
+        border-right: none;
+        color:#fff;
+       text-align: center;
+        margin-bottom: 24px;
+        font-family: 'AgencyFB';
+        margin-bottom:0px;
+        position: absolute;
+        top:75px !important;
+        width: 100%;
+        left:440px !important;
+        text-shadow: 1px 1px 1px #000, -1px -1px 1px #000;
+
+    }
+    h5.event-date{
+        font-size: 36px;
+        display: block;
+        border-right: none;
+        color:#fff;
+        text-align: center;
+        position: absolute;
+        width: 100%;
+        top:110px;
+        text-shadow: 1px 1px 1px #000, -1px -1px 1px #000;
+        margin-bottom:0px;
+        left:566px !important;
+        font-family: 'AgencyFB';
+    }
+    .card-footer {
+        left:-44px !important;
+        top:87% !important;
+        scale:90% !important;
+        padding-top:0px;
+        width: 100%;
+        a.rsvp-link{
+          //  margin-bottom:10px;
+            }
+            .presenter-info{
+            text-shadow: 1px 1px 1px #000, -1px -1px 1px #000;
+        }
+    }
+    .series-logo{
+        width:330px;
+    }
+    .futurewei-logo{
+        top:575px;
+    }
+    span.presenters-logo{
+        left: -1500px;
+        width: 639px;
+        top: -35px;
+    
+        position: absolute;
+      
+       
+    }
+    
+}
+
 
 #speaker-list .fifth  .daniel-dyboski-bryant{
     height:50px !important;
@@ -906,11 +984,12 @@ color:#fff;
         }
     }
     .session {
-        margin: 40px 0 !important;
+        margin: 20px 0 !important;
         border-top: 5px dashed #4173D8;
-        padding: 10px 0 !important;
+        padding: 20px 0 !important;
+
         div:first-child {
-            margin-top: 10px;
+           // margin-top: 10px;
         }
 
 

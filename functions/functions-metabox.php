@@ -117,7 +117,11 @@ function profile_info( $meta_boxes ) {
 				'type' => 'text',
 				'name' => esc_html__( 'Email', 'metabox-online-generator' ),
 			),
-
+			array(
+				'id' => 'sort_name',
+				'type' => 'text',
+				'name' => esc_html__( 'Sort Name As', 'metabox-online-generator' ),
+			),
 			array(
 				'id' => 'profile_wikipedia',
 				'type' => 'url',
@@ -185,6 +189,11 @@ function setProfileURL( $meta_boxes ) { // this shows the box were
 				'id' => 'profile_title',
 				'type' => 'text',
 				'name' => esc_html__( 'Contact Title', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => 'sort_name',
+				'type' => 'text',
+				'name' => esc_html__( 'Sort Name As', 'metabox-online-generator' ),
 			),
 			array(
 				'id' => 'email',

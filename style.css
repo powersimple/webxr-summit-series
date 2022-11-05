@@ -3264,7 +3264,7 @@ table.authors {
     top: 85px; }
   .production-summit h3.card-info {
     color: #fff !important;
-    text-shadow: 5px 5px 8px #0084ff, -5px -5px 8px #0084ff;
+    text-shadow: 3px 3px 3px #0084ff, -2px -3px 3px #0084ff;
     letter-spacing: .8px;
     font-size: 56px; }
   .production-summit .profile-card.img {
@@ -3278,7 +3278,7 @@ table.authors {
     .production-summit .session-times li span {
       display: block !important; }
   .production-summit span.series-logo {
-    width: 316px;
+    width: 330px;
     left: 30px;
     position: absolute;
     top: -25px;
@@ -3335,6 +3335,65 @@ table.authors {
     font-size: 18px !important; }
   .production-summit .presentation span.blurb p {
     padding-left: 5% !important; }
+
+#ros-accordion.hd .production-summit {
+  background: url("images/bg/ProdSummitCardBG-HD.jpg") center center no-repeat;
+  background-size: 160%;
+  scale: 160% !important;
+  left: 30% !important; }
+  #ros-accordion.hd .production-summit h4 {
+    position: absolute;
+    top: -0% !important;
+    left: 100% !important;
+    font-size: 60px !important;
+    padding-left: 0px;
+    text-shadow: 2px 2px 2px #0084ff, -2px -2px 2px #0084ff;
+    margin-bottom: 0px;
+    width: 700px !important; }
+  #ros-accordion.hd .production-summit h5.the-host {
+    font-size: 24px;
+    display: block;
+    border-right: none;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 24px;
+    font-family: 'AgencyFB';
+    margin-bottom: 0px;
+    position: absolute;
+    top: 75px !important;
+    width: 100%;
+    left: 440px !important;
+    text-shadow: 1px 1px 1px #000, -1px -1px 1px #000; }
+  #ros-accordion.hd .production-summit h5.event-date {
+    font-size: 36px;
+    display: block;
+    border-right: none;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    top: 110px;
+    text-shadow: 1px 1px 1px #000, -1px -1px 1px #000;
+    margin-bottom: 0px;
+    left: 566px !important;
+    font-family: 'AgencyFB'; }
+  #ros-accordion.hd .production-summit .card-footer {
+    left: -44px !important;
+    top: 87% !important;
+    scale: 90% !important;
+    padding-top: 0px;
+    width: 100%; }
+    #ros-accordion.hd .production-summit .card-footer .presenter-info {
+      text-shadow: 1px 1px 1px #000, -1px -1px 1px #000; }
+  #ros-accordion.hd .production-summit .series-logo {
+    width: 330px; }
+  #ros-accordion.hd .production-summit .futurewei-logo {
+    top: 575px; }
+  #ros-accordion.hd .production-summit span.presenters-logo {
+    left: -1500px;
+    width: 639px;
+    top: -35px;
+    position: absolute; }
 
 #speaker-list .fifth .daniel-dyboski-bryant {
   height: 50px !important; }
@@ -3498,11 +3557,9 @@ table.authors {
   text-align: center; }
 
 #schedule .session {
-  margin: 40px 0 !important;
+  margin: 20px 0 !important;
   border-top: 5px dashed #4173D8;
-  padding: 10px 0 !important; }
-  #schedule .session div:first-child {
-    margin-top: 10px; }
+  padding: 20px 0 !important; }
 
 #schedule .blurb {
   font-size: 12px;
@@ -3744,6 +3801,8 @@ model-viewer#reveal {
 #event-index {
   background: #fff;
   color: #000; }
+  #event-index p, #event-index li, #event-index span {
+    color: #000; }
 
 /*
 @import "partials/admin";
@@ -6573,3 +6632,10 @@ ul.nominee-list li {
 
 em {
   font-style: italic; }
+
+.wolvic-event {
+  background: url(images/icons/Wolvic.png) left top no-repeat transparent !important;
+  padding-left: 30px; }
+
+#megamenu .exo-menu > li.wolvic-event > a.active, #megamenu .exo-menu > li.wolvic-event > a:hover, #megamenu li.drop-down ul > li.wolvic-event > a {
+  background: #009FE1; }

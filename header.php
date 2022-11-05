@@ -48,7 +48,7 @@ if(is_front_page()){
     // INCLUDES AFRAME JS TAGES ONLY IF IT IS ENABLED.
 
   //
-  $aframe =    get_post_meta($post->ID,"use_aframe",true);
+ $aframe =    get_post_meta($post->ID,"use_aframe",true);
   if(@$aframe == 1){
     //hacks
     $speed = "0.2";
@@ -117,7 +117,7 @@ if(is_front_page()){
 
     <style>
   .a-enter-ar-button{
-            display: none !important;
+         /*   display: none !important;*/
             
         }       
             <?php

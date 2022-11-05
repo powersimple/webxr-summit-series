@@ -47,6 +47,11 @@ var menu_config = {
         'menu_type': 'run-of-show',
         'location': '#run-of-show'
 
+    },
+    'wolviclaunch': {
+        'menu_type': 'run-of-show',
+        'location': '#run-of-show'
+
     }
 }
 function runOfShow(id){

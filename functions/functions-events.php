@@ -43,10 +43,7 @@ function getCalendarInvite($session,$meta,$speaker,$start){
              "speaker"=> $speaker_name,
 
              "email"=> @$speaker['meta']['email'][0],
-             "registration_pending"=>  @$speaker['meta']['registration_pending'],
-             "signed_release"=>  @$speaker['meta']['signed_release'],
-             "calendar_sent"=>  @$speaker['meta']['calendar_sent'],
-             "calendar_confirmed"=>  @$speaker['meta']['calendar_confirmed'],
+            
              
          ];
      } else {
@@ -189,15 +186,31 @@ function replaceScriptVars($script,$session,$meta,$speaker,$start,$green_room_ur
 }
 
 
+
+function event_profile(){
+
+}
+
+
+
+
 function eventIndex($event_menus){
     $event_menus = explode(",",$event_menus);
-    $event_list = [];
-    $sessions_list = [];
-    $company_list = [];
     $title_counter = titleCounterArray();
-    $titles_list = [];
-    $profiles_list = [];
-    $sessions_list = [];
+    
+    $lists = [
+        "event_list" => [],
+        "sessions_list" => [],
+        "company_list" => [],
+        
+        "titles_list" => [],
+        "profiles_list" => [],
+        "profile_companies" => [],
+        "profile_sort" => [],
+        "company_sort" => [],
+        
+
+    ];
     
 
     
@@ -208,26 +221,59 @@ function eventIndex($event_menus){
         $event_list[$event] = get_menu_array($event);
     }
     foreach($event_list as $key => $events){// gets full array
+        
         foreach($events as $e => $event){// gets event_data
           //  var_dump($event);
            // print $event['title'];
            // print "<br>";
-            array_push($sessions_list,$event['title']);
+            array_push($lists['sessions_list'],$event['title']);
 //            print $event['content'];
             
           foreach($event['children'] as $s => $session){// gets event_data
            //     print "-".$session['title'];
-                array_push($sessions_list,$session['title']);
-
+              //  array_push($lists['sessions_list'],$session['title']);
+             
+                 
+            
                 foreach($session['children'] as $s => $profile){// gets event_data
-                    //var_dump($profile);
+                    extract($profile);
+                 //   var_dump($profile);
                 //    print "--".$profile['title'];
-                    $profile_companies = get_post_meta($profile['post']->ID,"company",true);
-                    array_push($profiles_list,$profile['title']);
+                    $lists['profile_companies'] = get_post_meta($profile['post']->ID,"company",true);
+                    array_push($lists['profiles_list'],$profile['title']);
+
+
+                 
+                    $sort_slug = $slug;
+                     
+
+                    if(!@$profile_sort[$slug]){
+                     
+                       
+                        $profile_sort[$slug]=[];//creates array of profile.    
+                        $profile_sort[$slug]['profile'] = $profile;
+                        $profile_sort[$slug]['company'] = get_post_meta($profile['post']->ID,"company",true);
+                        $profile_sort[$slug]['profile_title'] = get_post_meta($profile['post']->ID,"profile_title",true);
+                        $profile_sort[$slug]['sort'] =  @$profile['meta']['sort_name'][0];
+                        $profile_sort[$slug]['events'] = []; 
+                        
+                    }   
+                    $embed_video_url = @$session['meta']['embed_video_url'][0];
+                    array_push($profile_sort[$sort_slug]['events'],  [
+                        "event_id" => $event['ID'],
+                        "event_slug" => $key,
+                        "event_title" => $event['title'],
+                        "session_id" => $session['ID'],
+                        "session_title" => $session['title'],
+                        "session_embed_video_url" => $embed_video_url,
+                        
+
+                        
+                    ]);
+                
                     
 
-
-                    $companies = explode(";",$profile_companies);
+                    $companies = explode(";",$lists['profile_companies']);
 
                     foreach($companies as $c =>$company){
                         if(trim($company) != ''){
@@ -236,7 +282,7 @@ function eventIndex($event_menus){
                             }
 
                             
-                            array_push($company_list,$company);
+                            array_push($lists['company_list'],$company);
                         }
                     }
                     $profile_titles = get_post_meta($profile['post']->ID,"profile_title",true);
@@ -278,93 +324,146 @@ function eventIndex($event_menus){
 
           }
 
+        
         }
+        
+        
+        
         print "<br>";
     }
-    print "<hr>Title Count<hr>";
-    foreach($title_counter as $tc => $title_array){
-        extract($title_array);
-     print "<strong>$tc</strong><br>";
-   // var_dump($title_array['titles']);
-    print "Matched:".implode(" or ",$titles);
-     print "<BR>"; 
-     print "Strict Count $strict_counter<BR>";
-     print "Strict Profiles:<ol>";
-        foreach($strict_counter_profiles as $scp =>$profile){
+    $lists['profile_sort'] = $profile_sort;
+
+
+    
+       return $lists;
+}
+
+function displayProfileIndex($profile_sort){
+   
+    usort($profile_sort, function($a, $b) {
+        return $a['sort'] > $b['sort'];
+    });
+    foreach($profile_sort as $key =>$profile_data){
+        
+        extract($profile_data);
+        print $sort." ".$profile_title.", ".$company;
+
+
+        print "<ul>";
+        foreach($events as $Key=>$event){
+        
+            extract($event);
+            print "<li class='$event_slug'>$event_title | $session_title</li>";
+        }
+        print "</ul>";
+
+
+
+
+
+        // print $key."<BR>";
+        
+        //      print $title;
+
+
+        //print "<BR><BR>";
+
+    }
+}
+
+
+
+function getEventsList($lists){
+  
+    
+    
+    
+        print "<hr>Title Count<hr>";
+        foreach($title_counter as $tc => $title_array){
+            extract($title_array);
+         print "<strong>$tc</strong><br>";
+       // var_dump($title_array['titles']);
+        print "Matched:".implode(" or ",$titles);
+         print "<BR>"; 
+         print "Strict Count $strict_counter<BR>";
+         print "Strict Profiles:<ol>";
+            foreach($strict_counter_profiles as $scp =>$profile){
+                print "<li>".$profile."</li>";
+            }
+    
+    
+         print "</ol><BR>"; 
+         print "Matched Count Count $strict_counter<BR>";
+         print "Matched Profiles<ol>";
+         foreach(array_unique($counter_profiles) as $scp =>$profile){
             print "<li>".$profile."</li>";
         }
-
-
-     print "</ol><BR>"; 
-     print "Matched Count Count $strict_counter<BR>";
-     print "Matched Profiles<ol>";
-     foreach(array_unique($counter_profiles) as $scp =>$profile){
-        print "<li>".$profile."</li>";
-    }
-    print "</ol><BR>";
-
-     print "<hr>";
-
-
-    }
-
-
- //   var_dump($title_counter);
+        print "</ol><BR>";
     
-    print "<hr>Companies<hr><ol>";
-
-    natcasesort($company_list);
-//    $companies =;
-      // var_dump($cdompanies);
-    $counter=1;
-    foreach(array_unique($company_list) as $c => $company){
-       print "<li>$company</li>";
-        $counter++;
-    }
-    print $counter;
-    print "</ol><hr>Sessions<hr><ol>";
-
-    //natcasesort($sessions_list);
-//    $companies =;
-      // var_dump($cdompanies);
-    $counter=1;
-    foreach(array_unique($sessions_list) as $s => $session){
-       print "$session<BR>";
-        $counter++;
-    }
-    print $counter;
-
-
-    print "</ol><hr>Speakers<hr><ol>";
-
-    natcasesort($profiles_list);
-//    $companies =;
-      // var_dump($cdompanies);
-    $counter=1;
-    foreach(array_unique($profiles_list) as $p => $profile){
-       print "<li>$profile</li>";
-        $counter++;
-    }
-    print $counter;
-
-    print "</ol><hr>TITLES<hr>";
-
-    foreach($title_counter as $tc){
-        var_dump($tc);
-    }
-   
-   // var_dump($event_list);
-   natcasesort($titles_list);
-   //    $companies =;
-         // var_dump($cdompanies);
-       $counter=1;
-       foreach(array_unique($titles_list) as $t => $title){
-          print "$title<BR>";
-           $counter++;
-       }
-   
-
+         print "<hr>";
+    
+    
+        }
+    
+    
+     //   var_dump($title_counter);
+        
+        print "<hr>Companies<hr><ol>";
+    
+        natcasesort($company_list);
+    //    $companies =;
+          // var_dump($cdompanies);
+        $counter=1;
+        foreach(array_unique($company_list) as $c => $company){
+           print "<li>$company</li>";
+            $counter++;
+        }
+        print $counter;
+        print "</ol><hr>Sessions<hr><ol>";
+    
+        //natcasesort($sessions_list);
+    //    $companies =;
+          // var_dump($cdompanies);
+        $counter=1;
+        foreach(array_unique($sessions_list) as $s => $session){
+           print "$session<BR>";
+            $counter++;
+        }
+        print $counter;
+    
+    
+        print "</ol><hr>Speakers<hr><ol>";
+    
+        natcasesort($profiles_list);
+    //    $companies =;
+          // var_dump($cdompanies);
+        $counter=1;
+        foreach(array_unique($profiles_list) as $p => $profile){
+           print "<li>$profile</li>";
+            $counter++;
+        }
+        print $counter;
+    
+        print "</ol><hr>TITLES<hr>";
+    
+        foreach($title_counter as $tc){
+            var_dump($tc);
+        }
+       
+       // var_dump($event_list);
+       natcasesort($titles_list);
+       //    $companies =;
+             // var_dump($cdompanies);
+           $counter=1;
+           foreach(array_unique($titles_list) as $t => $title){
+              print "$title<BR>";
+               $counter++;
+           }
 }
+
+
+
+
 
 
 function getRoster($menu){
@@ -1046,6 +1145,7 @@ function get_pedestals($menu){
       return $pedestals;
   }
 
+
   
 function get_nominations($menu){
     $awards = get_menu_array($menu);
@@ -1065,7 +1165,7 @@ function get_nominations($menu){
                     "slug"=>@str_replace("2021-","",$award['slug']),
                     "classes"=>$award['classes'],
                     "coords"=>$award['coords'],
-                    "duration"=>$award['duration'],
+                    "duration"=>@$award['duration'],
                     
                     "nominees" => $award['children'],
                     "meta" => $award['meta']

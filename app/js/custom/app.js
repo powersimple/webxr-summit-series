@@ -102,10 +102,14 @@ function initSite() {
         menu_name = 'prodsummit22'
         event_class = 'production_summit'
         console.log("prod")
-    } 
+    } else if (window.location.pathname == '/event/wolvic-assembling-the-pack/'){
+        menu_name = 'wolviclaunch'
+        event_class = 'wolvic-launch'
+        console.log("wolvic")
+    }  
 
     if(menu_name != false){
-      //  console.log("menu",menu_name,menus[menu_name])
+        console.log("app/menuname menu",menu_name,menus[menu_name])
         var run_of_show = runOfShow(menus[menu_name]);
        console.log("Run of Show",run_of_show)
         //displayRunOfShow(run_of_show)

@@ -3444,3 +3444,10 @@ ul.nominee-list li{
   em{
       font-style:italic;
   }
+.wolvic-event{
+  background: url(images/icons/Wolvic.png) left top no-repeat transparent !important; 
+  padding-left: 30px;
+}
+#megamenu .exo-menu > li.wolvic-event > a.active, #megamenu .exo-menu > li.wolvic-event > a:hover, #megamenu li.drop-down ul > li.wolvic-event > a {
+    background: #009FE1;
+}

@@ -4,7 +4,7 @@ var ros_meta = {
 }
 function runOfShow(menu){
     var show = menu.menu_levels;
-    console.log("MENU",menu)
+    console.log("ROS MENU",show)
     
         if(show.length != undefined){
         
@@ -55,7 +55,7 @@ function displayMeta(){
     var meta = ''
     for(m in ros_meta){
             meta+='<h4>'+m+'</h4>'
-//            console.log("meta",m,ros_meta[m])
+            console.log("meta",m,ros_meta[m])
         for(i=0;i<ros_meta[m].length;i++){
             meta+=ros_meta[m][i].id+'|'+ros[m][i].name+"<br>"
 
@@ -137,7 +137,7 @@ function getProfileCard(this_profile,event_time){
        
         return card;
     } else {
-        console.log("no profile info",this_profile)
+     //   console.log("no profile info",this_profile)
     }
     
 
@@ -237,7 +237,7 @@ function displayRunOfShowList(runOfShow){
                 credential += '<span>'+info.company.trim()+'</span> '
             }
             if(admin == 1){
-                console.log('info',this_profile)
+     //           console.log('info',this_profile)
                 credential+='<a href="/wp-admin/post.php?action=edit&post='+this_profile.object_id+'" target="blank">edit</a>'
                 if(info.email != undefined){
                 credential +=  '|  <span><a href="mailto:'+info.email.trim()+'">'+info.email.trim()+'</a></span> '
@@ -288,7 +288,7 @@ function displayRunOfShowList(runOfShow){
 }
 function displayRunOfShowMonolith(runOfShow){
 
-    console.log(runOfShow)
+   // console.log(runOfShow)
    
     var show = '<h2>'+runOfShow.title+'</h2>'
 
@@ -455,7 +455,7 @@ cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
 
 function displayRunOfShowTable(runOfShow){
 
- //   console.log(runOfShow)
+    console.log("displayROSTable",runOfShow)
    
     var show = '<h2>'+runOfShow.title+'</h2>'
     var now = new Date()
@@ -516,7 +516,12 @@ function displayRunOfShowTable(runOfShow){
             
             sessions += '<div class="col-sm-3 col-md-2">'
             if(tense == 'future'){
-            sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time">'+display_event_time+' </span></h3>'
+            sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time">'
+            if(display_event_time === undefined){
+            }
+                sessions += display_event_time
+           
+            sessions += '</span></h3>'
             } else {
                 if(runOfShow.sessions[n].info.meta.embed_video_url != undefined){
                     sessions += '<a href="#" class="watch video-button" onclick="playVideo(\''+runOfShow.sessions[n].info.meta.embed_video_url+'\')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
@@ -785,11 +790,12 @@ function getProfileList(profiles,format){
                 profile_list += profile_company+' '
             }
             if(twitter_handle !=''){
-                profile_list += twitter_handle
+              //  profile_list += twitter_handle
             }
             if((p <= (profiles.length-1))){   
-                profile_list += '; '
+              //  profile_list += '; '
              }
+             profile_list += '\n'
 
         }
                 
@@ -874,7 +880,7 @@ function displayRunOfShowCards(runOfShow){
             sessions+='<input type="text" value="'+counter_label+'-'+runOfShow.sessions[n].slug+'" size="100"><BR><BR>'
         //    sessions+='<input type="text" value="'+counter_label+' of 21 -'+runOfShow.sessions[n].title+' - WebXR  Production Summit" size="100"><BR><BR>'
         }
-
+        sessions+='<input type="text" value="'+counter_label+'-'+runOfShow.sessions[n].slug+'" size="100"><BR><BR>'
         if(format == 'hd'){
         //   console.log(runOfShow.sessions[n].profiles)
             var profile_twitter = getProfileList(runOfShow.sessions[n].profiles,"twitter")
@@ -882,13 +888,13 @@ function displayRunOfShowCards(runOfShow){
             var profile_list_names = getProfileList(runOfShow.sessions[n].profiles,"names")
             
             var last_names = getProfileList(runOfShow.sessions[n].profiles,"lastnames")
-            var this_title = runOfShow.title+' '+counter_label+' of '+ session_count +' - ' +runOfShow.sessions[n].title
+            var this_title = counter_label+' of '+ session_count +' - ' +runOfShow.sessions[n].title+" - "+runOfShow.title
             var title_with_names = this_title+' with '+profile_list_names.replace(' and ',' & ')
             var title_with_lastnames =this_title+' w/ '+last_names.replace(' and ',', ')
           
           //END SUMMIT
-           //   description = stripHTML(runOfShow.sessions[n].info.content)+'\nThank you to '+profile_list+'\n\nPresented by Powersimple in association with MetaVRse and XRconnectED\nSponsored by Futurewei Technologies'
-             var  description = stripHTML(runOfShow.sessions[n].info.content)+'\n Join '+profile_list+'\nRegister at https://bit.ly/WebXR-Production-Summit-Tix for info on where to watch on stream or network at our community Watch parties across the #Metaverse'
+              description = stripHTML(runOfShow.sessions[n].info.content)+'\nThank you to '+profile_list+'\nWatch now '+runOfShow.sessions[n].info.meta.video_url
+           //  var  description = stripHTML(runOfShow.sessions[n].info.content)+'\nWith  '+profile_list+'\nThe WebXR Summit Series is presented by Powersimple in association with MetaVRse and XR Women - Sponsored by Futurewei Technologies.'
         
         //    console.log('len',title_with_names.length)
             if(title_with_names.length<=100){
@@ -898,24 +904,24 @@ function displayRunOfShowCards(runOfShow){
             } else 
             console.log(last_names)
             
-           sessions+='<input type="text" value="'+this_title+'" size="100">'+this_title.length+' | '+title_with_lastnames.length +'<BR>'
-            sessions+='<textarea cols="100" rows="10">' +description+'</textarea><BR><BR>'
+//           sessions+='<BR><BR><BR><BR><BR><BR><input type="text" value="'+this_title+'" size="100">'+this_title.length+' | '+title_with_lastnames.length +'<BR>'
+  //          sessions+='<textarea cols="100" rows="10">' +description+'</textarea><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>'
 
            console.log("ROS",n,runOfShow.sessions[n].info.meta.video_url)
            
            if(runOfShow.sessions[n].info.meta.video_url != undefined){
           // var linkedin_description = 'Thank you to '+profile_list+' for being part of the discussion "'+runOfShow.sessions[n].title+'" at the WebXR Production Summit'+ stripHTML(runOfShow.sessions[n].info.content)+'\nWatch the video on YouTube:'+runOfShow.sessions[n].info.meta.video_url
-          var linkedin_description = 'Thank you to '+profile_list+' for being part of the discussion "'+runOfShow.sessions[n].title+'" at the WebXR Production Summit'+ stripHTML(runOfShow.sessions[n].info.content)+'\nWatch the video on YouTube:'+runOfShow.sessions[n].info.meta.video_url
+          var linkedin_description = 'Thank you to '+profile_list+' for being part of the discussion "'+runOfShow.sessions[n].title+'" at the WebXR Production Summit'+ stripHTML(runOfShow.sessions[n].info.content)+'\nWatch the video on YouTube: '+runOfShow.sessions[n].info.meta.video_url
         
-            sessions+='LinkedIn <textarea cols="100" rows="10">' +linkedin_description+'</textarea><BR><BR>'
-         
+            sessions+='<BR><BR><BR>LinkedIn <textarea cols="100" rows="12">' +linkedin_description+'</textarea><BR><BR>'
+            var twitter_blurb =  'Thank you '+profile_twitter+' for appearing at the #WebXRProductionSummit hosted by @danieldbryant with @juliesmithso'+ '\nWatch '+runOfShow.sessions[n].title+' '+runOfShow.sessions[n].info.meta.video_url
+            sessions+='<input type="text" value="'+twitter_blurb.length+'" size="100"><br><br>'
+          sessions+='<textarea cols="100" rows="10">' +twitter_blurb+'</textarea><BR><br><BR><br><BR><br><BR><BR><BR><BR><BR>'
+     
        } 
        
     //   var twitter_blurb =  'Thank you to '+profile_twitter+' for being part of the '+runOfShow.sessions[n].info.meta.session_type+' "'+runOfShow.sessions[n].title+'" at the #WebXREducationSummit'+ '\nWatch:'+runOfShow.sessions[n].info.meta.video_url
-       var twitter_blurb =  'Join '+profile_twitter+' for '+runOfShow.sessions[n].title+'" at the #WebXRProductionSummit hosted by @danieldbryant with @juliesmithso'+ '\nRegister Free at https://bit.ly/WebXR-Production-Summit-Tix'
-       sessions+='<input type="text" value="'+twitter_blurb.length+'" size="100"><br><br>'
-     sessions+='<textarea cols="100" rows="10">' +twitter_blurb+'</textarea><BR>'
-
+       
 
 
 
@@ -1081,9 +1087,9 @@ function displayRunOfShowCards(runOfShow){
            }
            sessions += '<a class="rsvp-link" href"https://webxr.events/" target="_new">//webxr.events</a> | '
            sessions += '<a class="rsvp-link" href"https://twitter.com/webxrawards" target="_new">@webxrawards</a> | '
-           sessions += '<a class="rsvp-link" href"https://twitter.com/#webxrsummit" target="_new">#webxrsummit</a>'
+           sessions += '<a class="rsvp-link" href"#" target="_new">#webxrsummit</a>'
            if(format == 'hd'){
-           sessions += ' | <a class="rsvp-link" href"https://bit.ly/WebXRBrandSummit" target="_new">//bit.ly/WebXRBrandSummit</a><br>'
+           sessions += ' | <a class="rsvp-link" href"https://bit.ly/WebXR-Production-Summit" target="_new">//bit.ly/WebXR-Production-Summit</a><br>'
             } 
            sessions += '</span>'
            if(format == 'hd'){
@@ -1093,9 +1099,10 @@ function displayRunOfShowCards(runOfShow){
            }
            
            sessions += '</div>'
-          sessions += '<span class="sponsor-logo futurewei-logo"><a href="https://futurewei.com" target="_new"  title="Futurewei Technologies"><img src="/wp-content/themes/webxrsummits/images/logo/Futurewei-White-shadow.png" alt="Futurewei Technologies Logo"></a>'
-           if(format == 'hd'){
-            sessions += '<span class="sponsor-logo presenters-logo"><a href="https://futurewei.com" target="_new"  title="Futurewei Technologies"><img src="/wp-content/themes/webxrsummits/images/logo/powersimple-metavrse-xrwomen-futurewei.png" alt="Futurewei Technologies Logo"></a>'
+             if(format == 'hd'){
+      sessions += '<span class="sponsor-logo futurewei-logo"><a href="https://futurewei.com" target="_new"  title="Futurewei Technologies"><img src="/wp-content/themes/webxrsummits/images/logo/Futurewei-White-shadow.png" alt="Futurewei Technologies Logo"></a>'
+         
+          sessions += '<span class="sponsor-logo presenters-logo"><a href="#" target="_new"  title="Presenting Partners"><img src="/wp-content/themes/webxrsummits/images/logo/powersimple-metavrse-xrwomen-wide.png" alt="Presenting Partners Logos"></a>'
 
             //sessions += '<span class="presenting-partners">Presenting</span>'
             //sessions += '<span class="series-sponsor">Series Sponsor</span>'

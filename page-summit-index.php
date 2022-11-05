@@ -12,8 +12,26 @@
 
 
 <?php
+
+   $profiles = getProfiles();
+
+ //  indexProfiles($profiles);
+
+
+
     $events = "devsummit21,bizsummit21,designsummit21,edsummit22,brandsummit22,prodsummit22";
-    eventIndex($events);
+    $lists = eventIndex($events);
+
+ 
+
+    
+    
+    displayProfileIndex($lists['profile_sort']);
+
+
+
+
+
 ?>
             </div>
         </div>

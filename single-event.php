@@ -47,7 +47,7 @@ urlParams.set('cards', 'show')
 
 
 
-<main class="main" role="main">
+<main class="main" style="max-width:100% !important;padding:0px !important" role="main">
 
 <?php
     

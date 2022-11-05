@@ -1,12 +1,12 @@
 <?php
     get_header();
-    $section_class = get_post_meta($post->ID,'section_class',true);
+
     //require_once "functions/functions-awards.php";
      // $pedestals = get_pedestals('polys2');
     //    var_dump($pedestals);
       $assets = [];
      
-   $menu = get_menu_array("Polys3");
+   $menu = get_menu_array("SummitsWheel");
    
    $assets3D = [];
 
@@ -23,7 +23,7 @@
 
    
 
-<a-scene gltf-model="dracoDecoderPath: /assets/draco/;" grab-panels item-grab device-set nomination-link anti-drop
+<a-scene gltf-model="dracoDecoderPath: assets/draco/;" grab-panels item-grab device-set nomination-link anti-drop
     device-orientation-permission-ui physics="iterations: 30;"
     inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
     loading-screen="backgroundColor: #12171a" renderer="colorManagement: true; foveationLevel: 2;"
@@ -34,19 +34,19 @@
         <!-- Loads assets -->
         <?php
             
-            include "webxr/polys3/assets.php";
-            include "webxr/polys3/mixins.php";
+            include "webxr/summits22/assets.php";
+            include "webxr/summits22/mixins.php";
         ?>
 
     </a-assets>
     <a-sky src="#sky"></a-sky>
 
     <?php
-            include "webxr/polys3/rigging.php";
-            include "webxr/polys3/lights.php";
+            include "webxr/summits22/rigging.php";
+            include "webxr/summits22/lights.php";
 
 ?>
-<a-entity id="polys3" position="0 0 0" rotation="0 0 0" scale="1 1 1" visible="true">
+<a-entity id="summits-2022" position="0 0 0" rotation="0 0 0" scale="1 1 1" visible="true">
    <!-- <a-entity id="platform-wrap" visible="true" scale="1 1 1" 
     position="0 0 0"
                 rotation="0 0 0">
@@ -66,18 +66,7 @@
                 static-body="shape: box;" 
                 animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 24000; loop: true;"
                 ></a-entity><!-- outer ring -->
-            
-
-                <a-entity id="third-polys" class="center-obj-zone" static-body
-                gltf-model="#the-3rd-polys-webxr-awards-logo3D"  visible="true"
-                scale="3 3 3"
-                position="0 6 -22"
-                rotation="0 20 0"
-                static-body="shape: box;" 
-                animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 24000; loop: true;"
-                ></a-entity>
-
-
+                
 <!--
                 <a-entity id="22SummitsSquareModel" class="center-obj-zone" static-body
                 gltf-model="#22SummitsSquare"  visible="true"
@@ -92,7 +81,7 @@
             <a-entity id="platform-model" class="center-obj-zone" static-body
                 gltf-model="#platform"  visible="true"
                 scale="50 50 50"
-                position="0 -10 85"
+                position="0 -2.5 0"
                 rotation="0 20 0"
                 static-body="shape: box;" 
                 ></a-entity><!-- outer ring -->
@@ -108,9 +97,9 @@
 
 
   <?php
-//            include "webxr/summits22/panels.php";
+            include "webxr/summits22/panels.php";
             if(@$_GET['townhall']){
-  //         include "webxr/summits22/townhall.php";
+          // include "webxr/summits22/townhall.php";
             }
         ?>
         </a-entity><!-- panesls -->
@@ -133,29 +122,6 @@
 
 
 </a-scene>
-
-
-<?php
-?>
-<main role="main" class="main" <?=$section_class?>">
-
-  <section role="region">
-<div class="row">
-<div class="container">
-<div id="nomination-ballot">
- 
-
-
-<?php
-
-  print do_blocks(do_shortcode($post->post_content));
-?>
-</div>
-
-</div>
-</div>
-</section>
-</main>
 <?php
      get_footer();
 ?>
