@@ -72,7 +72,28 @@
         h2 {display:none;} 
     }
 }
+.video-position {
 
+    position:fixed;
+    width: 38%;
+    height: 0px;
+    padding-bottom: 56.25%;
+    background:#000;
+    left: 60%;
+    top:50px;
+    z-index: 100;
+    @media(max-width:767px) {
+        bottom: 48%;
+        width: 100%;
+        margin-left:0;
+        left:0px;
+    }
+    display: inline-table;
+    .video-wrap {
+     //   border: 3px dotted #fff;
+
+    }
+}
 #home-tagline {
     width: 100%;
     min-height:10vh;

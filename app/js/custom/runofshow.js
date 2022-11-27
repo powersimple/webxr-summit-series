@@ -2,9 +2,11 @@
 var ros_meta = {
     timezone: []
 }
+var currentROS = {}
+
 function runOfShow(menu){
     var show = menu.menu_levels;
-    console.log("ROS MENU",show)
+   // console.log("ROS MENU",show)
     
         if(show.length != undefined){
         
@@ -81,7 +83,7 @@ function adjustTimeZone(event_time,timezone){
 
     return card
 }
-function getProfileCard(this_profile,event_time){
+function getProfileCard(this_profile){
     var title = ''
     var card = ''
     var credential = ''
@@ -96,7 +98,7 @@ function getProfileCard(this_profile,event_time){
             
               
                 
-                card+= adjustTimeZone(event_time,timezone)
+               // card+= adjustTimeZone(event_time,timezone)
             } else{
               
                 ros_meta.timezone.push({id:this_profile.object_id,name:this_profile.title})
@@ -184,8 +186,9 @@ function displayRunOfShowList(runOfShow){
         if(session_number<10){
             session_order = '0'+session_number
         }
-        
-
+        if(runOfShow.sessions[n].info.event_info.duration == undefined){
+            runOfShow.sessions[n].info.event_info.duration = 0
+        }
         if(runOfShow.sessions[n].info.event_info.duration != ''){
             duration = parseInt(runOfShow.sessions[n].info.event_info.duration)*60
             event_time = showtime// this passes it below
@@ -289,7 +292,8 @@ function displayRunOfShowList(runOfShow){
 function displayRunOfShowMonolith(runOfShow){
 
    // console.log(runOfShow)
-   
+   currentROS = runOfShow //"creates memory object;
+
     var show = '<h2>'+runOfShow.title+'</h2>'
 
     var showtime = runOfShow.info.event_info.utc_start;
@@ -305,7 +309,10 @@ function displayRunOfShowMonolith(runOfShow){
     for (var n = 0; n < runOfShow.sessions.length; n++) { 
         //console.log("session-info",runOfShow.sessions[n].info,showtime)
         if(runOfShow.sessions[n].info != undefined){
-            
+            if(runOfShow.sessions[n].info.event_info.duration == undefined){
+                runOfShow.sessions[n].info.event_info.duration = 0
+            }
+           // console.log("duration",runOfShow.sessions[n].info.event_info)
             if(runOfShow.sessions[n].info.event_info.duration != ''){
             duration = parseInt(runOfShow.sessions[n].info.event_info.duration)*60
             event_time = showtime// this passes it below
@@ -456,7 +463,9 @@ cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
 function displayRunOfShowTable(runOfShow){
 
     console.log("displayROSTable",runOfShow)
-   
+      currentROS = runOfShow //"creates memory object;
+    var first = 0;
+    var ini
     var show = '<h2>'+runOfShow.title+'</h2>'
     var now = new Date()
     var showtime = runOfShow.info.event_info.utc_start;
@@ -490,14 +499,28 @@ function displayRunOfShowTable(runOfShow){
        
        //
       //  console.log("Suppress list",suppress_event_speaker_list)
+      
 
         //console.log("session-info",runOfShow.sessions[n].info,showtime)
         if(runOfShow.sessions[n].info != undefined){
+
+            if(tense == 'past' && runOfShow.sessions[n].info.meta.embed_video_url == undefined){
+                
+                continue;
+
+            }
+
         //    console.log("Suppress it",runOfShow.sessions[n].title,suppress_event_speaker_list)
              suppress_event_speaker_list = runOfShow.info.meta.suppress_speaker_list
             section_class = ''
              if(runOfShow.sessions[n].info.meta.section_class != undefined){
                 section_class = ''            
+            }
+          //  console.log("duration",runOfShow.sessions[n].info)
+            if(runOfShow.sessions[n].info.event_info === undefined){
+                runOfShow.sessions[n].info.event_info = {}
+            
+                runOfShow.sessions[n].info.event_info.duration = 0
             }
             if(runOfShow.sessions[n].info.event_info.duration != ''){
                 duration = parseInt(runOfShow.sessions[n].info.event_info.duration)*60
@@ -508,11 +531,12 @@ function displayRunOfShowTable(runOfShow){
                 showtime = parseInt(showtime)+duration; //add duration for next 
                 //console.log("duration",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
                     
-                    }
-                // console.log("info not undefined",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
             }
-    //        console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
-            sessions += '<div class="row session '+section_class+'">'
+                // console.log("info not undefined",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
+        
+        //        console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
+   
+            sessions += '<div id="'+runOfShow.sessions[n].info.slug+'"  class="row session '+section_class+'">'
             
             sessions += '<div class="col-sm-3 col-md-2">'
             if(tense == 'future'){
@@ -523,8 +547,11 @@ function displayRunOfShowTable(runOfShow){
            
             sessions += '</span></h3>'
             } else {
-                if(runOfShow.sessions[n].info.meta.embed_video_url != undefined){
-                    sessions += '<a href="#" class="watch video-button" onclick="playVideo(\''+runOfShow.sessions[n].info.meta.embed_video_url+'\')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
+              
+             if(runOfShow.sessions[n].info != undefined){
+          
+            
+            sessions += '<a href="#'+runOfShow.sessions[n].info.slug+'" class="watch video-button" onclick="playSessionVideo(\''+runOfShow.sessions[n].info.meta.embed_video_url+'\',\''+runOfShow.sessions[n].object_id+'\',\'\''+')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
                 }
             }
           //  sessions += '<div class="card-mode">'
@@ -544,36 +571,91 @@ function displayRunOfShowTable(runOfShow){
         sessions+= '</div>'
       
         sessions+= '<div class="col-sm-9 col-md-10">'
-        
+      //  console.log("session_id",runOfShow.sessions[n].object_id)
+        if(runOfShow.sessions[n].info != undefined){
+
         sessions += '<h3 class="session-title ">'+runOfShow.sessions[n].info.title+'</h3>'
       //  sessions += '<h5 class="session-blurb ">'+runOfShow.sessions[n].info.content+'</h3>'
-        if(runOfShow.sessions[n].info.content != undefined){
-
+      
             if(runOfShow.sessions[n].info.content != ''){
                 sessions += '<div class="session-content ">'+runOfShow.sessions[n].info.content+'</div>'
             }
         }
 
 
-    //   
+        //   
 
-    sessions+= '</div>'//time title content
-    sessions+= '</div>'//row
+        sessions+= '</div>'//time title content
+        sessions+= '</div>'//row
         sessions +='<div class="row"><div class="col-12">'//session
 
-            sessions += '<div class="row" class="speaker-list">'
+        sessions += displaySessionProfiles(runOfShow.sessions[n].object_id)
+
+          
+        sessions += '</div>'
+        }
+    }
+    sessions +='</div>'
+    
+    $("#ros-table").html(sessions)
+    playSessionVideo(runOfShow.sessions[first].info.meta.embed_video_url,first,'')
+   
+    if(getUrlParameter('collapse') != 'all'){
+       
+    //    activateAccordion("#ros-accordion")
+    }
+    if(getUrlParameter('cards') == 'show'){
+        $('#ros-accordion').addClass('cards')
+       
+   }
+    
+
+
+
+
+}
+function setSessionByID(id){
+    console.log("ros",id,currentROS)
+    for(var s=0;s<currentROS.sessions.length;s++){
+        if(currentROS.sessions[s].object_id == id){
+
+            return currentROS.sessions[s]
+        }
+
+    }
+
+   
+
+}
+
+
+function displaySessionProfiles(id){ // this shows the speaker list
+ 
+    var session = setSessionByID(id)
+    if(session != undefined){
+    
+  
+   console.log("session",id,session)
+
+
+    var suppress_speaker_list = 0 // session level
+    var suppress_event_speaker_list = 0 //event level
+
+    var suppress_unconfimred_speakers = 0 //session level
+    var suppress_event_unconfimred_speakers = 1 // event level
+   
+   var sessions = '<div class="row" class="speaker-list">'
             width_override = ''
-            
-            if(runOfShow.sessions[n].profiles.length == 5){
+            if(session.profiles.length == 5){
                 width_override = 'fifth'
                 card_size = 1
                 cols='fifth'
-            } else if(runOfShow.sessions[n].profiles.length == 1){
+            } else if(session.profiles.length == 1){
                 width_override = 'presentation'
                 card_size = 2
                 cols='col-sm-6 col-md-3'
 
-            } else if(runOfShow.sessions[n].profiles.length == 2){
+            } else if(session.profiles.length == 2){
                 width_override = 'interview'
                 card_size = 2
                 cols='col-sm-6 col-md-3'
@@ -585,20 +667,21 @@ function displayRunOfShowTable(runOfShow){
 
             }
             //suppress_speaker_list = 0;
-            
-            if(runOfShow.sessions[n].info.meta.suppress_speaker_list != undefined){
-                suppress_speaker_list = runOfShow.sessions[n].info.meta.suppress_speaker_list;
-                
-            }
-            
+            if(session.info != undefined){
 
-        cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
+                if(session.info.meta.suppress_speaker_list != undefined){
+                    suppress_speaker_list = session.info.meta.suppress_speaker_list;
+                    
+                }
+            }
+
+        cell_width = 100/session.profiles.length+'%';
         
-//        console.log("show speakers",show_speakers)
+        //        console.log("show speakers",show_speakers)
         if(suppress_event_speaker_list == 0||show_speakers == 1){
-            for (var p = 0; p < runOfShow.sessions[n].profiles.length; p++) { //speakers
+            for (var p = 0; p < session.profiles.length; p++) { //speakers
                 
-                this_profile = runOfShow.sessions[n].profiles[p]
+                this_profile = session.profiles[p]
              //   console.log('THumb',this_profile.profile,this_profile.profile.thumbnail_url.length)
              
 
@@ -606,7 +689,7 @@ function displayRunOfShowTable(runOfShow){
 
                 // console.log("THIS PROFILE",this_profile)
                     if(this_profile.profile != undefined){
-                        if(this_profile.profile.thumbnail_url.length != 0 || show_unconfirmed_speakers == 1){
+                     //   if(this_profile.profile.thumbnail_url.length != 0 || show_unconfirmed_speakers == 1){} 
                                 sessions += getProfileThumbnail(this_profile,'thumbnail');
                             /*                   if(card_size == 1){
                                 
@@ -625,8 +708,8 @@ function displayRunOfShowTable(runOfShow){
                                 sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title+'</span>'
                                 
                             
-                            sessions += getProfileCard(this_profile,event_time);
-                        } 
+                            sessions += getProfileCard(this_profile);
+                        
                 
                     if(width_override == 'presentation'){
                     sessions += '</div><div class="col-sm-12 col-md-8 talk-blurb">'
@@ -658,34 +741,42 @@ function displayRunOfShowTable(runOfShow){
         }           
            sessions += '</div>'
            sessions += '</div>'
-
-
-           
-
-          
-        sessions += '</div>'
+        return sessions;
     }
-    sessions +='</div>'
- 
-    $("#ros-table").html(sessions)
-
-   
-    if(getUrlParameter('collapse') != 'all'){
-       
-    //    activateAccordion("#ros-accordion")
-    }
-    if(getUrlParameter('cards') == 'show'){
-        $('#ros-accordion').addClass('cards')
-       
-   }
-    
 
 }
 
-function playVideo(src){
-   $("#video-player").attr("src",src)
+function displaySelectedVideoProfiles(profiles){
+    console.log("profiles",profiles);
+    var profile_list
+
+
+    return profile_list;
+}
+
+function playSessionVideo(src,session_id,attrs){
+    console.log("currentROS",currentROS,session_id);
+    var session = setSessionByID(session_id);
+    console.log("session",session);
+    var event_class = currentROS.slug;
+    var event = '<div class="'+currentROS.slug+'" title="'+currentROS.title+'">'+currentROS.title+'</div>'
+    var header = event+'<h4>'+session.title+'</h4>'
+
+
+    var sponsors = '<div class="'+currentROS.slug+'-sponsors" title="'+currentROS.title+' Sponsors"></div>'
+
+    var footer = sponsors+displaySessionProfiles(session_id);
+
+    $("#video-wrap-header").html(header);
+
+    $("#video-wrap-footer").html(footer);
+    console.log(src)
+
+    $("#video-player").attr("src",src)
+
 
 }
+
 
 function getProfileThumbnail(this_profile,size){
    
@@ -861,16 +952,17 @@ function displayRunOfShowCards(runOfShow){
             counter_label = counter;
         }
         if(runOfShow.sessions[n].info != undefined){
-            
-            if(runOfShow.sessions[n].info.event_info.duration != ''){
-            duration = parseInt(runOfShow.sessions[n].info.event_info.duration)*60
-            event_time = showtime// this passes it below
-            display_event_time = localTime(showtime)//converst
-          //  console.log("SHOWTIME",showtime);
-            start_time = showtime
-            showtime = parseInt(showtime)+duration; //add duration for next 
-            //console.log("duration",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
-                
+            if(runOfShow.sessions[n].info.event_info != undefined){
+                if(runOfShow.sessions[n].info.event_info.duration != ''){
+                duration = parseInt(runOfShow.sessions[n].info.event_info.duration)*60
+                event_time = showtime// this passes it below
+                display_event_time = localTime(showtime)//converst
+            //  console.log("SHOWTIME",showtime);
+                start_time = showtime
+                showtime = parseInt(showtime)+duration; //add duration for next 
+                //console.log("duration",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
+                    
+                }
             }
            // console.log("info not undefined",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
         }
@@ -975,9 +1067,9 @@ function displayRunOfShowCards(runOfShow){
             this_profile = runOfShow.sessions[n].profiles[p]
             var show_this = showThisProfile(this_profile);
             if(!show_this){
-                console.log("hide",this_profile.title, runOfShow.sessions[n].card_count)
+             //   console.log("hide",this_profile.title, runOfShow.sessions[n].card_count)
                 runOfShow.sessions[n].card_count--
-                console.log("after hide",this_profile.title, runOfShow.sessions[n].card_count)
+               // console.log("after hide",this_profile.title, runOfShow.sessions[n].card_count)
                 continue;
             }
         }

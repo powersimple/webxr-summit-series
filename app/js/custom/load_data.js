@@ -24,7 +24,7 @@ var posts = {},
     state = {},
     social = {},
     data_loaded = false,
-
+    menus_loaded = false,
     profile_posts = {},
     hardware_posts = {}
 
@@ -53,7 +53,7 @@ function getStaticJSON(filename, callback, dest) {
         url: json_data, // the url
         data: '',
         success: function(data, textStatus, request) {
-            console.log("load json", data);
+            console.log("load "+filename, data);
             //      data_loaded.push(callback);
             return data,
 
@@ -88,12 +88,20 @@ getStaticJSON('menus', setMenus) // returns the tags
 
 getStaticJSON('media', setMedia) // returns the tags
 */
+if (menus_loaded == false) {
+    getStaticJSON('menus', loadMenus) // returns all content
+}
 if (data_loaded == false) {
     getStaticJSON('content', setData) // returns all content
 }
-
+function loadMenus(data){
+   // console.log(data.menus)
+  //  setMenus(data.menus)
+   // initSite()
+    menus_loaded = true;
+}
 function setData(data) { //sets all content arrays
-    // console.log("setData", data)
+     console.log("setData", data)
     posts = setPosts(data.posts)
     pages = setPosts(data.pages)
     profiles = setPosts(data.profile)
@@ -135,9 +143,9 @@ function setData(data) { //sets all content arrays
     setTaxonomy(data, "platform")
     */
 
-
-    setTags(data.tags)
     setMenus(data.menus)
+    setTags(data.tags)
+    
     
         //  setMedia(data.media) media embeded into posts 
     initSite()
@@ -165,6 +173,18 @@ function sort_array (prop, arr) {
         }
     });
     return arr;
+};
+function sort_object (prop, data) {
+    var sorted = [];
+    Object
+    .keys(data).sort(function(a, b){
+        return data[b][prop] - data[a][prop];
+    })
+    .forEach(function(key) {
+        sorted.push(data[key])
+    });
+    console.log("Profiles",sorted)
+    return sorted
 };
 
 

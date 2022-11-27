@@ -82,6 +82,8 @@ $GLOBALS['REST_CONFIG'] =array(//An array of url arguments
             //"platform"=>"fields=id,name,count,slug,description,posts,children&".$GLOBALS['REST_tax_filter'],
             //"industry"=>"fields=id,name,count,slug,description,posts,children&".$GLOBALS['REST_tax_filter'],
             "tags"=>"fields=id,name,slug,posts&".$GLOBALS['REST_tax_filter'],
+            "categories"=>"fields=id,name,slug,posts&".$GLOBALS['REST_tax_filter'],
+            
             "menus"=>"menus",
             "media"=>iterateEndpoint('post_type','media',"fields=id,data&".$GLOBALS['REST_post_filter']),
            // "collaborators"=>"fields=meta_value&".$GLOBALS['REST_post_filter'],
@@ -134,6 +136,8 @@ require_once("functions-wpml-languages.php");
          //  print   $url = $url_path.$key."?".$value; // default, value passes params in REST_CONFIG array
          //  die();  
            $result_array = array();
+        
+           
              foreach($value as $it => $qstring){
                  $url = $url_path.$key."?".$qstring;
                  
@@ -142,6 +146,7 @@ require_once("functions-wpml-languages.php");
                     $api_json = getJSON($url);
                    //var_dump($api_json); 
                     $result_array = json_decode(getJSON($url),true);
+                   
                    
                     
 
@@ -153,19 +158,23 @@ require_once("functions-wpml-languages.php");
                      $this_api_hit = json_decode(getJSON($url),true);
                      foreach($this_api_hit as $nextkey=>$value){
                      array_push($result_array,$value);
-                     }
+                       
+                     } 
+                   
                  }
 
                
              }
+             
 
 
              $content[$key] = $result_array;
-
+             
+            
            } else {
                 $url = $url_path.$key."?".$value; 
                 $content[$key] = json_decode(getJSON($url));
-
+                
            } 
            
 
@@ -184,8 +193,11 @@ require_once("functions-wpml-languages.php");
         }
         if(@$_GET['publish']){
             header('Content-Type: application/json');
+            $menus = json_encode($content['menus'],true);
+            writeJSON($server_path."menus.json",$menus);
+
             $content = json_encode($content,true); // writes the whole shebang into a json packet
-            
+             
             writeJSON($server_path."content.json",$content);
             print $content;
             die();//kills the page load so you can see the endpoint urls

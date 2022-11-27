@@ -80,3 +80,15 @@
     margin-bottom:-5px !important;
     opacity:.8;
 }
+.home-section {
+    position: relative;
+    background: rgba(10, 10, 10,0.9);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain  !important;
+    width: 100%;
+    z-index: 0;
+    height:0px;
+    padding-bottom:20%;
+    margin-top:50px;
+}

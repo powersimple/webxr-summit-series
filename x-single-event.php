@@ -47,7 +47,7 @@ urlParams.set('cards', 'show')
 
 
 
-<main id="main" class="main"  role="main">
+<main class="main" style="max-width:100% !important;padding:0px !important" role="main">
 
 <?php
     
@@ -204,19 +204,14 @@ $events = getChildList($event_id,$post_type,$sort='menu_order');
  </div>
 <?php if($default_video_url != ''){?>
  <div class="container">
-     <div class="video-position">
-            <div class="video-wrap">
-            <div id="video-wrap-header"></div>
+     <div class="row pin-bottom">
+    
+        <div class="video-wrap">
 
-            <div class="video-wrap">
-
-        
-            <iframe id="video-player" src="<?=$default_video_url?>"  frameborder="0" allowfullscreen></iframe>
-                
-            </div> 
-            <div id="video-wrap-footer"></div>
-        </div>
-
+      
+        <iframe id="video-player" src="<?=$default_video_url?>"  frameborder="0" allowfullscreen></iframe>
+            
+        </div> 
     </div>            
 </div>    
 <?php

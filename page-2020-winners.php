@@ -1783,7 +1783,7 @@ Music by Matthew Dear; color:#fff; fontSize:.025;align:center;' material="shader
 
 
     </a-scene>
-    <?php get_foooter();?>
+    <?php get_footer();?>
 
 </body>
 <script>

@@ -51,7 +51,12 @@ var menu_config = {
     'wolviclaunch': {
         'menu_type': 'run-of-show',
         'location': '#run-of-show'
-
+    },
+        'virtual-red-carpet-2': {
+            'menu_type': 'virtual-red-carpet-2',
+            'location': '#virtual-red-carpet-2'
+    
+      
     }
 }
 function runOfShow(id){
@@ -71,7 +76,7 @@ function runOfShow(id){
 
 
 function setMenus(data) {
-    //console.log("raw menu data",data)
+   // console.log("raw menu data",data)
 
     for (var i = 0; i < data.length; i++) {
         menus[data[i].slug] = {}

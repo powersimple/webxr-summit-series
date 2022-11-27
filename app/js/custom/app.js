@@ -1,19 +1,77 @@
+var     last_orientation = '',
+        o = getOrientation()
+
+
+
 jQuery(document).ready(function() {
 
     openDrawer()
     $("body").css("margin-left:0px !important") //RUDE HACK
+    reposition_screen()
+
 });
 $( window ).scroll(function() {
     pinFooter()
 
 })
+function pinFooter(){
+    return false;
+}
+function getOrientation(){
+    
+    
+    o ={}
+    o._w = jQuery(window).width()
+    o._h = jQuery(window).height()
+
+
+
+    if (o._w > o._h) {
+        o.increment = 'vh'
+        o.oriented = 'landscape'
+            // orientation_last = 'horizontal'
+    } else {
+        o.increment = 'vw'
+        o.oriented = 'portrait'
+            //orientation_last = 'vertical'
+    }
+   
+    if(last_orientation != o.oriented){
+        last_orientation = o.oriented
+        console.log("orientation chaaaged to",last_orientation)
+    }
+
+    o.aspect = o._w / o._h
+    
+    console.log("o",o,screen.orientation)
+    
+    return o
+}
+
+
 $(window).resize(function() {
-    pinFooter()
+   
+    reposition_screen()
 
 });
-function pinFooter(){
+
+function reposition_screen() {
+ //   console.clear();
+    o = getOrientation();
+    if(o.oriented == 'landscape'){
+        $("#main").toggleClass("landscape")
+    } 
+    
+
     $('footer').css('bottom','0px')
+  
+    
 }
+
+
+
+
+
 (function() {
     'use strict';
     // this function is strict...
@@ -67,7 +125,7 @@ $('#nomination-ballot').css({ "max-height" :maxHeight})
 var hide_social_icons = getUrlParameter('hide-social-icons')
 var event_class = ''
 function initSite() {
-    console.log("megamenu");
+   // console.log("megamenu");
     megaMenu()
    // sponsorFooter()
 
@@ -101,17 +159,22 @@ function initSite() {
     } else if (window.location.pathname == '/event/webxr-production-summit/'){
         menu_name = 'prodsummit22'
         event_class = 'production_summit'
-        console.log("prod")
+      //  console.log("prod")
     } else if (window.location.pathname == '/event/wolvic-assembling-the-pack/'){
         menu_name = 'wolviclaunch'
         event_class = 'wolvic-launch'
-        console.log("wolvic")
-    }  
+        //console.log("wolvic")
+    
+} else if (window.location.pathname == '/event/the-2nd-polys-webxr-awards/2021-virtual-red-carpet/'){
+    menu_name = 'virtual-red-carpet-2'
+    event_class = 'virtual-red-carpet-2'
+   // console.log("virtual-red-carpet-2")
+}  
 
     if(menu_name != false){
-        console.log("app/menuname menu",menu_name,menus[menu_name])
+     //   console.log("app/menuname menu",menu_name,menus[menu_name])
         var run_of_show = runOfShow(menus[menu_name]);
-       console.log("Run of Show",run_of_show)
+       console.log("Run of Show",menu_name,menus[menu_name])
         //displayRunOfShow(run_of_show)
         var ros_list = getUrlParameter('ros-list')
 

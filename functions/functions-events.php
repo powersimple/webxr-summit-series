@@ -193,7 +193,6 @@ function event_profile(){
 
 
 
-
 function eventIndex($event_menus){
     $event_menus = explode(",",$event_menus);
     $title_counter = titleCounterArray();
@@ -208,8 +207,7 @@ function eventIndex($event_menus){
         "profile_companies" => [],
         "profile_sort" => [],
         "company_sort" => [],
-        
-
+        "ros_list" =>[]
     ];
     
 
@@ -219,28 +217,33 @@ function eventIndex($event_menus){
 
     foreach($event_menus as $key => $event){
         $event_list[$event] = get_menu_array($event);
+      
+     
     }
     foreach($event_list as $key => $events){// gets full array
-        
+  
+       
         foreach($events as $e => $event){// gets event_data
           //  var_dump($event);
            // print $event['title'];
            // print "<br>";
-            array_push($lists['sessions_list'],$event['title']);
+           $lists['ros_list'][$event['slug']] = $key;
+            array_push($lists['event_list'],$event);
 //            print $event['content'];
             
           foreach($event['children'] as $s => $session){// gets event_data
            //     print "-".$session['title'];
               //  array_push($lists['sessions_list'],$session['title']);
              
-                 
+                
             
                 foreach($session['children'] as $s => $profile){// gets event_data
                     extract($profile);
                  //   var_dump($profile);
                 //    print "--".$profile['title'];
                     $lists['profile_companies'] = get_post_meta($profile['post']->ID,"company",true);
-                    array_push($lists['profiles_list'],$profile['title']);
+
+                    array_push($lists['profiles_list'],$profile);
 
 
                  
@@ -250,23 +253,29 @@ function eventIndex($event_menus){
                     if(!@$profile_sort[$slug]){
                      
                        
-                        $profile_sort[$slug]=[];//creates array of profile.    
+                        $profile_sort[$slug]=[];//creates array of profile.
+                        $profile_sort[$slug]['id'] = $profile['post']->ID;
+                       
                         $profile_sort[$slug]['profile'] = $profile;
                         $profile_sort[$slug]['company'] = get_post_meta($profile['post']->ID,"company",true);
                         $profile_sort[$slug]['profile_title'] = get_post_meta($profile['post']->ID,"profile_title",true);
                         $profile_sort[$slug]['sort'] =  @$profile['meta']['sort_name'][0];
+                        $profile_sort[$slug]['slug'] =  @$profile['post']->post_name;
                         $profile_sort[$slug]['events'] = []; 
                         
                     }   
                     $embed_video_url = @$session['meta']['embed_video_url'][0];
                     array_push($profile_sort[$sort_slug]['events'],  [
                         "event_id" => $event['ID'],
-                        "event_slug" => $key,
+                        "event_slug" => $event['slug'],
+                        "event_key"=>$key,
                         "event_title" => $event['title'],
-                        "session_id" => $session['ID'],
-                        "session_title" => $session['title'],
-                        "session_embed_video_url" => $embed_video_url,
                         
+                        "session_id" => $session['post']->ID,
+                        "session_key" => $session['ID'],
+                        "session_title" => $session['title'],
+                        "session_embed_video_url" => @$embed_video_url,
+                        "session_video_url" => @$video_url,
 
                         
                     ]);
@@ -274,7 +283,7 @@ function eventIndex($event_menus){
                     
 
                     $companies = explode(";",$lists['profile_companies']);
-
+                    
                     foreach($companies as $c =>$company){
                         if(trim($company) != ''){
                             if(strpos(trim($company),"The ",0) === 0){ // if starts with the, apppend
@@ -282,7 +291,7 @@ function eventIndex($event_menus){
                             }
 
                             
-                            array_push($lists['company_list'],$company);
+                            array_push($lists['company_list'],trim($company));
                         }
                     }
                     $profile_titles = get_post_meta($profile['post']->ID,"profile_title",true);
@@ -294,7 +303,7 @@ function eventIndex($event_menus){
                             
                            // var_dump($title_array);break;
                             foreach($title_array['titles'] as $titlekey =>$title_match){
-                             //   print strtolower($profi).",".strtolower($title_match)."<BR>";
+                          
                                 if(str_contains(strtolower(trim($title)),strtolower(trim($title_match)))){
 
                                     $title_counter[$tc]['counter']++;
@@ -333,11 +342,54 @@ function eventIndex($event_menus){
     }
     $lists['profile_sort'] = $profile_sort;
 
-
+    $lists['company_list'] = array_unique($lists['company_list']);
+    
+  // $lists['profile_list'] = array_unique($lists['profile_list']);
+    
     
        return $lists;
 }
 
+function sortByLastName($name){
+
+    $parts = explode(" ", $name);
+    if(count($parts) > 1) {
+        $lastname = array_pop($parts);
+        $firstname = implode(" ", $parts);
+        return $lastname.", ".$firstname;
+    }
+    else
+    {
+        return $name;
+    }
+
+    
+}
+
+
+function updateProfileIndex($profile_sort){
+
+    foreach($profile_sort as $key => $profile){
+        extract($profile);
+        if($sort == ''){
+          $id = $profile['post']->ID;
+          $profile['post']->post_title ." $key sort|       ";
+         $name = sortByLastName($profile['post']->post_title);
+        if(!@$_GET['insertsql']){
+       print $id." ".$profile['post']->post_title." ".$name;
+       
+        } else{
+            print "Insert into wp_postmeta(post_id,meta_key,meta_value) values($id". ", 'sort_name','".$name."');";
+        }
+        print "<BR>";
+
+        }
+//        var_dump($profile);
+ 
+    }
+
+
+}
 function displayProfileIndex($profile_sort){
    
     usort($profile_sort, function($a, $b) {

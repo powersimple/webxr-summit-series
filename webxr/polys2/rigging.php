@@ -1,6 +1,6 @@
 <?php
 
-$speed = "1.4";
+$speed = ".5";
 if(@$_GET['speed']){
     $speed = $_GET['speed'];    
 }
@@ -58,11 +58,13 @@ if(@$_GET['camera']){
                     geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
                     material="shader: flat" raycaster="far: 5; objects: .clickable" visible="false"></a-entity>
             </a-entity>
-
-            <a-entity mixin="hand"  oculus-touch-controls="hand: left" hand-controls="hand: left; handModelStyle: highPoly; color: #0055ff"> 
+          
+            
+<a-entity mixin="hand"  oculus-touch-controls="hand: left" hand-tracking-controls="hand: left;modelStyle:mesh;" hand-controls="hand:
+             left; handModelStyle: highPoly; color: #0055ff"> 
              <!-- -->
           <!--  <a-entity fps-counter></a-entity>-->
             </a-entity>
-            <a-entity mixin="hand" oculus-touch-controls="hand: right" hand-controls="hand: right; handModelStyle: highPoly; color: #0055ff"   blink-controls ="cameraRig: #rig;  teleportOrigin: #camera; collisionEntities: .collision; hitCylinderColor: #FF0; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8;landingNormal:0 2 0"  >   
+            <a-entity mixin="hand" oculus-touch-controls="hand: right" hand-tracking-controls="hand: right;modelStyle:mesh;" hand-controls="hand: right; handModelStyle: highPoly; color: #0055ff"   blink-controls ="cameraRig: #rig;  teleportOrigin: #camera; collisionEntities: .collision; hitCylinderColor: #FF0; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8;landingNormal:0 2 0"  >   
             </a-entity>
         </a-entity>

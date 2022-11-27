@@ -1,6 +1,6 @@
 .main{
     max-width: 1280px;
-    margin:100px auto 60vh;
+    margin:0px auto 60vh;
     h1.title{
       
      
@@ -31,6 +31,12 @@
     }
 
 
+}
+#main.landscape{
+    width:54%;
+    left:2%;
+    margin-left:0px;
+    position: relative;
 }
 .light-mode{
     background-color: #f8f8f8;

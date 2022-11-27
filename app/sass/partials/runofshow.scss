@@ -21,6 +21,9 @@
     .session-times {
         display: none;
     }
+    .session-spacer{
+        height:50px;
+    }
     .profile-card {
 
         line-height: 120%;
@@ -902,10 +905,15 @@ color:#fff;
   }
 }
 
-
+.video-wrap{
+    h4{
+        text-align: center;
+    }
+}
 
 
 #schedule{
+}
 
 
     .session-times {
@@ -930,7 +938,7 @@ color:#fff;
     }
     .profile-name {
         font-family: 'Zen Dots';
-        font-size: 1rem;
+        font-size: .75rem;
     }
     .profile-info {
         padding-bottom: 20px;
@@ -956,11 +964,11 @@ color:#fff;
         }
     }
     .profile-name {
-        font-size: 1rem;
+        font-size: .5rem;
         border-bottom: 1px dashed #ccc;
     }
     .credential {
-        font-size: 0.8rem;
+        font-size: 0.5rem;
         line-height: 150%;
 
     }
@@ -984,7 +992,7 @@ color:#fff;
         }
     }
     .session {
-        margin: 20px 0 !important;
+        margin: 50px 0 0px!important;
         border-top: 5px dashed #4173D8;
         padding: 20px 0 !important;
 
@@ -1007,7 +1015,6 @@ color:#fff;
         width: 90%;
         margin-left: 5%;
     }
-}
 
 .twitter i.fa {
     color: #1DA1F2;
@@ -1027,25 +1034,7 @@ a.watch {
         font-size: 36px;
     }
 }
-.pin-bottom {
 
-    position: fixed;
-    width: 60%;
-    height: 25vh;
-    bottom: 0;
-    left: 50%;
-    margin-left: -30%;
-    z-index: 100;
-    @media(max-width:767px) {
-        width: 100%;
-        margin-left: -50%;
-    }
-    display: inline-table;
-    .video-wrap {
-        border: 3px dotted #fff;
-
-    }
-}
 table.segment {
     td {
         vertical-align: middle;

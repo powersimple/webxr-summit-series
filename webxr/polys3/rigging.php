@@ -5,8 +5,8 @@ if(@$_GET['speed']){
     $speed = $_GET['speed'];    
 }
 $cam_x =0;
-$cam_y =0;
-$cam_z =0;
+$cam_y =1.6;
+$cam_z =-3.5;
 if(@$_GET['camera']){
     $cam_coords =  explode("~",$_GET['camera']);
     if(count($cam_coords) == 3){
@@ -53,7 +53,7 @@ if(@$_GET['camera']){
                 
                 position="<?=$cam_x?> <?=$cam_y?> <?=$cam_z?>" 
             
-                rotation="0 0 0"
+                rotation="0 -25 0"
                 
                 >
                 <a-entity id="crosshair" cursor="rayOrigin:mouse" position="0 0 -0.2"

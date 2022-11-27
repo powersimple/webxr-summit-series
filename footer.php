@@ -1,19 +1,11 @@
 <footer class="footer">
-
-
-
-
-
-
-      
-            <div class="row">
-              
+<div class="row">
 
          <div class="partners col-sm-9">
                         <ul >
                         
                         <li><a class="awe" target="_blank"
-                                    href="https://augmentedworldexpo.secure.force.com/BuyTicket?id=7018V000001dCau">AWE EU, Lisbon Oct 20-21</a></li>
+                                    href="https://augmentedworldexpo.secure.force.com/BuyTicket?id=7018V000001dCau">AWE USA 2023, Santa Clara,CA May 31 - June 2</a></li>
                        <!-- <li><a class="gatherverse" target="_blank" href="https://gatherversesummit.com/">Gatherverse MMM Summit Jul 19</a></li>-->
                       
                             
