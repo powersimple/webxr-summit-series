@@ -12,7 +12,7 @@ DO NOT EDIT IN STYLE.CSS
 /*
     PUT YOUR COLOR PALETTE HERE:
 */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;900&display=swap&family=Zen+Dots");
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;900&display=swap&family=Zen+Dots");
 html,
 body,
 div,
@@ -1455,6 +1455,10 @@ body::-webkit-scrollbar-thumb {
   color: #000 !important; }
   .whitebg p, .whitebg li, .whitebg strong {
     color: #000 !important; }
+
+.polys {
+  font-family: "CreamCake";
+  font-size: 125%; }
 
 #nomination-ballot {
   background-color: rgba(0, 0, 0, 0.8);
@@ -3985,7 +3989,8 @@ body {
   display: block;
   max-width: 100%;
   background-color: #000;
-  font: 400 1rem/1.8 'Montserrat', sans-serif; }
+  color: #fff;
+  font: 400 1rem/1.8 'Barlow', sans-serif; }
 
 html {
   overflow-x: hidden; }
@@ -5473,7 +5478,7 @@ Google map
 #bwg_container1_0 #bwg_container2_0 .bwg-container-0.bwg-standard-thumbnails .bwg-title2, #bwg_container1_0 #bwg_container2_0 .bwg-container-0.bwg-standard-thumbnails .bwg-ecommerce2 {
   font-size: 24px !important;
   padding: 12px !important;
-  font-family: "Montserrat", sans-serif !important;
+  font-family: "Barlow", sans-serif !important;
   line-height: 125% !important; }
 
 .bwg-title1 {
@@ -5642,6 +5647,10 @@ div.developer-summit {
 .webxr-production-summit {
   color: #062C73;
   font-family: 'AgencyFB'; }
+
+.metatraversal {
+  color: #ae8376;
+  font-family: 'Goldman'; }
 
 .event-list {
   border-radius: 10px; }
@@ -5861,3 +5870,19 @@ em {
 .row {
   margin-left: 0px;
   margin-right: 0px; }
+
+#countdown {
+  position: absolute;
+  top: 50px; }
+  #countdown .countdown {
+    font-size: .5rem;
+    color: #fff;
+    text-transform: none;
+    font-weight: 100;
+    letter-spacing: 1px; }
+
+span.wpcf7-list-item {
+  display: table-row; }
+
+span.wpcf7-list-item * {
+  display: table-cell; }

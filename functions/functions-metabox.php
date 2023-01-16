@@ -50,7 +50,7 @@ function awards_metabox( $meta_boxes ) {
 	return $meta_boxes;
 	
 }
-add_filter( 'rwmb_meta_boxes', 'awards_metabox' );
+add_filter( 'rwmb_mehttps://hyperfy.io/ta_boxes', 'awards_metabox' );
 
 function section_class( $meta_boxes ) {
 	$prefix = '';
@@ -1183,7 +1183,7 @@ function setProfileEvents( $meta_boxes ) { // this shows the box where the scrap
 
 	return $meta_boxes;
 }
-add_filter( 'rwmb_meta_boxes', 'setProfileEvents' );
+//add_filter( 'rwmb_meta_boxes', 'setProfileEvents' );
 
 function setResourceProperties( $meta_boxes ) { // this shows the box where the scrape and search results
 	$prefix = '';

@@ -12,7 +12,7 @@ DO NOT EDIT IN STYLE.CSS
     PUT YOUR COLOR PALETTE HERE:
 */
     
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;900&display=swap&family=Zen+Dots');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;900&display=swap&family=Zen+Dots');
     @import "partials/reset";
     @import "partials/colors";
     @import "partials/typography";
@@ -61,6 +61,7 @@ DO NOT EDIT IN STYLE.CSS
 //languages
 @import "partials/wpml-languages";
 */
+
 .a-enter-vr-button{
     position:fixed !important;
     right:20px !important;
@@ -221,7 +222,8 @@ DO NOT EDIT IN STYLE.CSS
         display: block;
         max-width:100%; 
         background-color: #000;
-        font: 400 1rem/1.8 'Montserrat', sans-serif;
+        color:#fff;
+        font: 400 1rem/1.8 'Barlow', sans-serif;
     }
     
     html {
@@ -2009,7 +2011,7 @@ Google map
 	
 .bwg-zoom-effect .bwg-zoom-effect-overlay {opacity:100!important}	
 #bwg_container1_0 #bwg_container2_0 .bwg-container-0.bwg-standard-thumbnails .bwg-title1 {opacity:100!important}	
-#bwg_container1_0 #bwg_container2_0 .bwg-container-0.bwg-standard-thumbnails .bwg-title2, #bwg_container1_0 #bwg_container2_0 .bwg-container-0.bwg-standard-thumbnails .bwg-ecommerce2 {font-size: 24px!important; padding: 12px!important; font-family: "Montserrat", sans-serif!important; line-height:125%!important}	
+#bwg_container1_0 #bwg_container2_0 .bwg-container-0.bwg-standard-thumbnails .bwg-title2, #bwg_container1_0 #bwg_container2_0 .bwg-container-0.bwg-standard-thumbnails .bwg-ecommerce2 {font-size: 24px!important; padding: 12px!important; font-family: "Barlow", sans-serif!important; line-height:125%!important}	
 .bwg-title1 {background: rgba(47,32,105, 0.3);}	
 .bwg-title1:hover {background: rgba(124, 113, 170, 0.9);}	
 .webvr-ui-button {display:none}	
@@ -2221,7 +2223,10 @@ transform: scale(0.5) translate(-100%, -100%);
     color:$production_summit;
     font-family: 'AgencyFB';
 }
-
+.metatraversal{
+    color:$metatraversal;
+    font-family: 'Goldman';
+}
 
 
 
@@ -2482,3 +2487,17 @@ ul.nominee-list li{
     margin-left:0px;
     margin-right:0px;
 }
+#countdown{
+    position: absolute;
+    top:50px;
+    .countdown{
+       // font-family: 'AgencyFB';
+        font-size:.5rem;
+        color:#fff;
+        text-transform: none;
+        font-weight:100;
+        letter-spacing:1px;
+    }
+}
+span.wpcf7-list-item { display: table-row; }
+span.wpcf7-list-item * { display: table-cell; }

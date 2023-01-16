@@ -1173,11 +1173,20 @@ position="0 <?=$title_y?> 0"
 }
 
 function get_pedestals($menu){
-    $awards = get_menu_array($menu);
+    $ros = get_menu_array($menu);
       $pedestals = [];
-      
-     foreach($awards as $key =>$award){
+     
+
+
+
+
+     foreach($ros as $key =>$event){
+        foreach($event['children'] as $key =>$award){
+
+
     
+
+
 
         if($award['coords'] !=''){
           array_push($pedestals,[
@@ -1194,6 +1203,7 @@ function get_pedestals($menu){
           ]);
         }
       }// var_dump($pedestals); die();
+     }
       return $pedestals;
   }
 

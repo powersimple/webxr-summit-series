@@ -22,6 +22,7 @@ require_once("functions/functions-metabox.php");
 	require_once("functions/functions-rest-register.php");
 	require_once("functions/functions-rest-taxonomy.php");
 	require_once("functions/functions-navigation.php");
+	require_once("functions/functions-custom-menu-admin.php");
 	require_once("functions/functions-entities.php");	
 	require_once("functions/functions-publish.php");   
 	require_once("functions/parsers.php");

@@ -90,7 +90,7 @@
 
        //vendor is the stylesheet rendered 
 
-       wp_register_script('vendor',get_stylesheet_directory_uri() . '/vendor.js', array('jquery'),rand(100000,999999), true); 
+       wp_register_script('vendor',get_stylesheet_directory_uri() . '/vendor.min.js', array('jquery'),rand(100000,999999), false); 
 
        wp_enqueue_script('vendor');
 

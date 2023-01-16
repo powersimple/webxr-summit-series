@@ -20,7 +20,7 @@
 
 //devsummit21,bizsummit21,designsummit21,edsummit22,brandsummit22,prodsummit22,metatraversal4,metatraversal,
 
-$events = "devsummit21,bizsummit21,designsummit21,edsummit22,brandsummit22,prodsummit22,metatraversal4,metatraversal,wolviclaunch,virtual-red-carpet-2";
+$events = "devsummit21,bizsummit21,designsummit21,edsummit22,brandsummit22,prodsummit22,metatraversal4,metatraversal1,metatraversal4,metatraversal3,wolviclaunch,virtual-red-carpet-2";
 $lists = eventIndex($events);
     
     if(@$_GET['publish-index']){

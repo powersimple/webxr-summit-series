@@ -112,7 +112,6 @@
          //var_dump()
               add_post_meta($new_post,$v,$event[$v]);
         }
-        die();
 
       /*  $new_post = wp_insert_post( $new_post,$wp_error = false );
         global $wpdb;

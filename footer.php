@@ -12,7 +12,8 @@
                         <!-- <li><a target="_blank" class="awe" href="https://www.awexr.com/usa-2021/auggie/">
                                     Auggies Nomination Deadline September 8</a></li>-->
                             
-                                    <li><a class="vrara" target="_blank" href="https://www.immerseglobalnetwork.com/">Immerse Global Summit - Miami Dec 5-7</a></li>
+                                    <li><a class="threelbxr" target="_blank" href="https://www.3lbxr.com/">3lbXR</a></li>
+                                    <li><a class="vartisans" target="_blank" href="https://vartisans.com/">VARTISANS</a></li>
                                     <li><a target="_blank" class="futurewei" href="https://futurewei.com/">Futurewei
                                     Technologies</a></li>
 

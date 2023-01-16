@@ -71,9 +71,15 @@ if(is_front_page()){
         $summit_square_model = $_GET['summit_model'];
     }
 
+    $aframe_version="1.3.0";
+    if(@$_GET['aframe-version']){
+      $aframe_version=$_GET['aframe-version'];
+
+    }
+
 ?>
 
-<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+<script src="https://aframe.io/releases/<?=$aframe_version?>/aframe.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r134/examples/js/deprecated/Geometry.js"></script>
 <script src="/assets/js/aframe-extras.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
@@ -81,6 +87,7 @@ if(is_front_page()){
     <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js">
     </script>
     <script src="/assets/js/aframe-look-controls.js"></script>
+    <script src="https://unpkg.com/aframe-orbit-controls@1.3.0/dist/aframe-orbit-controls.min.js"></script>
 
 
 -    <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
@@ -97,7 +104,7 @@ if(is_front_page()){
 
     <style>
   .a-enter-ar-button{
-         /*   display: none !important;*/
+           display: none !important;/* */
             
         }       
             <?php
@@ -210,8 +217,12 @@ if (location.protocol !== 'https:') {
 
     $thumbnail =getThumbnail(get_post_thumbnail_id($post->ID),"Full");
           }
+
+         
       ?>
-     
+      
+
+
   </script>
   <link rel="stylesheet" type="text/css" media="print" href="<?=get_stylesheet_directory_uri()?>/print.css">
 </head>
@@ -240,10 +251,16 @@ if (location.protocol !== 'https:') {
                   
             </div>
             <div id="menu"></div>
-        
+            <div id="countdown">
+              <div id="polyscountdown" class="countdown"></div>
+              
+            </div>
             <div id="main-menu"></div>
             <div id="social-menu">
-      <a href="https://twitter.com/webxrawards" target="_blank"
+
+            
+
+            <a href="https://twitter.com/webxrawards" target="_blank"
                 class="fa fa-twitter" title="Follow us on Twitter"></a>
             <a href="https://www.instagram.com/webxrawards/" target="_blank" class="fa fa-instagram"
                 title="Follow us on Instagram"></a>
@@ -255,6 +272,7 @@ if (location.protocol !== 'https:') {
             <a href="https://discord.gg/T5vRuM5cDS" class="fa discord" target="_blank"
                 title="Join our community Discord"></a>
         </div>
+        
       </div>  
     
 </header>

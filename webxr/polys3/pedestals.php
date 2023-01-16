@@ -1,4 +1,8 @@
 
+    
+
+
+
     <?php
    
 
@@ -42,7 +46,7 @@
         <a-entity 
         gltf-model="#pedestal"
         class="table" static-body="shape: box;" 
-        position="0 0.3 0"
+        position="0 0 0"
         rotation="0 17.5 0"
         scale="0.25 0.25 0.25" id="pedestal-<?=$pedestal['slug']?>"  
         material="shader: standard; metalness: 0.8;"  
@@ -56,8 +60,8 @@
                 </a-entity>-->
 
                         <?php if(!@$_GET['hidelabels']){?> 
-                <a-entity troika-text='value:<?=$title?>; color:#f5f5f5; align:center; color:#fff; fontSize:.08;align:center;maxWidth:0.8'
-                    material="shader: standard; metalness: 0.8;" position="0 0.01 0.01" rotation="0 0 0">
+                <a-entity troika-text='value:<?=$title?>; color:#f5f5f5; align:center; color:#fff; fontSize:.08;align:center;maxWidth:0.8;font:/wp-content/themes/webxrsummits/fonts/AGENCYB.ttf'
+                    material="shader: standard; metalness: 0.8;" position="0 -0.25 0.01" rotation="0 0 0">
                 </a-entity>
             <a-plane height="0.3" width="0.55" position="0 0 0.005"
                 material="side: double; color: #333333; transparent: false; opacity: 1; roughness:1;" side="double" visible="false">
@@ -73,9 +77,7 @@
 
 
         <!--TROPHY-->
-        <a-entity id="<?=$pedestal['slug']?>-grab" class="clickable center-obj-zone" dynamic-body="shape: box; mass: 2"
-            position="0 1.28 0" mixin="obj" rotation="0 -75 0" scale="0.25 0.25 0.25" gltf-model="#2nd-polys-trophy"></a-entity>
-
+        <a-entity id="<?=$pedestal['slug']?>-grab" class="clickable center-obj-zone" dynamic-body="shape: box; mass: 2" position="0 1.28 0" mixin="obj" rotation="0 -75 0" scale="0.25 0.25 0.25" gltf-model="#trophy"></a-entity>
 
  <!--NOMINATIONs WRAPPER-->
         <a-entity id="nominations" rotation="0 0 0" position="0 30 -200" scale="30 30 30" shadow >
@@ -83,7 +85,7 @@
                 <a-entity id="<?=$pedestal['slug']?>-title" class="art-text" mixin="table-label" position="0 0 0" color="white"
                     width="2.5" rotation="0 0 0" text="value:;wrapCount:50 ">
 
-                    <a-entity troika-text='value:<?=$pedestal['title']?>; color:#f5f5f5; align:center; color:#fff; fontSize:.5;align:center;'
+                    <a-entity troika-text='value:<?=$pedestal['title']?>; color:#f5f5f5; align:center; color:#fff; fontSize:.5;align:center;font:/wp-content/themes/webxrsummits/fonts/AGENCYB.ttf'
                     material="shader: standard; metalness: 0.8;" position="0 2 0" rotation="0 0 0">
                 </a-entity>
                   <?php
@@ -99,10 +101,10 @@
 
         $counter = 0;                
         foreach($nominees as $n => $nomination){
-            
-            if ((@$nomination['classes'][0] == 'presenter')){
-                continue;
+            if ((@$nomination['classes'][0] == '')){
+              //  continue;
             }
+            
             $winner=0;
             if ((@$nomination['classes'][0] == 'winner')){
                 $winner=1;
@@ -120,6 +122,16 @@
 
      <a-entity  id="<?=$nomination['slug']?>-card" class="center-obj-zone"  <?=getCoords(explode(" ",$px))?>>
             <?php
+            if ((@$nomination['classes'][0] == 'presenter')){
+                // continue;
+                  ?>
+                  <a-entity id="label-<?=$nomination['slug']?>" troika-text='value:Presented by; color:#f5f5f5;  color:#fff; 
+  fontSize:.125;align:center; anchor:center;'material="shader: standard; metalness: 0.8;" rotation="0 0 0" position="0 -0.6 0"> </a-entity>
+  
+  
+  <?php
+  
+              }
 
             if( $laurel_id = @$nomination['meta']['laurel'][0]){
                 
@@ -190,7 +202,15 @@ fontSize:.2;align:left; anchor:left;'material="shader: standard; metalness: 0.8;
                             
                                 <?php
                                 
+                                foreach($nominee['children'] as $o => $subnominee){ //nominee
+                                    $y=$y-.3;
+                                    ?>
+                                     <a-entity troika-text='value: <?=$subnominee['title'] ?> ; color:#f5f5f5; align:center; color:#fff; fontSize:.15;align:center;'
+                            material="shader: standard; metalness: 0.8;" position="0 <?=$y?> 0" rotation="0 -0.1 0"></a-entity>
 
+<?php
+
+                                }
 
                                 $y=$y-.3;
                                     }
@@ -233,6 +253,9 @@ fontSize:.2;align:left; anchor:left;'material="shader: standard; metalness: 0.8;
 <script>
 
 
+
+
+
 AFRAME.registerComponent("item-grab", {
     init: function () {
         sceneEl = document.querySelector('a-scene');
@@ -263,6 +286,8 @@ AFRAME.registerComponent("item-grab", {
             })
            
         }
+     
+    
 <?php
         foreach($pedestals as $key=>$pedestal){
             extract($pedestal);
@@ -270,7 +295,7 @@ AFRAME.registerComponent("item-grab", {
         grabtrig("<?=$pedestal['slug']?>-grab", "<?=$pedestal['slug']?>-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
         <?php
         
-
+/*
 
         foreach($nominees as $n => $nomination){
 
@@ -283,7 +308,7 @@ AFRAME.registerComponent("item-grab", {
             } 
         }
 
-
+*/
 
 
 

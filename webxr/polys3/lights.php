@@ -5,104 +5,38 @@
 
 
 
-<a-light id="white-d1" type="directional" color="white" intensity="5" position="0 10 100" rotation="0 180 0" angle="90"></a-light>
+<a-light id="white-d1" type="point" color="white" intensity="1" position="5 -7 100" rotation="0 180 0" angle="90"></a-light>
 
  
 
 
-<a-light id="white-d2" type="directional" color="white" intensity="5" position="-100 10 0" rotation="90 -90 0" angle="90"></a-light>
+<a-light id="white-d2" type="directional" color="white" intensity="3" position="-100 10 0" rotation="90 -90 0" angle="90"></a-light>
 
 
-<a-light id="white-d3" type="directional" color="white" intensity="5" position="100 10 0" rotation="-90 90 0" angle="90"></a-light>
+<a-light id="white-d3" type="directional" color="white" intensity="3" position="100 10 0" rotation="-90 90 0" angle="90"></a-light>
 
-<a-light id="white-d4" type="spot" color="white" intensity="30" angle="180" position="0 10 -100" rotation="0 0 0" angle="90"></a-light>
-
-
-
-
-<a-light id="white-d5" type="directional" color="white" intensity="5" position="9.5 -31 5.2" rotation="-90 90 0" angle="90"></a-light>
+<a-light id="white-d4" type="point" color="white" intensity="3" angle="50" position="16 -20 70" rotation="14 -13 -15" angle="90"></a-light>
 
 
 
-<a-light id="white-d6" type="directional" color="purple" intensity="5" position="0 10 50" rotation="0 180 0" angle="90"></a-light>
 
- 
-
-
-<a-light id="white-d7" type="directional" color="red" intensity="5" position="-50 10 0" rotation="90 -90 0" angle="90"></a-light>
-
-
-<a-light id="white-d8" type="directional" color="green" intensity="5" position="-50 10 50" rotation="-90 90 0" angle="90"></a-light>
-
-<a-light id="white-d9" type="spot" color="blue" intensity="30" angle="180" position="50 10 -50" rotation="0 0 0" angle="90"></a-light>
-
+<a-light id="white-d5" type="directional" color="white" intensity="1" position="9.5 -31 5.2" rotation="-90 90 0" angle="90"></a-light>
 
 <!--
 
+<a-light id="white-d6" type="directional" color="purple" intensity="5" position="0 10 50" rotation="0 180 0" angle="90"></a-light>-->
+
+ 
 
 
-
-<a-light id="green1" type="point" intensity="1" position="0 -120 10" rotation="0 0 0" angle="90"></a-light>
-<a-light id="red1" type="point" color="#900" color="#090" intensity="1" position="-25 -80 -10" rotation="0 0 0" angle="90"></a-light>
-<a-light id="blue1" type="point" color="#009" intensity="1" position="24 -80 -10" rotation="0 0 0" angle="90"></a-light>
+<a-light id="red-d7" type="directional" color="red" intensity="5" position="-50 10 0" rotation="90 -90 0" angle="90"></a-light>
 
 
-<a-light id="yellow1" type="point" color="#Ff0" intensity="1" position="0 -140 100" rotation="0 0 0" angle="90"></a-light>
+<a-light id="yellow-d8" type="spot" color="yellow" intensity="30" position="-7 3 8" rotation="76.5 -35 -0" angle="80"></a-light>
 
-<a-light id="purple1" type="point" color="909" intensity="1" position="0 100 10" rotation="0 0 0" angle="90"></a-light>
+<a-light id="white-d8" type="spot" color="white" intensity="30" position="12 0.520 15" rotation="80 -9 0" angle="80"></a-light>
 
-
-
-
-
-<a-light id="yellow1" type="spot" color="#fff" intensity="15" position="0 5 30" rotation="-90 0 0" angle="90"></a-light>
+<a-light id="blue-d9" type="spot" color="blue" intensity="0 " angle="180" position="50 10 -50" rotation="0 0 0" angle="90"></a-light>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-       
-        <a-light type="spot" color="blue" intensity="1" position="15 -4.5 10"></a-light>
-
-
-<a-light type="spot" color="blue" intensity="1" position="15 -4.5 10"></a-light>
-
-
-        <a-light type="spot" color="green" intensity="1" position="0 -4.5 4"></a-light>
-        <a-light type="spot" color="green" intensity="1" position="0 -4.5 10"></a-light>
-
-        <a-light type="spot" color="blue" intensity="1" position="0 4.5 4"></a-light>
-        <a-light type="spot" color="blue" intensity="1" position="0 4.5 10"></a-light>
-       
-
-        <a-light id="light-left" intensity=".6" position="-10 3 -5" rotation="0 0 0"></a-light>
-        <a-light id="light-back" color="white" intensity=".5" position="-10 3 -5" rotation="0 0 0"></a-light>
-       
-        <a-light id="light-right" type="point" color="white" intensity=".5" position="15 4.5 -6" rotation="0 0 0">
-        <a-light id="light-back" type="point" color="white" intensity=".5" position="0 3 -15" rotation="0 0 0">
-        </a-light>
-        <a-light id="light-front" type="point" color="white" intensity=".6" position="0 3 5" rotation="0 0 0"></a-light>
-
-
-        <a-light id="L1" type="point" color="#606" intensity="1" position="0 -4.5 -4"></a-light>
-        <a-light id="L2" type="point" color="#606" intensity="1" position="0 -4.5 10"></a-light>
-
-       
-        <a-light id="L4" type="point" color="#900" intensity="1" position="0 4.5 -4"></a-light>
-        <a-light id="L4" type="point" color="#900" intensity="1" position="0 4.5 -10"></a-light>
-
-
-
-
-        <a-light id="light-side" type="point" color="#d00" intensity="1" position="-35 10 -15" rotation="0 0 0">
-        </a-light>  -->
 </a-entity>

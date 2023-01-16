@@ -8,8 +8,18 @@ jQuery(document).ready(function() {
     openDrawer()
     $("body").css("margin-left:0px !important") //RUDE HACK
     reposition_screen()
-
+    setCountdown()
 });
+
+function setCountdown(){
+  
+    $('#polyscountdown').countdown('2023/03/05 17:00:00 ', function(event) {
+        $(this).html(event.strftime('The show starts in %D Days %Hh %Mm'));
+      });
+    /*  $('#nominationcountdown').countdown('2023/01/01', function(event) {
+        $(this).html(event.strftime('%D Days %Hh %Mm to the Nomination Deadline'));
+      });*/
+}
 $( window ).scroll(function() {
     pinFooter()
 
