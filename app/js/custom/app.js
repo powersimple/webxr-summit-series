@@ -13,7 +13,7 @@ jQuery(document).ready(function() {
 
 function setCountdown(){
   
-    $('#polyscountdown').countdown('2023/03/05 17:00:00 ', function(event) {
+    $('#polyscountdown').countdown('2024/03/03 17:00:00 ', function(event) {
         $(this).html(event.strftime('The show starts in %D Days %Hh %Mm'));
       });
     /*  $('#nominationcountdown').countdown('2023/01/01', function(event) {

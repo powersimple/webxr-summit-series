@@ -27,7 +27,7 @@ if($post->post_parent==0){
 ?>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
-<section class="home-section home-parallax home-fade home-full-height" id="home" style="background:url(<?=$hero_image?>) center center no-repeat;background-size:cover;">
+<section class="home-section home-parallax home-fade " id="home" style="background:url(<?=$hero_image?>) top center no-repeat;background-size:contain;padding-bottom:25%;">
     
     </section>
 
@@ -55,16 +55,44 @@ if($post->post_parent==0){
 
   <section class="module" id="<?php echo @$slug?>" role="region">
     <div class="row">
-      <div class="container">
+      <div>
       
         <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-offset-1 col-10 ">
        
       <?php 
 
-          $awards = get_nominations('polys2');
-          nomineeAccordion($awards);
+print do_blocks(do_shortcode($post->post_content));
 
-          print do_blocks(do_shortcode($post->post_content));
+       
+
+          $awards = get_menu_array('polys2');
+
+
+          print "<hr><div>";
+          foreach($awards as $key => $award){// outer menu loop
+            
+            foreach($award['children'] as $c =>$child){// EVENTS loop
+              if($child['classes'][0] == 'nomination' || $child['classes'][0] == 'honor'){
+                
+                print '<h3 class="nomination-category">'.$child['title'].'</h3>';
+                print "<ul class='nominee-list'>";
+                get_nomination($child['children'],0);//recursive nominees loop
+                print "</ul>";
+                print '<hR>';
+              }
+
+            }
+
+          }
+          print "</div>";
+          
+
+
+
+//          print("<pre>".print_r($awards,true)."</pre>");
+//          nomineeAccordion($awards);
+
+          
         ?>
         
           </div>  

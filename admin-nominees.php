@@ -227,7 +227,7 @@ function getNomineeCards($awards){
 
 
             
-            </div>
+            </div>";
 
 
 

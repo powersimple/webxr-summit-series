@@ -13,7 +13,7 @@ jQuery(document).ready(function() {
 
 function setCountdown(){
   
-    $('#polyscountdown').countdown('2023/03/05 17:00:00 ', function(event) {
+    $('#polyscountdown').countdown('2024/03/03 17:00:00 ', function(event) {
         $(this).html(event.strftime('The show starts in %D Days %Hh %Mm'));
       });
     /*  $('#nominationcountdown').countdown('2023/01/01', function(event) {
@@ -1414,7 +1414,7 @@ function getStaticJSON(filename, callback, dest) {
     // local absolute path to the REST API + routing arguments
     //data_path is configured in header.php
     var json_data = data_path + filename + ".json"
-        //console.log("data_path", data_path)
+      //  console.log("data_path", data_path)
         // console.log("jsonfile", json_data);
     jQuery.ajax({
         url: json_data, // the url
@@ -2023,6 +2023,7 @@ function getMegaMenu(items, parent_classes) {
             ulclass = this_item.classes + '-ul'
 
         }
+        console.log(items);
     
 
         if (this_item.classes != undefined) {

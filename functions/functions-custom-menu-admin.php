@@ -1,154 +1,92 @@
 <?php
 
+/*
+
+	CUSTOM MENU META: event_length_seconds
 
 
-function custom_menu_field($var_name,$long_name,$slug){
+*/
+
+
+
+
+function kia_custom_fields_event_length_seconds( $item_id, $item,$label ) {
+
+		
+	if($item->object == 'event'){
+
+wp_nonce_field( '_event_length_seconds_nonce', '_event_length_seconds_nonce_name' );
+$_event_length_seconds = get_post_meta( $item_id, '_event_length_seconds', true );
+?>
+<div class="field-_event_length_seconds description-wide" style="margin: 5px 0;">
+<span class="description"><?php _e( "Duration (in seconds)", 'event_length_seconds' ); ?></span>
+<br />
+
+<input type="hidden" class="nav-menu-id" value="<?php echo $item_id ;?>" />
+
+<div class="logged-input-holder">
+<!-- -->
+
+
+<input type="text" name="_event_length_seconds[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>" size="40" value="<?php echo esc_attr( $_event_length_seconds ); ?>" />
+
+</div>
+
+</div>
+
+<?php
+}
+}
+
+
+
+
+function kia_nav_update_event_length_seconds( $menu_id, $menu_item_db_id ) {
+
+// Verify this came from our screen and with proper authorization.
+if ( ! isset( $_POST['_event_length_seconds_nonce_name'] ) || ! wp_verify_nonce( $_POST['_event_length_seconds_nonce_name'], '_event_length_seconds_nonce' ) ) {
+return $menu_id;
+}
+
+if ( isset( $_POST['_event_length_seconds'][$menu_item_db_id]  ) ) {
+$sanitized_data = $_POST['_event_length_seconds'][$menu_item_db_id];
+update_post_meta( $menu_item_db_id, '_event_length_seconds', $sanitized_data );
+} else {
+delete_post_meta( $menu_item_db_id, '_event_length_seconds' );
+}
+}
+
+
 
 
 /**
-* Add custom fields to menu item
+* Displays text on the front-end.
 *
-* This will allow us to play nicely with any other plugin that is adding the same hook
-*
-* @param  int $item_id 
-* @params obj $item - the menu item
-* @params array $args
+* @param string   $title The menu item's title.
+* @param WP_Post  $item  The current menu item.
+* @return string      
 */
-   $args = ['var_name'=>$var_name];
+function kia_custom_menu_title_event_length_seconds( $title, $item) {
 
+if( is_object( $item ) && isset( $item->ID ) ) {
 
-       
-    
-    add_action( 'wp_nav_menu_item_custom_fields', function($item_id, $item){
-        
-         wp_nonce_field( '_'.$var_name.'_nonce', '_'.$var_name.'_nonce_name' );
-        $meta_value = get_post_meta( $item_id, '_'.$var_name, true );
-        ?>
-        <div class="field-<?=$var_name?> description-wide" style="margin: 5px 0;">
-            <span class="description"><?php _e( ucfirst($var_name),$var_name ); ?></span>
-            <br />
-    
-            <input type="hidden" class="nav-menu-id" value="<?php echo $item_id ;?>" />
-    
-            <div class="logged-input-holder">
-                <input type="text" name="<?=$var_name?>[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>" size="40" value="<?php echo esc_attr( $meta_value ); ?>" />
-              
-            </div>
-    
-        </div>
-    
-        <?php
+$_event_length_seconds = get_post_meta( $item->ID, '_event_length_seconds', true );
 
-    
-},10, 2 );
-    
-    /**
-    * COORDINATESave the menu item meta
-    * 
-    * @param int $menu_id
-    * @param int $menu_item_db_id	
-    */
-    function nav_update( $menu_id, $menu_item_db_id ) {
-    
-        // Verify this came from our screen and with proper authorization.
-        if ( ! isset( $_POST['_'.$var_name.'_nonce_name'] ) || ! wp_verify_nonce( $_POST['_'.$var_name.'_nonce_name'], $var_name.'_nonce' ) ) {
-            return $menu_id;
-        }
-    
-        if ( isset( $_POST['_'.$var_name][$menu_item_db_id]  ) ) {
-            $sanitized_data = $_POST[$var_name][$menu_item_db_id];
-            update_post_meta( $menu_item_db_id, '_'.$var_name, $sanitized_data );
-        } else {
-            delete_post_meta( $menu_item_db_id, '_'.$var_name );
-        }
-    }
-    add_action( 'wp_update_nav_menu_item', 'nav_update', 10, 2 );
-    
-    
-    
-    /**
-    * Displays text on the front-end.
-    *
-    * @param string   $title The menu item's title.
-    * @param WP_Post  $item  The current menu item.
-    * @return string      
-    */
-    function custom_menu_title( $title, $item ) {
-    
-        if( is_object( $item ) && isset( $item->ID ) ) {
-    
-            $meta_value = get_post_meta( $item->ID, '_'.$var_name, true );
-    
-            if ( ! empty( $meta_value ) ) {
-                $title .= ' - ' . $meta_value;
-            }
-        }
-        return $title;
-    }
-    add_filter( 'nav_menu_item_title', 'custom_menu_title', 10, 2 );
-    
-    
-   
-    
-    
-
+if ( ! empty( $_event_length_seconds ) ) {
+$title .= ' - ' . $_event_length_seconds;
 }
-custom_menu_field('length','Length','length');
+}
+return $title;
+}
+/*
 
+add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_event_length_seconds', 10,3);
+add_action( 'wp_update_nav_menu_item', 'kia_nav_update_event_length_seconds', 10, 2 );
+add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_event_length_seconds', 10, 2 );
 
+*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* COORDINATES*/
 
 
 function kia_custom_fields_coords( $item_id, $item ) {
@@ -157,7 +95,7 @@ function kia_custom_fields_coords( $item_id, $item ) {
 	$_coords = get_post_meta( $item_id, '_coords', true );
 	?>
 	<div class="field-_coords description-wide" style="margin: 5px 0;">
-	    <span class="description"><?php _e( "Coordinates", 'coordinates' ); ?></span>
+	    <span class="description"><?php _e( "WebXR Coordinates", 'coordinates' ); ?></span>
 	    <br />
 
 	    <input type="hidden" class="nav-menu-id" value="<?php echo $item_id ;?>" />
@@ -223,6 +161,113 @@ add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_coords', 10, 2 );
 
 
 
+
+
+
+
+
+
+
+
+
+/* offset*/
+
+
+function kia_custom_fields_offset( $item_id, $item ) {
+
+	wp_nonce_field( '_offset_nonce', '_offset_nonce_name' );
+	$_offset = get_post_meta( $item_id, '_offset', true );
+	?>
+	<div class="field-_offset description-wide" style="margin: 5px 0;">
+	    <span class="description"><?php _e( "Item Offset", 'coordinates' ); ?></span>
+	    <br />
+
+	    <input type="hidden" class="nav-menu-id" value="<?php echo $item_id ;?>" />
+
+	    <div class="logged-input-holder">
+	        <input type="text" name="_offset[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>" size="40" value="<?php echo esc_attr( $_offset ); ?>" />
+	      
+	    </div>
+
+	</div>
+
+	<?php
+}
+add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_offset', 10, 2 );
+
+/**
+* COORDINATESave the menu item meta
+* 
+* @param int $menu_id
+* @param int $menu_item_db_id	
+*/
+function kia_nav_update_offset( $menu_id, $menu_item_db_id ) {
+
+	// Verify this came from our screen and with proper authorization.
+	if ( ! isset( $_POST['_offset_nonce_name'] ) || ! wp_verify_nonce( $_POST['_offset_nonce_name'], '_offset_nonce' ) ) {
+		return $menu_id;
+	}
+
+	if ( isset( $_POST['_offset'][$menu_item_db_id]  ) ) {
+		$sanitized_data = $_POST['_offset'][$menu_item_db_id];
+		update_post_meta( $menu_item_db_id, '_offset', $sanitized_data );
+	} else {
+		delete_post_meta( $menu_item_db_id, '_offset' );
+	}
+}
+add_action( 'wp_update_nav_menu_item', 'kia_nav_update_offset', 10, 2 );
+
+
+
+/**
+* Displays text on the front-end.
+*
+* @param string   $title The menu item's title.
+* @param WP_Post  $item  The current menu item.
+* @return string      
+*/
+function kia_custom_menu_title_offset( $title, $item ) {
+
+	if( is_object( $item ) && isset( $item->ID ) ) {
+
+		$_offset = get_post_meta( $item->ID, '_offset', true );
+
+		if ( ! empty( $_offset ) ) {
+			$title .= ' - ' . $_offset;
+		}
+	}
+	return $title;
+}
+add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_offset', 10, 2 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 
 	CUSTOM MENU META: guest_type
@@ -235,7 +280,7 @@ add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_coords', 10, 2 );
 function kia_custom_fields_guest_type( $item_id, $item,$label ) {
 
 		
-	if($item->object == 'profile'){
+	if($item->object == 'profile' || $item->object == 'resource'){
 
 wp_nonce_field( '_guest_type_nonce', '_guest_type_nonce_name' );
 $_guest_type = get_post_meta( $item_id, '_guest_type', true );
@@ -250,9 +295,19 @@ $_guest_type = get_post_meta( $item_id, '_guest_type', true );
 <!-- -->
 
 
-<select size="7" name="_guest_type[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>">
+<select size="8" name="_guest_type[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>">
 <option value=""<?=selectedOption("",esc_attr($_guest_type ))?>></option>
-		<option value="moderator"<?=selectedOption("moderator",esc_attr($_guest_type ))?>>Moderator</option>
+	<option value="award-presenter"<?=selectedOption("award-presenter",esc_attr($_guest_type ))?>>Award-Presenter</option>
+	<option value="interviewee"<?=selectedOption("interviewee",esc_attr($_guest_type ))?>>Interviewee</option>
+	<option value="host"<?=selectedOption("host",esc_attr($_guest_type ))?>>Host</option>
+	<option value="nominee"<?=selectedOption("nominee",esc_attr($_guest_type ))?>>Nominee</option>
+
+	<option value="honoree"<?=selectedOption("honoree",esc_attr($_guest_type ))?>>Honoree</option>
+	<option value="nominated-experience"<?=selectedOption("nominated-experience",esc_attr($_guest_type ))?>>Nominated experience</option>
+	
+	<option value="special-guest"<?=selectedOption("special-guest",esc_attr($_guest_type ))?>>Special Guest</option>
+			
+		<!--<option value="moderator"<?=selectedOption("moderator",esc_attr($_guest_type ))?>>Moderator</option>
 		<option value="panelist"<?=selectedOption("panelist",esc_attr($_guest_type ))?>>Panelist</option>
 		<option value="presenter"<?=selectedOption("presenter",esc_attr($_guest_type ))?>>Presenter</option>
 		<option value="interviewee"<?=selectedOption("interviewee",esc_attr($_guest_type ))?>>Interviewee</option>
@@ -260,10 +315,9 @@ $_guest_type = get_post_meta( $item_id, '_guest_type', true );
 		<option value="co-host"<?=selectedOption("co-host",esc_attr($_guest_type ))?>>Co-Host</option>
 
 
-		<option value="award-presenter"<?=selectedOption("award-presenter",esc_attr($_guest_type ))?>>Award-Presenter</option>
 
 		<option value="nominee"<?=selectedOption("nominee",esc_attr($_guest_type ))?>>Nominee</option>
-		
+	-->
 		
 
 
@@ -356,18 +410,29 @@ $_event_type = get_post_meta( $item_id, '_event_type', true );
 
 <select size="7" name="_event_type[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>">
 <option value=""<?=selectedOption("",esc_attr($_event_type ))?>></option>
-		<option value="summit"<?=selectedOption("summit",esc_attr($_event_type ))?>>Summit</option>
+	
+	
+	
+		<option value="nomination-category"<?=selectedOption("nomination-category",esc_attr($_event_type ))?>>Nomination Category</option>
+		<option value="honors-presentation"<?=selectedOption("honors-presentationn",esc_attr($_event_type ))?>>Honors Presentation</option>
+		<option value="red-carpet-interview"<?=selectedOption("red-carpet-interview",esc_attr($_event_type ))?>>Red Carpet Interview</option>
+		<option value="special-feature"<?=selectedOption("special-feature",esc_attr($_event_type ))?>>Special Feature</option>
+		<option value="sponsor-segment"<?=selectedOption("sponsor-segment",esc_attr($_event_type ))?>>Sponsor Segment</option>
+		<option value="keynote"<?=selectedOption("keynote",esc_attr($_event_type ))?>>Keynote</option>
+		<option value="welcome"<?=selectedOption("welcome",esc_attr($_event_type ))?>>Welcome</option>
+		<option value="thanks"<?=selectedOption("thanks",esc_attr($_event_type ))?>>Thanks</option>
+		<option value="credits"<?=selectedOption("credits",esc_attr($_event_type ))?>>Credits</option>
+		<option value="checkin"<?=selectedOption("checkin",esc_attr($_event_type ))?>>Watch Party Check-in</option>
+		
+		
+
+		<!--Summmits -->
+
+	<!--	<option value="summit"<?=selectedOption("summit",esc_attr($_event_type ))?>>Summit</option>
 		<option value="panel"<?=selectedOption("panel",esc_attr($_event_type ))?>>Panel</option>
 		<option value="presentation"<?=selectedOption("presentation",esc_attr($_event_type ))?>>Presentation</option>
 		<option value="interview"<?=selectedOption("interview",esc_attr($_event_type ))?>>Interview</option>
-		<option value="case-study"<?=selectedOption("case-study",esc_attr($_event_type ))?>>Case Study</option>
-	
-	
-		<option value="award-presentation"<?=selectedOption("award-presentation",esc_attr($_event_type ))?>>Award Presentation</option>
-		<option value="special-feature"<?=selectedOption("special-feature",esc_attr($_event_type ))?>>Special Feature</option>
-		<option value="keynote"<?=selectedOption("keynote",esc_attr($_event_type ))?>>Keynote</option>
-		<option value="welcome"<?=selectedOption("welcome",esc_attr($_event_type ))?>>Welcome</option>
-	
+		<option value="case-study"<?=selectedOption("case-study",esc_attr($_event_type ))?>>Case Study</option>-->
 
 
 </select>
@@ -422,14 +487,144 @@ $title .= ' - ' . $_event_type;
 return $title;
 }
 
-
+/*
 add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_event_type', 10,3);
 add_action( 'wp_update_nav_menu_item', 'kia_nav_update_event_type', 10, 2 );
 add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_event_type', 10, 2 );
 
+*/
+/*
+
+
+CUSTOM MENU META: Edit link
+
+
+*/
+
+
+function kia_custom_fields_edit_link( $item_id, $item,$label ) {
+	if($item->object != 'custom'){
+?>
+
+<hr>
+        <a target="_new" style="font-size:125%;font-weight:bold;" href="/wp-admin/post.php?action=edit&post=<?=$item->object_id?>">Edit <?=$item->type_label?> <?=$item->title?></a>
+<?php
+	}
+}
+add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_edit_link', 10,3);
 
 
 
+/*
+
+
+CUSTOM MENU META: appearance_type
+
+
+*/
+
+
+function kia_custom_fields_appearance_type( $item_id, $item,$label ) {
+
+    if($item->object == 'event'){
+        
+        ?>
+
+        <hr>
+        <a target="_new" style="font-size:125%;font-weight:bold;" href="/wp-admin/post.php?action=edit&post=<?=$item->object_id?>">Edit <?=$item->type_label?> <?=$item->title?></a>
+    </hr>
+    <?php
+    }
+                    if($item->object == 'profile'){
+        $item->menu_class = "fred";
+    wp_nonce_field( '_appearance_type_nonce', '_appearance_type_nonce_name' );
+    $_appearance_type = get_post_meta( $item_id, '_appearance_type', true );
+    
+    ?>
+    <div class="field-_appearance_type description-wide" style="margin: 5px 0;">
+        <hr>
+                        <a target="_new" style="font-size:125%;font-weight:bold;" href="/wp-admin/post.php?action=edit&post=<?=$item->object_id?>">Edit <?=$item->type_label?> <?=$item->title?></a>
+                    </hr>
+
+<!--	-->		<span class="description"><?php _e( "Appearance Type $item_id", 'appearance_type' ); ?></span>
+        <br />
+
+        <input type="hidden" class="nav-menu-id" value="<?php echo $item_id ;?>" />
+
+        <div class="logged-input-holder">
+            <!-- -->
+                
+        
+            <select size="6" name="_appearance_type[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>">
+            <option value=""<?=selectedOption("",esc_attr($_appearance_type ))?>></option>
+            
+                        <option value="inperson"<?=selectedOption("inperson",esc_attr($_appearance_type ))?>>In Person | Main Stage</option>
+						<option value="maybe"<?=selectedOption("maybe",esc_attr($_appearance_type ))?>>In Person Maybe</option>
+                        <option value="liveremote"<?=selectedOption("liveremote",esc_attr($_appearance_type ))?>>Live Remote</option>
+                        <option value="prerecorded"<?=selectedOption("prerecorded",esc_attr($_appearance_type ))?>>Prerecorded</option>
+						<option value="scatter"<?=selectedOption("scatter",esc_attr($_appearance_type ))?>>In Person | Scatter</option>
+						
+						<option value="vipzoom"<?=selectedOption("vipzoom",esc_attr($_appearance_type ))?>>VIP Zoom</option>
+						
+                       
+
+
+            </select>
+        
+
+        </div>
+
+    </div>
+
+    <?php
+}
+}
+
+
+
+function kia_nav_update_appearance_type( $menu_id, $menu_item_db_id ) {
+
+    // Verify this came from our screen and with proper authorization.
+    if ( ! isset( $_POST['_appearance_type_nonce_name'] ) || ! wp_verify_nonce( $_POST['_appearance_type_nonce_name'], '_appearance_type_nonce' ) ) {
+        return $menu_id;
+    }
+
+    if ( isset( $_POST['_appearance_type'][$menu_item_db_id]  ) ) {
+        $sanitized_data = $_POST['_appearance_type'][$menu_item_db_id];
+        update_post_meta( $menu_item_db_id, '_appearance_type', $sanitized_data );
+    } else {
+        delete_post_meta( $menu_item_db_id, '_appearance_type' );
+    }
+}
+
+
+
+
+/**
+* Displays text on the front-end.
+*
+* @param string   $title The menu item's title.
+* @param WP_Post  $item  The current menu item.
+* @return string      
+*/
+function kia_custom_menu_title_appearance_type( $title, $item) {
+
+    if( is_object( $item ) && isset( $item->ID ) ) {
+
+        $_appearance_type = get_post_meta( $item->ID, '_appearance_type', true );
+
+        if ( ! empty( $_appearance_type ) ) {
+            $title .= ' - ' . $_appearance_type;
+        }
+    }
+    return $title;
+}
+
+/*
+add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_appearance_type', 10,3);
+add_action( 'wp_update_nav_menu_item', 'kia_nav_update_appearance_type', 10, 2 );
+add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_appearance_type', 10, 2 );
+*/
 
 /*
 
@@ -476,14 +671,19 @@ add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_event_type', 10, 2 );
 				<!-- -->
 					
 			
-				<select size="10" name="_confirmation_status[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>">
+				<select size="8" name="_confirmation_status[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>">
 				<option value=""<?=selectedOption("",esc_attr($_confirmation_status ))?>></option>
 				<option value="needs-invite"<?=selectedOption("needs-invite",esc_attr($_confirmation_status ))?>>Needs Invitation</option>
 			
 							<option value="team"<?=selectedOption("team",esc_attr($_confirmation_status ))?>>Team</option>
 							<option value="invited"<?=selectedOption("invited",esc_attr($_confirmation_status ))?>>Invited</option>
 							<option value="agreed"<?=selectedOption("agreed",esc_attr($_confirmation_status ))?>>Agreed</option>
-							<option value="agreed-with-conditions"<?=selectedOption("-with-condition",esc_attr($_confirmation_status ))?>>Agreed With Conditions</option>
+							<option value="scheduled-prepcall"<?=selectedOption("scheduled-prepcall",esc_attr($_confirmation_status ))?>>Scheduled Prepcall</option>
+							<option value="prepcall-completed"<?=selectedOption("prepcall-completed",esc_attr($_confirmation_status ))?>>Prep Call Completed</option>
+							<option value="prerecord-edit-complete"<?=selectedOption("prerecord-edit-complete",esc_attr($_confirmation_status ))?>>Prerecord Edit Complete</option>
+							<option value="complete" <?=selectedOption("complete",esc_attr($_confirmation_status ))?>>Confirmed and Complete</option>
+
+							<!--<option value="agreed-with-conditions"<?=selectedOption("-with-condition",esc_attr($_confirmation_status ))?>>Agreed With Conditions</option>
 							
 							<option value="registered" <?=selectedOption("registered",esc_attr($_confirmation_status ))?>>Registration Complete</option>
 							<option value="registered-no-release" <?=selectedOption("registered-no-release",esc_attr($_confirmation_status ))?>>Registered No Release</option>
@@ -496,12 +696,12 @@ add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_event_type', 10, 2 );
 
 							<option value="calendar-sent-no-release" <?=selectedOption("calendar-sent-no-release",esc_attr($_confirmation_status ))?>>Calendar Sent No Release</option>
 							<option value="confirmed-no-release" <?=selectedOption("confirmed-no-release",esc_attr($_confirmation_status ))?>>Confirmed Calendar No Release</option>
+					
 
 
+							<option value="prerecord" <?=selectedOption("prerecord",esc_attr($_confirmation_status ))?>>Session Prerecorded</option>	-->
 
-							<option value="prerecord" <?=selectedOption("prerecord",esc_attr($_confirmation_status ))?>>Session Prerecorded</option>
-							<option value="complete" <?=selectedOption("complete",esc_attr($_confirmation_status ))?>>Confirmed and Complete</option>
-
+							
 
 				</select>
 			
@@ -559,11 +759,11 @@ add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_event_type', 10, 2 );
 		return $title;
 	}
 
-
+/*
 	add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_confirmation_status', 10,3);
 	add_action( 'wp_update_nav_menu_item', 'kia_nav_update_confirmation_status', 10, 2 );
 	add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_confirmation_status', 10, 2 );
-
+*/
 /*
 
 	CUSTOM MENU META: point_of_contact

@@ -163,7 +163,7 @@ $invitation_statuses = [
 if(@$_GET['calendar']){
     print "<a href='?'>Invite mode</a>";
 } 
- else if  {
+ else if (@$_GET['follow-up']) {
     print "<a href='?follow-up=1'>Followup mode</a>";
 } else {
     print "<a href='?calendar=1'>Calendar mode</a>";
@@ -242,6 +242,10 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
         $display_session_counter = "0".$session_counter;
     }}
     $duration = @$session['meta']['duration'][0]." Minutes";
+    $duration = @$session['meta']['event_length_seconds'][0]." seconds";
+    
+
+
 //    var_dump($session);
     $session_type = @$session['event_type'];
     if($session_type ==  ''){
@@ -433,7 +437,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
     
                 
                 $session_type='Interview';
-                $session_script = $interview_script;
+                $session_script = @$interview_script;
                    
                         if(@$moderator == $speaker_name){
     
@@ -446,7 +450,7 @@ foreach($ros as $i =>$item){ // this is the top level of the event itself
                         }
                     
                     
-                    $script = $interview_script;
+                    $script = @$interview_script;
 
             }
           

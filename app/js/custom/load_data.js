@@ -47,7 +47,7 @@ function getStaticJSON(filename, callback, dest) {
     // local absolute path to the REST API + routing arguments
     //data_path is configured in header.php
     var json_data = data_path + filename + ".json"
-        //console.log("data_path", data_path)
+      //  console.log("data_path", data_path)
         // console.log("jsonfile", json_data);
     jQuery.ajax({
         url: json_data, // the url

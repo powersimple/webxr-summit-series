@@ -992,7 +992,7 @@ blockquote {
 #logo {
   position: relative;
   width: 260px;
-  background-image: url(images/logo/Polys-SummitsLogo.png); }
+  background: url(images/logo/PolysLogo.png) no-repeat; }
   @media (min-width: 768px) {
     #logo {
       top: -15px; } }
@@ -3677,6 +3677,24 @@ table.segment .meta {
   background: #e7e7e7;
   color: #333; }
 
+.ros-table, .ros-table table {
+  width: 100%; }
+  .ros-table th, .ros-table table th {
+    font-size: 75%; }
+  .ros-table .session-title td, .ros-table table .session-title td {
+    text-decoration: underline;
+    color: #ff0; }
+  .ros-table .session-container, .ros-table table .session-container {
+    border-top: 1px dashed #999; }
+
+.the-3rd-polys-virtual-red-carpet {
+  border: 3px solid #900;
+  padding: 5px; }
+
+.the-3rd-polys {
+  border: 3px solid #009;
+  padding: 5px; }
+
 #cards {
   position: absolute;
   left: 0; }
@@ -5766,9 +5784,6 @@ div.developer-summit {
   margin: 0px auto;
   display: block; }
 
-#ballot {
-  margin-top: 70px; }
-
 #ballot-faq {
   height: 350px;
   overflow-y: auto;
@@ -5886,3 +5901,129 @@ span.wpcf7-list-item {
 
 span.wpcf7-list-item * {
   display: table-cell; }
+
+.nomination-category {
+  font-size: 200%;
+  text-align: center;
+  color: #f1c40f;
+  text-shadow: 2px 2px 2px #000;
+  font-family: 'AgencyFB'; }
+
+.nomination-thumbnail {
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  margin-left: 15px;
+  display: block; }
+
+li.nominee {
+  display: block;
+  clear: both; }
+  li.nominee a {
+    display: inline-block;
+    vertical-align: middle; }
+  li.nominee span {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 175%;
+    margin-right: 10px;
+    vertical-align: middle;
+    font-family: 'AgencyFB';
+    color: #fff; }
+  li.nominee img {
+    margin: 10px 1em 1em 18px; }
+
+li.nominee-credit {
+  display: inline-block;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  padding-right: 5px;
+  font-size: 80%; }
+
+h4.presenter {
+  display: block;
+  font-size: 0.75em;
+  line-height: 76px;
+  margin-bottom: 1em;
+  color: #ccc; }
+  h4.presenter img {
+    float: left;
+    margin-right: 1em;
+    margin-bottom: 1em; }
+
+td.nominee-info a.nominee {
+  font-size: 200%; }
+  td.nominee-info a.nominee :hover {
+    color: #fff;
+    text-decoration: underline; }
+
+.nominee-image {
+  background: url(images/icons/minilaurel.png) no-repeat -1px 4px;
+  background-size: contain;
+  width: 110px !important;
+  height: 100px !important;
+  display: block;
+  padding-left: 1px; }
+
+.winner::before {
+  content: "WINNER";
+  text-align: center;
+  color: #fff;
+  display: block;
+  font-weight: bold;
+  margin-left: 37px; }
+
+.winner2020 {
+  background: url(images/icons/minipoly.png) center center no-repeat;
+  background-size: contain;
+  height: 100px; }
+
+.winner {
+  background: url(images/icons/minipoly.png) center center no-repeat;
+  background-size: contain;
+  width: 29px;
+  height: 100px; }
+
+.choice {
+  text-align: center;
+  vertical-align: middle;
+  width: 50px; }
+
+#ballot input[type=submit] {
+  border: 2px outset #ccc;
+  border-radius: 5px;
+  background: rgba(0, 0, 104, 0.7);
+  color: #ff0; }
+  #ballot input[type=submit] :hover {
+    color: #006;
+    background: rgba(200, 200, 0, 0.7); }
+
+#ballot table {
+  width: 100%; }
+
+#ballot td.nominee span {
+  display: block; }
+
+#ballot th {
+  text-align: center; }
+
+#ballot input[type=radio] {
+  width: 100%;
+  height: 2em;
+  cursor: pointer; }
+
+.checked {
+  background: rgba(0, 96, 0, 0.5);
+  border: 3px outer #0c0; }
+
+.nom-cat {
+  border: 1px solid #ff0;
+  padding: 10px; }
+
+#noms-list .nominee-image {
+  background: url(images/icons/minilaurel.png) no-repeat 1px -3px;
+  background-size: contain;
+  width: 110px !important;
+  height: 100px !important;
+  display: block;
+  padding-left: 1px; }

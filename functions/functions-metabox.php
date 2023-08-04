@@ -92,11 +92,16 @@ function profile_info( $meta_boxes ) {
 	$meta_boxes[] = array(
 		'id' => 'profile_info',
 		'title' => esc_html__( 'Profile Info', 'metabox-online-generator' ),
-		'post_types' => array('profile' ),
+		'post_types' => array('profile','resource' ),
 		'context' => 'side',
 		'priority' => 'default',
 		'autosave' => 'false',
 		'fields' => array(
+			array(
+				'id' => 'is_company',
+				'type' => 'is_company',
+				'name' => esc_html__( 'Is Company/Org', 'metabox-online-generator' ),
+			),
 			array(
 				'id' => 'profile_title',
 				'type' => 'text',
@@ -181,6 +186,11 @@ function setProfileURL( $meta_boxes ) { // this shows the box were
                 'id'   => $prefix . 'PhD',
 			),
 			array(
+				'id' => 'is_company',
+				'type' => 'checkbox',
+				'name' => esc_html__( 'Is Company/Org', 'metabox-online-generator' ),
+			),
+			array(
 				'id' => 'company',
 				'type' => 'text',
 				'name' => esc_html__( 'Company', 'metabox-online-generator' ),
@@ -217,6 +227,11 @@ function setProfileURL( $meta_boxes ) { // this shows the box were
 				'name' => esc_html__( 'Twitter URL', 'omniscience-profiler' ),
 			),
 			array(
+				'id' =>  'github',
+				'type' => 'url',
+				'name' => esc_html__( 'Github', 'omniscience-profiler' ),
+			),
+			array(
 				'id' =>  'facebook',
 				'type' => 'url',
 				'name' => esc_html__( 'Facebook URL', 'omniscience-profiler' ),
@@ -245,7 +260,7 @@ function setProfileURL( $meta_boxes ) { // this shows the box were
 			[
                 'type' => 'textarea',
                 'name' => esc_html__( 'resources', 'online-generator' ),
-                'id'   => $prefix . 'blurb',
+                'id'   => $prefix . 'resources',
             ],
 			[
                 'type' => 'textarea',
@@ -322,11 +337,7 @@ function setProfileURL( $meta_boxes ) { // this shows the box were
 				),
 
 
-					array(
-					'id' =>  'GitHub',
-					'type' => 'url',
-					'name' => esc_html__( 'Github', 'omniscience-profiler' ),
-				),
+				
 				array(
 					'id' =>  'medium',
 					'type' => 'url',
@@ -484,7 +495,7 @@ function selectHeroImage( $meta_boxes ) {
 	$meta_boxes[] = array(
 		'id' => 'hero',
 		'title' => esc_html__( 'Hero Image', 'metabox-online-generator' ),
-		'post_types' => array('post', 'page','resource','profile','guide' ),
+		'post_types' => array('post', 'page','event','resource','profile','guide' ),
 		'context' => 'side',
 		'priority' => 'default',
 		'autosave' => 'false',
@@ -493,6 +504,12 @@ function selectHeroImage( $meta_boxes ) {
 				'id' => $prefix . 'hero',
 				'type' => 'image_advanced',
 				'name' => esc_html__( 'Hero Image', 'metabox-online-generator' ),
+				'desc' => esc_html__( '', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => $prefix . 'page-background',
+				'type' => 'image_advanced',
+				'name' => esc_html__( 'Page Background', 'metabox-online-generator' ),
 				'desc' => esc_html__( '', 'metabox-online-generator' ),
 			),
 		),
@@ -673,6 +690,17 @@ function siteProperties3D( $meta_boxes ) {
 				'attributes' => array(),
 			),
 			array(
+				'id' => 'world_model',
+				'type' => 'image_advanced',
+				'name' => esc_html__( 'World Model', 'metabox-online-generator' ), 
+				'desc' => esc_html__( 'World Model', 'metabox-online-generator' ),
+				'force_delete' => true,
+				'max_file_uploads' => '1',
+				'options' => array(),
+				'attributes' => array(),
+			),
+			
+			array(
 				'id' => 'logo_3D',
 				'type' => 'image_advanced',
 				'name' => esc_html__( '3D Event Logo', 'metabox-online-generator' ), 
@@ -702,6 +730,17 @@ function siteProperties3D( $meta_boxes ) {
 				'options' => array(),
 				'attributes' => array(),
 			),
+			array(
+				'id' => 'furniture',
+				'type' => 'image_advanced',
+				'name' => esc_html__( 'Furniture (other 3d Models)', 'metabox-online-generator' ), 
+				'desc' => esc_html__( 'This is to upload additional 3D Models', 'metabox-online-generator' ),
+				'force_delete' => true,
+				'max_file_uploads' => '20',
+				'options' => array(),
+				'attributes' => array(),
+			),
+			
 
 
 
@@ -954,6 +993,43 @@ function eventSponsor( $meta_boxes ) {
 	return $meta_boxes;
 }
 //add_filter( 'rwmb_meta_boxes', 'eventSponsor' );
+function eventScripts( $meta_boxes ) {
+	$prefix = '';
+
+	$meta_boxes[] = array(
+		'id' => 'event_scripts',
+		'title' => esc_html__( 'Event Scripts', 'metabox-online-generator' ),
+		'post_types' => array('event'),
+		
+		'priority' => 'high',
+		'autosave' => 'false',
+		'fields' => [
+			[
+                'type' => 'url',
+                'name' => esc_html__( 'Script URL', 'online-generator' ),
+                'id'   => $prefix . 'script_url',
+			],
+			
+		
+			[
+                'type' => 'wysiwyg',
+                'name' => esc_html__( 'Host Script', 'online-generator' ),
+                'id'   => $prefix . 'event_host_script',
+            ],
+			[
+                'type' => 'wysiwyg',
+                'name' => esc_html__( 'Linked In Post', 'online-generator' ),
+                'id'   => $prefix . 'linked_in_post',
+            ],
+			
+			
+			
+        ],
+	);
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'eventScripts' );
 
 
 function eventCalendar( $meta_boxes ) {
@@ -1011,7 +1087,6 @@ function eventCalendar( $meta_boxes ) {
 	return $meta_boxes;
 }
 add_filter( 'rwmb_meta_boxes', 'eventCalendar' );
-
 
 
 // PROFILE METABOXES
@@ -1200,6 +1275,11 @@ function setResourceProperties( $meta_boxes ) { // this shows the box where the 
                 'type' => 'url',
                 'name' => esc_html__( 'Resource URL', 'online-generator' ),
                 'id'   => $prefix . 'resource_url',
+            ],
+			[
+                'type' => 'url',
+                'name' => esc_html__( 'Private Resource URL', 'online-generator' ),
+                'id'   => $prefix . 'private_resource_url',
             ],
         ],
 	);

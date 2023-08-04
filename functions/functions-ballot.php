@@ -30,7 +30,186 @@ function getJurorLinks(){
 
 
 }
-function get_ballot($menu,$id){
+
+function getJurorCandidates(){
+    global $wpdb;
+    $q = $wpdb->get_results("select ID, post_title from wp_posts where post_type ='profile'");
+    print "<table>";
+    foreach($q as $key=>$profile){
+        $email = get_post_meta($profile->ID,'email',true);
+        if($email != ''){
+        print "<tr><td>$profile->post_title</td><td>$email</td></tr>";
+    }   
+    }
+
+
+    print "</table>";
+
+
+
+}
+
+
+function get_ballot($award_id,$children,$counter){
+    if(@$_POST['juror_id']){
+        $ballot = getJurorBallot($award_id,$_POST['juror_id']);
+      //  var_dump($ballot);
+
+      if(@$ballot[$award_id]){
+      print "<tr><th colspan='4'>You have already voted in this category ✅. <br>You may change your vote if you wish.</th>";
+    } else{
+        print "<tr><th colspan='4'>Click on the Nominee Name or Laurel to launch link your immersive Browser. Evaluation of Experience Nominations may only be done exclusively though an immersive browser. Do not use a 2D screen.<hr></th>";
+    }
+
+    print "<tr><th></th><th>First Choice</th><th>Second Choice</th><th>Third Choice</th>";
+
+    foreach($children as $c =>$child){
+      extract($child);
+     
+    //  print("<pre>".print_r($meta,true)."</pre>");
+     // print $counter;
+     $thumbnail_src = getThumbnail(@$meta['_thumbnail_id'][0],"thumbnail");
+     if($classes[0] == 'honor'){
+        continue;
+     }
+      if($classes[0] == 'presenter'){
+        continue;
+        print "<h4 class='presenter'>";
+        if($thumbnail_src != '' && $counter == 0){
+          print "<img src='$thumbnail_src' alt='$title' title='$title' class='nomination-thumbnail'>";
+        }
+        print "Presented by ";
+      //  print @$meta['thumbnail_id']; 
+        print "<span class='presented-by'>".$child['title'];
+        print get_nominee_meta($child['meta']);
+        print "</span></h4>";
+       
+      } else{
+        $item_class = 'nominee';
+        if($counter>0){
+          $item_class = 'nominee-credit';
+          
+        }
+        print "<tr>";
+        print "<td class='$item_class'>";
+        $nominee_id = $child['ID'];
+     
+        
+        if($thumbnail_src != '' && $counter == 0){
+            if(@$_meta['private_resource_url'][0]!=''){
+               
+                @$meta['resource_url'][0] = @$meta['private_resource_url'][0];
+            }
+      
+            if(@$meta['resources'][0]!=''){
+               
+                @$meta['resource_url'][0] = @$meta['resources'][0];
+            }
+           if(@$meta['private_resource_url'][0] != NULL){
+            $meta['resource_url'][0] = $meta['private_resource_url'][0];
+           }
+          if(@$meta['resource_url'][0] != '' ){
+            $nominee_class= '';
+            if($counter == 0){
+                $nominee_class= 'nom';
+
+            }
+
+            print "<a href='".$meta['resource_url'][0]."' target='_blank' class='nominee-image $item_class'>";
+          
+           } else {
+            print "<span class='nominee-image'>";
+           }
+          print "<img src='$thumbnail_src'  class='nomination-thumbnail'>";
+          if(@$meta['resource_url'][0] != ''){
+
+            print "</a>";
+          
+           } else {
+            print "</span>";
+          
+           }
+           if($classes[0] == 'winner'){
+            print "<span class='winner'></span>";
+          }  
+        }
+       
+     // var_dump(@$ballot[$award_id]);
+      print "</td>";
+
+      $first_choice_checked = '';
+      $second_choice_checked = '';
+      $third_choice_checked = '';
+      if($nominee_id == @$ballot[$award_id]['first_choice']){
+        $first_choice_checked = ' checked';        
+      }
+      if($nominee_id == @$ballot[$award_id]['second_choice']){
+        $second_choice_checked = ' checked';        
+      }
+      if($nominee_id == @$ballot[$award_id]['third_choice']){
+        $third_choice_checked = ' checked';        
+      }
+
+      
+      print  "<td class='choice $first_choice_checked'><input type='radio' name='award[$award_id][first_choice]' value='$nominee_id'". @$first_choice_checked.">
+      ";
+//print      countNomineeChoice($award_id,$nominee_id,"first");
+
+      print "
+      </td>";
+
+      print "<td class='choice $second_choice_checked'><input type='radio' name='award[$award_id][second_choice]' value='$nominee_id' ".@$second_choice_checked."> ";
+   //   print      countNomineeChoice($award_id,$nominee_id,"second");
+      
+            print "</td>";
+      
+      print "<td class='choice $third_choice_checked'><input type='radio' name='award[$award_id][third_choice]' value='$nominee_id' ".@$third_choice_checked."> ";
+     // print      countNomineeChoice($award_id,$nominee_id,"third");
+      
+            print "</td>";
+
+      print "</tr>";
+      print "<tr><td colspan='4' class='nominee-info'>";
+      print get_nominee_info($child,$counter);
+       
+      // print "|".@$child['meta']['github']."|";
+     if(is_array(@$children)){
+       $counter++;
+       if($counter == 2 && count($children)){
+         print ",";
+       }
+       get_nomination($children,$counter);
+      
+       $counter --;
+     }
+      print "</td></tr>";
+
+
+
+
+      print "<tr><td colspan='4'><hr></td></tr>";
+      }
+      
+      
+
+    }
+        }//!@ juror id; 
+  }
+
+  function countNomineeChoice($award_id,$nominee_id,$choice){
+    global $wpdb;
+    $sql = "Select count(*) as votes from award_ballot where award_id = $award_id and ".$choice."_choice = $nominee_id";
+    if(@$_GET['revealcount']){}
+    return $wpdb->get_var($sql);
+
+
+  }
+  
+
+
+
+
+function xget_ballot($menu,$id){
     $nominations = get_nominations('polys2');
     
     $ballot = getJurorBallot($id);
@@ -183,9 +362,9 @@ function getJurorID(){
     }
 
 }
-function clearJurorBallot($id){
+function clearJurorBallot($award_id, $juror_id){
     global $wpdb;
-    $wpdb->query("DELETE FROM award_ballot where juror_id = $id");
+    $wpdb->query("DELETE FROM award_ballot where award_id = $award_id and juror_id = $juror_id");
 
 }
 
@@ -195,10 +374,10 @@ function updateJuror($field,$value,$id){
     $wpdb->query($sql);
 
 }
-function updateJurorBallot($id){
+function updateJurorBallot($award_id,$juror_id){
     //  $ballot = getJurorBallot($id);
   
-      clearJurorBallot($id);//DELETES ALL
+      clearJurorBallot($award_id, $juror_id);//DELETES ALL
     global $wpdb;
   
     if(@$_POST['award']){
@@ -215,7 +394,7 @@ function updateJurorBallot($id){
             }
 
             //INSERTS ALL NEW
-            $sql = "INSERT INTO `award_ballot` ( `juror_id`, `award_id`, `first_choice`, `second_choice`, third_choice, `vote_time`) VALUES ('$id', '$key', '$value[first_choice]', '$value[second_choice]','$value[third_choice]', CURRENT_TIMESTAMP);";
+            $sql = "INSERT INTO `award_ballot` ( `juror_id`, `award_id`, `first_choice`, `second_choice`, third_choice, `vote_time`) VALUES ('$juror_id', '$award_id', '$value[first_choice]', '$value[second_choice]','$value[third_choice]', CURRENT_TIMESTAMP);";
             $wpdb->query($sql);
 
 
@@ -237,15 +416,17 @@ function getEmailList(){
 }
 
 
-function getJurorBallot($id){
+function getJurorBallot($award_id,$juror_id){
      global $wpdb;
-    $sql = "SELECT * FROM `award_ballot` where juror_id = '$id'";
+    $sql = "SELECT * FROM `award_ballot` where juror_id = '$juror_id'";
     $q = $wpdb->get_results($sql);
 
  
     if(count($q) == 0){
         
-        updateJurorBallot($id);
+
+        updateJurorBallot($award_id,$juror_id);
+
         return null;
     } else {
         $ballot = array();
@@ -267,5 +448,42 @@ function insertVote($key,$value){
   
 
 }
+function get_nom_name($id){
+    global $wpdb;
+  print   $sql = "select post_title from wp_posts where ID = $id";
+    return $wpdb->get_var($sql);
+}
+
+
+function get_ballot_results(){
+    global $wpdb;
+    $sql = "SELECT distinct a.award_id, p.post_title FROM `award_ballot` a, wp_posts p where a.award_id = p.ID ";
+    $awards = $wpdb->get_results($sql);
+
+    foreach($awards as $key=>$value){
+        print "$value->award_id $value->post_title";
+        $sql = "SELECT first_choice, second_choice, third_choice
+        from award_ballot
+        where award_id = $value->award_id
+        group by first_choice, second_choice, third_choice
+        ";
+        $distinct_noms = $wpdb->get_results($sql);
+        foreach($distinct_noms as $key=>$noms){
+            print $noms->first_choice;
+            print get_nom_name($noms->first_choice);
+
+
+
+
+            print "<br>";
+        }
+
+
+        print "<br>";
+    }
+    
+
+}
+
 
 ?>

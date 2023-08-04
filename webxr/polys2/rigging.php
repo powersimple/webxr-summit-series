@@ -1,12 +1,12 @@
 <?php
 
-$speed = ".5";
+$speed = "1";
 if(@$_GET['speed']){
     $speed = $_GET['speed'];    
 }
 $cam_x =0;
-$cam_y =2;
-$cam_z =10;
+$cam_y =1.6;
+$cam_z =-3.5;
 if(@$_GET['camera']){
     $cam_coords =  explode("~",$_GET['camera']);
     if(count($cam_coords) == 3){
@@ -16,6 +16,8 @@ if(@$_GET['camera']){
     }
   }
 ?>
+
+
 
 <a-entity>
             <a-text id="GL-VR" visible="false" position="2.55 -0.1 0.01" value="" color="white" width="4"
@@ -36,35 +38,33 @@ if(@$_GET['camera']){
 
 
         <a-entity id="rig" rotation-reader thumbstick-logging
-            movement-controls="speed:<?=$speed?>; constrainToNavMesh: true;fly: true " position="0 0.1 1">
+            movement-controls="speed:<?=$speed?>;" position="0 0 0">
             <!-- Player Character -->
             <a-box id="body" plane-hit aabb-collider="collideNonVisible: true; objects: .zone" static-body="shape: box"
                 position="0 0.05 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
             
                 <!-- CAMERA 
                     summit coords position="-40 35 -105" f
-
+ position="<?=$cam_x?> <?=$cam_y?> <?=$cam_z?>" 
                 -->
                 
-            <a-entity id="camera"  wasd-controls camera look-controls raycaster="far: 5; objects: .clickable"
+            <a-entity camera look-controls="fly:true"  wasd-controls="fly:true; acceleration:<?=$speed?>" raycaster="far: 5; objects: .clickable"
                 super-hands="colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
                 
-                position="<?=$cam_x?> 2 <?=$cam_z?>" 
+                position="<?=$cam_x?> <?=$cam_y?> <?=$cam_z?>" 
             
-                rotation="0 0 0"
+                rotation="0 -25 0"
                 
                 >
                 <a-entity id="crosshair" cursor="rayOrigin:mouse" position="0 0 -0.2"
                     geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
                     material="shader: flat" raycaster="far: 5; objects: .clickable" visible="false"></a-entity>
             </a-entity>
-          
-            
-<a-entity mixin="hand"  oculus-touch-controls="hand: left" hand-tracking-controls="hand: left;modelStyle:mesh;" hand-controls="hand:
-             left; handModelStyle: highPoly; color: #0055ff"> 
+
+            <a-entity mixin="hand"  oculus-touch-controls="hand: left" hand-controls="hand: left; handModelStyle: highPoly; color: #0055ff"> 
              <!-- -->
           <!--  <a-entity fps-counter></a-entity>-->
             </a-entity>
-            <a-entity mixin="hand" oculus-touch-controls="hand: right" hand-tracking-controls="hand: right;modelStyle:mesh;" hand-controls="hand: right; handModelStyle: highPoly; color: #0055ff"   blink-controls ="cameraRig: #rig;  teleportOrigin: #camera; collisionEntities: .collision; hitCylinderColor: #FF0; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8;landingNormal:0 2 0"  >   
+            <a-entity mixin="hand" oculus-touch-controls="hand: right" hand-controls="hand: right; handModelStyle: highPoly; color: #0055ff"   blink-controls ="cameraRig: #rig;  teleportOrigin: #camera; collisionEntities: .collision; hitCylinderColor: #FF0; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 40; curveShootingSpeed: 8;landingNormal:0 2 0"  >   
             </a-entity>
         </a-entity>

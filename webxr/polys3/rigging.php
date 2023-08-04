@@ -1,6 +1,6 @@
 <?php
 
-$speed = "0.5";
+$speed = "1";
 if(@$_GET['speed']){
     $speed = $_GET['speed'];    
 }
@@ -51,7 +51,7 @@ if(@$_GET['camera']){
             <a-entity camera look-controls="fly:true"  wasd-controls="fly:true; acceleration:<?=$speed?>" raycaster="far: 5; objects: .clickable"
                 super-hands="colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
                 
-                position="0 1.6 -12" 
+                position="<?=$cam_x?> <?=$cam_y?> <?=$cam_z?>" 
             
                 rotation="0 -25 0"
                 

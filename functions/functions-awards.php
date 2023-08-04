@@ -143,8 +143,9 @@ function nomineeAccordion($awards){
   print "<div id='nomineeAccordion'>";
   
   foreach($awards as $i =>$award){
+  
       extract($award);
-      
+     
       $current_award = $slug;
       
       if(!in_array("nomination",explode(" ",$classes[0]))){
@@ -700,6 +701,16 @@ function get2DLaurels($laurels,$label){
   
     }
 }
+function get_juror_id($email){
+  global $wpdb; 
+//  var_dump($_POST);
+  $q = $wpdb->get_row("SELECT id, name FROM `award_jurors` WHERE email = '$email'");
+  //var_dump($q);
+
+  return $q;
+
+
+}
 
 
 function getNomineeCard($awards){
@@ -885,5 +896,317 @@ function getNomineeCredits($nominee,$nominations,$current_award,$current_nominat
   return $nominations;
 
 }
+   function get_nominee_meta($meta){
+            print " ".wrapMeta(@$meta,'twitter',"a");
+            print " ".wrapMeta(@$meta,'linkedin',"a");
+            print " ".wrapMeta(@$meta,'instagram',"a");
+            print " ".wrapMeta(@$meta,'github',"a");
+            print " ".wrapmeta(@$meta,'website',"a");
 
+          }
+
+  function get_nominee_info($nominee,$counter){
+    extract($nominee);
+    $item_class='';
+    if($counter == 0){
+      $item_class='nominee';
+      
+    }
+
+    if(@$meta['resource_url'][0] != ''){
+
+      print "<a href='".$meta['resource_url'][0]."' target='_blank' class='$item_class'><span>$title</span></a>";
+    
+    } else {
+      print "<span>$title</span>";
+    }
+    
+  //  print " ".wrapmeta(@$meta,'resource_url',"a");
+  get_nominee_meta(@$meta);
+
+  }
+          function get_nomination($children,$counter){
+            
+            foreach($children as $c =>$child){
+              extract($child);
+              if($classes[0] == 'presenter-unconfirmed'){
+                continue;
+              }
+            //  print("<pre>".print_r($meta,true)."</pre>");
+             // print $counter;
+             $thumbnail_src = getThumbnail(@$meta['_thumbnail_id'][0],"thumbnail");
+              if($classes[0] == 'presenter'){
+                print "<h4 class='presenter'>";
+                if($thumbnail_src != '' && $counter == 0){
+                  print "<img src='$thumbnail_src' alt='$title' title='$title' class='nomination-thumbnail'>";
+                }
+                print "Presented by ";
+              //  print @$meta['thumbnail_id']; 
+                print "<span class='presented-by'>".$child['title'];
+                print get_nominee_meta($child['meta']);
+                print "</span></h4>";
+               
+              } else{
+                $item_class = 'nominee';
+                if($counter>0){
+                  $item_class = 'nominee-credit';
+                  
+                }
+
+                print "<li class='$item_class'>";
+             
+                
+                if($thumbnail_src != '' && $counter == 0){
+                  if(@$meta['resource_url'][0] != ''){
+
+                    print "<a href='".$meta['resource_url'][0]."' target='_blank' class='nominee-image'>";
+                  
+                   } else {
+                    print "<span class='nominee-image'>";
+                   }
+                  print "<img src='$thumbnail_src'  class='nomination-thumbnail'>";
+                  if(@$meta['resource_url'][0] != ''){
+
+                    print "</a>";
+                  
+                   } else {
+                    print "</span>";
+                  
+                   }
+                   if($classes[0] == 'winner'){
+                    print "<span class='winner'></span>";
+                  }  
+                }
+                print get_nominee_info($child,$counter);
+               
+               // print "|".@$child['meta']['github']."|";
+              if(is_array(@$children)){
+                $counter++;
+                if($counter == 2 && count($children)){
+                  print ",";
+                }
+                get_nomination($children,$counter);
+               
+                $counter --;
+              }
+             
+              print "</li>";
+              }
+
+              
+
+            }
+           
+          }
+
+
+          
+
+          
+          function get_nomination_data($results,$children,$counter){
+            
+            foreach($children as $c =>$child){
+             
+              extract($child);
+              
+              if($classes[0] == 'presenter-unconfirmed'){
+                continue;
+              }
+            //  print("<pre>".print_r($meta,true)."</pre>");
+             // print $counter;
+             $thumbnail_src = getThumbnail(@$meta['_thumbnail_id'][0],"thumbnail");
+          
+             if(@$_GET['mode'] == 'social'){
+          
+             
+                switch(@$_GET['channel']){
+                  case "twitter":
+              //      array_push($results,getTwitterData($child));
+                   // print $counter." ";
+                    getTwitterPost($child,$counter);
+                    break;
+                  case "linkedin":
+                    getLinkedInPost($child,$counter);
+                    break;
+                  default: "";
+                }
+
+             } else if (@$_GET['mode'] == 'email'){
+
+                
+
+             }
+
+
+
+             if(is_array(@$children)){
+              $counter++;
+              get_nomination_data($results,$children,$counter);
+             
+              $counter --;
+             
+            }
+              
+
+            }//for
+           return $results;
+          }//func
+          function cleanTwitter($handle,$mode){
+            if($mode == '@'){
+              return str_replace("https://twitter.com/","@",$handle);
+            }
+          }
+
+          function getTwitterPost($child,$counter){
+            extract($child);
+           // print $title. " ";
+             $handle = @$meta['twitter'][0];
+             if ($counter == 0){
+              print "
+";
+            } 
+            if($handle != ''){
+             print cleanTwitter($handle,"@")." ";
+            } else {
+
+              print $title." ";
+           //   var_dump($meta);
+            }
+           
+
+          }
+
+          function getLinkedInPost($child,$counter){
+            extract($child);
+            //var_dump($child['classes'][0]); print "<BR><BR>";
+           // print $title. " ";
+             $linkedin = @$meta['linkedin'][0];
+             if(in_array("presenter",explode(" ",$classes[0]))){
+              print " will be presented by $title
+";
+              print "And the Nominees are:
+";
+             } else {
+            //  print $title;
+              if ($counter == 0){
+                print "
+$title : ";
+              } else if($counter == 1){
+                print "  $title, ";
+              } else {
+                print "$title ";
+              }
+
+ 
+             }
+           
+
+          }
+
+
+          function getTwitterData($child){
+            extract($child);
+        //   print $title. " ";
+            $handle = cleanTwitter(@$meta['twitter'][0],"@");
+
+            return ['name'=>$title,'handle'=>$handle];
+
+          }
+
+          function checkEmptyHandles($results){
+            foreach($results as $key =>$result){
+              if($result['handle'] ==''){
+              print $result['name']."<BR>";
+              } else {
+              print $result['handle']."<BR>";
+              }
+
+            }
+          }
+          function optin($field,$juror,$message,$optin,$optedin){
+            $juror = (array)$juror;
+            //var_dump($juror);
+        
+              if($juror[$field] == 0){
+                $state=1;
+                $button =$optin;
+              } else {
+                $state=0;
+                $button =$optedin;
+              }
+            }
+            function display_nominee_meta($nominee_meta){
+   
+              print "<ol>";
+              foreach($nominee_meta as $m => $meta){
+                print "<li>".$m."</li>";
+              }
+              print "</ol>";
+            
+              }
+            
+            
+              function get_event_meta($event,$children,$counter,$container){
+              
+              
+
+              foreach($children as $c =>$child){
+                extract($child);
+               
+              
+              //  print("<pre>".print_r($meta,true)."</pre>");
+               // print $counter;
+               $thumbnail_src = getThumbnail(@$meta['_thumbnail_id'][0],"thumbnail");
+               $slug = $child['post']->post_name;
+               
+               if($child['post']->post_type == 'profile'){
+                if(!array_key_exists($slug,$container)){
+                  $container[$slug] = [];
+                }
+                array_push($container[$slug],[
+                  "event_slug"=>$event['post']->post_name,
+                  "event_title"=>$event['title'],
+                  "event_type"=>$event['event_type'],
+                  
+                  "name"=>$child['post']->post_title,
+                  'email' => @$meta['email'][0],
+                  'twitter' => @$meta['twitter'][0],
+                  'linkedin' => @$meta['linkedin'][0],
+                  'instagram' => @$meta['instagram'][0],
+                  'sort_name' => @$meta['sort_name'][0],
+                  'github' => @$meta['github'][0],
+                  'is_company' => @$meta['is_company'][0],
+                  'profile_title' => @$meta['profile_title'][0],
+                  'company'=> @$meta['company'][0],
+                  'guest_type' => @$child['guest_type'],
+                  'appearance_type' => @$child['appearance_type'],
+                  'confirmation_status' => @$child['confirmation_status'],
+                  'level' => @$counter,
+                  'role'=> $classes[0]
+                ]);
+              }
+              
+                 // print "|".@$child['meta']['github']."|";
+                if(is_array(@$child['children'])){
+                $counter++;
+                if($counter == 2 && count($children)){
+                 
+                }
+            
+            
+                 $container = get_event_meta($event,$child['children'],$counter,$container);
+                 // get_nomination($children,$counter);
+                 
+                $counter --;
+                }
+               
+               
+               
+            
+                
+            
+              }
+              return $container;
+            
+              }
 ?>

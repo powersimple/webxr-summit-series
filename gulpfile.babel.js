@@ -1,4 +1,4 @@
-var localhost = 'https://webxrsummitseries/' // SET local dev url here
+var localhost = 'https://thepolys/' // SET local dev url here
 //var localhost = 'http://1me.192.168.1.19.xip.io' // SET local dev url here
 
 const { gulp, src, dest, watch } = require('gulp'),

@@ -15,7 +15,7 @@
   }
   function getProfiles(){
     global $wpdb;
-    $sql = "select ID, post_title, post_excerpt, post_content, post_parent from wp_posts where post_type='profile' and post_status='publish' order by post_title";
+    $sql = "select ID, post_title, post_excerpt, post_content, post_parent,post_name from wp_posts where post_type='profile' and post_status='publish' order by post_title";
     return $wpdb->get_results($sql);
     
 
@@ -143,10 +143,15 @@ return ob_get_clean();
         }
     }
     function wrapLink($var,$link,$target){
+        if($link == ''){
+            return;
+        }
         $use_font_awesome = false;
         if($var == 'twitter'
         || $var == 'linkedin'
         || $var == 'github'
+        || $var == 'instagram'
+        
         || $var == 'website'){
             $use_font_awesome = true;
 
@@ -154,7 +159,8 @@ return ob_get_clean();
         if($use_font_awesome == true){
             $label = "<i class='fa fa-$var social-icon'></i>";
         } else {
-            $label = '$var';
+            
+            $label = $link;
         }
         
         return "<a href='$link' target='$target'>$label</a>";

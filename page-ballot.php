@@ -25,81 +25,6 @@ if($post->post_parent==0){
 <?php
 }
 ?>
-<style>
-    .thumb{
-            width:150px;
-            border-radius:50%;
-    }
-    th{
-               font-weight:900;
-
-    }
-    table{
-      width:100%;
-    }
-    tr.even{
-        background-color:#f7f7f7;
-    }
-    th, td{
-     vertical-align:middle;
-     padding:3px;
-    }
-    td a{
-      font-size:150%;
-      color:#EEF;
-    }
-    .ballot-page{}
-    .category{
-        background-color:#444;
-        color:#fff;
-        font-weight:900;
-        font-size:150%;
-        line-height:125%;
-        padding:10px;
-
-    }
-
-    .nominee{
-       font-size:125%;
-           line-height: 125%;
-    }
-    .save {
-        float:right;
-        background-color:#393;
-        color:#fff;
-        border-radius:15px;
-        font-weight:900;
-        margin-right:20px;
-        padding:5px 10px;;
-    }
-    .sign-in input{
-        font-size:120%;
-    }
-    .choice{
-        text-align:center;
-vertical-align:middle;
-    }
-    .choice input[type=radio]{
-        transform: scale(2);
-  padding: 10px;
-        text-align:center;
-        font-size:15px;
-    }
-    .cert{
-        font-size:80%;
-        text-align:right;
-        vertical-align:middle;
-    }
-    .optin{
-      border:1px dashed #ccc;
-      padding:40px;
-    }
-    .page-ballot{
-      padding-top:70px;
-      font-size:150%;
-    }
-    
-</style>
 
 <main role="main" class="main">
 
@@ -107,157 +32,167 @@ vertical-align:middle;
 <div class="row">
 <div class="container">
  
-  <div class="col-xs-12 ballot-page">
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 ballot-page">
 
    <h1><?=$post->post_title?></h1>
 <?php
-  if(@$_POST['consent']){
-    foreach($_POST['consent'] as $key=>$value){
-      updateJuror($key,$value,$_POST['juror_id']); 
-    }
-     
-
-  }
-
-
-  function optin($field,$juror,$message,$optin,$optedin){
-    $juror = (array)$juror;
-    //var_dump($juror);
-
-      if($juror[$field] == 0){
-        $state=1;
-        $button =$optin;
-      } else {
-        $state=0;
-        $button =$optedin;
-      }
-
-
-    ?>
-
-    <!--
-    <form action="/ballot/" method="post" class="sign-in">
-    <label><?=$message?></label>  
-    <input type='hidden' value="<?=$state?>" name="consent[<?=$field?>]">
-    <input type='hidden' value="<?=$juror['id']?>" name="juror_id">
-    <input type='hidden' value="<?=$juror['email']?>" name="juror_email">
-    
-
-      <input type="submit" value="<?=$button?>">
-
-  </form>-->
-  <?php
-  }
-
-
-
-
-  if(!@$_POST['juror_email']){
-
+/*
+  print "<pre>";
   
+  getJurorCandidates();
+
+
+  print "</pre>";
+*/
+ // var_dump($_POST);
+ print "<hr><div id='ballot'>";
+ if(@$_GET['tally'] == 'ho'){
+
+  get_ballot_results();
+
+
+  print "<br><hr><br>";
+ }
+
+ if(@$_GET['mats'] == 1){
 ?>
 
+ <form method="post" action="?">
+    <p>Please Enter the Email Address where you received your Jury Invitation<br>
+  Your votes will be anonomyized on the ballot. 
+  </p>
+      <input type="email" name="email" value="" placeholder="Email">
+      <input type="submit" value="Enter to Vote for The Polys">
+    
 
-<p>Voting for <span class="thepolys">The<sup>2nd</sup>Polys</span> <span class="webxrawards">- WebXR Awards</span> has concluded and the winners have been chosen. 
-<BR><BR>
-Thank you to all the jurors who voted.
-</p>
 
-<!--
-<p>You have been invited to participate in the jury to select winners of <span class="thepolys">The Polys</span> <span class="webxrawards">- WebXR Awards</span> on February 12<sup>th</sup>. </p>
 
-<form action="/ballot/" method="post" class="sign-in">
-    <label>Please enter the email address where you received your invitation.
-    <input type="text" name="juror_email" value="" placeholder="email" size="30"><br>
-    <input type="submit" value="Proceed to Ballot">
-  </form>-->
+  </form>
+<?php
+ }
+  if(!@$_POST['email'] && !@$_POST['juror_id']){
+?>
 
+ Voting for the 2022 Polys - WebXR Awards has ended. Thank you to our Jurors. See you next year.
+ <br>
+
+
+ <hr>
+ <br>
 
 <?php
-  } else{
 
 
-
-
-  $juror = getJuror(@$_POST['juror_email']);
-  if(@$juror->name){
-     $awards = get_nominations('polys2');
-
-
-
-     if(@$_POST['award']){
- 
-     updateJurorBallot($juror->id);
-
-     }
-     ?>
-     <div id="ballot-faq">
-     <h2>Welcome <?=$juror->name?>,</h2>
-
-
-    <?php
-
-       print do_blocks(do_shortcode($post->post_content));
+    print do_blocks(do_shortcode($post->post_content));
       
 
-    ?>
-     </div>
- 
- <div class="optin">
-    <p>
-    <strong>FIVARS and VRTO</strong> have kindly offered free access to Jurors so they can review the FIVARS World, which is nominated for Event of the Year. FIVARS is a world built in Janus XR by Keram Malicki-Sánchez who is nominated for Creator of the year and James Baicoianu, who is nominated for Developer of the Year. VRTO, which is nominated for World of the Year, is a collection of Hubs worlds built on a custom Hubs Cloud deployment and requires user registration as it is a private server. Keram is the founder of FIVARS and VRTO. You must <strong>OPT-IN to share your email with Constant Change Media Group.</strong> We cannot share your email without your consent.<br>
-<br>
-
-
-</p>
-<?php
-
-  optin('constantchange',$juror,"OPT-IN to share your email with Constant Change Media Group?<br>","Yes, Please",'You have opted in');
-
-?>
-</div>
-<div id="ballot">
-  <h2><span class="thepolys">The<sup> 2nd </sup>Polys</span><span class="webxrawards"> - WebXR-Awards Ballot</span>
-    <?php
-
-  get_ballot("polys2",$juror->id);
-  ?>
-  </div>
-  <?php
-  }
-    if($juror == NULL){
-print "We're sorry, we did not find your email address<BR>
-<a href='/ballot/'><strong>CLICK HERE TO RE-ENTER YOUR EMAIL</strong></a><br><Br>
-If that doesn't work, please email nominees AT webxrawards.com";
-    }else {
-     
-    ?>
+  } else {
     
-  <?php
+    if(@$_POST['email']){
+      $juror = get_juror_id($_POST['email']);
+      if(@$juror == NULL){
+
+        // CAN'T FIND JUROR EMAIL
+
+        print "Sorry we could not find your email address<br>
+        please try again.";
+        ?>
+      <form method="post" action="?">
+          <p>Please Enter the Email Address where you received your Jury Invitation<br>
+        Your votes will be anonomyized on the ballot. 
+        </p>
+            <input type="email" name="email" value="" placeholder="Email">
+            <input type="submit" value="Enter to Vote for The Polys">
+          
+        </form>
+          <p>If you cannot access your ballot, please report it to <a href="mailto:webxrawards@gmail.com">webxrawards@gmail.com</a>
+        
+          <?php
+      print do_blocks(do_shortcode($post->post_content));
 
 
 
+      } else{
+        //SUCCESS
+        $juror_id = $juror->id;
+        $_POST['juror_id'] = $juror->id;
+
+        print "Welcome $juror->name";
+      }
+    } else {
+      
+      $juror_id=$_POST['juror_id'];
+      $award_id=$_POST['award_id'];
+      updateJurorBallot($award_id, $juror_id);
+    
 
     }
 
+
+    
+
+
   
 
-?>
+    ?>
+
+   
+  
 
 
-
-
-<div id="ballot">
-
-
-
-
-</div>
 
 <?php
+if(@$juror_id != NULL || @$_GET['tally'=='']){
+$awards = get_menu_array('polys3');
+
+
+    foreach($awards as $key => $award){// outer menu loop
+        print "<h4>Please remember to save after voting in each category before voting in the next</h4>";
+        print "<table>";
+        foreach($award['children'] as $c =>$child){// EVENTS loop
+          if($child['classes'][0] == 'honor'){
+            continue;
+          }
+        
+
+          if($child['classes'][0] == 'nomination' ){
+            print "<tr><td class='nom-cat'>";
+            ?>
+            <form method="post" action="?">
+            <input type="hidden" name="juror_id" value="<?=$juror_id?>">
+            <input type="hidden" name="award_id" value="<?=$child['ID']?>">
+            
+            <?php
+            print '<h3 class="nomination-category">'.$child['title'].'</h3>';
+          //  var_dump($child['ID']);
+            print "<table class='nominee-list'>";
+            get_ballot($child['ID'],$child['children'],0);//recursive nominees loop
+            print "<tr><th colspan='4'>";
+            print "I affirm that I have reviewed all nominees in this category<br>before casting a vote<br>";
+            print "<input type='submit' value='SAVE YOUR VOTE NOW for ".$child['title']."'><br>Save Before Proceeding";
+            print "</th>";
+            print "</table>";
+          
+            print '</form>';
+          }
+          print "</td></tr>";
+        
+          
+        }
+    
+        print "</table>";
+
+      }
+  print "</div>";
+
+  }
+
 }
-   
 ?>
+
+
+
+
 </div>
 </section>
 </div>

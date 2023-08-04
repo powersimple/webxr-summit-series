@@ -89,9 +89,10 @@
      */
 
        //vendor is the stylesheet rendered 
+      
+$path= parse_url(get_stylesheet_directory_uri())['path'];
 
-       wp_register_script('vendor',get_stylesheet_directory_uri() . '/vendor.min.js', array('jquery'),rand(100000,999999), false); 
-
+       wp_register_script('vendor',$path . '/vendor.min.js', array('jquery'),rand(100000,999999), false); 
        wp_enqueue_script('vendor');
 
        /*
@@ -104,10 +105,12 @@
         
 
      
+     
+   
 
-
-
-        wp_register_script('main',get_stylesheet_directory_uri() . '/main.js', array('jquery'),rand(100000,999999), true); 
+    
+       
+    //    wp_register_script('main',$path. '/main.js', array('jquery'),rand(100000,999999), true); 
 
       
 
@@ -123,6 +126,17 @@
 
     add_action( 'wp_enqueue_scripts', 'theme_scripts' );  
 
+
+
+function style_loader_src_make_relative ( $src, $handle ) {
+    // Remove the domain part. 
+    // site_url() = http://localhost:8080
+    $src = str_replace(url_root(), "", $src); 
+    
+    return $src;  
+  }
+  add_filter('style_loader_src', 'style_loader_src_make_relative', 10, 2 );
+//phpinfo(); die();
 
 
 ?>

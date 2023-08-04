@@ -1,5 +1,5 @@
 <?php
- require_once "webxr/functions-aframe.php";
+ require_once "functions/functions-aframe.php";
 //enqueues scripts and styles
 require_once("functions/functions-enqueue.php");
 require_once("functions/functions-ballot.php");
@@ -34,15 +34,23 @@ require_once("functions/functions-metabox.php");
 	require_once("functions/functions-post-access.php");
 	
 	add_post_type_support( 'page', 'excerpt' );
-add_theme_support('post-thumbnails', array(
-'post',
-'page',
-'social',
-'profile',
-'resource',
-'sponsor',
-'event'
-));
+
+
+
+function featured_image_support(){
+	add_theme_support('post-thumbnails', array(
+		'post',
+		'page',
+		'social',
+		'profile',
+		'resource',
+		'sponsor',
+		'event'
+		));
+}
+
+add_action('after_setup_theme', 'featured_image_support');
+
 function add_mimes($mime_types){
 	$mime_types['gltf'] = 'model/gltf+json';
 	$mime_types['usdz'] = 'model/vnd.usdz+zip';
@@ -62,7 +70,11 @@ function is_gutenberg() {
         return false;
     }
 }
+function stripURL($path){
+	
+	return parse_url($path, PHP_URL_PATH);
 
+}
 
 		/* OLD RELIABLE!
         HASN'T CHANGED IN YEARS
@@ -74,7 +86,7 @@ function is_gutenberg() {
 			$img = wp_get_attachment_image_src(  $id, $use);
 			if(is_array($img)){
 				if($img[0] !=""){
-					return $img[0];
+					return stripURL($img[0]);
 				} 
 			}
 			return $img;//$img[0];
@@ -257,7 +269,15 @@ function getHardwareProperties($hardware){
 
 
 }
-
+function url_root(){
+      
+    $path= parse_url(get_stylesheet_directory_uri());
+    $url_root= $path['scheme']."://".$path['host'];
+    if(@$path['port']){
+            $url_root.=":".$path['port'];
+    }
+    return $url_root;
+}
 function getHardwareListing($parent_id){
 	
 $children = get_children( array("post_parent"=>$parent_id,'post_type'=>'hardware','orderby' => 'menu_order ASC','order' => 'ASC') );
@@ -274,6 +294,122 @@ $children = get_children( array("post_parent"=>$parent_id,'post_type'=>'hardware
 
 }
 
+
+
+function enqueue_glb_model_viewer_script() {
+    // MODEL VIEWER IN WP-ADMIN
+    $screen = get_current_screen();
+    $is_media_library = $screen->id === 'upload';
+    $is_metabox_page = $screen->id === 'post' && isset( $_GET['post'] ) && get_post_meta( $_GET['post'], 'logo_3D', true );
+
+    // Enqueue the Model Viewer script only on the appropriate admin pages
+    if ( $is_media_library || $is_metabox_page ) {
+        add_action( 'admin_footer', 'print_model_viewer_script' );
+    }
+}
+add_action('admin_enqueue_scripts', 'enqueue_glb_model_viewer_script');
+function print_model_viewer_script() {
+    if ( ! current_user_can( 'upload_files' ) ) {
+        return;
+    }
+
+    echo '<style>
+        .model-viewer-container {
+            position: relative;
+            height: 100%;
+        }
+
+        .model-viewer-container img.icon {
+            display: none;
+        }
+    </style>';
+
+    echo '<script>
+        (function($) {
+            $(document).ready(function() {
+                function updateMediaTile(attachmentElement) {
+                    const attachmentId = $(attachmentElement).data("id");
+
+                    if (!wp.media || !wp.media.attachment) {
+                        return;
+                    }
+
+                    const attachment = wp.media.attachment(attachmentId);
+
+                    if (!attachment || !attachment.attributes || attachment.attributes.subtype !== "gltf-binary") {
+                        return;
+                    }
+                }
+
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+                            mutation.addedNodes.forEach(function(addedNode) {
+                                if (addedNode.classList && addedNode.classList.contains("attachment")) {
+                                    updateMediaTile(addedNode);
+                                }
+                            });
+                        }
+                    });
+                });
+
+                const mediaLibraryContainer = $(".attachments-browser .attachments");
+                if (mediaLibraryContainer.length > 0) {
+                    observer.observe(mediaLibraryContainer[0], { childList: true });
+                }
+                
+                // Add a test message to each media item tile outside the function and observer
+                $(".attachment .filename div").append("<span> Test message</span>");
+            });
+        })(jQuery);
+    </script>';
+}
+
+
+
+
+function add_glb_model_viewer_code( $field, $meta, $object_id, $field_id ) {
+	//MODEL VIEWER IN METABAX
+    // Check if the field is for the logo_3D image_advanced field
+    if ( $field_id === 'logo_3D' ) {
+        // Get the selected image's URL
+        $image_url = wp_get_attachment_url( $meta );
+
+        // Check if the selected file is a .glb file
+        $file_type = wp_check_filetype( $image_url );
+        if ( $file_type['ext'] === 'glb' ) {
+            // Define the Model Viewer code to display the .glb file
+            $model_viewer_code = '<model-viewer src="' . esc_url( $image_url ) . '"
+                                  alt="A 3D model"
+                                  camera-controls
+                                  background-color="#f8f8f8"></model-viewer>';
+
+            // Output the Model Viewer code after the logo_3D field
+            echo $model_viewer_code;
+        }
+    }
+}
+add_action( 'rwmb_frontend_after_field', 'add_glb_model_viewer_code', 10, 4 );
+
+function add_model_viewer_column( $cols ) {
+    $cols['model_viewer'] = 'Model Viewer';
+    return $cols;
+}
+add_filter( 'manage_media_columns', 'add_model_viewer_column' );
+
+function add_model_viewer_content( $column_name, $attachment_id ) {
+    if ( $column_name === 'model_viewer' && get_post_mime_type( $attachment_id ) === 'model/gltf-binary' ) {
+        $glb_file_url = wp_get_attachment_url( $attachment_id );
+        $model_viewer_code = '<model-viewer src="' . $glb_file_url . '" alt="3D Model" camera-controls></model-viewer>';
+        echo $model_viewer_code;
+    }
+}
+add_action( 'manage_media_custom_column', 'add_model_viewer_content', 10, 2 );
+function add_glb_mime_type( $mimes ) {
+    $mimes['glb'] = 'model/gltf-binary';
+    return $mimes;
+}
+add_filter( 'upload_mimes', 'add_glb_mime_type' );
 
 
 

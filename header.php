@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="profile" href="https://gmpg.org/xfn/11">
     <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri();?>/images/icons/favicon.ico" />
-<?php wp_head(); 
+<?php 
+
+
+wp_head(); 
     $url = wp_upload_dir();
 ?>
     <link href="<?php echo get_stylesheet_directory_uri();?>/assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,6 +25,10 @@
     <link href="<?php echo get_stylesheet_directory_uri();?>/style.css" rel="stylesheet">
 <?php 
 
+
+
+
+
 if(is_front_page()){
   $page_title= '';
 } else {
@@ -35,6 +42,7 @@ if(is_front_page()){
   }
   wp_head(); 
 
+
   ?>
 
 
@@ -42,8 +50,7 @@ if(is_front_page()){
 
 
   <?php
-
-  // 
+// 
   
     // INCLUDES AFRAME JS TAGES ONLY IF IT IS ENABLED.
 
@@ -65,13 +72,13 @@ if(is_front_page()){
     if(@$_GET['event_menu']){
         $menu = $_GET['event_menu'];
     }
-
+ 
     $summit_square_model = 'business-summmit-square';
     if(@$_GET['summit_model']){
         $summit_square_model = $_GET['summit_model'];
     }
 
-    $aframe_version="1.3.0";
+    $aframe_version="1.2.0";
     if(@$_GET['aframe-version']){
       $aframe_version=$_GET['aframe-version'];
 
@@ -89,8 +96,8 @@ if(is_front_page()){
     <script src="/assets/js/aframe-look-controls.js"></script>
     <script src="https://unpkg.com/aframe-orbit-controls@1.3.0/dist/aframe-orbit-controls.min.js"></script>
 
-
--    <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
+    <
+  <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
     <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
@@ -138,7 +145,7 @@ if(is_front_page()){
     // END AFRAME
 
   //
-
+$rel_path= str_replace(url_root(),"",get_stylesheet_directory_uri());
 ?>
     <script src="/assets/js/jquery.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -166,7 +173,7 @@ if (location.protocol !== 'https:') {
       home_page = <?=get_option( 'page_on_front' )?>,
       site_title = "<?=get_bloginfo('name')?>",
       xr_path = "<?=get_stylesheet_directory_uri()?>/xr/",
-      data_path = "<?=get_stylesheet_directory_uri()?>/data/",
+      data_path = "<?=$rel_path?>/data/",
       useWheelNav = false,
       uploads_path =  "<?=$url['baseurl']?>/",
       slug = "<?=$post->post_name;?>",
@@ -227,9 +234,23 @@ if (location.protocol !== 'https:') {
   <link rel="stylesheet" type="text/css" media="print" href="<?=get_stylesheet_directory_uri()?>/print.css">
 </head>
 
+<?php
+$page_style = '';
+if($bg=get_post_meta($post->ID,'page-background',true)){
+   $bg_src = getThumbnail($bg);
+  if($bg_src != ''){
+    $style_background="background:url($bg_src);background-size:cover";
+  }
+  $page_style = "style='$style_background'";
+}
+$section_class = '';
+if($section_class==get_post_meta($post->ID,'section',true)){
+  $class_bg = $section_class;
+}  
 
+?>
 
-  <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60" class="<?php echo @$class_bg;?>">
+  <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60" class="<?php echo @$class_bg;?>" <?=$page_style?>>
 
 
         <div class="page-loader">

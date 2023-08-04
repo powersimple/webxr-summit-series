@@ -114,10 +114,11 @@ body {
 }
 
 .winner{
-background: #333;
-padding: 25px 0px;
-border-radius: 25px;
-border: 1px solid #fff;
+    background:url(images/icons/minipoly.png) center center no-repeat;
+    background-size: contain;
+    width:29px;
+    height:100px;
+
 }
 .inapppage {
     padding-left: 0px;
