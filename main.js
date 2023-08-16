@@ -48,12 +48,12 @@ function getOrientation(){
    
     if(last_orientation != o.oriented){
         last_orientation = o.oriented
-        console.log("orientation chaaaged to",last_orientation)
+    //    console.log("orientation changed to",last_orientation)
     }
 
     o.aspect = o._w / o._h
     
-    console.log("o",o,screen.orientation)
+ //   console.log("o",o,screen.orientation)
     
     return o
 }
@@ -69,7 +69,7 @@ function reposition_screen() {
  //   console.clear();
     o = getOrientation();
     if(o.oriented == 'landscape'){
-        $("#main").toggleClass("landscape")
+       // $("#main").toggleClass("landscape")
     } 
     
 
@@ -138,13 +138,14 @@ function initSite() {
    // console.log("megamenu");
     megaMenu()
    // sponsorFooter()
-
+   displayFooterMenu()
 
     getVideo();
-
+/*
     var menu_name = getUrlParameter('event_menu')
-    
+    console.log("menuvars",section_class,section_menu_slug);
   //console.log('url',window.location.pathname,getUrlParameter('event_menu'))
+    console.log("section_menu",section_menu, section_menu_slug)
     if(window.location.pathname == '/event/webxr-business-summit/'){
         menu_name = 'bizsummit21'
         event_class = 'business_summit'
@@ -180,11 +181,13 @@ function initSite() {
     event_class = 'virtual-red-carpet-2'
    // console.log("virtual-red-carpet-2")
 }  
-
-    if(menu_name != false){
+*/
+    if(section_menu_slug != ''){
      //   console.log("app/menuname menu",menu_name,menus[menu_name])
-        var run_of_show = runOfShow(menus[menu_name]);
-       console.log("Run of Show",menu_name,menus[menu_name])
+        
+        
+        var run_of_show = runOfShow(menus[section_menu_slug]);
+       console.log("Run of Show",section_menu_slug,menus[section_menu_slug])
         //displayRunOfShow(run_of_show)
         var ros_list = getUrlParameter('ros-list')
 
@@ -273,7 +276,33 @@ jQuery(function() {
     }); //win func.
 }); //ready func.
 
+function displayFooterMenu() {
 
+    var menu_data = menus['footermenu'].menu_array
+    var menu_links = '<ul>'
+    var url = '';
+    var logo = '';
+    var slug = '';
+    // console.log(menu_data, menu_data.length)
+
+    for (var i = 0; i < menu_data.length; i++) {
+
+        //console.log("profile =" + menu_data[i].title, menu_data[i].object_id, profiles[menu_data[i].object_id])
+       // logo = profiles[menu_data[i].object_id].post_media.logo[0].full_path
+      //  url = profiles[menu_data[i].object_id].info.url
+        slug = profiles[menu_data[i].object_id].slug
+            //        console.log(url)
+        menu_links += "<li class='col'><a href='/" + slug + "' target='_new' title='" + menu_data[i].title + "'> "
+        menu_links += profiles[menu_data[i].object_id].title
+       // menu_links += '<img src="' + logo + '" alt="' + menu_data[i].title + ' logo">'
+        menu_links += "</a></li>"
+
+    }
+    menu_links += "</ul>"
+    jQuery('#footer-menu').html(menu_links);
+    //    console.log("sponsor-footer", menu_links)
+   
+}
 
 
 function sponsorFooter() {
@@ -2023,7 +2052,7 @@ function getMegaMenu(items, parent_classes) {
             ulclass = this_item.classes + '-ul'
 
         }
-        console.log(items);
+       // console.log(items);
     
 
         if (this_item.classes != undefined) {
@@ -2111,6 +2140,7 @@ function getMegaMenu(items, parent_classes) {
 
     return menu_items;
 }
+
 var menu_config = {
     'megamenu': {
         'menu_type': 'megamenu',
@@ -2202,7 +2232,7 @@ function setMenus(data) {
         
     }
     buildMenuData();
-     //  console.log("raw menu data", menus)
+       console.log("raw menu data", menus)
 
 }
 
@@ -2213,7 +2243,9 @@ function setMenu(slug, items) {
         menu[items[i].ID] = setMenuItem(slug, items[i])
             // console.log("setMenu", items[i].ID, slug, items)
         if (items[i].menu_item_parent != 0) { //recursive
-            menu[items[i].menu_item_parent].children.push(items[i].ID) //children empty array is created in setMenuItem
+            if(menu[items[i].menu_item_parent] != undefined){
+                menu[items[i].menu_item_parent].children.push(items[i].ID) //children empty array is created in setMenuItem
+                }
 
         } else {
         }
@@ -2372,7 +2404,8 @@ function buildMenuData() {
         for (var m in menus) { // 
             var data = [];
           //  console.log('menu loop',m)
-            if (menu_config[m] != undefined) {
+            if (menu_config[m] != undefined) {}
+
                 var items = ''
 
                 //menus[m].items.sort(function(a,b){return a.menu_order-b.menu_order})
@@ -2477,8 +2510,7 @@ function buildMenuData() {
 
 
                 //circleMenu('.circle a')
-            }
-
+            
         }
 
     }
@@ -2920,7 +2952,7 @@ function getProfileCard(this_profile){
         
         if(!hide_social_icons){
             if(info.twitter != undefined){
-                social +='<a target="_new" class="twitter" href="'+info.twitter+'"><i class="fa fa-twitter social-icon" title="'+this_profile.title+' on Twitter"></i></a>'
+                social +='<a target="_new" class="twitter" href="'+info.twitter+'"><i class="fa fa-x-twitter social-icon" title="'+this_profile.title+' on Twitter"></i></a>'
             }
             if(info.linkedin != undefined){
                 social +='<a target="_new" class="linkedin" href="'+info.linkedin+'"><i class="fa fa-linkedin social-icon" title="'+this_profile.title+' on LinkedIn"></i></a>'
@@ -2951,7 +2983,10 @@ function displayRunOfShowList(runOfShow){
     var list = '<div class="ros-list">'
   
     var now = new Date()
-    var showtime = runOfShow.info.event_info.utc_start;
+    var showtime = null
+    if(runOfShow.info.event_info.utc_start != undefined){
+        showtime = runOfShow.info.event_info.utc_start;
+    }
     
     var duration = 0;
     var tense = "future";
@@ -2970,7 +3005,7 @@ function displayRunOfShowList(runOfShow){
     var description;
     var display_event_time
     var admin = getUrlParameter('admin')
- 
+    var session_ids = {}
 
     list += '<h2|'+runOfShow.title+'</h2>'
 //    list += '<h2>'+runOfShow.title+'</h2>'
@@ -3049,7 +3084,7 @@ function displayRunOfShowList(runOfShow){
            // credential += '|'
      if(info.twitter != undefined){
         credential += '@'+info.twitter.replace("https://twitter.com/","")
-         //          credential +=' <a target="_new" class="twitter" href="'+info.twitter+'"><i class="fa fa-twitter social-icon" title="'+this_profile.title+' on Twitter"></i></a> '
+         //          credential +=' <a target="_new" class="twitter" href="'+info.twitter+'"><i class="fa fa-x-twitter social-icon" title="'+this_profile.title+' on Twitter"></i></a> '
                //credential +='<a target="_new" class="twitter" href="'+info.twitter+'">Twitter</a> '
                }
 
@@ -3093,8 +3128,10 @@ function displayRunOfShowMonolith(runOfShow){
 
     var show = '<h2>'+runOfShow.title+'</h2>'
 
-    var showtime = runOfShow.info.event_info.utc_start;
-    
+    var showtime = null
+    if(runOfShow.info.event_info.utc_start != undefined){
+        showtime = runOfShow.info.event_info.utc_start;
+    }
     $("#show").html(show)
     var duration = 0;
     var sessions = '<div id="schedule">'
@@ -3174,8 +3211,15 @@ function displayRunOfShowMonolith(runOfShow){
                 cols='col-sm-6 col-md-3'
 
             }
+            cols='col'
+            if(runOfShow.sessions[n].profiles.length > 3){
+                width_override = 'pair'
+                card_size = 2
+              //  cols='col-xs-6 col-sm-6 col-md-4 col-lg-3'
 
-            
+            }
+
+
         
 
 cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
@@ -3197,7 +3241,7 @@ cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
 
                     }*/
                     if((width_override == 'presentation') || (width_override == 'pair')){
-                        sessions += '</div><div class="col-sm-6 col-md-3">'
+                        sessions += '</div><div class="col">'
                     }
                     sessions += '<span class="profile-info">'
                 
@@ -3207,7 +3251,7 @@ cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
                 sessions += getProfileCard(this_profile,event_time);
                 
                 if(width_override == 'presentation'){
-                   sessions += '</div><div class="col-sm-12 col-md-8 talk-blurb">'
+               //    sessions += '</div><div class="col-sm-12 col-md-8 talk-blurb">'
                 /*
                
                      if(this_profile.profile.info.talk_description != undefined){
@@ -3265,7 +3309,12 @@ function displayRunOfShowTable(runOfShow){
     var ini
     var show = '<h2>'+runOfShow.title+'</h2>'
     var now = new Date()
-    var showtime = runOfShow.info.event_info.utc_start;
+
+    var showtime = null
+   // console.log("ROSTEST",runOfShow.info)
+    if(runOfShow.info.event_info != undefined){
+        showtime = runOfShow.info.event_info.utc_start;
+    }
     var duration = 0;
     var tense = "future";
     var seconds =  Math.floor(Date.now() / 1000)
@@ -3289,21 +3338,31 @@ function displayRunOfShowTable(runOfShow){
     var suppress_unconfimred_speakers = 0 //session level
     var suppress_event_unconfimred_speakers = 1 // event level
     var section_class = ''
+
+    var section_strip_from_label = ''
+    if("ROSTEST",runOfShow.info.meta.section_strip_from_label != undefined){
+        section_strip_from_label = runOfShow.info.meta.section_strip_from_label
+    }
     
     var show_speakers = getUrlParameter('show_speakers')
     var show_unconfirmed_speakers = getUrlParameter('show_unconfirmed_speakers')
+    var session_ids = []
+    var session_title = ''
     for (var n = 0; n < runOfShow.sessions.length; n++) { 
+        session_title = runOfShow.sessions[n].title.replace(section_strip_from_label,'').trim()
        
        //
-      //  console.log("Suppress list",suppress_event_speaker_list)
+ //console.log("Suppress list",suppress_event_speaker_list)
       
-
+         session_ids.push({"id":runOfShow.sessions[n].object_id,"title":session_title,
+         //"data":runOfShow.sessions[n]
+        })
         //console.log("session-info",runOfShow.sessions[n].info,showtime)
         if(runOfShow.sessions[n].info != undefined){
 
             if(tense == 'past' && runOfShow.sessions[n].info.meta.embed_video_url == undefined){
-                
-                continue;
+                //console.log("skip")
+               // continue;
 
             }
 
@@ -3331,7 +3390,7 @@ function displayRunOfShowTable(runOfShow){
             }
                 // console.log("info not undefined",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
         
-        //        console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
+              //console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
    
             sessions += '<div id="'+runOfShow.sessions[n].info.slug+'"  class="row session '+section_class+'">'
             
@@ -3344,11 +3403,16 @@ function displayRunOfShowTable(runOfShow){
            
             sessions += '</span></h3>'
             } else {
-              
-             if(runOfShow.sessions[n].info != undefined){
-          
-            
-            sessions += '<a href="#'+runOfShow.sessions[n].info.slug+'" class="watch video-button" onclick="playSessionVideo(\''+runOfShow.sessions[n].info.meta.embed_video_url+'\',\''+runOfShow.sessions[n].object_id+'\',\'\''+')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
+              var embed_video_url = runOfShow.sessions[n].info.meta.embed_video_url
+                if(embed_video_url != undefined){
+                            //              console.log(embed_video_url)
+                if(runOfShow.sessions[n].info != undefined){
+                    embed_video_url  = embed_video_url.replace(/(\?.+)?$/, function(match) {
+                        return match ? match + '&autoplay=1&rel=0' : '?autoplay=1&rel=0';
+                    });
+                
+                sessions += '<a href="#'+runOfShow.sessions[n].info.slug+'" class="watch video-button" onclick="playSessionVideo(\''+embed_video_url+'\',\''+runOfShow.sessions[n].object_id+'\',\'\''+')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
+                    }
                 }
             }
           //  sessions += '<div class="card-mode">'
@@ -3371,7 +3435,7 @@ function displayRunOfShowTable(runOfShow){
       //  console.log("session_id",runOfShow.sessions[n].object_id)
         if(runOfShow.sessions[n].info != undefined){
 
-        sessions += '<h3 class="session-title ">'+runOfShow.sessions[n].info.title+'</h3>'
+        sessions += '<h3 class="session-title ">'+session_title+'</h3>'
       //  sessions += '<h5 class="session-blurb ">'+runOfShow.sessions[n].info.content+'</h3>'
       
             if(runOfShow.sessions[n].info.content != ''){
@@ -3387,13 +3451,13 @@ function displayRunOfShowTable(runOfShow){
         sessions +='<div class="row"><div class="col-12">'//session
 
         sessions += displaySessionProfiles(runOfShow.sessions[n].object_id)
-
+        
           
         sessions += '</div>'
         }
     }
     sessions +='</div>'
-    
+      
     $("#ros-table").html(sessions)
     playSessionVideo(runOfShow.sessions[first].info.meta.embed_video_url,first,'')
    
@@ -3406,13 +3470,13 @@ function displayRunOfShowTable(runOfShow){
        
    }
     
-
+   console.log("sesion_ids", session_ids)
 
 
 
 }
 function setSessionByID(id){
-    console.log("ros",id,currentROS)
+    //console.log("ros",id,currentROS)
     for(var s=0;s<currentROS.sessions.length;s++){
         if(currentROS.sessions[s].object_id == id){
 
@@ -3427,11 +3491,12 @@ function setSessionByID(id){
 
 
 function displaySessionProfiles(id){ // this shows the speaker list
- 
+   
     var session = setSessionByID(id)
     if(session != undefined){
     
   
+
    console.log("session",id,session)
 
 
@@ -3463,6 +3528,15 @@ function displaySessionProfiles(id){ // this shows the speaker list
                 cols='col-sm-6 col-md-3'
 
             }
+            cols='col'
+            if(session.profiles.length > 3){
+                width_override = 'pair'
+                card_size = 2
+                cols='col-xs-6 col-sm-6 col-md-3'
+
+            }
+
+
             //suppress_speaker_list = 0;
             if(session.info != undefined){
 
@@ -3496,7 +3570,7 @@ function displaySessionProfiles(id){ // this shows the speaker list
 
                                 }*/
                                 if((width_override == 'presentation')){
-                                    sessions += '</div><div class="col-sm-6 col-md-3">'
+                                    sessions += '</div><div class="col">'
                                 } else if (width_override == 'inteview'){
                                     
                                 }
@@ -3509,7 +3583,7 @@ function displaySessionProfiles(id){ // this shows the speaker list
                         
                 
                     if(width_override == 'presentation'){
-                    sessions += '</div><div class="col-sm-12 col-md-8 talk-blurb">'
+                   // sessions += '</div><div class="col-sm-12 col-md-8 talk-blurb">'
                     
                 //       console.log(this_profile.profile);
                     if(this_profile.profile.meta.talk_description != undefined){
@@ -3552,12 +3626,14 @@ function displaySelectedVideoProfiles(profiles){
 }
 
 function playSessionVideo(src,session_id,attrs){
-    console.log("currentROS",currentROS,session_id);
+   // console.log("currentROS",currentROS,session_id);
     var session = setSessionByID(session_id);
-    console.log("session",session);
+   // console.log("session",session);
     var event_class = currentROS.slug;
     var event = '<div class="'+currentROS.slug+'" title="'+currentROS.title+'">'+currentROS.title+'</div>'
-    var header = event+'<h4>'+session.title+'</h4>'
+    var header = ''
+    
+    header = event+'<h4>'+currentROS.title+'</h4>'
 
 
     var sponsors = '<div class="'+currentROS.slug+'-sponsors" title="'+currentROS.title+' Sponsors"></div>'
@@ -3567,7 +3643,7 @@ function playSessionVideo(src,session_id,attrs){
     $("#video-wrap-header").html(header);
 
     $("#video-wrap-footer").html(footer);
-    console.log(src)
+//    console.log(src)
 
     $("#video-player").attr("src",src)
 
@@ -3719,8 +3795,11 @@ function displayRunOfShowCards(runOfShow){
     var show = '<h2>'+runOfShow.title+'</h2>'
     }
    // console.log("ROS",runOfShow)
-
-    var showtime = runOfShow.info.event_info.utc_start;
+   var showtime = null
+  
+   if(runOfShow.info.event_info.utc_start != undefined){
+        showtime = runOfShow.info.event_info.utc_start;
+    }
   //  console.log("SHOWTIME",showtime)
     $("#show").html(show)
     var duration = 0;
@@ -3890,7 +3969,7 @@ function displayRunOfShowCards(runOfShow){
             card_size = 1
         }
         if (width_override == 'interview'){
-            sessions += '<div class="col-sm-6 '+ width_override+'"><span class="blurb">'+runOfShow.sessions[n].info.content+'</span></div>'
+           // sessions += '<div class="col-sm-6 '+ width_override+'"><span class="blurb">'+runOfShow.sessions[n].info.content+'</span></div>'
             }
         for (var p = 0; p < runOfShow.sessions[n].profiles.length; p++) { 
             
@@ -3909,7 +3988,7 @@ function displayRunOfShowCards(runOfShow){
             if(!show_this){
                 continue;
             }
-                sessions += '<div class="col-sm-3 '+ width_override+'">'
+                sessions += '<div class="col">'
                     sessions += '<div class="profile-card" class="'+ this_profile.classes +'">'
                // console.log("THIS PROFILE",this_profile)
                 if(this_profile.profile != undefined){

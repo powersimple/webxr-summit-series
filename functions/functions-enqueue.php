@@ -4,7 +4,7 @@
 
         //because without this, there is no site, at least not a coherent one.
 
-        wp_enqueue_style( 'powersimple',get_stylesheet_directory_uri() . '/style.css');
+        wp_enqueue_style( 'powersimple',get_stylesheet_directory_uri() . '/style.min.css');
 
        /*
 

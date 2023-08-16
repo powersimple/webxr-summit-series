@@ -284,36 +284,36 @@
     device-orientation-permission-ui physics="iterations: 30;"
     inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
     loading-screen="backgroundColor: #12171a" renderer="colorManagement: true; foveationLevel: 2;"
-    background="color: #000000">
+    background="color: #000000; position:relative;z-index:1">
     <a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
     <a-entity tracked-controls="controller: 1; idPrefix: OpenVR"></a-entity>
     <a-assets timeout="800000">
         <!-- Loads models -->
-        <a-asset-item id="pedestal" response-type="arraybuffer" src="assets/models/pedestal.glb"></a-asset-item>
+        <a-asset-item id="pedestal" response-type="arraybuffer" src="/assets/models/pedestal.glb"></a-asset-item>
 
-        <a-asset-item id="buttonmodel" response-type="arraybuffer" src="assets/models/button.glb"></a-asset-item>
-        <a-asset-item id="buttonupmodel" response-type="arraybuffer" src="assets/models/button-up.glb">
+        <a-asset-item id="buttonmodel" response-type="arraybuffer" src="/assets/models/button.glb"></a-asset-item>
+        <a-asset-item id="buttonupmodel" response-type="arraybuffer" src="/assets/models/button-up.glb">
         </a-asset-item>
-        <a-asset-item id="the-polys" response-type="arraybuffer" src="assets/models/thepolys.glb"></a-asset-item>
-        <a-asset-item id="webxr-awards" response-type="arraybuffer" src="assets/models/WebXRAwards.glb">
+        <a-asset-item id="the-polys" response-type="arraybuffer" src="/assets/models/thepolys.glb"></a-asset-item>
+        <a-asset-item id="webxr-awards" response-type="arraybuffer" src="/assets/models/WebXRAwards.glb">
         </a-asset-item>
 
-        <a-asset-item id="emblem" response-type="arraybuffer" src="assets/models/emblem.glb"></a-asset-item>
-        <a-asset-item id="mountain" response-type="arraybuffer" src="assets/models/mountain9b.glb"></a-asset-item>
+        <a-asset-item id="emblem" response-type="arraybuffer" src="/assets/models/emblem.glb"></a-asset-item>
+        <a-asset-item id="mountain" response-type="arraybuffer" src="/assets/models/mountain9b.glb"></a-asset-item>
         <a-asset-item id="dev-summmit-logo" response-type="arraybuffer"
-            src="assets/models/WebXR-DeveloperSummit.glb"></a-asset-item>
+            src="/assets/models/WebXR-DeveloperSummit.glb"></a-asset-item>
          <!--   <a-asset-item id="town-hall" response-type="arraybuffer"
-            src="assets/models/TownHall.glb"></a-asset-item>-->
+            src="/assets/models/TownHall.glb"></a-asset-item>-->
             <a-asset-item id="dev-summmit-hosted" response-type="arraybuffer"
-            src="assets/models/hostedby.glb"></a-asset-item>
+            src="/assets/models/hostedby.glb"></a-asset-item>
             <a-asset-item id="business-summmit-square" response-type="arraybuffer"
-            src="assets/models/BusinessSummitSquare.glb"></a-asset-item>
+            src="/assets/models/BusinessSummitSquare.glb"></a-asset-item>
             <a-asset-item id="business-summmit-wide" response-type="arraybuffer"
-            src="assets/models/BusinessSummit-wide.glb"></a-asset-item>
+            src="/assets/models/BusinessSummit-wide.glb"></a-asset-item>
             <a-asset-item id="design-summmit-wide" response-type="arraybuffer"
-            src="assets/models/DesignSummit-wide.glb"></a-asset-item>
+            src="/assets/models/DesignSummit-wide.glb"></a-asset-item>
             <a-asset-item id="design-summmit-square" response-type="arraybuffer"
-            src="assets/models/DesignSummit-square.glb"></a-asset-item>
+            src="/assets/models/DesignSummit-square.glb"></a-asset-item>
 
         <img id="sky" src="/assets/images/skybox/blueskybox.jpg">
 

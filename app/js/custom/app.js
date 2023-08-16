@@ -48,12 +48,12 @@ function getOrientation(){
    
     if(last_orientation != o.oriented){
         last_orientation = o.oriented
-        console.log("orientation chaaaged to",last_orientation)
+    //    console.log("orientation changed to",last_orientation)
     }
 
     o.aspect = o._w / o._h
     
-    console.log("o",o,screen.orientation)
+ //   console.log("o",o,screen.orientation)
     
     return o
 }
@@ -69,7 +69,7 @@ function reposition_screen() {
  //   console.clear();
     o = getOrientation();
     if(o.oriented == 'landscape'){
-        $("#main").toggleClass("landscape")
+       // $("#main").toggleClass("landscape")
     } 
     
 
@@ -138,13 +138,14 @@ function initSite() {
    // console.log("megamenu");
     megaMenu()
    // sponsorFooter()
-
+   displayFooterMenu()
 
     getVideo();
-
+/*
     var menu_name = getUrlParameter('event_menu')
-    
+    console.log("menuvars",section_class,section_menu_slug);
   //console.log('url',window.location.pathname,getUrlParameter('event_menu'))
+    console.log("section_menu",section_menu, section_menu_slug)
     if(window.location.pathname == '/event/webxr-business-summit/'){
         menu_name = 'bizsummit21'
         event_class = 'business_summit'
@@ -180,11 +181,13 @@ function initSite() {
     event_class = 'virtual-red-carpet-2'
    // console.log("virtual-red-carpet-2")
 }  
-
-    if(menu_name != false){
+*/
+    if(section_menu_slug != ''){
      //   console.log("app/menuname menu",menu_name,menus[menu_name])
-        var run_of_show = runOfShow(menus[menu_name]);
-       console.log("Run of Show",menu_name,menus[menu_name])
+        
+        
+        var run_of_show = runOfShow(menus[section_menu_slug]);
+       console.log("Run of Show",section_menu_slug,menus[section_menu_slug])
         //displayRunOfShow(run_of_show)
         var ros_list = getUrlParameter('ros-list')
 
@@ -273,7 +276,33 @@ jQuery(function() {
     }); //win func.
 }); //ready func.
 
+function displayFooterMenu() {
 
+    var menu_data = menus['footermenu'].menu_array
+    var menu_links = '<ul>'
+    var url = '';
+    var logo = '';
+    var slug = '';
+    // console.log(menu_data, menu_data.length)
+
+    for (var i = 0; i < menu_data.length; i++) {
+
+        //console.log("profile =" + menu_data[i].title, menu_data[i].object_id, profiles[menu_data[i].object_id])
+       // logo = profiles[menu_data[i].object_id].post_media.logo[0].full_path
+      //  url = profiles[menu_data[i].object_id].info.url
+        slug = profiles[menu_data[i].object_id].slug
+            //        console.log(url)
+        menu_links += "<li class='col'><a href='/" + slug + "' target='_new' title='" + menu_data[i].title + "'> "
+        menu_links += profiles[menu_data[i].object_id].title
+       // menu_links += '<img src="' + logo + '" alt="' + menu_data[i].title + ' logo">'
+        menu_links += "</a></li>"
+
+    }
+    menu_links += "</ul>"
+    jQuery('#footer-menu').html(menu_links);
+    //    console.log("sponsor-footer", menu_links)
+   
+}
 
 
 function sponsorFooter() {

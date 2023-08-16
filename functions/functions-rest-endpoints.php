@@ -72,7 +72,7 @@ $GLOBALS['REST_CONFIG'] =array(//An array of url arguments
            // "hardware"=>"fields=id,type,title,content,slug,excerpt,posts,post_media,languages,info,seo,profiles,featured_media,screen_images,featured_video,type,industry,feature,thumbnail_url,platform,cats,tags&".$GLOBALS['REST_post_filter'],
             "resource"=>"fields=id,type,title,content,slug,excerpt,languages,meta,info,related,featured_media,screen_images,post_media,related,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
             //"event"=>"fields=id,type,title,content,slug,excerpt,languages,event_info,profiles,date_time,resources,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
-            "event"=>iterateEndpoint('post_type','event',"fields=id,type,title,content,slug,excerpt,languages,meta,event_info,profiles,date_time,resources,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter']),
+            "event"=>iterateEndpoint('post_type','event',"fields=id,type,title,content,slug,excerpt,languages,meta,event_info,profiles,post_media,date_time,resources,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter']),
             //"product"=>"fields=id,type,title,content,slug,excerpt,languages,project_info,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
             //"person"=>"fields=id,type,title,content,slug,excerpt,languages,project_info,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],
             "sponsor"=>"fields=id,type,title,content,slug,excerpt,languages,project_info,featured_media,screen_images,featured_video,type,cats,tags&".$GLOBALS['REST_post_filter'],

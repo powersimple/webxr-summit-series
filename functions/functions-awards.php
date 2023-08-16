@@ -925,6 +925,127 @@ function getNomineeCredits($nominee,$nominations,$current_award,$current_nominat
   get_nominee_meta(@$meta);
 
   }
+  function get_nominees_and_winners($children,$counter){
+            
+    foreach($children as $c =>$child){
+      extract($child);
+      
+    //  print("<pre>".print_r($meta,true)."</pre>");
+     // print $counter;
+     $thumbnail_src = getThumbnail(@$meta['_thumbnail_id'][0],"thumbnail");
+      if($classes[0] == 'presenter'){
+        print "<div class='col-12 col-sm-6'>";
+        print "<h4 class='presenter'>";
+        if($thumbnail_src != '' && $counter == 0){
+          print "<img src='$thumbnail_src' alt='$title' title='$title' class='nomination-thumbnail'>";
+        }
+        if($child['attr_title'] != ''){
+          print $child['attr_title']. " ";
+        } else {
+          print "Presented by ";
+        }
+
+
+
+      //  print @$meta['thumbnail_id']; 
+        print "<span class='presented-by'>";
+        
+        print $child['title'];
+        print get_nominee_meta($child['meta']);
+        print "</span>
+              </h4>
+            </div>
+          <hr>";
+       
+      } else if ($classes[0] == 'honoree'){
+        $item_class = 'honoree';
+        if($counter>0){
+          $item_class = 'honoree';
+          
+        }
+        print "<li class='$item_class'>";
+     
+        
+        if($thumbnail_src != '' && $counter == 0){
+          if(@$meta['resource_url'][0] != ''){
+
+            print "<a href='".$meta['resource_url'][0]."' target='_blank' class='nominee-image'>";
+          
+           } else {
+            print "<span class='nominee-image'>";
+           }
+          
+          print "<img src='$thumbnail_src'  class='nomination-thumbnail'>";
+          if(@$meta['resource_url'][0] != ''){
+
+            print "</a>";
+          
+           } else {
+            print "</span>";
+          
+           }
+           if($classes[0] == 'honoree' ){
+            print "<span class='winner'></span>";
+          }  
+        }
+        print get_nominee_info($child,$counter);
+       
+      } else{
+        $item_class = 'nominee';
+        if($counter>0){
+          $item_class = 'nominee-credit';
+          
+        }
+
+        print "<li class='$item_class'>";
+     
+        
+        if($thumbnail_src != '' && $counter == 0){
+          if(@$meta['resource_url'][0] != ''){
+
+            print "<a href='".$meta['resource_url'][0]."' target='_blank' class='nominee-image'>";
+          
+           } else {
+            print "<span class='nominee-image'>";
+           }
+          
+          print "<img src='$thumbnail_src'  class='nomination-thumbnail'>";
+          if(@$meta['resource_url'][0] != ''){
+
+            print "</a>";
+          
+           } else {
+            print "</span>";
+          
+           }
+           if($classes[0] == 'winner' || $classes[0] == 'honoree'){
+            print "<span class='winner'></span>";
+          }  
+        }
+        print get_nominee_info($child,$counter);
+       
+       // print "|".@$child['meta']['github']."|";
+      if(is_array(@$children)){
+        $counter++;
+        if($counter == 2 && count($children)){
+          print ",";
+        }
+        get_nominees_and_winners($children,$counter);
+       
+        $counter --;
+      }
+     
+      print "</li>";
+      }
+
+      
+
+    }
+   
+  }
+
+
+
           function get_nomination($children,$counter){
             
             foreach($children as $c =>$child){
@@ -1209,4 +1330,11 @@ $title : ";
               return $container;
             
               }
+              function embed_LKBlock_by_id($embed_id){
+                ?>
+              <div class="lkg-blocks-player" style="padding:133.333% 0 0 0;position:relative;"><iframe src="https://blocks.glass/embed/<?=$embed_id?>" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;" allow="autoplay; encrypted-media; xr-spatial-tracking; accelerometer; gyroscope; magnetometer" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" execution-while-out-of-viewport="true" execution-while-not-rendered="true"></iframe></div>
+              <?php
+              } 
+            
+
 ?>

@@ -50,42 +50,10 @@ function awards_metabox( $meta_boxes ) {
 	return $meta_boxes;
 	
 }
-add_filter( 'rwmb_mehttps://hyperfy.io/ta_boxes', 'awards_metabox' );
+add_filter( 'rwmb_meta_boxes', 'awards_metabox' );
 
-function section_class( $meta_boxes ) {
-	$prefix = '';
 
-	$meta_boxes[] = array(
-		'id' => 'section',
-		'title' => esc_html__( 'SECTION', 'section_class' ),
-		'post_types' => array( 'page','event','resource','profile' ),
-		'context' => 'side',
-		'priority' => 'high',
-		'autosave' => false,
-		'fields' => array(
-		   
-			array(
-				'id' => $prefix . 'section_class',
-				'type' => 'text',
-				'name' => esc_html__( 'section-class', 'ps-social' ),
-			),
-		
-			[
-                'type'       => 'taxonomy',
-                'name'       => esc_html__( 'Taxonomy', 'online-generator' ),
-                'id'         => 'section_menu',
-                'taxonomy'   => 'nav_menu',
-                'field_type' => 'select_advanced',
-                'query_args' => [
-                    '' => '',
-                ],
-			],
-			
-		),
-	);
 
-	return $meta_boxes;
-}
 function profile_info( $meta_boxes ) {
 	$prefix = '';
 
@@ -445,7 +413,7 @@ function setProfileURL( $meta_boxes ) { // this shows the box were
 }
 add_filter( 'rwmb_meta_boxes', 'setProfileURL' );
 
-add_filter( 'rwmb_meta_boxes', 'section_class' );
+
 function selectLayoutTemplate( $meta_boxes ) {
 	$prefix = '';
 
@@ -505,6 +473,12 @@ function selectHeroImage( $meta_boxes ) {
 				'type' => 'image_advanced',
 				'name' => esc_html__( 'Hero Image', 'metabox-online-generator' ),
 				'desc' => esc_html__( '', 'metabox-online-generator' ),
+			),
+			array(
+				'id' => $prefix . 'tile-image',
+				'type' => 'image_advanced',
+				'name' => esc_html__( 'Tile Image', 'metabox-online-generator' ),
+				'desc' => esc_html__( 'Square Image', 'metabox-online-generator' ),
 			),
 			array(
 				'id' => $prefix . 'page-background',
@@ -841,6 +815,61 @@ function eventProperties( $meta_boxes ) {
 	return $meta_boxes;
 }
 add_filter( 'rwmb_meta_boxes', 'eventProperties' );
+
+
+function sectionProperties( $meta_boxes ) {
+	$prefix = '';
+
+	$meta_boxes[] = [
+			'id' => 'section_properties',
+			'title' => esc_html__( 'SECTION', 'metabox-online-generator' ),
+			'post_types' => array('post','page','profile','event','resource'),
+			'context' => 'side',
+			'priority' => 'high',
+			'autosave' => 'false',
+			'fields' => [
+
+				[
+					'type'       => 'taxonomy_advanced',
+					'name'       => esc_html__( 'Section Menu', 'online-generator' ),
+					'id'         => 'section_menu',
+					'taxonomy'   => 'nav_menu',
+					'field_type' => 'select_advanced',
+					'query_args' => [
+						'' => '',
+					],
+				],
+				[
+					'id' => $prefix . 'section_strip_from_label',
+					'type' => 'text',
+					'name' => esc_html__( 'Strip Text from Labels', 'metabox-online-generator' ),
+					'desc' => esc_html__( 'Removes this text from child event labels ', 'metabox-online-generator' ),
+				],
+				[
+					'id' => $prefix . 'section_class',
+					'type' => 'text',
+					'name' => esc_html__( 'Section Class', 'ps-social' ),
+					'desc' => esc_html__( 'governs the style of this and sub-posts' ),
+				],
+				[
+					'id' => $prefix . 'section_hero_class',
+					'type' => 'text',
+					'name' => esc_html__( 'Section Hero Class', 'metabox-online-generator' ),
+					'desc' => esc_html__( 'Which class to use to display the hero based on the aspect ratio', 'metabox-online-generator' ),
+				],
+			],
+		];
+			
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'sectionProperties' );
+
+
+
+
+
+
 
 function eventResources( $meta_boxes ) {
 	$prefix = '';
@@ -1644,3 +1673,42 @@ function team_metabox( $meta_boxes ) {
 	
 }
 //add_filter( 'rwmb_meta_boxes', 'team_metabox' );
+
+function looking_glass_metabox( $meta_boxes ) {
+	$prefix = '';
+
+	$meta_boxes[] = array(
+		'id' => 'section',
+		'title' => esc_html__( 'Looking Glass Blocks', 'metabox-online-generator' ),
+		'post_types' => array( 'page','event','resource','profile' ),
+		
+	
+		'autosave' => false,
+		'fields' => array(
+		   
+			[
+				'id' => $prefix . 'looking_glass_embed_trophy_base',
+				'type' => 'text',
+				'name' => esc_html__( 'Embed Trophy Base ID', 'metabox-online-generator' ),
+				'desc' => esc_html__( 'If Event has a Poly Recipient, this is the embed id for the trophy hologram by Looking Glass Blocks' ),
+			],
+			[
+				'id' => $prefix . 'looking_glass_embed_trophy',
+				'type' => 'text',
+				'name' => esc_html__( 'Embed Full Trophy ID', 'metabox-online-generator' ),
+				'desc' => esc_html__( 'If Event has a Poly Recipient, this is the embed id for the full trophy hologram by Looking Glass Blocks' ),
+			],
+			
+
+
+
+
+			
+		),
+	);
+
+	return $meta_boxes;
+}
+
+add_filter( 'rwmb_meta_boxes', 'looking_glass_metabox' );
+

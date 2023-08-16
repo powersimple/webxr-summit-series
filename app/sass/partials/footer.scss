@@ -1,5 +1,17 @@
 footer {
-    position: relative;
+    // Styling for the footer
+    background-color: #111; // Consistent with the header's dark color
+    color: #ffffff; // White text for readability on dark background
+    text-align: center;
+    padding: 20px 0;
+    z-index: 1;
+    // If you want a maximum width to your footer content (like the header)
+    .container {
+        max-width: 1140px; // Bootstrap's large container width
+        margin: 0 auto;
+    }
+    /*
+    position: absolute;
     display: table;
     z-index: 100;
    background-color: rgba(0,0,0,1);
@@ -16,6 +28,7 @@ footer {
         margin-top:-100px;
 
     }
+    */
     .xri-logo {
         width: 100px;
         margin-top: 10px;
@@ -26,7 +39,7 @@ footer {
         line-height: 120%;
         vertical-align: top;
         margin: 0;
-        font-size: 9;
+        font-size: 9px;
        
         padding-bottom: .5em;
         span {
@@ -54,15 +67,13 @@ footer {
         position: absolute;
         height: 50px;
     }
-}
-footer{
     ul{
-        float:right;
+       
         li{
             list-style:none;
-            padding:0px 10px;
+            
             display: inline-block;
-            border-left:1px solid #fff;
+           
             a{
                 text-decoration: none;
             }
@@ -76,10 +87,25 @@ footer{
             
         }
         li:last-child{
-            border-right:1px solid #fff;
+            //border-right:1px solid #fff;
         }
     }
+     
 }
+#footer-menu{
+    ul li{
+    padding:0px 10px;
+   
+    }
+}
+#social-menu li{
+    padding:0px 5px;
+    @media(max-width:767px){
+        padding:10px 5px;
+
+    }
+}
+
 .page-footer {
     display: block;
     position: absolute;
@@ -163,6 +189,8 @@ footer{
     font-family: 'Zen Dots', cursive;
     font-size:12px;
     text-transform: none;
+    line-height: 120%;
+    display:block;
 }
 .experiences-header{
     font-weight: bold;
@@ -176,4 +204,9 @@ footer{
 }
 #rights{
     font-size:.5rem;
+    line-height: 120%;
+    @media(max-width:767px){
+        padding-top:10px;
+
+    }
 }

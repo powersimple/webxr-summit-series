@@ -156,6 +156,9 @@ return ob_get_clean();
             $use_font_awesome = true;
 
         }    
+        if($var == 'twitter'){
+            $var = 'x-twitter';
+        }
         if($use_font_awesome == true){
             $label = "<i class='fa fa-$var social-icon'></i>";
         } else {

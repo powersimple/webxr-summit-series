@@ -1,4 +1,17 @@
-  /* Dark background */
+
+#hero{
+    :after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 80px; /* Adjust the height based on your design */
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+        pointer-events: none;
+    }
+}
+/* Dark background */
   
   .bg-dark,
   .bg-dark-30,

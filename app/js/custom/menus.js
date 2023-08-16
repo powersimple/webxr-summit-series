@@ -89,7 +89,7 @@ function setMenus(data) {
         
     }
     buildMenuData();
-     //  console.log("raw menu data", menus)
+       console.log("raw menu data", menus)
 
 }
 
@@ -100,7 +100,9 @@ function setMenu(slug, items) {
         menu[items[i].ID] = setMenuItem(slug, items[i])
             // console.log("setMenu", items[i].ID, slug, items)
         if (items[i].menu_item_parent != 0) { //recursive
-            menu[items[i].menu_item_parent].children.push(items[i].ID) //children empty array is created in setMenuItem
+            if(menu[items[i].menu_item_parent] != undefined){
+                menu[items[i].menu_item_parent].children.push(items[i].ID) //children empty array is created in setMenuItem
+                }
 
         } else {
         }
@@ -259,7 +261,8 @@ function buildMenuData() {
         for (var m in menus) { // 
             var data = [];
           //  console.log('menu loop',m)
-            if (menu_config[m] != undefined) {
+            if (menu_config[m] != undefined) {}
+
                 var items = ''
 
                 //menus[m].items.sort(function(a,b){return a.menu_order-b.menu_order})
@@ -364,8 +367,7 @@ function buildMenuData() {
 
 
                 //circleMenu('.circle a')
-            }
-
+            
         }
 
     }

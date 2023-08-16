@@ -34,7 +34,7 @@ add_action( 'rest_api_init', 'register_post_media' );
  function register_post_media() {
  
 
-	register_rest_field( ['post','page','profile','resource','hardware'], 'post_media', array(
+	register_rest_field( ['post','page','profile','event','resource','hardware'], 'post_media', array(
 		'get_callback' => 'get_post_media'
 
 		)
@@ -184,7 +184,7 @@ function get_media_data_by_id($id){//this function builds the data for a lean js
 
 function get_media_data( $object ) { 
    
-	return get_media_data_by_id($object['id']); // because this is a callback which passes in the full object and we want to be able to get the data elsewhere with just the id. 
+	return get_media_data_by_id(@$object['id']); // because this is a callback which passes in the full object and we want to be able to get the data elsewhere with just the id. 
 }
 
 

@@ -80,7 +80,7 @@
     .fifth {
         width: 20% !important;
     }
-    .sponsor-card {}
+
     .education-summit .profile-thumbnail img{
 
         box-shadow: 0 0 10px 10px rgba(176, 2, 255, 0.3);
@@ -115,14 +115,9 @@
                 font-size: 14px;
                 height: 30px;
 
-            }    text-shadow: 8px 6px 26px #000;
-            .sophia-moshasha,
-            .atsushi-shimono,
-            .daniel-ljunggren,
-            .yu-yuan,
-            .neil-trevett {
-             //   height: 50px !important;
-            }
+            }   
+             text-shadow: 8px 6px 26px #000;
+           
         }
         // PRESENTATION OVERRIDES
         .presentation {
@@ -287,9 +282,7 @@ color:#fff;
                 padding:0px 10%;
             }
         }
-        h4{
-            
-        }
+       
         .sponsor-logo{
             display:none;
         }
@@ -446,11 +439,7 @@ color:#fff;
         }
         
     }
-    .brand-summit {
-       
-    }
-    
-    
+
     .host{
         position: absolute;
         font-family: "AgencyFB";
@@ -558,9 +547,7 @@ color:#fff;
             top:25%;
             scale:100%;
             padding-top:0px;
-            a.rsvp-link{
-              //  margin-bottom:10px;
-                }
+           
         }
     }
 
@@ -666,9 +653,7 @@ color:#fff;
         top:87% !important;
     scale:90% !important;
         padding-top:0px;
-        a.rsvp-link{
-          //  margin-bottom:10px;
-            }
+     
     }
     .futurewei-logo{
         scale: 65%;
@@ -737,9 +722,7 @@ color:#fff;
         scale:90% !important;
         padding-top:0px;
         width: 100%;
-        a.rsvp-link{
-          //  margin-bottom:10px;
-            }
+    
             .presenter-info{
             text-shadow: 1px 1px 1px #000, -1px -1px 1px #000;
         }
@@ -864,9 +847,6 @@ color:#fff;
             width:1100px;
             left:25px;
         }
-        span.sponsor-logo{
-          
-        }
         span.presenters-logo{
             width:300px;
             left:76%;
@@ -912,8 +892,6 @@ color:#fff;
 }
 
 
-#schedule{
-}
 
 
     .session-times {
@@ -964,11 +942,11 @@ color:#fff;
         }
     }
     .profile-name {
-        font-size: .5rem;
+        font-size: .8rem;
         border-bottom: 1px dashed #ccc;
     }
     .credential {
-        font-size: 0.5rem;
+        font-size: 0.8rem;
         line-height: 150%;
 
     }
@@ -996,10 +974,6 @@ color:#fff;
         border-top: 5px dashed #4173D8;
         padding: 20px 0 !important;
 
-        div:first-child {
-           // margin-top: 10px;
-        }
-
 
     }
     .blurb {
@@ -1018,6 +992,7 @@ color:#fff;
 
 .twitter i.fa {
     color: #1DA1F2;
+    font-size: 80%;
 }
 .linkedin i.fa {
     color: #0077b5;
@@ -1050,7 +1025,7 @@ table.segment {
         width: 150px;
         border-radius: 150px;
     }
-    .presenter {}
+ 
     .thumbnail {
         background-color: transparent;
         width: 100px;
@@ -1104,4 +1079,32 @@ table.segment {
     border:3px solid #009;
 
     padding:5px;
+}
+.container-flex {
+    transition: all 0.4s ease-in-out; /* Smooth transition */
+}
+.left, .right {
+    transition: all 0.4s ease-in-out; /* Smooth transition */
+}
+.right{
+    position: sticky;
+    top: 0;
+    padding-left:2%;            
+}
+@media (max-width: 767px) {
+    .container-flex {
+        flex-direction: column-reverse;
+    }
+
+    .right {
+        max-height: 60vh;  /* 40% of viewport height */
+        overflow-y: auto;  /* Scroll if content overflows */
+        overflow-x:hidden;
+        position: sticky;
+        top: 0;            /* Position from the top */
+        z-index: 10;
+        background-color: #000;
+        padding-left:0px;
+        
+    }
 }

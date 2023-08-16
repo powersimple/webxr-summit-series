@@ -56,9 +56,9 @@
     background-color:#000;    
     max-height:85vh;
     video {
-    width: 100vw;
-    margin-top: 50px;
-    opacity:1;
+        width: 100vw;
+        margin-top: 50px;
+        opacity:1;
     }
 }
 
@@ -74,8 +74,7 @@
 }
 .video-position {
 
-    position:fixed;
-    width: 38%;
+    width: 100%;
     height: 0px;
     padding-bottom: 56.25%;
     background:#000;
@@ -89,6 +88,7 @@
         left:0px;
     }
     display: inline-table;
+    position:sticky;
     .video-wrap {
      //   border: 3px dotted #fff;
 

@@ -35,7 +35,12 @@ require_once("functions/functions-metabox.php");
 	
 	add_post_type_support( 'page', 'excerpt' );
 
-
+	add_action('admin_notices', 'show_content_url');
+	function show_content_url() {
+		echo '<div class="notice notice-info is-dismissible">';
+		echo '<p>Content URL: ' . content_url() . '</p>';
+		echo '</div>';
+	}
 
 function featured_image_support(){
 	add_theme_support('post-thumbnails', array(
@@ -75,6 +80,7 @@ function stripURL($path){
 	return parse_url($path, PHP_URL_PATH);
 
 }
+
 
 		/* OLD RELIABLE!
         HASN'T CHANGED IN YEARS
@@ -121,7 +127,7 @@ add_filter('wpcf7_form_elements', 'my_wpcf7_form_elements');
 	
 	
 	 function get_slides( $id ) {
-		return get_post_meta($id,"top_slider") ;//from functions.php,
+		return get_post_meta($id,"screen_image") ;//from functions.php,
 		}
 		//Embed Video  Shortcode
 	
@@ -186,6 +192,17 @@ function register_video_meta() {
         )
     );
 }
+
+function modify_post_title() {
+	// Remove the specified strings from the title
+$title = get_the_title();
+	$strip = @get_post_meta(get_the_id(),"section_strip_from_label",true);
+	$modified_title = str_replace($strip, "", $title);
+
+	// Return the modified title
+	return $modified_title;
+  }
+
 
 
 function get_attachment($id){
@@ -325,7 +342,7 @@ function print_model_viewer_script() {
     </style>';
 
     echo '<script>
-        (function($) {
+        (function($
             $(document).ready(function() {
                 function updateMediaTile(attachmentElement) {
                     const attachmentId = $(attachmentElement).data("id");

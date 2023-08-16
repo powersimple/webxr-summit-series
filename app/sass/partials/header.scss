@@ -1,11 +1,10 @@
-#header {
-    // background-color: $darkest_gray;
-}
+
 
 
     #header {
         //  background-color: $darkest_gray;
         height: 50px;
+        z-index: 100;
     }
     #logo {
         position: relative;
@@ -80,15 +79,31 @@
     margin-bottom:-5px !important;
     opacity:.8;
 }
+//*Heros*//
+
 .home-section {
     position: relative;
-    background: rgba(10, 10, 10,0.9);
+    background-position: top center;
+    padding-bottom:20%;//default
     background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain  !important;
-    width: 100%;
-    z-index: 0;
-    height:0px;
+    background-size: cover;
+}
+.hero-cover-20 {
+    background-size: cover !important;
     padding-bottom:20%;
-    margin-top:50px;
+}
+.hero-cover-25 {
+    background-size: cover !important;
+    padding-bottom:25%;
+}
+
+.hero-cover-50 {
+    background-size: cover !important;
+    padding-bottom:50%;
+}
+.parallax{
+    background-attachment: fixed;
+      opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s, transform 0.3s;
 }

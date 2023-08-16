@@ -40,7 +40,7 @@ function getMegaMenu(items, parent_classes) {
             ulclass = this_item.classes + '-ul'
 
         }
-        console.log(items);
+       // console.log(items);
     
 
         if (this_item.classes != undefined) {

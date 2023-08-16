@@ -1,39 +1,37 @@
 <footer class="footer">
+<div class="container">
 <div class="row">
 
-         <div class="partners col-sm-9">
-                        <ul >
-                        
-                        <li><a class="awe" target="_blank"
-                                    href="https://augmentedworldexpo.secure.force.com/BuyTicket?id=7018V000001dCau">AWE USA 2023</a></li>
-                       <!-- <li><a class="gatherverse" target="_blank" href="https://gatherversesummit.com/">Gatherverse MMM Summit Jul 19</a></li>-->
-                      
-                            
-                        <!-- <li><a target="_blank" class="awe" href="https://www.awexr.com/usa-2021/auggie/">
-                                    Auggies Nomination Deadline September 8</a></li>-->
-                            
-                                    <li><a class="threelbxr" target="_blank" href="https://www.3lbxr.com/">3lbXR</a></li>
-                                    <li><a class="vartisans" target="_blank" href="https://vartisans.com/">VARTISANS</a></li>
-                                    <li><a class="vrm" target="_blank" href="https://www.virtualrealitymarketing.com/">Virtual Reality Marketing</a></li>
-                                    
-                                    <li><a target="_blank" class="futurewei" href="https://futurewei.com/">Futurewei
-                                    Technologies</a></li>
+<div id="social-menu" class="col-md-3">
+        <ul>
+            
 
-                            </li>
-                            <li><a target="_blank" class="metavrse" href="https://metavrse.com/"></a></li>
+        <li><a href="https://twitter.com/webxrawards" target="_blank"
+        class="fa fa-x-twitter" title="Follow us on the Social Network formerly known as Twitter"></a>
+        </li>
+        <li><a href="https://www.instagram.com/webxrawards/" target="_blank" class="fa fa-instagram"
+        title="Follow us on Instagram"></a>
+        </li>
+        <li><a href="https://www.facebook.com/groups/webxrawards" target="_blank" class="fa fa-facebook"
+        title="Join our Facebook Group"></a>
+        </li>
+        <li><a href="https://www.linkedin.com/company/the-polys/" target="_blank" class="fa fa-linkedin"
+        title="Connect with us on LinkedIn" target="_blank"></a>
+        </li>
+        <li><a href="https://discord.gg/T5vRuM5cDS" class="fa discord" target="_blank"
+        title="Join our community Discord"></a>
+        </li>
+        </ul>
+</div>
 
-                            </li>
-                        </ul>
+<div id="footer-menu" class="col-md-6"></div>
 
-                   
-                    
-            </div>
-             <div class="col-sm-3" id="rights">
+                <div class="col-md-3" id="rights">
 
-             <span class="font-alt copyright "><span class="point-cloud">Point Cloud Productions</span><br>
-             <span>&copy; <?=  date("Y")?> Powersimple, LLC - </span><span> All Rights Reserved</span></span>
-                </div> 
-      
+                        <span class="font-alt copyright "><span class="point-cloud">Point Cloud Productions</span><br>
+                        <span>&copy; <?=  date("Y")?> Powersimple, LLC -  All Rights Reserved</span></span>
+                        </div> 
+                </div>
         </div>
 </footer>
 

@@ -32,7 +32,7 @@ if(@$_GET['menu']){
 
 
 $menu = get_menu_array($menu);
-var_dump($menu);
+//var_dump($menu);
 function dump_menu_children($children){
  
   if(count($children)){

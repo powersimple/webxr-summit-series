@@ -1,7 +1,7 @@
 `<?php
     get_header();
     require_once "functions/functions-awards.php";
-      $pedestals = get_pedestals('polys4');
+    //  $pedestals = get_pedestals('polys4');
     //    var_dump($pedestals);
       $assets = [];
      
@@ -62,7 +62,7 @@
 
 ?>
 <a-entity id="awards-2022" position="0 0 0" rotation="0 0 0" scale="1 1 1" visible="true">
-    <a-entity id="platform-wrap"  scale="2 2 2" position="-8 -2.1 -36" rotation="0 25 0" visible="<?=$showplatform?>">
+    <a-entity id="platform-wrap"  scale="2 2 2" position="-8 -2 -40" rotation="0 25 0" visible="<?=$showplatform?>">
 
 
       
@@ -75,24 +75,33 @@
 
                 <a-entity id="ring1" class="center-obj-zone" static-body
                 gltf-model="#ring" class="collision" visible="true"
-                scale="1 1 1"
-                position="0 -0.005 3"
+                scale=".8 .8 .8"
+                position="0 0 3"
                 static-body="shape: box;" 
                 ></a-entity><!-- outer ring -->
 
                 <a-entity id="ring2" class="center-obj-zone" static-body
                 gltf-model="#ring"  visible="true"
-                scale="1 1 1"
-                position="0 0 10"
+                scale=".8 .8 .8"
+                position="-3 0 9"
                 static-body="shape: box;" 
                 >  </a-entity>
                 
                 <a-entity id="ring3" class="center-obj-zone" static-body
                 gltf-model="#ring" class="collision" visible="true"
-                scale="1 1 1"
-                position="6 .005 6"
+                scale=".8 .8 .8"
+                position="6 0 6"
                 static-body="shape: box;" 
-                >  </a-entity><!-- /inner ring
+                >  </a-entity>
+                
+                <a-entity id="ring4" class="center-obj-zone" static-body
+                gltf-model="#ring" class="collision" visible="true"
+                scale=".8 .8 .8"
+                position="3 0 12"
+                static-body="shape: box;" 
+                >  </a-entity>
+                
+                <!-- /inner ring
             
             animation="property: object3D.rotation.y; to: -360; easing: linear; dur: 24000; loop: true;"
             -->
@@ -232,7 +241,7 @@
   <?php
 
         if($showplatform == "true"){
-            include "webxr/polys4/pedestals.php";
+         //   include "webxr/polys4/pedestals.php";
         }
 
         ?>
@@ -249,8 +258,8 @@
 
         <a-entity id="trophy-model" class="center-obj-zone" 
                 gltf-model="#trophy"  visible="true"
-                scale="100 100 100"
-                position="1 -56.180 -27"
+                scale=".5 .5 .5"
+                position="1 -53 -27"
                 rotation="0 0 0" 
                 animation="property: object3D.rotation.y; to: -360; easing: linear; dur: 24000; loop: true;">
                 

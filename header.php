@@ -8,17 +8,22 @@
 <?php 
 
 
+
+
+$post_title = modify_post_title();
+add_filter('wp_title', 'modify_post_title', 10, 2);
 wp_head(); 
     $url = wp_upload_dir();
 ?>
-    <link href="<?php echo get_stylesheet_directory_uri();?>/assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
     
    
     <link href="<?php echo get_stylesheet_directory_uri();?>/assets/lib/animate.css/animate.css" rel="stylesheet">
     <link rel='stylesheet' id='drawer-css'
-        href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css'
+        href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css' type='text/css'
         media='all' />
+        
     <link href="<?php echo get_stylesheet_directory_uri();?>/assets/lib/flexslider/flexslider.css" rel="stylesheet">
 
     <!-- Main stylesheet and color file-->
@@ -95,8 +100,6 @@ if(is_front_page()){
     </script>
     <script src="/assets/js/aframe-look-controls.js"></script>
     <script src="https://unpkg.com/aframe-orbit-controls@1.3.0/dist/aframe-orbit-controls.min.js"></script>
-
-    <
   <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
     <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
 
@@ -146,6 +149,12 @@ if(is_front_page()){
 
   //
 $rel_path= str_replace(url_root(),"",get_stylesheet_directory_uri());
+// section vars used below in JS Default Var declarations
+$section_class = @get_post_meta($post->ID,"section_class",true);
+$section_menu = @get_post_meta($post->ID,"section_menu",true);
+$section_menu_slug = @get_term($section_menu,"nav_menu")->slug;
+
+
 ?>
     <script src="/assets/js/jquery.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -176,7 +185,14 @@ if (location.protocol !== 'https:') {
       data_path = "<?=$rel_path?>/data/",
       useWheelNav = false,
       uploads_path =  "<?=$url['baseurl']?>/",
+      section_class = "<?=$section_class?>",
+      
+      section_menu = "<?=$section_menu?>",
+      section_menu_slug = "<?=$section_menu_slug?>",
       slug = "<?=$post->post_name;?>",
+      
+
+
       profile_template = ''//hack
       
       
@@ -250,7 +266,7 @@ if($section_class==get_post_meta($post->ID,'section',true)){
 
 ?>
 
-  <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60" class="<?php echo @$class_bg;?>" <?=$page_style?>>
+  <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60" class="<?=@$class_bg?>" <?=@$page_style?>>
 
 
         <div class="page-loader">
@@ -277,27 +293,115 @@ if($section_class==get_post_meta($post->ID,'section',true)){
               
             </div>
             <div id="main-menu"></div>
-            <div id="social-menu">
-
-            
-
-            <a href="https://twitter.com/webxrawards" target="_blank"
-                class="fa fa-twitter" title="Follow us on Twitter"></a>
-            <a href="https://www.instagram.com/webxrawards/" target="_blank" class="fa fa-instagram"
-                title="Follow us on Instagram"></a>
-            <a href="https://www.facebook.com/groups/webxrawards" target="_blank" class="fa fa-facebook"
-                title="Join our Facebook Group"></a>
-            <a href="https://www.linkedin.com/company/the-polys/" target="_blank" class="fa fa-linkedin"
-                title="Connect with us on LinkedIn" target="_blank"></a>
-
-            <a href="https://discord.gg/T5vRuM5cDS" class="fa discord" target="_blank"
-                title="Join our community Discord"></a>
-        </div>
+          
         
       </div>  
-    
-</header>
       
+</header>
+      <script>
+        window.addEventListener("scroll", function() {
+          let scroll = window.pageYOffset;
+  let scaleValue = 1 + scroll * 0.0005; // Slower zoom
+  let opacityValue = 1 - scroll * 0.0005; // Slower fade
+  
+  let parallaxElement = document.querySelector(".parallax");
+  
+  parallaxElement.style.transform = `scale(${scaleValue})`;
+  parallaxElement.style.opacity = opacityValue;
+});
 
 
 
+</script>
+
+
+<?php
+    if(@$post->post_excerpt){
+    ?>
+    <h2 class="featuring">
+        <?=$post->post_excerpt?></h1>
+    
+    <?php
+    }
+   
+
+function extract_number($class) {
+    preg_match('/\d+$/', $class, $matches);
+    return isset($matches[0]) ? intval($matches[0]) : null;
+}
+
+
+      $section_class = @get_post_meta($post->ID,"section_class",true);
+      $section_hero_class = @get_post_meta($post->ID,"section_hero_class",true);
+
+      $padding_number = extract_number($section_hero_class);
+      if(!empty($padding_number)){
+        $padding_bottom = "padding-bottom:$padding_number%";
+      } else {
+        $padding_bottom = '';
+      }
+
+      $hero=get_post_meta($post->ID,'hero',true);
+   $hero_image = getThumbnail($hero);
+        
+      $slides = get_slides($post->ID);
+
+
+      if($hero){
+      ?>
+        <section class="home-section <?=@$section_hero_class?> parallax home-fade home-full-height hero-content <?=@$section_class?> " id="dynamic-hero" style="background-image:url(<?=$hero_image?>); <?=$padding_bottom?>"></section>
+       
+
+
+    <?php
+      } else if(is_array($slides) && count($slides)>0){ 
+          ?>
+          <section class="home-section <?=@$section_hero_class?> parallax home-fade home-full-height" id="hero" >
+            <div class="hero-slider">
+
+          <ul class="slides">
+          <?php
+
+
+     
+          foreach ($slides as $key => $media_id) {
+          $src= wp_get_attachment_image_src( $media_id,"Full");
+         
+          extract((array) get_media_data($media_id));
+          ?>
+
+
+            <li class="bg-dark-30 bg-dark" style="background-image:url(<?php echo $src[0];?>);">
+              <div class="titan-caption">
+                <div class="caption-content">
+                
+                  <div class="hero-slide"><?php echo $title?></div><a class="section-scroll btn " href="/<?php echo sanitize_title($title);?>"><?php echo wpautop($caption)?></a>
+
+                </div>
+              </div>
+            </li>
+         
+          <?php
+      }// end if slides
+
+
+        ?>
+          </ul>
+
+</div>
+        
+        
+        </section>
+      
+      
+      <?php
+      }
+
+
+
+      
+      
+      
+      
+      ?>
+      <h1 class="title"><?=$post_title?></h1>

@@ -24,6 +24,7 @@ const { gulp, src, dest, watch } = require('gulp'),
 
 function css() {
     return src(['app/sass/style.scss'], { sourcemaps: true })
+    .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(dest('./'))
         .pipe(minifyCSS())
@@ -31,6 +32,7 @@ function css() {
             suffix: '.min'
         }))
         .pipe(cssnano())
+        .pipe(sourcemaps.write('.')) // Write the sourcemaps to a separate file
         .pipe(dest('./'))
         .pipe(notify({
             message: 'SCSS converted to SCSS '
@@ -38,10 +40,12 @@ function css() {
         .pipe(browserSync.stream())
 }
 
+
 function print_css() {
     return src(['app/sass/print.scss'], {
             sourcemaps: true
         })
+        .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(dest('./'))
         .pipe(minifyCSS())
@@ -60,6 +64,7 @@ function xr_css() {
     return src(['xr/css/xr.scss'], {
             sourcemaps: true
         })
+        .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(dest('./'))
         .pipe(minifyCSS())
@@ -67,6 +72,7 @@ function xr_css() {
             suffix: '.min'
         }))
         .pipe(cssnano())
+        
         .pipe(dest('./'))
         .pipe(notify({
             message: 'XR converted to SCSS '
