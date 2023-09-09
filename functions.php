@@ -54,6 +54,10 @@ function featured_image_support(){
 		));
 }
 
+// former field filtration plugin,
+//require_once('functions/rest-api-filter-fields.class.php');
+ 
+  
 add_action('after_setup_theme', 'featured_image_support');
 
 function add_mimes($mime_types){

@@ -131,9 +131,14 @@ return ob_get_clean();
     }
 
     function wrapMeta($array,$var,$tag,$target="_blank"){
+        //var_dump($array);
+        if($var == 'website'){
+           $value = @$array['website'][0];
+           $var = 'link';
+        }
+       
         if(@$array[$var]){
-        
-          
+           
             $value = $array[$var][0];
             if($tag == 'a'){
                 return wrapLink($var,$value,$target);
@@ -151,7 +156,6 @@ return ob_get_clean();
         || $var == 'linkedin'
         || $var == 'github'
         || $var == 'instagram'
-        
         || $var == 'website'){
             $use_font_awesome = true;
 
@@ -178,4 +182,37 @@ return ob_get_clean();
         return $profile_children;
     }
 
+    function displayTeam($team){
+       
+    
+        foreach($team as $key => $member){
+            
+          print "<div class='team-member  col-sm-4 col-md-6 col-lg-2'>";
+            displayTeamMember($member);
+          print "</div>";  
+          
+        }
+        return $team;
+    }
+    function displayTeamMember($member){
+        extract((array)$member);
+        $link = get_permalink($post->ID);
+       $thumbnail_id = $meta['_thumbnail_id'][0];
+        $thumbnail = getThumbnail($thumbnail_id);
+        $custom_class= @$classes[0];
+       ?>
+    
+       <a href='<?=$link?>' title='<?=$title?>'>
+        <img class="<?=$custom_class?>" src="<?=$thumbnail?>" alt="<?=$title?>" title="<?=$title?>"> 
+        <h4><?=$title?><h4></a>
+        <h5><?=$attr_title?></h5>
+        <h6><?=displayProfileMeta($post->ID)?></h6>
+        <p><?=$description?><p>
+    
+
+        <?php
+     
+    }
+
 ?>
+

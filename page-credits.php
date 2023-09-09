@@ -22,7 +22,7 @@
    </div>
 <?php
 }
-$menu = 'virtual-red-carpet-3';
+$menu = 'credit-edit';
 if(@$_GET['menu']){
 
 
@@ -132,7 +132,7 @@ if(@$_GET['z_offset']){
         <a-light color="#fff000"  position="0 250 -275" rotation="0 0 0"  light="type: spot; intensity: 20; angle: 90; distance:500; shadowRadius: -3.72" visible=""></a-light>
         <a-light color="#fff000" position="0 -127.00302 -331.17228" rotation="" light="type: spot; intensity: 22.1; angle: 90; distance: 500; shadowRadius: -3.72" visible=""></a-light>
 <a-entity id="outer-wrap" position="0.05 3.5
- 564" rotation="0 0 0" scale="1 1 1" visible="true">
+ 100" rotation="0 0 0" scale="1 1 1" visible="true">
     <a-entity id="credits-wrap" visible="true" scale="2 2 2" position="0 -2 0"  rotation="0 0 0">
 <?php
  

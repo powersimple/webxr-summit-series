@@ -1,37 +1,10 @@
 <?php
-//phpinfo(); die();
 get_header(); 
-/*
-$postmeta = get_post_meta($post->ID);
-$screenshots = $postmeta['screenshot'];
- 
-$logo = $postmeta['logo'];
-
-$company = $postmeta['company'];
- $solution_name = $postmeta['solution_name'];
-
-
-
-$screenshot_array = array();
-foreach($screenshots as $key => $image_id){
-  array_push($screenshots,getThumbnail($image_id,"hero"));
-
-}
-//print json_encode($screenshot_array);
-*/
-  $current_event = 13;
 
 
   $profile_meta = get_post_meta($post->ID);
   $thumbnail = getThumbnail(@$profile_meta['_thumbnail_id'][0],"medium");
-                  
-if(strpos(@$_SERVER['HTTP_REFERER'],"localhost")){
 
-  $thumbnail = str_replace('https://',"/",$thumbnail);
-  $thumbnail = str_replace(@$_GET['host_root'],"/",$thumbnail);
-
-  $thumbnail = str_replace('/webxrsummitseries/',"/",$thumbnail);
- }
   
   $profile_events = getProfileEvents($post->ID);
 
@@ -43,63 +16,35 @@ if(strpos(@$_SERVER['HTTP_REFERER'],"localhost")){
 
 
 </script>
-<?php
-if($hero=get_post_meta($post->ID,'hero',true)){
-  $hero_image = getThumbnail($hero);
 
-
- if(@$hero_image != ''){
-?>
-<section class="home-section home-parallax home-fade home-full-height" id="home" style="background:url(<?=$hero_image?>) center center no-repeat;background-size:cover;">
-    
-    </section>
-<?php
- }
-}
-?>
 
 
 <main role="main" id="main" class="main">
 
-  <section class="module profile-container" id="<?php echo @$slug?>" role="region">
-  <div class="row">
-      <div class="container profile-title">
-        <h1><?= $post->post_title;?> 
-        </h1>
-        <h5>
-        <?= wrapMeta($profile_meta,'profile_title','span');?>, 
-        <?= wrapMeta($profile_meta,'company','span
-        ');?>
-        </h5>
-        <hr>
-      </div>
-  </div>
+<div class="row">
+<div class="d-flex container-flex">
+<div class="col-md-7 left" id="ros-table" >
+  
+      
 
-    <div class="row">
-      <div class="container">
 
-        <div class="col-sm-3 col-md-4">
           <div class="profile-thumbnail">
             <img src="<?=$thumbnail?>" alt="<?=$post->post_title?> profile pic">
           </div>
 
           <div class="profile-meta">
-          <?php
-          $profile_meta = get_post_meta($post->ID);
-
+        
 
       
   
-          if($post->post_excerpt !=''){
-            ?>
-            <h4><?=$post->post_excerpt?></h4>
-            <?php
-              }
-            ?>
+        
 
          
         <div class="speaker-meta">
-       
+        <h5>
+          <?= wrapMeta($profile_meta,'profile_title','span');?>, 
+          <?= wrapMeta($profile_meta,'company','span');?>
+        </h5>
         <?= wrapMeta($profile_meta,'twitter','a');?>
         <?= wrapMeta($profile_meta,'linkedin','a');?>
         <?= wrapMeta($profile_meta,'github','a');?>
@@ -107,8 +52,7 @@ if($hero=get_post_meta($post->ID,'hero',true)){
         </div>
 
           </div>
-        </div>
-        <div class="col-sm-9 col-md-8">
+
       
           <?php
           if(is_gutenberg()){
@@ -119,7 +63,7 @@ if($hero=get_post_meta($post->ID,'hero',true)){
           ?>
         
         </div>
-
+        <div class="col-md-5 right">
 <?php
 
 
@@ -177,7 +121,6 @@ if($hero=get_post_meta($post->ID,'hero',true)){
 
       </div>
 
-  </section>
 </main>
 
 

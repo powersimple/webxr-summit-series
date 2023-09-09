@@ -637,6 +637,37 @@ function selectScreenImage( $meta_boxes ) {
 }
 add_filter( 'rwmb_meta_boxes', 'selectScreenImage' );
 
+function use_libraries( $meta_boxes ) {
+	$prefix = '';
+
+	$meta_boxes[] = array(
+		'id' => 'use_libraries',
+		'title' => esc_html__( 'Libraries', 'metabox-online-generator' ),
+		'post_types' => array( 'post', 'page', 'event' ),
+		'context' => 'side',
+		'priority' => 'default',
+		'autosave' => false,
+		'fields' => array(
+			[
+				'type' => 'checkbox',
+				'name' => esc_html__( 'Use A-Frame', 'online-generator' ),
+				'id'   => $prefix . 'use_aframe',
+			],
+			[
+				'type' => 'checkbox',
+				'name' => esc_html__( 'Use Slick Slider', 'online-generator' ),
+				'id'   => $prefix . 'use_slick',
+			],
+			
+		),
+	);
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'use_libraries' );
+
+
+
 function siteProperties3D( $meta_boxes ) {
 	$prefix = '';
 
@@ -648,11 +679,7 @@ function siteProperties3D( $meta_boxes ) {
 		'priority' => 'default',
 		'autosave' => false,
 		'fields' => array(
-			[
-                'type' => 'checkbox',
-                'name' => esc_html__( 'Use A-Frame', 'online-generator' ),
-                'id'   => $prefix . 'use_aframe',
-            ],
+			
 			array(
 				'id' => 'skybox',
 				'type' => 'image_advanced',
@@ -760,6 +787,7 @@ function eventProperties( $meta_boxes ) {
                 'name' => esc_html__( 'Embed Video URL', 'online-generator' ),
                 'id'   => $prefix . 'embed_video_url',
 			],
+			
 			[
                 'type' => 'url',
                 'name' => esc_html__( 'Video URL', 'online-generator' ),
@@ -801,10 +829,11 @@ function eventProperties( $meta_boxes ) {
                 ],
             ],
 		
+	
 			array(
-				'id' => 'hero',
+				'id' => 'sponsor_board',
 				'type' => 'image_advanced',
-				'name' => esc_html__( 'Hero Image', 'metabox-online-generator' ),
+				'name' => esc_html__( 'Sponsor Board', 'metabox-online-generator' ),
 				'desc' => esc_html__( '', 'metabox-online-generator' ),
 			),
 

@@ -22,7 +22,7 @@ li.nominee{
     span{
         display:inline-block;
         font-weight: bold;
-        font-size:175%;
+       
         margin-right:10px;
         margin-left:10px;
         
@@ -42,7 +42,7 @@ li.nominee-credit{
     margin-bottom:0px;
     padding-bottom:0px;
     padding-right:5px;
-    font-size:80%;
+    font-size:70%;
 }
 h4.presenter{
     display:block;
@@ -57,7 +57,7 @@ h4.presenter{
     }
 }
 td.nominee-info a.nominee {
-    font-size:200%;
+    
     :hover{
         color:#fff;
         text-decoration: underline;
@@ -77,12 +77,15 @@ td.nominee-info a.nominee {
 .winner::before{
     content: "WINNER";
     text-align: center;
-    color: #fff;
+    color: #e9e14d;
 
     display: block;
     font-weight: bold;
-
-    margin-left: 37px;
+    font-style: italic;
+    margin-left: 50px;
+    font-size: 120%;
+    position: relative;
+    top: -15px;
 }
 .winner2020{
     background:url(images/icons/minipoly.png) center center no-repeat;
@@ -240,9 +243,10 @@ input[type=radio] {
     #countdown{
         position: absolute;
         top:50px;
+        left:60px;
         .countdown{
            // font-family: 'AgencyFB';
-            font-size:.5rem;
+            font-size:.7rem;
             color:#fff;
             text-transform: none;
             font-weight:100;

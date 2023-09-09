@@ -43,7 +43,7 @@ add_action( 'rest_api_init', 'register_post_media' );
 
 function get_post_media( $object ) { 
 
-	$postmeta_media_fields = "hero,_thumbnail_id,featured_video,screen_image,screenshot,logo";
+	$postmeta_media_fields = "hero,sponsor_board,_thumbnail_id,featured_video,screen_image,screenshot,logo";
 
 	
 	foreach(explode(",",$postmeta_media_fields) as $key  => $field){
@@ -123,7 +123,9 @@ add_action( 'rest_api_init', 'register_media_data' );
 }
 
 function get_media_data_by_id($id){//this function builds the data for a lean json packet of media
+
 		$data = array();   
+		
 	$url = wp_upload_dir();
 	$upload_path = $url['baseurl']."/";
 	$file_path = str_replace($upload_path,'',wp_get_attachment_url($id));
@@ -177,14 +179,14 @@ function get_media_data_by_id($id){//this function builds the data for a lean js
 		'full_path' => "/wp-content/uploads/".$path.$file
 		
 	);
-
+//var_dump($id,$data); die();
  return $data;//from functions.php,
 
 }
 
 function get_media_data( $object ) { 
-   
-	return get_media_data_by_id(@$object['id']); // because this is a callback which passes in the full object and we want to be able to get the data elsewhere with just the id. 
+ //  var_dump($object);
+	return get_media_data_by_id(@$object); // because this is a callback which passes in the full object and we want to be able to get the data elsewhere with just the id. 
 }
 
 

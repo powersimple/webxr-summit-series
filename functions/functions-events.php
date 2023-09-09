@@ -207,7 +207,8 @@ function eventIndex($event_menus){
         "profile_companies" => [],
         "profile_sort" => [],
         "company_sort" => [],
-        "ros_list" =>[]
+        "ros_list" =>[],
+        "no_sort_field" =>[]
     ];
     
 
@@ -220,6 +221,7 @@ function eventIndex($event_menus){
       
      
     }
+
     foreach($event_list as $key => $events){// gets full array
   
        
@@ -244,7 +246,11 @@ function eventIndex($event_menus){
                     $lists['profile_companies'] = get_post_meta($profile['post']->ID,"company",true);
 
                     array_push($lists['profiles_list'],$profile);
+                    
 
+                    if(!@$profile['meta']['sort_name'][0]){
+                        array_push($lists['no_sort_field'],$profile);
+                    }
 
                  
                     $sort_slug = $slug;
@@ -341,7 +347,7 @@ function eventIndex($event_menus){
         print "<br>";
     }
     $lists['profile_sort'] = $profile_sort;
-
+ 
     $lists['company_list'] = array_unique($lists['company_list']);
     
   // $lists['profile_list'] = array_unique($lists['profile_list']);
@@ -513,6 +519,26 @@ function getEventsList($lists){
            }
 }
 
+function getSponsorTiles($menu){
+    $menu = get_menu_array($menu);
+    $sponsors = [];
+    print "<div class='row'>";
+    foreach($menu as $key => $sponsor){
+      
+        $title = $sponsor['title'];
+        $attr = $sponsor['attr_title'];
+        
+        $src = getThumbnail(@$sponsor['meta']['_thumbnail_id'][0],'thumbnail');
+        $website = @$sponsor['meta']['website'][0];
+        $cols = "col-xl-1 col-lg-2 col-md-3 col-sm-4 col-6";
+
+       print "<div class='$cols'>";
+     //  print "<span class='attr'>$attr</span>";
+        print "<a href='$website' target='_blank'><img src='$src' alt='$title'></a>";
+        print "</div>";
+    }
+   print "</div>";
+}
 
 
 

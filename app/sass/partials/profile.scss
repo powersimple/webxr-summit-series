@@ -58,3 +58,66 @@
   }
   margin-bottom:2rem;
 }
+.team-member{
+    h4{
+        text-align:center;
+        color:#eee;
+
+    }
+    a{
+        display: block;
+    }
+    img{
+    border-radius: 50%;
+    width:75%;
+    display: block;
+    margin: 0 auto 1em;
+    box-shadow: 0 0 10px 10px rgba(255, 173, 2, 0.4);
+    
+    }
+}
+.cause{
+    box-shadow: 0 0 10px 10px rgba(151, 255, 132, 0.4);
+}
+.cause{
+    box-shadow: 0 0 10px 10px rgba(83, 29, 119, 0.4);
+}
+#profile-index{
+    font-size:1.5em;
+    h4{
+        color:#fff;
+        border-top:1px dashed #fff;
+        padding-top:5px;
+        margin-top:5px;
+        font-size:1.5rem;
+    }
+    h5 {
+        font-size:1.2rem;
+    }
+    ul, ol{
+        padding-left:25px;
+    }
+    ul li{
+        list-style-type: disc;
+    }
+ ol li{
+        list-style-type:decimal;
+        
+    }
+    li{
+        font-size: 1rem;
+        color: #00BFFF;
+        a {
+            color: #00BFFF; /* Light blue color */
+            text-decoration: none; /* Remove underlines */
+            transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transitions */
+          }
+          
+          /* Hover link styles */
+          a:hover {
+            color: #0073e6; /* Brighter blue on hover */
+            text-decoration: underline; /* Underline on hover */
+          }
+    }
+
+}

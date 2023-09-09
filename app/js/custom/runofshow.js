@@ -6,11 +6,11 @@ var currentROS = {}
 
 function runOfShow(menu){
     var show = menu.menu_levels;
-   // console.log("ROS MENU",show)
-    
+ 
         if(show.length != undefined){
         
         for (var s = 0; s < show.length; s++) {
+            
             var this_event = show[s]
             this_event.sessions = [];
             this_event.info =events[show[s].object_id]
@@ -311,6 +311,7 @@ function displayRunOfShowMonolith(runOfShow){
     var card_size = 1
     var cell_width = '100%';
     var cols = '';
+    var classes = '';
     for (var n = 0; n < runOfShow.sessions.length; n++) { 
         //console.log("session-info",runOfShow.sessions[n].info,showtime)
         if(runOfShow.sessions[n].info != undefined){
@@ -321,7 +322,8 @@ function displayRunOfShowMonolith(runOfShow){
             if(runOfShow.sessions[n].info.event_info.duration != ''){
             duration = parseInt(runOfShow.sessions[n].info.event_info.duration)*60
             event_time = showtime// this passes it below
-            
+            classes = runOfShow.sessions[n].classes
+            console.log("classes"+n,classes)
             display_event_time = localTime(showtime)//converst
             start_time = showtime
             showtime = parseInt(showtime)+duration; //add duration for next 
@@ -331,7 +333,7 @@ function displayRunOfShowMonolith(runOfShow){
             // console.log("info not undefined",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
             }
     //        console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
-            sessions += '<div class="row session">'
+            sessions += '<div class="row session '+classes+'">'
           /*  
             sessions += '<div class="col-sm-2 col-md-1">'
             sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time">'+display_event_time+' </span></h3>'
@@ -473,7 +475,7 @@ cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
 }
 
 function displayRunOfShowTable(runOfShow){
-
+   
     console.log("displayROSTable",runOfShow)
       currentROS = runOfShow //"creates memory object;
     var first = 0;
@@ -509,7 +511,7 @@ function displayRunOfShowTable(runOfShow){
     var suppress_unconfimred_speakers = 0 //session level
     var suppress_event_unconfimred_speakers = 1 // event level
     var section_class = ''
-
+    var classes = ''
     var section_strip_from_label = ''
     if("ROSTEST",runOfShow.info.meta.section_strip_from_label != undefined){
         section_strip_from_label = runOfShow.info.meta.section_strip_from_label
@@ -563,7 +565,7 @@ function displayRunOfShowTable(runOfShow){
         
               //console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
    
-            sessions += '<div id="'+runOfShow.sessions[n].info.slug+'"  class="row session '+section_class+'">'
+            sessions += '<div id="'+runOfShow.sessions[n].info.slug+'"  class="row session '+classes+'">'
             
             sessions += '<div class="col-sm-3 col-md-2">'
             if(tense == 'future'){
@@ -574,14 +576,14 @@ function displayRunOfShowTable(runOfShow){
            
             sessions += '</span></h3>'
             } else {
-              var embed_video_url = runOfShow.sessions[n].info.meta.embed_video_url
+              var embed_video_url = embed_video_url = addYouTubeParameters(runOfShow.sessions[n].info.meta.embed_video_url)
                 if(embed_video_url != undefined){
                             //              console.log(embed_video_url)
                 if(runOfShow.sessions[n].info != undefined){
                     embed_video_url  = embed_video_url.replace(/(\?.+)?$/, function(match) {
                         return match ? match + '&autoplay=1&rel=0' : '?autoplay=1&rel=0';
                     });
-                
+                console.log("event"+n,runOfShow.sessions[n].info.featured_media)
                 sessions += '<a href="#'+runOfShow.sessions[n].info.slug+'" class="watch video-button" onclick="playSessionVideo(\''+embed_video_url+'\',\''+runOfShow.sessions[n].object_id+'\',\'\''+')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
                     }
                 }
@@ -700,12 +702,20 @@ function displaySessionProfiles(id){ // this shows the speaker list
 
             }
             cols='col'
-            if(session.profiles.length > 3){
+            if(session.profiles.length == 3 || session.profiles.length == 4){
                 width_override = 'pair'
                 card_size = 2
                 cols='col-xs-6 col-sm-6 col-md-3'
 
+                
+            } else if(session.profiles.length == 5 ){
+                cols='col-xs-6 col-sm-6 col-md-4 fifth'
             }
+            else if(session.profiles.length > 5 ){
+
+                cols='col col-xs-6 col-sm-6 col-md-4'
+            }
+
 
 
             //suppress_speaker_list = 0;
@@ -747,7 +757,14 @@ function displaySessionProfiles(id){ // this shows the speaker list
                                 }
                                 sessions += '<span class="profile-info">'
                             
-                                sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title+'</span>'
+                                sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title
+                                console.log(
+
+                                    "classes",
+                                    this_profile.classes
+                                )
+                                sessions += '<br><span class="'+this_profile.classes+'">'+this_profile.classes+'</span>'
+                                sessions +='</span>'
                                 
                             
                             sessions += getProfileCard(this_profile);
@@ -1174,7 +1191,14 @@ function displayRunOfShowCards(runOfShow){
                     }
                     sessions += '<span class="profile-info">'
                 
-                    sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title+'</span>'
+                    sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title
+                                console.log(
+
+                                    "classes",
+                                    this_profile.classes
+                                )
+                                sessions += '<br>'+this_profile.classes
+                                sessions +='</span>'
                     
     
                 sessions += getProfileCard(this_profile,event_time);

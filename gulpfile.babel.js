@@ -60,25 +60,6 @@ function print_css() {
         .pipe(browserSync.stream())
 }
 
-function xr_css() {
-    return src(['xr/css/xr.scss'], {
-            sourcemaps: true
-        })
-        .pipe(sourcemaps.init())
-        .pipe(sass())
-        .pipe(dest('./'))
-        .pipe(minifyCSS())
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(cssnano())
-        
-        .pipe(dest('./'))
-        .pipe(notify({
-            message: 'XR converted to SCSS '
-        }))
-        .pipe(browserSync.stream())
-}
 
 function js() {
     return src('app/js/custom/**/*.js', {
@@ -121,57 +102,13 @@ function vendor() {
         }))
 }
 
-function xr_lib() {
-    return src('xr/js/lib/**/*.js', {
-        sourcemaps: true
-    })
-
-    .pipe(babel({
-        presets: ['@babel/preset-env']
-    }))
-
-    .pipe(concat('xr-lib.js'))
-        .pipe(dest('./'))
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(uglify())
-        .pipe(dest('./'))
-        .pipe(notify({
-            message: 'XR LIB compiled'
-        }))
-}
-
-
-function xr_app() {
-
-    return src('app/xr/**/*.js', {
-        sourcemaps: true
-    })
-
-
-
-    .pipe(concat('xr.js'))
-        .pipe(dest('./'))
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(uglify())
-        .pipe(dest('./'))
-        .pipe(notify({
-            message: 'XR APP compiled'
-        }))
-}
 
 function clean() {
     return del(['./style.css', './style.min.css'])
 
 }
 
-function xr_clean() {
-    return del(['./xr.css', './xr.min.css'])
 
-}
 
 function print_clean() {
     return del(['./print.css', './print.min.css'])
@@ -196,12 +133,6 @@ function browser() {
 
     watch('./app/sass/print.scss', print_clean);
     watch('./app/sass/print.scss', print_css).on('change', browserSync.reload);
-
-    //until I put this in webpack.
-    watch('./xr/css/**/*.scss', xr_clean);
-    watch('./xr/css/**/*.scss', xr_css).on('change', browserSync.reload);
-    //watch('./xr/js/lib/**/*.js', xr_lib).on('change', browserSync.reload);
-    watch('./app/xr/**/*.js', xr_app).on('change', browserSync.reload);
 
 }
 

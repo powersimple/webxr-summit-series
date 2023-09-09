@@ -5,6 +5,13 @@
         //  background-color: $darkest_gray;
         height: 50px;
         z-index: 100;
+        position: relative;
+        width: 100%;
+        @media(max-width: 767px){
+            margin-bottom:20px;
+            position: fixed;
+ 
+        }
     }
     #logo {
         position: relative;
@@ -95,6 +102,7 @@
 .hero-cover-25 {
     background-size: cover !important;
     padding-bottom:25%;
+    
 }
 
 .hero-cover-50 {

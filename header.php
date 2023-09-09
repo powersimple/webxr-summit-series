@@ -24,7 +24,13 @@ wp_head();
         href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css' type='text/css'
         media='all' />
         
-    <link href="<?php echo get_stylesheet_directory_uri();?>/assets/lib/flexslider/flexslider.css" rel="stylesheet">
+        <link rel='stylesheet' id='drawer-css'
+        href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css'
+        media='all' />
+        <link href="<?php echo get_stylesheet_directory_uri();?>/assets/lib/animate.css/animate.css" rel="stylesheet">
+
+
+        
 
     <!-- Main stylesheet and color file-->
     <link href="<?php echo get_stylesheet_directory_uri();?>/style.css" rel="stylesheet">
@@ -48,124 +54,44 @@ if(is_front_page()){
   wp_head(); 
 
 
-  ?>
-
-
-
-
-
-  <?php
-// 
   
     // INCLUDES AFRAME JS TAGES ONLY IF IT IS ENABLED.
 
   //
  $aframe =    get_post_meta($post->ID,"use_aframe",true);
+
+
+
+
+
+
+
   if(@$aframe == 1){
-    //hacks
-    $speed = "0.2";
-    if(@$_GET['speed']){
-        $speed = $_GET['speed'];    
-    }
-    if($post->ID == 13){ 
-      $_GET['event_menu'] = 'bizsummit21';
-  
-  }
-    $menu = 'bizsummit21';
-    $model='';
-
-    if(@$_GET['event_menu']){
-        $menu = $_GET['event_menu'];
-    }
- 
-    $summit_square_model = 'business-summmit-square';
-    if(@$_GET['summit_model']){
-        $summit_square_model = $_GET['summit_model'];
-    }
-
-    $aframe_version="1.2.0";
-    if(@$_GET['aframe-version']){
-      $aframe_version=$_GET['aframe-version'];
-
-    }
-
-?>
-
-<script src="https://aframe.io/releases/<?=$aframe_version?>/aframe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r134/examples/js/deprecated/Geometry.js"></script>
-<script src="/assets/js/aframe-extras.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
-    <script src="/assets/js/aframe-physics-system.min.js"></script>
-    <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js">
-    </script>
-    <script src="/assets/js/aframe-look-controls.js"></script>
-    <script src="https://unpkg.com/aframe-orbit-controls@1.3.0/dist/aframe-orbit-controls.min.js"></script>
-  <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
-    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
-   
-    </script>
-    <script src="/assets/js/aframe-troika-text.min.js"></script>
-    <script src="/assets/js/msc_basis_transcoder.js"></script>
-
-    <script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>
-
-
-    <style>
-  .a-enter-ar-button{
-           display: none !important;/* */
-            
-        }       
-            <?php
-              /// 
-              //DISAPPEARS THE HEADER AND FOOTER FOR PURE AFRAME
-              //USED IN VIRTUALPRODUCTION
-              ///
-
-            if(@$_GET['disappear']==1){
-            ?>
-              
-                    .a-enter-ar-button, .a-enter-vr-button, .toggle-edit, .sidedrawer
-                  {
-                        display: none !important;
-                        
-                    } 
-                    header, footer {
-                        display: none !important;
-                        
-                    } 
-
-            <?php
-              } 
-            ?>
-    </style>
-
-<?php
+    require_once("webxr/libraries/aframe.php");
   }
   // 
   
     // END AFRAME
 
   //
+
 $rel_path= str_replace(url_root(),"",get_stylesheet_directory_uri());
 // section vars used below in JS Default Var declarations
 $section_class = @get_post_meta($post->ID,"section_class",true);
 $section_menu = @get_post_meta($post->ID,"section_menu",true);
 $section_menu_slug = @get_term($section_menu,"nav_menu")->slug;
-
+//phpinfo();
 
 ?>
-    <script src="/assets/js/jquery.js"></script>
+    <script src="<?php print  get_template_directory_uri()?>/assets/js/jquery.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!--  -->
-    <!---->
+    <!--
 <link rel='stylesheet' id='drawer-css' href='/assets/css/drawer.css' type='text/css' media='all' />
 <link rel='stylesheet' id='drawer-css' href='/assets/css/jquery-ui.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='drawer-css'
-        href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css'
-        media='all' />
 
+   
+-->
 
 
 
@@ -194,36 +120,10 @@ if (location.protocol !== 'https:') {
 
 
       profile_template = ''//hack
-      
-      
-      var hero_slides = [
-          <?php $slides = get_slides($post->ID);
-          $slide_version_list = array();
-        foreach ($slides as $key => $media_id) {
-          $src= wp_get_attachment_image_src( $media_id,"Full");
-          //var_dump($src);//var_dump(get_media_data($media_id));
-          $media_data = get_media_data($media_id);
-        //  var_dump($media_data);
-          $versions = getThumbnailVersions($media_id);
-          $version_list = array();
-          foreach($versions as $v => $version){https://twitter.com/hunicke
-              array_push($version_list,"'".$v."'".": '".$version."'");
-
-          }
-          array_push($slide_version_list,"{".implode(",",$version_list)."}
-          ");
-          
-        
-        // print "<BR>";
-          // var_dump($versions);
-            extract((array) get_media_data($media_id));
-        }
-        print implode(",",$slide_version_list);
-      
-        ?>
-         ]
+      </script>
       <?php
-      // post specific hacks
+     
+    
      
     
           if(function_exists('icl_object_id')){
@@ -266,13 +166,14 @@ if($section_class==get_post_meta($post->ID,'section',true)){
 
 ?>
 
-  <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60" class="<?=@$class_bg?>" <?=@$page_style?>>
+<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60" class="<?=@$class_bg?>" <?=@$page_style?>>
 
 
         <div class="page-loader">
         <div class="loader">Loading...</div>
       </div>
-<header id="header" class="navbar navbar-custom navbar-fixed-top navbar-transparent" role="navigation">
+  <div class="flex-wrapper"><!--to maintain sticky footer-->
+    <header id="header" class="navbar navbar-custom navbar-fixed-top navbar-transparent" role="navigation">
         <div class="container">
          
           <div class="navbar-header">
@@ -280,14 +181,8 @@ if($section_class==get_post_meta($post->ID,'section',true)){
            <div id="logo" class="onpage-navigation"><a  href="/"></a></div>
             
           </div>
-          <div class="collapse navbar-collapse" id="custom-collapse">
-         
-
-                   
-                  
-                  
-            </div>
-            <div id="menu"></div>
+          <div class="collapse navbar-collapse" id="custom-collapse"></div>
+    
             <div id="countdown">
               <div id="polyscountdown" class="countdown"></div>
               
@@ -297,7 +192,8 @@ if($section_class==get_post_meta($post->ID,'section',true)){
         
       </div>  
       
-</header>
+  </header>
+
       <script>
         window.addEventListener("scroll", function() {
           let scroll = window.pageYOffset;
@@ -314,15 +210,8 @@ if($section_class==get_post_meta($post->ID,'section',true)){
 
 </script>
 
-
 <?php
-    if(@$post->post_excerpt){
-    ?>
-    <h2 class="featuring">
-        <?=$post->post_excerpt?></h1>
-    
-    <?php
-    }
+  
    
 
 function extract_number($class) {
@@ -349,59 +238,87 @@ function extract_number($class) {
 
       if($hero){
       ?>
-        <section class="home-section <?=@$section_hero_class?> parallax home-fade home-full-height hero-content <?=@$section_class?> " id="dynamic-hero" style="background-image:url(<?=$hero_image?>); <?=$padding_bottom?>"></section>
+        <section class="parallax home-fade home-full-height hero-content <?=$section_hero_class?> <?=@$section_class?> " id="dynamic-hero" style="background-image:url(<?=$hero_image?>); <?=$padding_bottom?>"></section>
        
 
 
     <?php
       } else if(is_array($slides) && count($slides)>0){ 
-          ?>
-          <section class="home-section <?=@$section_hero_class?> parallax home-fade home-full-height" id="hero" >
-            <div class="hero-slider">
-
-          <ul class="slides">
-          <?php
-
-
      
-          foreach ($slides as $key => $media_id) {
-          $src= wp_get_attachment_image_src( $media_id,"Full");
-         
-          extract((array) get_media_data($media_id));
-          ?>
-
-
-            <li class="bg-dark-30 bg-dark" style="background-image:url(<?php echo $src[0];?>);">
-              <div class="titan-caption">
-                <div class="caption-content">
-                
-                  <div class="hero-slide"><?php echo $title?></div><a class="section-scroll btn " href="/<?php echo sanitize_title($title);?>"><?php echo wpautop($caption)?></a>
-
-                </div>
-              </div>
-            </li>
-         
-          <?php
-      }// end if slides
-
-
-        ?>
-          </ul>
-
-</div>
+        $slide_version_list = [];
         
+        if(is_array($slides) && count($slides)>0){
+          ?>
+            
+   
+    <section class="home-section home-parallax home-fade <?=@$section_hero_class?>" id="home">
+
+    <div class="hero-slideshow">
+  <!-- Slides will be dynamically added here -->
+</div>
+
         
         </section>
       
       
       <?php
+        }
+ 
+?>
+
+
+
+    <?php
+  
+          foreach ($slides as $key => $media_id) {
+              $versions = getThumbnailVersions($media_id);
+              $version_list = array();
+            // var_dump($versions);
+              foreach($versions as $v => $version) {
+                  $version_list[] = "'$v': '$version'";
+              }
+              
+              $media_data = get_media_data($media_id);
+              
+              $slide_data = array(
+                  "sm" => $versions["thumbnail"],
+                  "md" => $versions["medium"],
+                  "md_lg" => $versions["medium_large"],
+                  "lg" => $versions["large"],
+                  "xl" => $versions["1536x1536"],
+                  "full"=>$versions["2048x2048"],
+                  "title" => $media_data["title"],
+                  "alt" => $media_data["alt"],
+                  "description" => $media_data["desc"],
+                  "caption" => $media_data["caption"]
+              );
+              
+              $slide_json = json_encode($slide_data);
+              array_push($slide_version_list, $slide_json);
+          }
+          
+          
+          ?>
+              <script>
+          var hero_slides = [
+            <?=implode(",", $slide_version_list)?>
+          ];
+          </script>
+          <?php
+        
+
+        $slick =    get_post_meta($post->ID,"use_slick",true);  
+        if(@$slick == 1){
+          require_once("functions/slick.php");
+        }
       }
 
-
-
-      
+   
+     
+    
       
       
       
       ?>
-      <h1 class="title"><?=$post_title?></h1>
+
+      

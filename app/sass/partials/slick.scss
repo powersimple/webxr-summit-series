@@ -137,7 +137,7 @@
     display: block;
     margin: 0;
     padding: 0;
-
+    border-bottom: 1px solid #FFD700;
     &:focus {
         outline: none;
     }
@@ -215,9 +215,7 @@
     }
 }
 
-.slick-arrow{
 
-}
 
 .slick-arrow.slick-hidden {
     display: none;
@@ -226,7 +224,7 @@
 .slick-dots {
 
     position: relative;
-    bottom: 40px;
+    bottom: 50px;
     display: block;
     width: 100%;
     padding: 0;
@@ -247,8 +245,9 @@
                 color: #3bbfd6;
                 border: 0;
                 outline: none;
-                background:#3bbfd6;
+                background: radial-gradient(circle at center, #FFD700 0%, #FFA500 70%, #FFD700 70%);
                 border-radius: 50%;
+                
             }
         }
 
@@ -257,10 +256,152 @@
         }
     
 }
-button, input{
-   // @include appearance(none);
-}
 
+
+    .hero-slideshow {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        padding-bottom: 25%;
+        transition: opacity 0.3s ease;
+      
+      }
+      .slide-container{
+        padding-bottom: 150px;
+      }
+      .slide {
+        width: 100%;
+        padding-bottom: 37%; 
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      
+      }
+      
+      .slide-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        text-align: center;
+        color: white;
+      }
+      /* Make the whole slide a flex container */
+      /* Reset to block display */
+      /* Overall styling of the slide. Making it flexy! */
+      .hero-slideshow .slide {
+          display: flex;
+          align-items: center; /* This centers the content vertically */
+          justify-content: center; /* This centers the content horizontally */
+          position: relative;
+      }
+      
+.slide-content {
+  position: absolute;
+  top: 100%; /* Initially positioned below the slide */
+  left: 50%;
+  transform: translateX(-50%) scaleX(0) rotateY(90deg); /* Initially stretched horizontally */
+  transform-origin: bottom right; 
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: auto;
+  max-width: 100%;
+  padding: 0 1rem;
+  transform: translateX(-50%) scaleX(0.2) scaleY(0.2);
+  transition: transform 2s cubic-bezier(0.32, 1, 0.32, 1), right 2s ease; /* Apply transitions */
+  overflow: hidden; /* Hide any overflow from the stretched content */
+  /* Prevent line breaks in stretched content */
+  opacity: 0; /* Initially invisible */
+  color: rgba(255, 255, 255, 1); /* Initially white text color */
+  animation: glitchIn 0.5s cubic-bezier(0.33, 0, 0.67, 1) 0.1s forwards; 
+}
+/* Define keyframes for the glitch and fade-in animation */
+@keyframes glitchIn {
+    0% {
+      transform: perspective(1000px) rotateY(180deg) translateX(2px); /* Initial flip state with a slight translation */
+      right: 100%; /* Initially positioned to the right */
+      opacity: 0; /* Initially invisible */
+      color: rgba(255, 255, 255, 0.8); /* Initial text color with slight distortion */
+    }
+    25% {
+      transform: perspective(1000px) rotateY(0deg) translateX(-2px); /* Flip back to normal state with slight translation */
+      right: 0; /* Slide in from the right */
+      opacity: 1; /* Fade in */
+      color: rgba(255, 255, 255, 1); /* Transition to full white text color */
+    }
+    100% {
+      transform: perspective(1000px) rotateY(0deg); /* Flip back to normal state */
+      right: 0; /* Slide in from the right */
+      opacity: 1; /* Fully visible */
+      color: rgba(255, 255, 255, 1); /* White text color */
+    }
+  }
+@keyframes flipIn {
+    from {
+      transform: translateX(-50%) scaleX(0.2) scaleY(0.2) rotateY(90deg);
+      right:100%;
+      opacity: 0; /* Initially invisible */
+    }
+    to {
+      transform: translateX(-50%) scaleX(1) scaleY(1) rotateY(0deg);
+      right:0%;
+      opacity: 1; /* Fade in */
+    }
+  }
+/* Apply animation when the slide is active */
+.slick-active .slide-content {
+    
+    animation: flipIn 1s cubic-bezier(0.33, 0, 0.67, 1) 0.5s forwards;
+}
+  
+  
+      .slide-content h2, 
+      .slide-content p {
+        color: white;
+        margin-bottom:0px;
+        line-height: 120%;
+      }
+      
+      
+      .slide-content p {
+          font-size: 1.25rem; /* Equivalent to 20px, adjust as needed */
+          text-align: center;
+          font-size: 1.25rem; /* This would be equivalent to 32px, adjust as desired */
+          
+          
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      
+      .slide-content p.caption {
+          font-size: 1rem; /* 16px, adjust if you want the caption smaller or bigger */
+      }
+      /* You can add @media queries below to further fine-tune for specific screen sizes if necessary. */
+      @media (max-width: 1024px) {
+          .slide-content h2 {
+              font-size: 1.75rem; 
+          }
+      
+          .slide-content p {
+              font-size: 1rem;
+          }
+      }
+      .slide-content h2, 
+      .slide-content p {
+          line-height: 1.4; 
+      }
+      @media (max-width: 768px) {
+          .slide-content h2 {
+              font-size:70%;
+          }
+      
+          .slide-content p {
+            font-size:50%;
+        }
+      }
+     
 .slick-prev,
 .slick-next {
     //font-size: 1em;
@@ -291,3 +432,26 @@ button, input{
 .slick-next {
     right: -20px;
     }
+
+      .slick-dots li.slick-active button {
+        background: radial-gradient(circle at center, #FFA500 0%, #FFD700 40%, #FFA500 40%);
+        border: 1px solid #FFD700;
+     }
+    
+
+     @media (max-width: 767px) {
+        .slider-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      
+        .title,
+        .caption,
+        .description {
+          width: 100%;
+          text-align: center;
+          font-size: 18px; /* Adjusted font size for mobile */
+          margin: 10px 0; /* Add spacing between elements */
+        }
+      }

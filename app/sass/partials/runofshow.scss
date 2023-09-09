@@ -78,7 +78,12 @@
     }
 
     .fifth {
-        width: 20% !important;
+        @media (min-width: 1200px) {
+            width: 20% !important;
+        }
+            
+ 
+       
     }
 
     .education-summit .profile-thumbnail img{
@@ -977,7 +982,7 @@ color:#fff;
 
     }
     .blurb {
-        font-size: 12px;
+        font-size: 1rem;
         line-height: 120%;
         padding-bottom: 20px;
         display: block;
@@ -1085,26 +1090,4 @@ table.segment {
 }
 .left, .right {
     transition: all 0.4s ease-in-out; /* Smooth transition */
-}
-.right{
-    position: sticky;
-    top: 0;
-    padding-left:2%;            
-}
-@media (max-width: 767px) {
-    .container-flex {
-        flex-direction: column-reverse;
-    }
-
-    .right {
-        max-height: 60vh;  /* 40% of viewport height */
-        overflow-y: auto;  /* Scroll if content overflows */
-        overflow-x:hidden;
-        position: sticky;
-        top: 0;            /* Position from the top */
-        z-index: 10;
-        background-color: #000;
-        padding-left:0px;
-        
-    }
 }

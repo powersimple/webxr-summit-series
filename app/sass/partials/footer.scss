@@ -3,8 +3,13 @@ footer {
     background-color: #111; // Consistent with the header's dark color
     color: #ffffff; // White text for readability on dark background
     text-align: center;
-    padding: 20px 0;
+    padding: 5px 0;
     z-index: 1;
+   
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
     // If you want a maximum width to your footer content (like the header)
     .container {
         max-width: 1140px; // Bootstrap's large container width

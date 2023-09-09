@@ -182,18 +182,20 @@ function initSite() {
    // console.log("virtual-red-carpet-2")
 }  
 */
+console.log("Run of Show DATA")
     if(section_menu_slug != ''){
      //   console.log("app/menuname menu",menu_name,menus[menu_name])
         
         
         var run_of_show = runOfShow(menus[section_menu_slug]);
-       console.log("Run of Show",section_menu_slug,menus[section_menu_slug])
+       console.log("Run of Show DATA",section_menu_slug,menus[section_menu_slug])
         //displayRunOfShow(run_of_show)
         var ros_list = getUrlParameter('ros-list')
 
         if(ros_list != false){
             
             displayRunOfShowList(run_of_show)
+
         }
 
         var monolith_view = getUrlParameter('monolith-view')
@@ -202,10 +204,12 @@ function initSite() {
         if(monolith_view){
             hide_social_icons = 1
             displayRunOfShowMonolith(run_of_show)
+
         } else if(cards){
             displayRunOfShowCards(run_of_show)
            
         } else {
+            
             displayRunOfShowTable(run_of_show)
         }
     }
@@ -339,4 +343,16 @@ function scrollToAnchor(div) {
     $('html,body').animate({
         scrollTop: anchor.offset().top - 100
     }, 'slow');
+}
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
 }

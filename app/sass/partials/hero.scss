@@ -90,7 +90,6 @@
   
   .hero-slider .slides>li {
       display: none;
-      -webkit-backface-visibility: hidden;
   }
   
   .hero-slider,
@@ -184,8 +183,6 @@
       text-shadow: 5px 5px $darkest_blue;
   }
   
-  .hero-slider {}
-  
   .caption-content a.btn {
       font-size: 1vw;
       text-shadow: 1px 1px #000;
@@ -201,4 +198,12 @@
           max-width: 90%;
           word-wrap: break-word;
       }
+  }
+  .hero-content{
+    @media(max-width:767px){
+      background-size: contain !important;
+      padding-bottom: 50%;
+      background-position-x: center;
+      background-repeat: no-repeat;
+    }
   }

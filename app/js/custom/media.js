@@ -130,7 +130,22 @@ function setImageContent(loc, title, caption, desc, alt, src) {
 
 }
 
-
+function addYouTubeParameters(url) {
+    if (typeof url !== 'string') {
+      return url; // Return the URL as is if it's not a string
+    }
+  
+    // Check if the URL already contains a query string
+    const separator = url.includes('?') ? '&' : '?';
+  
+    // Check if 'autoplay' and 'rel' parameters already exist in the URL
+    if (!url.includes('autoplay=') && !url.includes('rel=')) {
+      // Append 'autoplay=1' and 'rel=0' to the URL
+      url += `${separator}autoplay=1&rel=0`;
+    }
+  
+    return url;
+  }
 
 
 function transitionImage(dest, type, media_id) {

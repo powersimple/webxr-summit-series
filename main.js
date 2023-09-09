@@ -182,18 +182,20 @@ function initSite() {
    // console.log("virtual-red-carpet-2")
 }  
 */
+console.log("Run of Show DATA")
     if(section_menu_slug != ''){
      //   console.log("app/menuname menu",menu_name,menus[menu_name])
         
         
         var run_of_show = runOfShow(menus[section_menu_slug]);
-       console.log("Run of Show",section_menu_slug,menus[section_menu_slug])
+       console.log("Run of Show DATA",section_menu_slug,menus[section_menu_slug])
         //displayRunOfShow(run_of_show)
         var ros_list = getUrlParameter('ros-list')
 
         if(ros_list != false){
             
             displayRunOfShowList(run_of_show)
+
         }
 
         var monolith_view = getUrlParameter('monolith-view')
@@ -202,10 +204,12 @@ function initSite() {
         if(monolith_view){
             hide_social_icons = 1
             displayRunOfShowMonolith(run_of_show)
+
         } else if(cards){
             displayRunOfShowCards(run_of_show)
            
         } else {
+            
             displayRunOfShowTable(run_of_show)
         }
     }
@@ -339,6 +343,18 @@ function scrollToAnchor(div) {
     $('html,body').animate({
         scrollTop: anchor.offset().top - 100
     }, 'slow');
+}
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
 }
 var directory_list = [],
     active_filters = {},
@@ -1628,6 +1644,867 @@ function setPosts(data) { // special function for the any post type
 
     return posts
 }
+console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55');
+
+/* ---------------------------------------------- /*
+ * Preloader
+ /* ---------------------------------------------- */
+(function(){
+    $(window).on('load', function() {
+        $('.loader').fadeOut();
+        $('.page-loader').delay(350).fadeOut('slow');
+    });
+
+    $(document).ready(function() {
+
+        /* ---------------------------------------------- /*
+         * WOW Animation When You Scroll
+         /* ---------------------------------------------- */
+
+        wow = new WOW({
+            mobile: false
+        });
+        wow.init();
+
+
+        /* ---------------------------------------------- /*
+         * Scroll top
+         /* ---------------------------------------------- */
+
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.scroll-up').fadeIn();
+            } else {
+                $('.scroll-up').fadeOut();
+            }
+        });
+
+        $('a[href="#totop"]').click(function() {
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
+            return false;
+        });
+
+
+        /* ---------------------------------------------- /*
+         * Initialization General Scripts for all pages
+         /* ---------------------------------------------- */
+
+        var homeSection = $('.home-section'),
+            navbar      = $('.navbar-custom'),
+            navHeight   = navbar.height(),
+            worksgrid   = $('#works-grid'),
+            width       = Math.max($(window).width(), window.innerWidth),
+            mobileTest  = false;
+
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            mobileTest = true;
+        }
+
+       // buildHomeSection(homeSection);
+        navbarAnimation(navbar, homeSection, navHeight);
+        navbarSubmenu(width);
+        hoverDropdown(width, mobileTest);
+
+        $(window).resize(function() {
+            var width = Math.max($(window).width(), window.innerWidth);
+            buildHomeSection(homeSection);
+            hoverDropdown(width, mobileTest);
+        });
+
+        $(window).scroll(function() {
+            console.l
+            effectsHomeSection(homeSection, this);
+            navbarAnimation(navbar, homeSection, navHeight);
+        });
+
+        /* ---------------------------------------------- /*
+         * Set sections backgrounds
+         /* ---------------------------------------------- */
+
+        var module = $('.home-section, .module, .module-small, .side-image');
+        module.each(function(i) {
+            if ($(this).attr('data-background')) {
+                $(this).css('background-image', 'url(' + $(this).attr('data-background') + ')');
+            }
+        });
+
+        /* ---------------------------------------------- /*
+         * Home section height
+         /* ---------------------------------------------- */
+
+        function buildHomeSection(homeSection) {
+            if (homeSection.length > 0) {
+                if (homeSection.hasClass('home-full-height')) {
+                    homeSection.height($(window).height());
+                    
+                } else if (homeSection.hasClass('hero-cover-20')) {
+                    homeSection.height(0);
+                    homeSection.paddingBottom('20%');
+                    homeSection.top('50px');
+                    console.log('hero-cover-20');
+                } else if (homeSection.hasClass('hero-cover-20')) {
+                    homeSection.height(0);
+                    homeSection.paddingBottom('25%');
+                } else {
+                    homeSection.height($(window).height() * 0.85);
+                }
+            }
+        }
+
+
+        /* ---------------------------------------------- /*
+         * Home section effects
+         /* ---------------------------------------------- */
+
+        function effectsHomeSection(homeSection, scrollTopp) {
+            if (homeSection.length > 0) {
+                var homeSHeight = homeSection.height();
+                var topScroll = $(document).scrollTop();
+                if ((homeSection.hasClass('home-parallax')) && ($(scrollTopp).scrollTop() <= homeSHeight)) {
+                    homeSection.css('top', (topScroll * 0.55));
+                }
+                if (homeSection.hasClass('home-fade') && ($(scrollTopp).scrollTop() <= homeSHeight)) {
+                    var caption = $('.caption-content');
+                    caption.css('opacity', (1 - topScroll/homeSection.height() * 1));
+                }
+            }
+        }
+
+        /* ---------------------------------------------- /*
+         * Intro slider setup
+         /* ---------------------------------------------- */
+
+        if( $('.hero-slider').length > 0 ) {
+            $('.hero-slider').flexslider( {
+                animation: "fade",
+                animationSpeed: 1000,
+                animationLoop: true,
+                prevText: '',
+                nextText: '',
+                before: function(slider) {
+                    $('.titan-caption').fadeOut().animate({top:'-80px'},{queue:false, easing: 'swing', duration: 700});
+                    slider.slides.eq(slider.currentSlide).delay(500);
+                    slider.slides.eq(slider.animatingTo).delay(500);
+                },
+                after: function(slider) {
+                    $('.titan-caption').fadeIn().animate({top:'0'},{queue:false, easing: 'swing', duration: 700});
+                },
+                useCSS: true
+            });
+        }
+
+
+        /* ---------------------------------------------- /*
+         * Rotate
+         /* ---------------------------------------------- 
+
+        $(".rotate").textrotator({
+            animation: "dissolve",
+            separator: "|",
+            speed: 3000
+        });
+
+*/
+        /* ---------------------------------------------- /*
+         * Transparent navbar animation
+         /* ---------------------------------------------- */
+
+        function navbarAnimation(navbar, homeSection, navHeight) {
+            var topScroll = $(window).scrollTop();
+            if (navbar.length > 0 && homeSection.length > 0) {
+                if(topScroll >= navHeight) {
+                    navbar.removeClass('navbar-transparent');
+                } else {
+                    navbar.addClass('navbar-transparent');
+                }
+            }
+        }
+
+        /* ---------------------------------------------- /*
+         * Navbar submenu
+         /* ---------------------------------------------- */
+
+        function navbarSubmenu(width) {
+            if (width > 767) {
+                $('.navbar-custom .navbar-nav > li.dropdown').hover(function() {
+                    var MenuLeftOffset  = $('.dropdown-menu', $(this)).offset().left;
+                    var Menu1LevelWidth = $('.dropdown-menu', $(this)).width();
+                    if (width - MenuLeftOffset < Menu1LevelWidth * 2) {
+                        $(this).children('.dropdown-menu').addClass('leftauto');
+                    } else {
+                        $(this).children('.dropdown-menu').removeClass('leftauto');
+                    }
+                    if ($('.dropdown', $(this)).length > 0) {
+                        var Menu2LevelWidth = $('.dropdown-menu', $(this)).width();
+                        if (width - MenuLeftOffset - Menu1LevelWidth < Menu2LevelWidth) {
+                            $(this).children('.dropdown-menu').addClass('left-side');
+                        } else {
+                            $(this).children('.dropdown-menu').removeClass('left-side');
+                        }
+                    }
+                });
+            }
+        }
+
+        /* ---------------------------------------------- /*
+         * Navbar hover dropdown on desctop
+         /* ---------------------------------------------- */
+
+        function hoverDropdown(width, mobileTest) {
+            if ((width > 767) && (mobileTest !== true)) {
+                $('.navbar-custom .navbar-nav > li.dropdown, .navbar-custom li.dropdown > ul > li.dropdown').removeClass('open');
+                var delay = 0;
+                var setTimeoutConst;
+                $('.navbar-custom .navbar-nav > li.dropdown, .navbar-custom li.dropdown > ul > li.dropdown').hover(function() {
+                        var $this = $(this);
+                        setTimeoutConst = setTimeout(function() {
+                            $this.addClass('open');
+                            $this.find('.dropdown-toggle').addClass('disabled');
+                        }, delay);
+                    },
+                    function() {
+                        clearTimeout(setTimeoutConst);
+                        $(this).removeClass('open');
+                        $(this).find('.dropdown-toggle').removeClass('disabled');
+                    });
+            } else {
+                $('.navbar-custom .navbar-nav > li.dropdown, .navbar-custom li.dropdown > ul > li.dropdown').unbind('mouseenter mouseleave');
+                $('.navbar-custom [data-toggle=dropdown]').not('.binded').addClass('binded').on('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    $(this).parent().siblings().removeClass('open');
+                    $(this).parent().siblings().find('[data-toggle=dropdown]').parent().removeClass('open');
+                    $(this).parent().toggleClass('open');
+                });
+            }
+        }
+
+        /* ---------------------------------------------- /*
+         * Navbar collapse on click
+         /* ---------------------------------------------- */
+
+        $(document).on('click','.navbar-collapse.in',function(e) {
+            if( $(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle' ) {
+                $(this).collapse('hide');
+            }
+        });
+
+
+        /* ---------------------------------------------- /*
+         * Video popup, Gallery
+         /* ---------------------------------------------- 
+        $('.video-pop-up').magnificPopup({
+            type: 'iframe'
+        });
+
+        $(".gallery-item").magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1]
+            },
+            image: {
+                titleSrc: 'title',
+                tError: 'The image could not be loaded.'
+            }
+        });
+        */
+
+        /* ---------------------------------------------- /*
+         * Portfolio
+         /* ----------------------------------------------
+
+        var worksgrid   = $('#works-grid'),
+            worksgrid_mode;
+
+        if (worksgrid.hasClass('works-grid-masonry')) {
+            worksgrid_mode = 'masonry';
+        } else {
+            worksgrid_mode = 'fitRows';
+        }
+
+        worksgrid.imagesLoaded(function() {
+            worksgrid.isotope({
+                layoutMode: worksgrid_mode,
+                itemSelector: '.work-item'
+            });
+        });
+
+        $('#filters a').click(function() {
+            $('#filters .current').removeClass('current');
+            $(this).addClass('current');
+            var selector = $(this).attr('data-filter');
+
+            worksgrid.isotope({
+                filter: selector,
+                animationOptions: {
+                    duration: 750,
+                    easing: 'linear',
+                    queue: false
+                }
+            });
+
+            return false;
+        });
+*/
+
+        /* ---------------------------------------------- /*
+         * Testimonials
+         /* ---------------------------------------------- */
+
+        if ($('.testimonials-slider').length > 0 ) {
+            $('.testimonials-slider').flexslider( {
+                animation: "slide",
+                smoothHeight: true
+            });
+        }
+
+
+        /* ---------------------------------------------- /*
+         * Post Slider
+         /* ---------------------------------------------- */
+
+        if ($('.post-images-slider').length > 0 ) {
+            $('.post-images-slider').flexslider( {
+                animation: "slide",
+                smoothHeight: true,
+            });
+        }
+
+
+        /* ---------------------------------------------- /*
+         * Progress bar animations
+         /* ---------------------------------------------- */
+
+        $('.progress-bar').each(function(i) {
+            $(this).appear(function() {
+                var percent = $(this).attr('aria-valuenow');
+                $(this).animate({'width' : percent + '%'});
+                $(this).find('span').animate({'opacity' : 1}, 900);
+                $(this).find('span').countTo({from: 0, to: percent, speed: 900, refreshInterval: 30});
+            });
+        });
+
+
+        /* ---------------------------------------------- /*
+         * Funfact Count-up
+         /* ---------------------------------------------- */
+
+        $('.count-item').each(function(i) {
+            $(this).appear(function() {
+                var number = $(this).find('.count-to').data('countto');
+                $(this).find('.count-to').countTo({from: 0, to: number, speed: 1200, refreshInterval: 30});
+            });
+        });
+
+
+        /* ---------------------------------------------- /*
+         * Youtube video background
+         /* ---------------------------------------------- 
+
+        $(function(){
+            $(".video-player").mb_YTPlayer();
+        });
+
+        $('#video-play').click(function(event) {
+            event.preventDefault();
+            if ($(this).hasClass('fa-play')) {
+                $('.video-player').playYTP();
+            } else {
+                $('.video-player').pauseYTP();
+            }
+            $(this).toggleClass('fa-play fa-pause');
+            return false;
+        });
+
+        $('#video-volume').click(function(event) {
+            event.preventDefault();
+            if ($(this).hasClass('fa-volume-off')) {
+                $('.video-player').YTPUnmute();
+            } else {
+                $('.video-player').YTPMute();
+            }
+            $(this).toggleClass('fa-volume-off fa-volume-up');
+            return false;
+        });
+*/
+
+        /* ---------------------------------------------- /*
+         * Owl Carousel
+         /* ---------------------------------------------- */
+
+        $('.owl-carousel').each(function(i) {
+
+            // Check items number
+            if ($(this).data('items') > 0) {
+                items = $(this).data('items');
+            } else {
+                items = 4;
+            }
+
+            // Check pagination true/false
+            if (($(this).data('pagination') > 0) && ($(this).data('pagination') === true)) {
+                pagination = true;
+            } else {
+                pagination = false;
+            }
+
+            // Check navigation true/false
+            if (($(this).data('navigation') > 0) && ($(this).data('navigation') === true)) {
+                navigation = true;
+            } else {
+                navigation = false;
+            }
+
+            // Build carousel
+            $(this).owlCarousel( {
+                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+                nav: navigation,
+                dots: pagination,
+                loop: true,
+                dotsSpeed: 400,
+                items: items,
+                navSpeed: 300,
+                autoplay: 2000
+            });
+
+        });
+
+
+        /* ---------------------------------------------- /*
+         * Blog masonry
+         /* ---------------------------------------------- 
+
+        $('.post-masonry').imagesLoaded(function() {
+            $('.post-masonry').masonry();
+        });
+*/
+
+        /* ---------------------------------------------- /*
+         * Scroll Animation
+         /* ---------------------------------------------- */
+
+        $('.section-scroll').bind('click', function(e) {
+            var anchor = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $(anchor.attr('href')).offset().top - 50
+            }, 1000);
+            e.preventDefault();
+        });
+
+        /*===============================================================
+         Working Contact Form
+         ================================================================*/
+
+        $("#contactForm").submit(function (e) {
+
+            e.preventDefault();
+            var $ = jQuery;
+
+            var postData = $(this).serializeArray(),
+                formURL = $(this).attr("action"),
+                $cfResponse = $('#contactFormResponse'),
+                $cfsubmit = $("#cfsubmit"),
+                cfsubmitText = $cfsubmit.text();
+
+            $cfsubmit.text("Sending...");
+
+
+            $.ajax(
+                {
+                    url: formURL,
+                    type: "POST",
+                    data: postData,
+                    success: function (data) {
+                        $cfResponse.html(data);
+                        $cfsubmit.text(cfsubmitText);
+                        $('#contactForm input[name=name]').val('');
+                        $('#contactForm input[name=email]').val('');
+                        $('#contactForm textarea[name=message]').val('');
+                    },
+                    error: function (data) {
+                        alert("Error occurd! Please try again");
+                    }
+                });
+
+            return false;
+
+        });
+
+
+        /*===============================================================
+         Working Request A Call Form
+         ================================================================*/
+
+        $("#requestACall").submit(function (e) {
+
+            e.preventDefault();
+            var $ = jQuery;
+
+            var postData = $(this).serializeArray(),
+                formURL = $(this).attr("action"),
+                $cfResponse = $('#requestFormResponse'),
+                $cfsubmit = $("#racSubmit"),
+                cfsubmitText = $cfsubmit.text();
+
+            $cfsubmit.text("Sending...");
+
+
+            $.ajax(
+                {
+                    url: formURL,
+                    type: "POST",
+                    data: postData,
+                    success: function (data) {
+                        $cfResponse.html(data);
+                        $cfsubmit.text(cfsubmitText);
+                        $('#requestACall input[name=name]').val('');
+                        $('#requestACall input[name=subject]').val('');
+                        $('#requestACall textarea[name=phone]').val('');
+                    },
+                    error: function (data) {
+                        alert("Error occurd! Please try again");
+                    }
+                });
+
+            return false;
+
+        });
+
+
+        /*===============================================================
+         Working Reservation Form
+         ================================================================*/
+
+        $("#reservationForm").submit(function (e) {
+
+            e.preventDefault();
+            var $ = jQuery;
+
+            var postData = $(this).serializeArray(),
+                formURL = $(this).attr("action"),
+                $cfResponse = $('#reservationFormResponse'),
+                $cfsubmit = $("#rfsubmit"),
+                cfsubmitText = $cfsubmit.text();
+
+            $cfsubmit.text("Sending...");
+
+
+            $.ajax(
+                {
+                    url: formURL,
+                    type: "POST",
+                    data: postData,
+                    success: function (data) {
+                        $cfResponse.html(data);
+                        $cfsubmit.text(cfsubmitText);
+                        $('#reservationForm input[name=date]').val('');
+                        $('#reservationForm input[name=time]').val('');
+                        $('#reservationForm textarea[name=people]').val('');
+                        $('#reservationForm textarea[name=email]').val('');
+                    },
+                    error: function (data) {
+                        alert("Error occurd! Please try again");
+                    }
+                });
+
+            return false;
+
+        });
+
+
+        /* ---------------------------------------------- /*
+         * Subscribe form ajax
+         /* ---------------------------------------------- */
+
+        $('#subscription-form').submit(function(e) {
+
+            e.preventDefault();
+            var $form           = $('#subscription-form');
+            var submit          = $('#subscription-form-submit');
+            var ajaxResponse    = $('#subscription-response');
+            var email           = $('input#semail').val();
+
+            $.ajax({
+                type: 'POST',
+                url: 'assets/php/subscribe.php',
+                dataType: 'json',
+                data: {
+                    email: email
+                },
+                cache: false,
+                beforeSend: function(result) {
+                    submit.empty();
+                    submit.append('<i class="fa fa-cog fa-spin"></i> Wait...');
+                },
+                success: function(result) {
+                    if(result.sendstatus == 1) {
+                        ajaxResponse.html(result.message);
+                        $form.fadeOut(500);
+                    } else {
+                        ajaxResponse.html(result.message);
+                    }
+                }
+            });
+
+        });
+
+
+        /* ---------------------------------------------- /*
+         * Google Map
+         /* ---------------------------------------------- */
+
+        if($("#map").length == 0 || typeof google == 'undefined') return;
+
+        // When the window has finished loading create our google map below
+        google.maps.event.addDomListener(window, 'load', init);
+
+        var mkr = new google.maps.LatLng(40.6700, -74.2000);
+        var cntr = (mobileTest) ? mkr : new google.maps.LatLng(40.6700, -73.9400);
+
+        function init() {
+            // Basic options for a simple Google Map
+            // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+            var mapOptions = {
+                // How zoomed in you want the map to start at (always required)
+                zoom: 11,
+                scrollwheel: false,
+                // The latitude and longitude to center the map (always required)
+                center: cntr, // New York
+
+                // How you would like to style the map.
+                // This is where you would paste any style found on Snazzy Maps.
+                styles: [
+                    {
+                        "featureType": "all",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "visibility": "on"
+                            },
+                            {
+                                "saturation": "-11"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "saturation": "22"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "saturation": "-58"
+                            },
+                            {
+                                "color": "#cfcece"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "labels.text",
+                        "stylers": [
+                            {
+                                "color": "#f8f8f8"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "color": "#999999"
+                            },
+                            {
+                                "visibility": "on"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                            {
+                                "visibility": "on"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.country",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#f9f9f9"
+                            },
+                            {
+                                "visibility": "simplified"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape",
+                        "elementType": "all",
+                        "stylers": [
+                            {
+                                "color": "#f2f2f2"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "saturation": "-19"
+                            },
+                            {
+                                "lightness": "-2"
+                            },
+                            {
+                                "visibility": "on"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "all",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "all",
+                        "stylers": [
+                            {
+                                "saturation": -100
+                            },
+                            {
+                                "lightness": 45
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "all",
+                        "stylers": [
+                            {
+                                "visibility": "simplified"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.arterial",
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "transit",
+                        "elementType": "all",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "all",
+                        "stylers": [
+                            {
+                                "color": "#d8e1e5"
+                            },
+                            {
+                                "visibility": "on"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#dedede"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "labels.text",
+                        "stylers": [
+                            {
+                                "color": "#cbcbcb"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "color": "#9c9c9c"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    }
+                ]
+            };
+
+            // Get the HTML DOM element that will contain your map
+            // We are using a div with id="map" seen below in the <body>
+            var mapElement = document.getElementById('map');
+
+            // Create the Google Map using our element and options defined above
+            var map = new google.maps.Map(mapElement, mapOptions);
+
+            // Let's also add a marker while we're at it
+            var image = new google.maps.MarkerImage('assets/images/map-icon.png',
+                new google.maps.Size(59, 65),
+                new google.maps.Point(0, 0),
+                new google.maps.Point(24, 42)
+            );
+
+            var marker = new google.maps.Marker({
+                position: mkr,
+                icon: image,
+                title: 'Titan',
+                infoWindow: {
+                    content: '<p><strong>Rival</strong><br/>121 Somewhere Ave, Suite 123<br/>P: (123) 456-7890<br/>Australia</p>'
+                },
+                map: map,
+            });
+        }
+
+    });
+})(jQuery);
+
+
+
 function setMedia(data) {
 
     for (var m = 0; m < data.length; m++) {
@@ -1760,7 +2637,22 @@ function setImageContent(loc, title, caption, desc, alt, src) {
 
 }
 
-
+function addYouTubeParameters(url) {
+    if (typeof url !== 'string') {
+      return url; // Return the URL as is if it's not a string
+    }
+  
+    // Check if the URL already contains a query string
+    const separator = url.includes('?') ? '&' : '?';
+  
+    // Check if 'autoplay' and 'rel' parameters already exist in the URL
+    if (!url.includes('autoplay=') && !url.includes('rel=')) {
+      // Append 'autoplay=1' and 'rel=0' to the URL
+      url += `${separator}autoplay=1&rel=0`;
+    }
+  
+    return url;
+  }
 
 
 function transitionImage(dest, type, media_id) {
@@ -2516,6 +3408,221 @@ function buildMenuData() {
     }
 
 }
+/*
+ * jQuery.appear
+ * https://github.com/bas2k/jquery.appear/
+ * http://code.google.com/p/jquery-appear/
+ *
+ * Copyright (c) 2009 Michael Hixson
+ * Copyright (c) 2012 Alexander Brovikov
+ * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
+ */
+(function($) {
+    $.fn.appear = function(fn, options) {
+
+        var settings = $.extend({
+
+            //arbitrary data to pass to fn
+            data: undefined,
+
+            //call fn only on the first appear?
+            one: true,
+
+            // X & Y accuracy
+            accX: 0,
+            accY: 0
+
+        }, options);
+
+        return this.each(function() {
+
+            var t = $(this);
+
+            //whether the element is currently visible
+            t.appeared = false;
+
+            if (!fn) {
+
+                //trigger the custom event
+                t.trigger('appear', settings.data);
+                return;
+            }
+
+            var w = $(window);
+
+            //fires the appear event when appropriate
+            var check = function() {
+
+                //is the element hidden?
+                if (!t.is(':visible')) {
+
+                    //it became hidden
+                    t.appeared = false;
+                    return;
+                }
+
+                //is the element inside the visible window?
+                var a = w.scrollLeft();
+                var b = w.scrollTop();
+                var o = t.offset();
+                var x = o.left;
+                var y = o.top;
+
+                var ax = settings.accX;
+                var ay = settings.accY;
+                var th = t.height();
+                var wh = w.height();
+                var tw = t.width();
+                var ww = w.width();
+
+                if (y + th + ay >= b &&
+                    y <= b + wh + ay &&
+                    x + tw + ax >= a &&
+                    x <= a + ww + ax) {
+
+                    //trigger the custom event
+                    if (!t.appeared) t.trigger('appear', settings.data);
+
+                } else {
+
+                    //it scrolled out of view
+                    t.appeared = false;
+                }
+            };
+
+            //create a modified fn with some additional logic
+            var modifiedFn = function() {
+
+                //mark the element as visible
+                t.appeared = true;
+
+                //is this supposed to happen only once?
+                if (settings.one) {
+
+                    //remove the check
+                    w.unbind('scroll', check);
+                    var i = $.inArray(check, $.fn.appear.checks);
+                    if (i >= 0) $.fn.appear.checks.splice(i, 1);
+                }
+
+                //trigger the original fn
+                fn.apply(this, arguments);
+            };
+
+            //bind the modified fn to the element
+            if (settings.one) t.one('appear', settings.data, modifiedFn);
+            else t.bind('appear', settings.data, modifiedFn);
+
+            //check whenever the window scrolls
+            w.scroll(check);
+
+            //check whenever the dom changes
+            $.fn.appear.checks.push(check);
+
+            //check now
+            (check)();
+        });
+    };
+
+    //keep a queue of appearance checks
+    $.extend($.fn.appear, {
+
+        checks: [],
+        timeout: null,
+
+        //process the queue
+        checkAll: function() {
+            var length = $.fn.appear.checks.length;
+            if (length > 0) while (length--) ($.fn.appear.checks[length])();
+        },
+
+        //check the queue asynchronously
+        run: function() {
+            if ($.fn.appear.timeout) clearTimeout($.fn.appear.timeout);
+            $.fn.appear.timeout = setTimeout($.fn.appear.checkAll, 20);
+        }
+    });
+
+    //run checks when these methods are called
+    $.each(['append', 'prepend', 'after', 'before', 'attr',
+        'removeAttr', 'addClass', 'removeClass', 'toggleClass',
+        'remove', 'css', 'show', 'hide'], function(i, n) {
+        var old = $.fn[n];
+        if (old) {
+            $.fn[n] = function() {
+                var r = old.apply(this, arguments);
+                $.fn.appear.run();
+                return r;
+            }
+        }
+    });
+
+})(jQuery);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(function($) {
+    $.fn.countTo = function(options) {
+        // merge the default plugin settings with the custom options
+        options = $.extend({}, $.fn.countTo.defaults, options || {});
+
+        // how many times to update the value, and how much to increment the value on each update
+        var loops = Math.ceil(options.speed / options.refreshInterval),
+            increment = (options.to - options.from) / loops;
+
+        return $(this).each(function() {
+            var _this = this,
+                loopCount = 0,
+                value = options.from,
+                interval = setInterval(updateTimer, options.refreshInterval);
+
+            function updateTimer() {
+                value += increment;
+                loopCount++;
+                $(_this).html(value.toFixed(options.decimals));
+
+                if (typeof(options.onUpdate) == 'function') {
+                    options.onUpdate.call(_this, value);
+                }
+
+                if (loopCount >= loops) {
+                    clearInterval(interval);
+                    value = options.to;
+
+                    if (typeof(options.onComplete) == 'function') {
+                        options.onComplete.call(_this, value);
+                    }
+                }
+            }
+        });
+    };
+
+    $.fn.countTo.defaults = {
+        from: 0,  // the number the element should start at
+        to: 100,  // the number the element should end at
+        speed: 1000,  // how long it should take to count between the target numbers
+        refreshInterval: 100,  // how often the element should be updated
+        decimals: 0,  // the number of decimal places to show
+        onUpdate: null,  // callback method for every time the element is updated,
+        onComplete: null,  // callback method for when the element finishes updating
+    };
+})(jQuery);
 function displayValidField() {
 
 }
@@ -2835,11 +3942,11 @@ var currentROS = {}
 
 function runOfShow(menu){
     var show = menu.menu_levels;
-   // console.log("ROS MENU",show)
-    
+ 
         if(show.length != undefined){
         
         for (var s = 0; s < show.length; s++) {
+            
             var this_event = show[s]
             this_event.sessions = [];
             this_event.info =events[show[s].object_id]
@@ -3140,6 +4247,7 @@ function displayRunOfShowMonolith(runOfShow){
     var card_size = 1
     var cell_width = '100%';
     var cols = '';
+    var classes = '';
     for (var n = 0; n < runOfShow.sessions.length; n++) { 
         //console.log("session-info",runOfShow.sessions[n].info,showtime)
         if(runOfShow.sessions[n].info != undefined){
@@ -3150,7 +4258,8 @@ function displayRunOfShowMonolith(runOfShow){
             if(runOfShow.sessions[n].info.event_info.duration != ''){
             duration = parseInt(runOfShow.sessions[n].info.event_info.duration)*60
             event_time = showtime// this passes it below
-            
+            classes = runOfShow.sessions[n].classes
+            console.log("classes"+n,classes)
             display_event_time = localTime(showtime)//converst
             start_time = showtime
             showtime = parseInt(showtime)+duration; //add duration for next 
@@ -3160,7 +4269,7 @@ function displayRunOfShowMonolith(runOfShow){
             // console.log("info not undefined",runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
             }
     //        console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
-            sessions += '<div class="row session">'
+            sessions += '<div class="row session '+classes+'">'
           /*  
             sessions += '<div class="col-sm-2 col-md-1">'
             sessions += '<h3 class="ros"><span class="spacer"></span><span class="session-time">'+display_event_time+' </span></h3>'
@@ -3302,7 +4411,7 @@ cell_width = 100/runOfShow.sessions[n].profiles.length+'%';
 }
 
 function displayRunOfShowTable(runOfShow){
-
+   
     console.log("displayROSTable",runOfShow)
       currentROS = runOfShow //"creates memory object;
     var first = 0;
@@ -3338,7 +4447,7 @@ function displayRunOfShowTable(runOfShow){
     var suppress_unconfimred_speakers = 0 //session level
     var suppress_event_unconfimred_speakers = 1 // event level
     var section_class = ''
-
+    var classes = ''
     var section_strip_from_label = ''
     if("ROSTEST",runOfShow.info.meta.section_strip_from_label != undefined){
         section_strip_from_label = runOfShow.info.meta.section_strip_from_label
@@ -3392,7 +4501,7 @@ function displayRunOfShowTable(runOfShow){
         
               //console.log(runOfShow.sessions[n],duration,display_event_time,convertDate(showtime))
    
-            sessions += '<div id="'+runOfShow.sessions[n].info.slug+'"  class="row session '+section_class+'">'
+            sessions += '<div id="'+runOfShow.sessions[n].info.slug+'"  class="row session '+classes+'">'
             
             sessions += '<div class="col-sm-3 col-md-2">'
             if(tense == 'future'){
@@ -3403,14 +4512,14 @@ function displayRunOfShowTable(runOfShow){
            
             sessions += '</span></h3>'
             } else {
-              var embed_video_url = runOfShow.sessions[n].info.meta.embed_video_url
+              var embed_video_url = embed_video_url = addYouTubeParameters(runOfShow.sessions[n].info.meta.embed_video_url)
                 if(embed_video_url != undefined){
                             //              console.log(embed_video_url)
                 if(runOfShow.sessions[n].info != undefined){
                     embed_video_url  = embed_video_url.replace(/(\?.+)?$/, function(match) {
                         return match ? match + '&autoplay=1&rel=0' : '?autoplay=1&rel=0';
                     });
-                
+                console.log("event"+n,runOfShow.sessions[n].info.featured_media)
                 sessions += '<a href="#'+runOfShow.sessions[n].info.slug+'" class="watch video-button" onclick="playSessionVideo(\''+embed_video_url+'\',\''+runOfShow.sessions[n].object_id+'\',\'\''+')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
                     }
                 }
@@ -3529,12 +4638,20 @@ function displaySessionProfiles(id){ // this shows the speaker list
 
             }
             cols='col'
-            if(session.profiles.length > 3){
+            if(session.profiles.length == 3 || session.profiles.length == 4){
                 width_override = 'pair'
                 card_size = 2
                 cols='col-xs-6 col-sm-6 col-md-3'
 
+                
+            } else if(session.profiles.length == 5 ){
+                cols='col-xs-6 col-sm-6 col-md-4 fifth'
             }
+            else if(session.profiles.length > 5 ){
+
+                cols='col col-xs-6 col-sm-6 col-md-4'
+            }
+
 
 
             //suppress_speaker_list = 0;
@@ -3576,7 +4693,14 @@ function displaySessionProfiles(id){ // this shows the speaker list
                                 }
                                 sessions += '<span class="profile-info">'
                             
-                                sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title+'</span>'
+                                sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title
+                                console.log(
+
+                                    "classes",
+                                    this_profile.classes
+                                )
+                                sessions += '<br><span class="'+this_profile.classes+'">'+this_profile.classes+'</span>'
+                                sessions +='</span>'
                                 
                             
                             sessions += getProfileCard(this_profile);
@@ -4003,7 +5127,14 @@ function displayRunOfShowCards(runOfShow){
                     }
                     sessions += '<span class="profile-info">'
                 
-                    sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title+'</span>'
+                    sessions += '<span class="profile-name ' +this_profile.slug+'">'+this_profile.title
+                                console.log(
+
+                                    "classes",
+                                    this_profile.classes
+                                )
+                                sessions += '<br>'+this_profile.classes
+                                sessions +='</span>'
                     
     
                 sessions += getProfileCard(this_profile,event_time);

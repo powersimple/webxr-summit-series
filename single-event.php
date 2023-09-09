@@ -24,10 +24,13 @@ urlParams.set('cards', 'show')
 
 
       <div class="d-flex container-flex">
-<div class="col-md-7 left" id="ros-table" >
+<div class="col-md-7 left event-post">
 <?php
 
 print do_blocks($post->post_content);
+?>
+<div id="ros-table"></div>
+<?php
 $trophy_embed_id = get_post_meta($post->ID,"looking_glass_embed_trophy",true);
 $trophy_base_embed_id = get_post_meta($post->ID,"looking_glass_embed_trophy_base",true);
 
@@ -108,23 +111,38 @@ if((trim($trophy_embed_id) != '') && (trim($trophy_base_embed_id) != '')){
      
      </div>
  </div>
-<?php if($default_video_url != ''){?>
+
 
             <div class="col-md-5 right">
+                <div class="sticky">
+                <?php if($default_video_url != ''){?>
                 <div class="video-position">
-                        <div class="video-wrap">
+                    <div class="video-wrap">
                         <div id="video-wrap-header"></div>
 
                         <div class="video-wrap">
-
-                    
-                        <iframe id="video-player" src="<?=$default_video_url?>"  frameborder="0" allowfullscreen></iframe>
-                            
+                            <iframe id="video-player" src="<?=$default_video_url?>"  frameborder="0" allowfullscreen></iframe>
+                                
                         </div> 
                         <div id="video-wrap-footer"></div>
+                    </div>
                 </div>
-                </div>
+                
+               
+               </div>
+               <?php 
+                }
+                $sponsor_board = get_post_meta($post->ID,"sponsor_board",true);
             
+                if($sponsor_board != ''){
+                    $src = getThumbnail($sponsor_board, 'medium_large');
+                    ?>
+                    <div class="sponsor-board">
+                        <img src="<?=$src?>" />
+                    </div>
+                    <?php
+                }
+               ?>
             </div>
         </div>
     </div>
@@ -132,9 +150,7 @@ if((trim($trophy_embed_id) != '') && (trim($trophy_base_embed_id) != '')){
         
            
 
-<?php
-    }
-?> 
+
 
 
 

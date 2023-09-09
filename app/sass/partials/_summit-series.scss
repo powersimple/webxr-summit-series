@@ -110,7 +110,16 @@ transform: scale(0.5) translate(-100%, -100%);
     color:$production_summit;
     font-family: 'AgencyFB';
 }
-
+.wolvic{
+    font-size:.9rem;
+    color:#5163e1;
+    background-color: #fefefc;
+   
+}
+.wolvic a {
+    color: #5163e1 !important;
+    font-weight: bold;
+}
 /*
   
   #megamenu .red-carpet a {
