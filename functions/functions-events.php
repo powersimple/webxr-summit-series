@@ -280,6 +280,8 @@ function eventIndex($event_menus){
                         "session_id" => $session['post']->ID,
                         "session_key" => $session['ID'],
                         "session_title" => $session['title'],
+                        "session_slug" => $session['slug'],
+                        
                         "session_embed_video_url" => @$embed_video_url,
                         "session_video_url" => @$video_url,
 
@@ -353,6 +355,7 @@ function eventIndex($event_menus){
   // $lists['profile_list'] = array_unique($lists['profile_list']);
     
     
+
        return $lists;
 }
 

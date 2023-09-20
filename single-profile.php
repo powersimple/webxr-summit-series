@@ -3,16 +3,16 @@ get_header();
 
 
   $profile_meta = get_post_meta($post->ID);
-  $thumbnail = getThumbnail(@$profile_meta['_thumbnail_id'][0],"medium");
+  $thumbnail = getThumbnail(@$profile_meta['_thumbnail_id'][0],"medium_large");
 
-  
+  $default_video_url = get_post_meta($post->ID,"featured_video_url",true);
   $profile_events = getProfileEvents($post->ID);
 
 ?>
     <script>
   var profile_template = 'full-profile-template'
-
-
+  var profile_events = [];
+  var default_video_url = '<?=$default_video_url?>';
 
 
 </script>
@@ -20,41 +20,54 @@ get_header();
 
 
 <main role="main" id="main" class="main">
+<div class="row">
+  <div class="container">
 
+    <h1 class="profile-header"><?=$post->post_title?></h1>
+    <div class="profile-meta">
+          <h5>
+            <?= wrapMeta($profile_meta,'profile_title','span');?>
+          <?php  if(@$profile_meta['company'][0] != ''){
+              print ", ";
+            }?>
+            <?= wrapMeta($profile_meta,'company','span');?>
+          </h5>
+          <div class="social">
+            <div class="social-icons">
+              
+         
+          <?= wrapMeta($profile_meta,'linkedin','a');?>
+          <?= wrapMeta($profile_meta,'github','a');?>
+          <?= wrapMeta($profile_meta,'website','a');?>
+          <?= wrapMeta($profile_meta,'twitter','a');?>
+          </div>
+    </div>
+    </div>
+    </div>
+</div>
 <div class="row">
 <div class="d-flex container-flex">
-<div class="col-md-7 left" id="ros-table" >
-  
+<div class="col-md-7 left" id="profile-videos" >
       
 
 
-          <div class="profile-thumbnail">
-            <img src="<?=$thumbnail?>" alt="<?=$post->post_title?> profile pic">
-          </div>
+<?php
 
-          <div class="profile-meta">
-        
 
-      
+?>
+
+<div class="profile">
   
-        
-
+<img src="<?=$thumbnail?>" alt="<?=$post->post_title?> profile pic" class="float-left">
          
-        <div class="speaker-meta">
-        <h5>
-          <?= wrapMeta($profile_meta,'profile_title','span');?>, 
-          <?= wrapMeta($profile_meta,'company','span');?>
-        </h5>
-        <?= wrapMeta($profile_meta,'twitter','a');?>
-        <?= wrapMeta($profile_meta,'linkedin','a');?>
-        <?= wrapMeta($profile_meta,'github','a');?>
-        <?= wrapMeta($profile_meta,'website','a');?>
-        </div>
 
-          </div>
-
-      
+       
           <?php
+         if($post->post_excerpt != ""){
+          print "<h2 class='featuring'>".nl2br($post->post_excerpt)."</h2><hr>";
+        }
+
+
           if(is_gutenberg()){
             print do_blocks($post->post_content);
             } else {
@@ -63,58 +76,20 @@ get_header();
           ?>
         
         </div>
+        </div>
         <div class="col-md-5 right">
-<?php
-
-
-/*
-
-        foreach($profile_events as $s => $session){
-          $this_session = getProfileSession($session->post_id)[0];
-          $session_meta = get_post_meta($session->post_id);
-          $track = null;
-          if($this_session->post_parent == $current_event){
-            
-            $event = getProfileSession($current_event)[0];
-           
-            
-          } else {
-            $grand_parent = getProfileSession($this_session->post_parent)[0];
-            //var_dump($grand_parent);
-            if(empty(getProfileSession($grand_parent->post_parent)[0])){
-              $event = getProfileSession($grand_parent->post_parent);
-
-            } else {
-              $track = getProfileSession($this_session->post_parent)[0];
-              $event = getProfileSession($grand_parent->post_parent)[0];
-            }
-           
-             
-             
-              
-          }
           
-          
-          if(!empty($event)){
-            ?>
-         <h2><?=$event->post_title?></h2>
-          <?php
-            if(!empty(@$track)){
-                ?>
- <h3><?=$track->post_title?></h3>
-                <?php
-            }
-          ?>
-          <h4><?=$this_session->post_title?></h4>
-          <?php 
-          } 
-        }
+    <?php
+$show_player = true;
+if($default_video_url != ''){
+  $show_player = false;
+}
+  require_once('templates/embed-video.php');
   
-*/
-
-    ?>
-     
-
+?>
+          <div id="appearances"></div>
+          </div>
+          
 
 
         </div>
@@ -123,7 +98,15 @@ get_header();
 
 </main>
 
+<script>
+  
+ jQuery(document).ready(function() {
 
+ 
+  getStaticJSON('profiles/profile-<?=$post->ID?>', loadProfileData);
+
+})
+</script>
   
 
   <?php get_footer(); ?>

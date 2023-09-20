@@ -53,8 +53,7 @@ print do_blocks($post->post_content);
             </div>
             <div class="partners">
         <?php   
-                $menu = 'polys3-partners';
-                getSponsorTiles($menu);
+               
             ?>
         </div>
         </div>

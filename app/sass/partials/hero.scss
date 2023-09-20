@@ -201,9 +201,19 @@
   }
   .hero-content{
     @media(max-width:767px){
-      background-size: contain !important;
+      background-size: cover !important;
       padding-bottom: 50%;
       background-position-x: center;
       background-repeat: no-repeat;
+        top:75px;
+      position: sticky;
     }
   }
+  @media(max-width:767px){
+  .hero-mobile-left{
+    background-position: left;
+  }
+  .hero-mobile-right{
+    background-position: right;
+  }
+}

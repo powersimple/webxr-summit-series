@@ -309,3 +309,134 @@ function loadProfile(id) {
     return profile_posts[id]
 
 }
+function getClassy(slug) {
+    if (slug.includes("metatraversal")) {
+        return "metatraversal";
+    }
+    else if (slug.includes("polys")) {
+        return "polys";
+    } else if (slug.includes("summit")) {
+        return "summit";
+    } else if (slug.includes("wolvic")) {
+        return "summit";
+    } else if (slug.includes("special-edition")) {
+            return "summit";
+    }  else if (slug.includes("golf")) {
+        return "golf";
+      } else if (slug.includes("makers")) {
+        return "polys";
+    } else if (slug.includes("hall")) {
+        return "hall";
+    }
+    else {
+        return 'else'; // Return an empty string if "metatraversal" is not found
+    }
+}
+
+function getLabel(a) {
+    switch (a) {
+        case 'metatraversal':
+            return 'MetaTr@versal';
+        case 'polys':
+            return 'The Poly Awards';
+        case 'summit':
+            return 'WebXR Summit Series';
+        case 'summit':
+                return 'WebXR Summit Series';
+        case 'golf':
+            return 'Ready Player Golf';
+        case 'makers':
+            return 'Meet the Makers!';
+        case 'polys':
+            return 'XR Hall of Fame';
+        default:
+            return 'else'; // Return an empty string for other values of 'a'
+    }
+}
+
+function displayProfiles(profiles){
+    var profile_list = '<div id="profiles">'
+    var events = []
+    var embed_video_url = ''
+    var slug = ''
+    for(var p = 0;p<profiles.length;p++){
+      
+       
+        profile_list += '<span id="'+profiles[p].slug+'">'
+        profile_list += profiles[p].sort;
+        profile_list += '</span>'
+
+        profile_list += ', '+profiles[p].profile_title+", "+profiles[p].company
+        
+        events = profiles[p].events; 
+
+        
+      //  console.log("EVENTS",events)
+        
+        for(var e=0;e<events.length;e++){
+          slug = events[e].event_slug
+            profile_list += '<li>'
+             
+            embed_video_url = events_object[slug].children[events[e].session_key].meta.embed_video_url 
+           // var session_children = events_object[events[e].event_slug].children[events[e].session_id].children
+
+            profile_list += '<a href="#'+slug+'" onclick="setROS(\''+events[e].event_slug+'\');playSessionVideo(\''+embed_video_url+'\',\''+events[e].session_id+'\',\'\');">'
+            
+            profile_list += events[e].session_title
+           // profile_list += embed_video_url
+            
+            profile_list += ', '
+            profile_list += '</a>'
+            profile_list += '<span class="'+events[e].event_slug+'">'
+            profile_list += events[e].event_title
+            profile_list += '</span>'
+            profile_list += '</li>'
+                
+
+        }/**/
+    }
+    profile_list += '</div>'
+    $("#profile-index").html(profile_list);
+
+}
+
+function loadProfileData(data){
+    console.log("LOAD profile",data)
+    
+  var this_class = '';
+  
+    var appearances = '<h4>Appearances by '+data.profile.title+'</h4><hr>';
+    var appearances_array = [];
+    for(var e=0;e<data.events.length;e++){
+
+     
+      this_class = getClassy(data.events[e].event_slug)
+      if(this_class != ''){
+        if(appearances_array[this_class] == undefined){
+        appearances_array[this_class] =[]
+       }
+       appearances_array[this_class].push(data.events[e])
+      }
+     
+
+      
+    }
+  
+    appearances += '<ul class="appearances">';
+    profile_events = appearances_array;
+    for(a in appearances_array){
+
+       
+
+      console.log("appearances_array[a]",a,appearances_array[a])
+      appearances += '<li class="event-title '+a+'">'+getLabel(a)+'</li>'
+      for(var e=0;e<appearances_array[a].length;e++){
+        console.log("appearances_array[a][e]",appearances_array[a][e])
+        this_class = getClassy(appearances_array[a][e].event_slug)
+        appearances += '<li class="appearance"><a onclick="playProfileVideo(\''+a+'\','+e+')">'+appearances_array[a][e].session_title+'</a> | <span class="'+this_class+' '+appearances_array[a][e].event_slug+'">'+appearances_array[a][e].event_title+'</span></li>'
+      }
+    }
+    
+    appearances += '</ul>';
+    $('#appearances').html(appearances)
+   }

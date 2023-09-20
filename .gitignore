@@ -2,3 +2,4 @@ node_modules
 .sass-cache
 .history
 .vscode-upload.js
+data/profiles

@@ -1,7 +1,27 @@
+.profile{
+   
+        overflow: hidden; /* Clear the float */
+  
+    
+    .float-left {
+        float: left;
+        margin-right: 2%; /* Add some spacing between the image and text */
+        width: 38.1%; /* Set the width of the image to 38.1% */
+    }
+    
+    /* You can add additional styles to your text as needed */
+  
+}
+
 .profile-info {
     p {
         text-align: left;
     }
+}
+h1.profile-header{
+    text-shadow: 0px -2px 2px rgba(0, 0, 0, 0.8), 0px 2px 2px rgba(0, 0, 0, 0.8);
+    position: relative ;
+    z-index: 100;
 }
 
 #profile-hero {
@@ -59,13 +79,27 @@
   margin-bottom:2rem;
 }
 .team-member{
+    margin-bottom:50px;
     h4{
         text-align:center;
         color:#eee;
 
     }
+    h5{
+        font-size:1rem;
+        text-align: center;
+        margin-bottom: 0px;
+    }
     a{
-        display: block;
+        display:inline-block;
+        transition: transform 0.3s;
+        &:hover {
+            transform: scale(1.2); /* Scale up the link when hovered */
+        }
+    }
+
+    p{
+        font-size:.8rem;
     }
     img{
     border-radius: 50%;
@@ -73,7 +107,11 @@
     display: block;
     margin: 0 auto 1em;
     box-shadow: 0 0 10px 10px rgba(255, 173, 2, 0.4);
-    
+    @media(max-width:768px){
+       
+            max-width: 50%;
+       
+    }
     }
 }
 .cause{
@@ -92,7 +130,10 @@
         font-size:1.5rem;
     }
     h5 {
+      
         font-size:1.2rem;
+        margin-bottom:1rem;
+        display: block;
     }
     ul, ol{
         padding-left:25px;
@@ -120,4 +161,71 @@
           }
     }
 
+}
+#appearances{
+    border:1px solid #ccc;
+    h4{
+        font-size:1.5rem;
+        text-align: center;
+        margin-top:.5rem;
+
+    }
+    li.event-title{
+        margin-bottom:0px;
+    }
+    ul{
+        padding-left:20px;
+        li.appearance{
+            color:yellow;
+            margin-bottom:0px;
+            font-size:1rem;
+            a{
+                color:#e7e7e7;
+                cursor: pointer;
+                transition: transform 0.3s, color 0.3s, box-shadow 0.3s, scale 0.3s; /* Add scaling effect */
+            }
+            a:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.profile-meta{
+    margin-bottom:20px;
+    border-bottom:3px outset #ccc;
+    padding-bottom:20px;
+    h5{
+        text-align: center;
+      
+        font-size:1rem;
+        
+    }
+    h5:last-child{margin-bottom: 2em};
+  
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+}
+
+.social-icons {
+   
+    display: flex;
+    justify-content: center; /* Center the child elements horizontally */
+    align-items: center; /* Center the child elements vertically */
+    margin-top: 15px;
+    a{
+        font-size:125%;
+        color:#99c;
+        transition: transform 0.3s, color 0.3s, box-shadow 0.3s, scale 0.3s; /* Add scaling effect */
+        margin-top:.5em;
+    
+        
+        &:hover {
+            /* ... Existing hover styles ... */
+            transform: scale(1.2); /* Add scaling effect on hover */
+        }
+    }
 }

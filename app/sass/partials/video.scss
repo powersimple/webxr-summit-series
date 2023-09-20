@@ -80,7 +80,7 @@
     background:#000;
     left: 60%;
     top:50px;
-    z-index: 100;
+    z-index: 40;
     border: 3px solid #ccc;
     padding: 0px 5px 15%;
     position: sticky;
@@ -184,3 +184,38 @@
     }
   }
   
+  .video-title{
+    font-size:1.5rem;
+    text-align: center;
+    padding-top: 10px;
+}
+.video-listing{
+    font-size:1rem;
+    clear:both;
+    .video-thumbnail{
+        width:50%;
+        float:left; 
+        display: inline-block;
+    }
+    .video-link{
+        display:inline-block;
+        text-align: center;
+        vertical-align: top;
+        width:40%;
+        padding:5%;
+    }
+}
+
+/* Apply the float and width to the video element */
+.video-wrapper video {
+    float: left;
+    width: 50%;
+    margin-right: 20px; /* Adjust the margin as needed for spacing */
+}
+
+/* Clear the float to prevent text from flowing around the video */
+.video-wrapper::after {
+    content: "";
+    display: table;
+    clear: both;
+}

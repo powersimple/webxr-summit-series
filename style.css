@@ -12,7 +12,7 @@ DO NOT EDIT IN STYLE.CSS
 /*
     PUT YOUR COLOR PALETTE HERE:
 */
-@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;900&display=swap&family=Zen+Dots");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;600;900&display=swap&family=Zen+Dots&family=Goldman");
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
 html,
 body,
@@ -727,7 +727,7 @@ blockquote {
     color: #fff;
     text-align: center;
     /* Use lowercase 'center' for proper value */
-    top: -50px;
+    top: -60px;
     display: flex;
     /* Use flex to center vertically and horizontally */
     align-items: center;
@@ -1773,6 +1773,10 @@ iframe {
   margin: 40px auto;
   background-color: #000;
   color: #fff; }
+  @media (max-width: 767px) {
+    .main {
+      position: relative;
+      top: 50px; } }
   .main h1.title {
     color: #fff;
     text-align: center;
@@ -2086,7 +2090,7 @@ h5.download {
   background: #000;
   left: 60%;
   top: 50px;
-  z-index: 100;
+  z-index: 40;
   border: 3px solid #ccc;
   padding: 0px 5px 15%;
   position: sticky;
@@ -2178,6 +2182,38 @@ h5.download {
   @media (max-width: 767px) and (orientation: landscape) {
     .close {
       display: none; } }
+
+.video-title {
+  font-size: 1.5rem;
+  text-align: center;
+  padding-top: 10px; }
+
+.video-listing {
+  font-size: 1rem;
+  clear: both; }
+  .video-listing .video-thumbnail {
+    width: 50%;
+    float: left;
+    display: inline-block; }
+  .video-listing .video-link {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 40%;
+    padding: 5%; }
+
+/* Apply the float and width to the video element */
+.video-wrapper video {
+  float: left;
+  width: 50%;
+  margin-right: 20px;
+  /* Adjust the margin as needed for spacing */ }
+
+/* Clear the float to prevent text from flowing around the video */
+.video-wrapper::after {
+  content: "";
+  display: table;
+  clear: both; }
 
 #hero :after {
   content: "";
@@ -2356,10 +2392,18 @@ h5.download {
 
 @media (max-width: 767px) {
   .hero-content {
-    background-size: contain !important;
+    background-size: cover !important;
     padding-bottom: 50%;
     background-position-x: center;
-    background-repeat: no-repeat; } }
+    background-repeat: no-repeat;
+    top: 75px;
+    position: sticky; } }
+
+@media (max-width: 767px) {
+  .hero-mobile-left {
+    background-position: left; }
+  .hero-mobile-right {
+    background-position: right; } }
 
 .sponsor {
   margin-bottom: 1em; }
@@ -2752,8 +2796,24 @@ table.authors {
     margin: 10px 0;
     /* Add spacing between elements */ } }
 
+.profile {
+  overflow: hidden;
+  /* Clear the float */
+  /* You can add additional styles to your text as needed */ }
+  .profile .float-left {
+    float: left;
+    margin-right: 2%;
+    /* Add some spacing between the image and text */
+    width: 38.1%;
+    /* Set the width of the image to 38.1% */ }
+
 .profile-info p {
   text-align: left; }
+
+h1.profile-header {
+  text-shadow: 0px -2px 2px rgba(0, 0, 0, 0.8), 0px 2px 2px rgba(0, 0, 0, 0.8);
+  position: relative;
+  z-index: 100; }
 
 #profile-hero {
   height: 38.2vh;
@@ -2797,19 +2857,32 @@ table.authors {
     text-align: center;
     margin-bottom: 2rem; }
 
-.team-member h4 {
-  text-align: center;
-  color: #eee; }
-
-.team-member a {
-  display: block; }
-
-.team-member img {
-  border-radius: 50%;
-  width: 75%;
-  display: block;
-  margin: 0 auto 1em;
-  box-shadow: 0 0 10px 10px rgba(255, 173, 2, 0.4); }
+.team-member {
+  margin-bottom: 50px; }
+  .team-member h4 {
+    text-align: center;
+    color: #eee; }
+  .team-member h5 {
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0px; }
+  .team-member a {
+    display: inline-block;
+    transition: transform 0.3s; }
+    .team-member a:hover {
+      transform: scale(1.2);
+      /* Scale up the link when hovered */ }
+  .team-member p {
+    font-size: .8rem; }
+  .team-member img {
+    border-radius: 50%;
+    width: 75%;
+    display: block;
+    margin: 0 auto 1em;
+    box-shadow: 0 0 10px 10px rgba(255, 173, 2, 0.4); }
+    @media (max-width: 768px) {
+      .team-member img {
+        max-width: 50%; } }
 
 .cause {
   box-shadow: 0 0 10px 10px rgba(151, 255, 132, 0.4); }
@@ -2826,7 +2899,9 @@ table.authors {
     margin-top: 5px;
     font-size: 1.5rem; }
   #profile-index h5 {
-    font-size: 1.2rem; }
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: block; }
   #profile-index ul, #profile-index ol {
     padding-left: 25px; }
   #profile-index ul li {
@@ -2849,6 +2924,60 @@ table.authors {
       /* Brighter blue on hover */
       text-decoration: underline;
       /* Underline on hover */ }
+
+#appearances {
+  border: 1px solid #ccc; }
+  #appearances h4 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: .5rem; }
+  #appearances li.event-title {
+    margin-bottom: 0px; }
+  #appearances ul {
+    padding-left: 20px; }
+    #appearances ul li.appearance {
+      color: yellow;
+      margin-bottom: 0px;
+      font-size: 1rem; }
+      #appearances ul li.appearance a {
+        color: #e7e7e7;
+        cursor: pointer;
+        transition: transform 0.3s, color 0.3s, box-shadow 0.3s, scale 0.3s;
+        /* Add scaling effect */ }
+      #appearances ul li.appearance a:hover {
+        text-decoration: underline; }
+
+.profile-meta {
+  margin-bottom: 20px;
+  border-bottom: 3px outset #ccc;
+  padding-bottom: 20px; }
+  .profile-meta h5 {
+    text-align: center;
+    font-size: 1rem; }
+  .profile-meta h5:last-child {
+    margin-bottom: 2em; }
+
+.social {
+  display: flex;
+  justify-content: center; }
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  /* Center the child elements horizontally */
+  align-items: center;
+  /* Center the child elements vertically */
+  margin-top: 15px; }
+  .social-icons a {
+    font-size: 125%;
+    color: #99c;
+    transition: transform 0.3s, color 0.3s, box-shadow 0.3s, scale 0.3s;
+    /* Add scaling effect */
+    margin-top: .5em; }
+    .social-icons a:hover {
+      /* ... Existing hover styles ... */
+      transform: scale(1.2);
+      /* Add scaling effect on hover */ }
 
 #guide strong {
   font-weight: 700; }
@@ -3875,14 +4004,6 @@ table.segment .meta {
   .ros-table .session-container, .ros-table table .session-container {
     border-top: 1px dashed #999; }
 
-.the-3rd-polys-virtual-red-carpet {
-  border: 3px solid #900;
-  padding: 5px; }
-
-.the-3rd-polys {
-  border: 3px solid #009;
-  padding: 5px; }
-
 .container-flex {
   transition: all 0.4s ease-in-out;
   /* Smooth transition */ }
@@ -4146,6 +4267,9 @@ div.developer-summit {
   color: #5163e1 !important;
   font-weight: bold; }
 
+.summit {
+  font-family: 'AgencyFB'; }
+
 /*
   
   #megamenu .red-carpet a {
@@ -4218,7 +4342,7 @@ li.nominee {
   li.nominee img {
     margin: 10px 1em 1em 18px; }
 
-li.nominee-credit {
+li.nominee-credit, li.honoree-credit {
   display: inline-block;
   margin-bottom: 0px;
   padding-bottom: 0px;
@@ -4326,7 +4450,7 @@ td.nominee-info a.nominee :hover {
 
 .polys {
   font-family: "CreamCake";
-  font-size: 125%; }
+  font-size: 125% !important; }
 
 #nomination-ballot {
   background-color: rgba(0, 0, 0, 0.8);

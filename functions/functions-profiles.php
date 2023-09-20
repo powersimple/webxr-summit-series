@@ -89,11 +89,12 @@
         <div class="speaker-meta">
         <?= wrapMeta($profile_meta,'profile_title','h5');?>
         <?= wrapMeta($profile_meta,'company','h5');?>
-        <?= wrapMeta($profile_meta,'twitter','a');?>
         <?= wrapMeta($profile_meta,'linkedin','a');?>
         <?= wrapMeta($profile_meta,'github','a');?>
         <?= wrapMeta($profile_meta,'website','a');?>
-        <?php
+        <?= wrapMeta($profile_meta,'twitter','a');?>
+
+<?php
 
     }
     function displayProfile($profile_id,$profile_context){
@@ -131,15 +132,11 @@ return ob_get_clean();
     }
 
     function wrapMeta($array,$var,$tag,$target="_blank"){
-        //var_dump($array);
-        if($var == 'website'){
-           $value = @$array['website'][0];
-           $var = 'link';
-        }
+     
        
         if(@$array[$var]){
            
-            $value = $array[$var][0];
+           $value = $array[$var][0];
             if($tag == 'a'){
                 return wrapLink($var,$value,$target);
             } else {
@@ -151,6 +148,7 @@ return ob_get_clean();
         if($link == ''){
             return;
         }
+       
         $use_font_awesome = false;
         if($var == 'twitter'
         || $var == 'linkedin'
@@ -162,6 +160,12 @@ return ob_get_clean();
         }    
         if($var == 'twitter'){
             $var = 'x-twitter';
+        }
+      //
+        
+        if($var == 'website'){
+            $var = 'link';
+            
         }
         if($use_font_awesome == true){
             $label = "<i class='fa fa-$var social-icon'></i>";
@@ -182,37 +186,64 @@ return ob_get_clean();
         return $profile_children;
     }
 
-    function displayTeam($team){
+    function displayTeam($team,$className){
        
-    
+        print "<div class='row'>";
+
         foreach($team as $key => $member){
             
-          print "<div class='team-member  col-sm-4 col-md-6 col-lg-2'>";
+          print "<div class='$className'>";
             displayTeamMember($member);
           print "</div>";  
           
         }
+
+        print "</div>";
         return $team;
     }
     function displayTeamMember($member){
         extract((array)$member);
+      
         $link = get_permalink($post->ID);
-       $thumbnail_id = $meta['_thumbnail_id'][0];
+       $thumbnail_id = @$meta['_thumbnail_id'][0];
         $thumbnail = getThumbnail($thumbnail_id);
         $custom_class= @$classes[0];
        ?>
     
        <a href='<?=$link?>' title='<?=$title?>'>
         <img class="<?=$custom_class?>" src="<?=$thumbnail?>" alt="<?=$title?>" title="<?=$title?>"> 
-        <h4><?=$title?><h4></a>
         <h5><?=$attr_title?></h5>
-        <h6><?=displayProfileMeta($post->ID)?></h6>
-        <p><?=$description?><p>
+        <h4><?=$title?><h4></a>
+        
+        <h6><div class="social-icons profile-meta"><?=displayProfileMeta($post->ID)?></div></h6>
+        <p><?=nl2br($member['post']->post_excerpt)?><p>
     
 
         <?php
      
     }
+
+
+	function profile_shortcode( $atts, $content = null ) {
+		//set default attributes and values
+     
+        $menu = get_menu_array($atts['menu']);
+       
+		$values = shortcode_atts( array(
+			'menu'   	=>  $menu,
+			'className'	=> $atts['class'],
+		), $atts );
+		
+		ob_start();
+       displayTeam($menu,$atts['class']);
+
+		?>
+	
+		<?php
+		return ob_get_clean();
+	
+	}
+	add_shortcode( 'profile_list', 'profile_shortcode' );
 
 ?>
 

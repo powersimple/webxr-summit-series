@@ -53,7 +53,7 @@ function getStaticJSON(filename, callback, dest) {
         url: json_data, // the url
         data: '',
         success: function(data, textStatus, request) {
-            console.log("load "+filename, data);
+           // console.log("load "+filename, data);
             //      data_loaded.push(callback);
             return data,
 
@@ -67,6 +67,7 @@ function getStaticJSON(filename, callback, dest) {
         cache: false
     })
 }
+
 /*
 //THIS SECTION IS DEPRECATED, Data now consolidated into one content packet
 getStaticJSON('posts', setPosts) // get posts

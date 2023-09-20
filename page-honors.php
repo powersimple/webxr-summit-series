@@ -19,12 +19,8 @@ urlParams.set('cards', 'show')
 
 
 <main id="main" class="main"  role="main">
-
-
-
-
-      <div class="d-flex container-flex">
-<div class="col-md-7 left event-post">
+    <div class="d-flex container-flex">
+        <div class="col-md-7 left event-post">
 <?php
 
 print do_blocks($post->post_content);
@@ -110,10 +106,7 @@ if((trim($trophy_embed_id) != '') && (trim($trophy_base_embed_id) != '')){
         
      
      </div>
- </div>
 
-
-            <div class="col-md-5 right">
                 <div class="sticky">
                 <?php if($default_video_url != ''){?>
                 <div class="video-position">

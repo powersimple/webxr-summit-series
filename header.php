@@ -80,6 +80,9 @@ $rel_path= str_replace(url_root(),"",get_stylesheet_directory_uri());
 $section_class = @get_post_meta($post->ID,"section_class",true);
 $section_menu = @get_post_meta($post->ID,"section_menu",true);
 $section_menu_slug = @get_term($section_menu,"nav_menu")->slug;
+
+global $default_embed_video_url;
+$default_embed_video_url = "https://www.youtube.com/embed/AWFgm65j4n8?autoplay=1&rel=0";
 //phpinfo();
 
 ?>
@@ -194,20 +197,20 @@ if($section_class==get_post_meta($post->ID,'section',true)){
       
   </header>
 
-      <script>
-        window.addEventListener("scroll", function() {
-          let scroll = window.pageYOffset;
-  let scaleValue = 1 + scroll * 0.0005; // Slower zoom
-  let opacityValue = 1 - scroll * 0.0005; // Slower fade
-  
-  let parallaxElement = document.querySelector(".parallax");
-  
-  parallaxElement.style.transform = `scale(${scaleValue})`;
-  parallaxElement.style.opacity = opacityValue;
-});
+  <script>
+    window.addEventListener("scroll", function() {
+        let scroll = window.pageYOffset;
+        let scaleValue = 1 + scroll * 0.0005; // Slower zoom
+        let opacityValue = 1 - scroll * 0.0005; // Slower fade
 
+        let parallaxElement = document.querySelector(".parallax");
 
-
+        // Check if parallaxElement exists before applying transformations
+        if (parallaxElement) {
+            parallaxElement.style.transform = `scale(${scaleValue})`;
+            parallaxElement.style.opacity = opacityValue;
+        }
+    });
 </script>
 
 <?php
@@ -221,8 +224,12 @@ function extract_number($class) {
 
 
       $section_class = @get_post_meta($post->ID,"section_class",true);
-      $section_hero_class = @get_post_meta($post->ID,"section_hero_class",true);
+    $section_hero_class = @get_post_meta($post->ID,"section_hero_class",true);
 
+      if($section_hero_class == ''){
+        $section_hero_class = 'hero-cover-25';
+      }
+    
       $padding_number = extract_number($section_hero_class);
       if(!empty($padding_number)){
         $padding_bottom = "padding-bottom:$padding_number%";
@@ -238,7 +245,7 @@ function extract_number($class) {
 
       if($hero){
       ?>
-        <section class="parallax home-fade home-full-height hero-content <?=$section_hero_class?> <?=@$section_class?> " id="dynamic-hero" style="background-image:url(<?=$hero_image?>); <?=$padding_bottom?>"></section>
+        <section class="parallax home-fade home-full-height hero-content <?=$section_hero_class?> <?=@$section_class?> " id="dynamic-hero" style="background-image:url(<?=$hero_image?>);"></section>
        
 
 

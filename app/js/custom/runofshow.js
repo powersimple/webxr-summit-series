@@ -584,7 +584,7 @@ function displayRunOfShowTable(runOfShow){
                         return match ? match + '&autoplay=1&rel=0' : '?autoplay=1&rel=0';
                     });
                 console.log("event"+n,runOfShow.sessions[n].info.featured_media)
-                sessions += '<a href="#'+runOfShow.sessions[n].info.slug+'" class="watch video-button" onclick="playSessionVideo(\''+embed_video_url+'\',\''+runOfShow.sessions[n].object_id+'\',\'\''+')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
+                sessions += '<a href="#'+runOfShow.sessions[n].info.slug+'" class="watch video-button" onclick="playSessionVideo(\''+embed_video_url+'\',\''+runOfShow.sessions[n]+'\',\'\''+')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
                     }
                 }
             }
@@ -632,7 +632,7 @@ function displayRunOfShowTable(runOfShow){
     sessions +='</div>'
       
     $("#ros-table").html(sessions)
-    playSessionVideo(runOfShow.sessions[first].info.meta.embed_video_url,first,'')
+    playSessionVideo(runOfShow.sessions[first].info.meta.embed_video_url,runOfShow.sessions[first],'')
    
     if(getUrlParameter('collapse') != 'all'){
        
@@ -813,10 +813,122 @@ function displaySelectedVideoProfiles(profiles){
     return profile_list;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+        function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function playProfileVideo(a,index){
+  
+    session = profile_events[a][index]
+    console.log("session",session,index,profile_events);
+     var event_class = session.event_slug;
+     var event = '<h3 class="video-title '+session.event_slug+'" title="'+session.event_title+'">'+session.event_title+'</h3>'
+     var header = ''
+     
+     header = event+'<h4>'+session.session_title+'</h4>'
+ 
+ 
+     var sponsors = '<div class="'+session.slug+'-sponsors" title="'+session.session_title+' Sponsors"></div>'
+ 
+     var footer = ''//sponsors+displaySessionProfiles(session.session_id);
+ 
+     $("#video-wrap-header").html(header);
+ 
+     $("#video-wrap-footer").html(footer);
+ //    console.log(src)
+ 
+ $("#video-player").attr("src",session.session_embed_video_url)
+
+ 
+ 
+ }
+ 
+ 
+
+
+
+ function setROS(slug){//passes wp slug;
+            var menu_name = ros_list[slug]//converts it to menu_name;
+           console.log("menu name",menu_name,menus['menu_name'])
+           
+            currentROS = runOfShow(menus[menu_name])
+          console.log("set",currentROS)
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function playSessionVideo(src,session_id,attrs){
-   // console.log("currentROS",currentROS,session_id);
+  
     var session = setSessionByID(session_id);
-   // console.log("session",session);
+
     var event_class = currentROS.slug;
     var event = '<div class="'+currentROS.slug+'" title="'+currentROS.title+'">'+currentROS.title+'</div>'
     var header = ''

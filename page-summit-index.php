@@ -45,7 +45,7 @@ $lists = eventIndex($events);
 
         function loadIndex(data){
         
-           console.log("data",data)
+           console.log("index data",data)
           
             
             for(var p in data['profile_sort']){
@@ -71,18 +71,7 @@ $lists = eventIndex($events);
 
 
         }
-        function getUrlVars()
-{
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++)
-    {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
-    }
-    return vars;
-}
+       
         function setROS(slug){//passes wp slug;
             var menu_name = ros_list[slug]//converts it to menu_name;
            console.log("menu name",menu_name,menus['menu_name'])

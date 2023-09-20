@@ -48,6 +48,10 @@ iframe {
     
     margin:40px auto;
     background-color: #000;
+    @media(max-width:767px){
+        position: relative;
+         top:50px;
+     }
     h1.title{
       
      
@@ -82,7 +86,7 @@ iframe {
             
         }
     }
-
+  
 
 
 h2{
@@ -228,7 +232,7 @@ em{
   }
 
   .right{
-  
+    
     top: 0;
     padding-left:2%;            
 }

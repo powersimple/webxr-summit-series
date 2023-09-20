@@ -37,7 +37,7 @@ li.nominee{
 
 }
 
-li.nominee-credit{
+li.nominee-credit, li.honoree-credit{
     display:inline-block;
     margin-bottom:0px;
     padding-bottom:0px;
@@ -165,7 +165,7 @@ input[type=radio] {
  
       .polys{
         font-family:"CreamCake";
-        font-size:125%;
+        font-size:125% !important;
     }
     #nomination-ballot{
         background-color: rgba(0,0,0,0.8);

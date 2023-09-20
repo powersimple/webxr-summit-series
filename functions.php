@@ -7,7 +7,6 @@ require_once("functions/metaboxes-aframe.php");
 
 require_once("functions/functions-metabox.php");
 
-
 	//enqueues scripts and styles
 	require_once("functions/functions-rest-endpoints.php");
 	// special class to register the restapi
@@ -59,6 +58,12 @@ function featured_image_support(){
  
   
 add_action('after_setup_theme', 'featured_image_support');
+
+
+
+
+
+
 
 function add_mimes($mime_types){
 	$mime_types['gltf'] = 'model/gltf+json';
@@ -137,7 +142,7 @@ add_filter('wpcf7_form_elements', 'my_wpcf7_form_elements');
 	
 		function video_shortcode( $atts, $content = null ) {
 			//set default attributes and values
-			$values = shortcode_atts( array(
+			$atts = shortcode_atts( array(
 				'url'   	=> '#',
 				'className'	=> 'video-embed',
 				'aspect' => '56.25%'
@@ -146,14 +151,57 @@ add_filter('wpcf7_form_elements', 'my_wpcf7_form_elements');
 			ob_start();
 			?>
 			<div class="video-wrapper">
-				<iframe src="<?=$values['url']?>" class="<?=$values['className']?>"></iframe>
+				<iframe src="<?=$atts['url']?>" class="<?=$atts['className']?>"></iframe>
 			</div> 
 			<?php
+		
 			return ob_get_clean();
 			//return '<a href="'. esc_attr($values['url']) .'"  target="'. esc_attr($values['target']) .'" class="btn btn-green">'. $content .'</a>';
 		
 		}
 		add_shortcode( 'embed_video', 'video_shortcode' );
+
+
+
+		function embed_video_file_shortcode($atts) {
+			// Extract the media_id and className parameters from the shortcode
+			$atts = shortcode_atts(array(
+				'media_id' => '',
+				'className' => '',
+			), $atts);
+		
+			// Check if a media ID is provided
+			if (!empty($atts['media_id'])) {
+				// Get the media URL by media ID
+				$media_url = wp_get_attachment_url($atts['media_id']);
+		
+				// Check if the media URL exists
+				if ($media_url) {
+					// Create a wrapper div with the specified class
+					$output = '<div class="video-wrapper embed-video-file ' . esc_attr($atts['className']) . '">';
+		
+					// Create the video tag with the media URL
+
+					$output .= '<video class="video-wrapper" controls>';
+					$output .= '<source src="' . esc_url($media_url) . '" type="video/mp4">';
+					$output .= '</video>';
+		
+					// Close the wrapper div
+					$output .= '</div>';
+		
+					// Return the HTML output
+					return $output;
+				} else {
+					return 'Media not found.';
+				}
+			} else {
+				return 'Please provide a media_id parameter.';
+			}
+		}
+		
+		// Register the shortcode
+		add_shortcode('embed_video_file', 'embed_video_file_shortcode');
+		
 
 		function add_category_to_page() {  
 			// Add tag metabox to page

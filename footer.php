@@ -26,7 +26,7 @@
         </li>
         <li><a href=" https://www.youtube.com/@ThePolysWebXRAwards" class="fa fa-youtube webxrsummits-channel" target="_blank"
         title="WebXR SummitSeries YouTube Channel"></a>
-        </li>--
+        </li>-->
         </ul>
 </div>
 

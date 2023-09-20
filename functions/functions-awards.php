@@ -985,7 +985,11 @@ function getNomineeCredits($nominee,$nominations,$current_award,$current_nominat
           
            }
            if($classes[0] == 'honoree' ){
-            print "<span class='winner'></span>";
+            print "<span class='honoree'></span>";
+            if($counter>0){
+              $item_class = 'nominee-credit';
+              
+            }
           }  
         }
         print get_nominee_info($child,$counter);

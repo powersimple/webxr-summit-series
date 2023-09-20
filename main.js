@@ -106,7 +106,19 @@ function getVideo() {
     }
 
 }
-
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+     
 
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
@@ -1465,7 +1477,7 @@ function getStaticJSON(filename, callback, dest) {
         url: json_data, // the url
         data: '',
         success: function(data, textStatus, request) {
-            console.log("load "+filename, data);
+           // console.log("load "+filename, data);
             //      data_loaded.push(callback);
             return data,
 
@@ -1479,6 +1491,7 @@ function getStaticJSON(filename, callback, dest) {
         cache: false
     })
 }
+
 /*
 //THIS SECTION IS DEPRECATED, Data now consolidated into one content packet
 getStaticJSON('posts', setPosts) // get posts
@@ -3934,6 +3947,138 @@ function loadProfile(id) {
     return profile_posts[id]
 
 }
+function getClassy(slug) {
+    if (slug.includes("metatraversal")) {
+        return "metatraversal";
+    }
+    else if (slug.includes("polys")) {
+        return "polys";
+    } else if (slug.includes("summit")) {
+        return "summit";
+    } else if (slug.includes("wolvic")) {
+        return "summit";
+    } else if (slug.includes("special-edition")) {
+            return "summit";
+    }  else if (slug.includes("golf")) {
+        return "golf";
+      } else if (slug.includes("makers")) {
+        return "polys";
+    } else if (slug.includes("hall")) {
+        return "hall";
+    }
+    else {
+        return 'else'; // Return an empty string if "metatraversal" is not found
+    }
+}
+
+function getLabel(a) {
+    switch (a) {
+        case 'metatraversal':
+            return 'MetaTr@versal';
+        case 'polys':
+            return 'The Poly Awards';
+        case 'summit':
+            return 'WebXR Summit Series';
+        case 'summit':
+                return 'WebXR Summit Series';
+        case 'golf':
+            return 'Ready Player Golf';
+        case 'makers':
+            return 'Meet the Makers!';
+        case 'polys':
+            return 'XR Hall of Fame';
+        default:
+            return 'else'; // Return an empty string for other values of 'a'
+    }
+}
+
+function displayProfiles(profiles){
+    var profile_list = '<div id="profiles">'
+    var events = []
+    var embed_video_url = ''
+    var slug = ''
+    for(var p = 0;p<profiles.length;p++){
+      
+       
+        profile_list += '<span id="'+profiles[p].slug+'">'
+        profile_list += profiles[p].sort;
+        profile_list += '</span>'
+
+        profile_list += ', '+profiles[p].profile_title+", "+profiles[p].company
+        
+        events = profiles[p].events; 
+
+        
+      //  console.log("EVENTS",events)
+        
+        for(var e=0;e<events.length;e++){
+          slug = events[e].event_slug
+            profile_list += '<li>'
+             
+            embed_video_url = events_object[slug].children[events[e].session_key].meta.embed_video_url 
+           // var session_children = events_object[events[e].event_slug].children[events[e].session_id].children
+
+            profile_list += '<a href="#'+slug+'" onclick="setROS(\''+events[e].event_slug+'\');playSessionVideo(\''+embed_video_url+'\',\''+events[e].session_id+'\',\'\');">'
+            
+            profile_list += events[e].session_title
+           // profile_list += embed_video_url
+            
+            profile_list += ', '
+            profile_list += '</a>'
+            profile_list += '<span class="'+events[e].event_slug+'">'
+            profile_list += events[e].event_title
+            profile_list += '</span>'
+            profile_list += '</li>'
+                
+
+        }/**/
+    }
+    profile_list += '</div>'
+    $("#profile-index").html(profile_list);
+
+}
+
+function loadProfileData(data){
+    console.log("LOAD profile",data)
+    
+  var this_class = '';
+  
+    var appearances = '<h4>Appearances by '+data.profile.title+'</h4><hr>';
+    var appearances_array = [];
+    for(var e=0;e<data.events.length;e++){
+
+     
+      this_class = getClassy(data.events[e].event_slug)
+      if(this_class != ''){
+        if(appearances_array[this_class] == undefined){
+        appearances_array[this_class] =[]
+       }
+       appearances_array[this_class].push(data.events[e])
+      }
+     
+
+      
+    }
+  
+    appearances += '<ul class="appearances">';
+    profile_events = appearances_array;
+    for(a in appearances_array){
+
+       
+
+      console.log("appearances_array[a]",a,appearances_array[a])
+      appearances += '<li class="event-title '+a+'">'+getLabel(a)+'</li>'
+      for(var e=0;e<appearances_array[a].length;e++){
+        console.log("appearances_array[a][e]",appearances_array[a][e])
+        this_class = getClassy(appearances_array[a][e].event_slug)
+        appearances += '<li class="appearance"><a onclick="playProfileVideo(\''+a+'\','+e+')">'+appearances_array[a][e].session_title+'</a> | <span class="'+this_class+' '+appearances_array[a][e].event_slug+'">'+appearances_array[a][e].event_title+'</span></li>'
+      }
+    }
+    
+    appearances += '</ul>';
+    $('#appearances').html(appearances)
+   }
+
 
 var ros_meta = {
     timezone: []
@@ -4520,7 +4665,7 @@ function displayRunOfShowTable(runOfShow){
                         return match ? match + '&autoplay=1&rel=0' : '?autoplay=1&rel=0';
                     });
                 console.log("event"+n,runOfShow.sessions[n].info.featured_media)
-                sessions += '<a href="#'+runOfShow.sessions[n].info.slug+'" class="watch video-button" onclick="playSessionVideo(\''+embed_video_url+'\',\''+runOfShow.sessions[n].object_id+'\',\'\''+')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
+                sessions += '<a href="#'+runOfShow.sessions[n].info.slug+'" class="watch video-button" onclick="playSessionVideo(\''+embed_video_url+'\',\''+runOfShow.sessions[n]+'\',\'\''+')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
                     }
                 }
             }
@@ -4568,7 +4713,7 @@ function displayRunOfShowTable(runOfShow){
     sessions +='</div>'
       
     $("#ros-table").html(sessions)
-    playSessionVideo(runOfShow.sessions[first].info.meta.embed_video_url,first,'')
+    playSessionVideo(runOfShow.sessions[first].info.meta.embed_video_url,runOfShow.sessions[first],'')
    
     if(getUrlParameter('collapse') != 'all'){
        
@@ -4749,10 +4894,122 @@ function displaySelectedVideoProfiles(profiles){
     return profile_list;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+        function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function playProfileVideo(a,index){
+  
+    session = profile_events[a][index]
+    console.log("session",session,index,profile_events);
+     var event_class = session.event_slug;
+     var event = '<h3 class="video-title '+session.event_slug+'" title="'+session.event_title+'">'+session.event_title+'</h3>'
+     var header = ''
+     
+     header = event+'<h4>'+session.session_title+'</h4>'
+ 
+ 
+     var sponsors = '<div class="'+session.slug+'-sponsors" title="'+session.session_title+' Sponsors"></div>'
+ 
+     var footer = ''//sponsors+displaySessionProfiles(session.session_id);
+ 
+     $("#video-wrap-header").html(header);
+ 
+     $("#video-wrap-footer").html(footer);
+ //    console.log(src)
+ 
+ $("#video-player").attr("src",session.session_embed_video_url)
+
+ 
+ 
+ }
+ 
+ 
+
+
+
+ function setROS(slug){//passes wp slug;
+            var menu_name = ros_list[slug]//converts it to menu_name;
+           console.log("menu name",menu_name,menus['menu_name'])
+           
+            currentROS = runOfShow(menus[menu_name])
+          console.log("set",currentROS)
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function playSessionVideo(src,session_id,attrs){
-   // console.log("currentROS",currentROS,session_id);
+  
     var session = setSessionByID(session_id);
-   // console.log("session",session);
+
     var event_class = currentROS.slug;
     var event = '<div class="'+currentROS.slug+'" title="'+currentROS.title+'">'+currentROS.title+'</div>'
     var header = ''

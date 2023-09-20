@@ -500,7 +500,7 @@ add_filter( 'rwmb_meta_boxes', 'selectHeroImage' );
         $meta_boxes[] = array(
             'id' => 'featured_video',
             'title' => esc_html__( 'Featured Video', 'ps-video' ),
-            'post_types' => array( 'page','post','project' ),
+            'post_types' => array( 'page','post','profile' ),
             'context' => 'side',
             'priority' => 'default',
             'autosave' => false,
@@ -511,6 +511,16 @@ add_filter( 'rwmb_meta_boxes', 'selectHeroImage' );
                     'name' => esc_html__( 'Video', 'ps-video' ),
                     'max_file_uploads' => 4,
                 ),
+				[
+					'type'       => 'taxonomy_advanced',
+					'name'       => esc_html__( 'Video Playlist', 'online-generator' ),
+					'id'         => 'video_playlist',
+					'taxonomy'   => 'nav_menu',
+					'field_type' => 'select_advanced',
+					'query_args' => [
+						'' => '',
+					],
+				],
                 array(
                     'id' => $prefix . 'featured_video_url',
                     'type' => 'url',
