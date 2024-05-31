@@ -81,20 +81,24 @@ if(@$_GET['publish-index']){
        
   
     </div>
-        <div class="col-md-5 right">
- <div class="container">
-     <div class="video-position">
-            <div class="video-wrap">
-            <div id="video-wrap-header"></div>
-
-            <div class="video-wrap">
-
+    <div class="col-md-5 right">
+          
+          <?php
+      $show_player = true;
+      if($default_video_url != ''){
+        $show_player = false;
+      }
+        require_once('templates/embed-video.php');
         
-            <iframe id="video-player" src="<?=$default_video_url?>"  frameborder="0" allowfullscreen></iframe>
+      ?>
+                <div id="appearances"></div>
+                </div>
                 
-            </div> 
-            <div id="video-wrap-footer"></div>
-        </div>
+      
+      
+              </div>
+      
+            </div>
 
     </div>            
 </div>    

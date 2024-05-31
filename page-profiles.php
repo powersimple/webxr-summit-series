@@ -53,7 +53,7 @@ if($post->post_parent==0){
 
 <?php
   $event_meta = [];
-  $awards = array_merge(get_menu_array('virtual-red-carpet-3'),get_menu_array('polys3'));
+  $awards = array_merge(get_menu_array('virtual-red-carpet-4'),get_menu_array('polys4'));
 
   foreach($awards as $key => $award){// outer menu loop
     
@@ -210,7 +210,7 @@ function get_profile_array(){
 
 $event_data = get_event_data($event_meta);
 
-if(@$_GET['polys'] == 3){
+if(@$_GET['polys'] == 4){
 $vips = display_event_data($event_data);
 displayVIPList($vips);
 }

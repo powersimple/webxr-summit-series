@@ -122,15 +122,16 @@
         
         $credits = [];
         foreach($credits_menu as $key => $credit){
+          //  var_dump($credit);
             if($credit['ID']==5926){
-                $trigger=1;
+          //      $trigger=1;
             }
             print "<BR>";
             if( @$attr){
                 print $attr."<BR>";
             }
             
-             print $credit['title'] ."<br>";
+           print @$credit['attr']." ". $credit['title'] ."<br>";
             if(count(@$credit['children'])){
                 foreach($credit['children'] as $key =>$child){
                     
@@ -285,7 +286,7 @@
     <a-entity id="w-<?=$slug?>" <?=$wrapper_coords?>>      
 <?php
     if(@$attr != ''){
-        $attr_y = 1.2;
+        $attr_y = 1.4;
     
         if(in_array("label-bottom",@$classes)){
             $attr_y = -1;
@@ -323,7 +324,7 @@
         position="0 0 0" mixin="obj" rotation="0 0 0" scale="<?=$scale?>" gltf-model="#<?=$slug?>-logo3D"></a-entity>
             <?php
 
-$y_offset -= .81;
+$y_offset -= 1;
       if(@$attr != ''){
         
       }

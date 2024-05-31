@@ -10,15 +10,13 @@
                 geometry="primitive: cone; segmentsRadial: 3; openEnded: true; radiusBottom: 0.5; segmentsHeight: 1"
                 material="emissive: #ff6a00; wireframe: true"
                 animation="property: rotation; to: 180 360 0; loop: true; easing: linear; dur: 10000"></a-mixin>
-            <a-mixin id="hand" physics-collider static-body="shape: box" collision-filter="collisionForces: false;"
-                super-hands="colliderEvent: collisions; 
-                              colliderEventProperty: els;
-                              colliderEndEvent: collisions;
-                              colliderEndEventProperty: clearedEls;
-                              grabStartButtons: trackpaddown, triggerdown, gripclose, gripdown, thumbstickdown, mousedown; 
-                              grabEndButtons: trackpadup, triggerup, gripopen, gripup, thumbstickup, mouseup">
-
-            </a-mixin>
+                <a-mixin id="hand" super-hands="colliderEvent: collisions; 
+                colliderEventProperty: els;
+                colliderEndEvent: collisions;
+                colliderEndEventProperty: clearedEls;
+                grabStartButtons: trackpaddown, triggerdown, gripclose, gripdown, thumbstickdown, mousedown; 
+                grabEndButtons: trackpadup, triggerup, gripopen, gripup, thumbstickup, mouseup"
+				 ></a-mixin>            
             <a-mixin id="table-label" position="0 0 -1" rotation="0 -90 0" visible="false"
                 text="width: 2; color: black; lineHeight: 60; wrap-count: 35"></a-mixin>
           

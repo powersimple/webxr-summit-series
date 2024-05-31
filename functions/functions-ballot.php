@@ -100,6 +100,7 @@ function get_ballot($award_id,$children,$counter){
                
                 @$meta['resource_url'][0] = @$meta['private_resource_url'][0];
             }
+            
       
             if(@$meta['resources'][0]!=''){
                
@@ -132,6 +133,9 @@ function get_ballot($award_id,$children,$counter){
            if($classes[0] == 'winner'){
             print "<span class='winner'></span>";
           }  
+          if(@$meta['resource_info_url'][0] != '' ){
+            print "<a href='".$meta['resource_info_url'][0]."' target='_blank' class=' $item_class'>More Info about this Nominee</a>";
+          }
         }
        
      // var_dump(@$ballot[$award_id]);

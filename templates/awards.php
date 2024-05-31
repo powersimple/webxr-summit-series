@@ -39,7 +39,7 @@
      }
      ?>
      <a href="#<?=$child['slug']?>" onclick="playSessionVideo('<?=$embed_video_url?>');" class='watch video-button' title="WATCH"><i  class="fa fa-youtube"></i></a>
-      <a href="<?=$link?>" title="<?=$child['title']?>"><?=$child['title']?></a></h3>
+      <a href="<?=$link?>" title="<?=$child['title']?>"></a><?=$child['title']?></h3>
 
  
        <div>

@@ -64,13 +64,20 @@ if($post->post_parent==0){
 
   <?php 
    
-  
+  $vrc = 'virtual-red-carpet-4';
+  $ceremony = 'polys4';
 
+    if(@$_GET['vrc']){
+      $vrc = $_GET['vrc'];
+    }
+    if(@$_GET['ceremony']){
+      $ceremony = $_GET['ceremony'];
+    }
 
    print "<hr><div>";
 
-    $vrc = get_menu_array('virtual-red-carpet-3');
-    $ceremony = get_menu_array('polys3');
+    $vrc = get_menu_array($vrc);
+    $ceremony = get_menu_array($ceremony);
     $awards = array_merge($vrc,$ceremony);
 
     $results = [];

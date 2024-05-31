@@ -5,6 +5,7 @@ var ros_meta = {
 var currentROS = {}
 
 function runOfShow(menu){
+    console.log("runOfShow",menu)
     var show = menu.menu_levels;
  
         if(show.length != undefined){
@@ -884,9 +885,9 @@ function playProfileVideo(a,index){
 
  function setROS(slug){//passes wp slug;
             var menu_name = ros_list[slug]//converts it to menu_name;
-           console.log("menu name",menu_name,menus['menu_name'])
+           console.log("SetROS menu name",slug,ros_list,menu_name,menus[slug])
            
-            currentROS = runOfShow(menus[menu_name])
+            currentROS = runOfShow(menus[slug])
           console.log("set",currentROS)
         }
 
@@ -926,14 +927,14 @@ function playProfileVideo(a,index){
 
 
 function playSessionVideo(src,session_id,attrs){
-  
-    var session = setSessionByID(session_id);
 
+    var session = setSessionByID(session_id);
+  
     var event_class = currentROS.slug;
     var event = '<div class="'+currentROS.slug+'" title="'+currentROS.title+'">'+currentROS.title+'</div>'
     var header = ''
     
-    header = event+'<h4>'+currentROS.title+'</h4>'
+    header = event+'<h4>'+session.title+'</h4>'
 
 
     var sponsors = '<div class="'+currentROS.slug+'-sponsors" title="'+currentROS.title+' Sponsors"></div>'

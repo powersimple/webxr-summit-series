@@ -1,20 +1,30 @@
-<a-entity id="lighting" visible="true" static-body position="0 0 0" rotation="0 0 0"  animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 36000; loop: true;">
+<a-entity id="lighting" visible="true" static-body position="0 0 10" rotation="0 0 0"  animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 24000; loop: true;">
 
-    <a-light id="white-d8"  color="white"  position="0 -80 500" rotation="" angle="80" light="type: directional; intensity: 10; angle: 75.4; shadowRadius: -3.72" visible=""></a-light>
-    <a-light id="white-d9"  color="white"  position="0 -80 -500" rotation="" angle="80" light="type: directional; intensity:10; angle: 80.81" visible=""></a-light>
+   
+    <a-light id="red-d7" type="point" color="#990000" intensity="5" position="16 0 0" rotation="90 -90 0" angle="90"></a-light>
+    <a-light id="green-d7" type="point" color="#99c800" intensity="5" position="0 16 0" rotation="90 -90 0" angle="90"></a-light>
+    <a-light id="blue-d7" type="point" color="#000099" intensity="5" position="0 0 16" rotation="90 -90 0" angle="90"></a-light>
 
-    <a-light id="white-d8"  color="white"  position="500 -80 0" rotation="" angle="80" light="type: directional; intensity: 10; angle: 75.4; shadowRadius: -3.72" visible=""></a-light>
-    <a-light id="white-d9" color="white" position="-500 -80 0" rotation="" angle="80" light="type: directional; intensity: 10; angle: 80.81" visible=""></a-light>
+<a-light id="white-d8" color="white" position="-22.42293 0.04765 304.98845" rotation="76.450 0 0" angle="80" light="angle: 75; type: spot; intensity: 55.32; shadowRadius: -3.72" visible=""></a-light>
+<a-light id="white-d9" color="white" position="-90.67807 -5.219 -11.07101" rotation="-72.85237 -90.623 -168.32020000000003" angle="80" light="angle: 75; type: spot; intensity: 20; shadowRadius: -3.72" visible=""></a-light>
+<a-light id="white-d8" color="white" position="72.597 -21.54833 -22.56896" rotation="0 89.9 0" angle="80" light="angle: 75; type: spot; intensity: 5; shadowRadius: -3.72" visible=""></a-light>
+<a-light id="white-d8" color="white" position="0 4.55193 90" rotation="-75.71 0 0" angle="80" light="angle: 75; type: spot; intensity: 10; shadowRadius: -3.72" visible=""></a-light>
+</a-entity>
+    <!--
+    <a-light id="white-d9"  color="white"  position="0 -80 -500" rotation="" angle="80" light="type: directional; intensity:3; angle: 80.81" visible=""></a-light>
+
+    <a-light id="white-d8"  color="white"  position="500 -80 0" rotation="" angle="80" light="type: directional; intensity: 3; angle: 75.4; shadowRadius: -3.72" visible=""></a-light>
+    <a-light id="white-d9" color="white" position="-500 -80 0" rotation="" angle="80" light="type: directional; intensity: 3; angle: 80.81" visible=""></a-light>
     <a-light id="white-10" color="white"position="-500 -80 0" rotation="" angle="80" light="type: point; intensity: 5; angle: 80.81" visible=""></a-light>
 
 
-	</a-entity>
+
   <a-light id="red-d7" type="point" color="#990000" intensity="5" position="0 16 0" rotation="90 -90 0" angle="90"></a-light>
 
 
 
 
-	<!--
+
 	
 <a-light id="white-d1" type="directional" color="white" intensity=".1" position="120 0 0" rotation="0 0 0" angle="90"></a-light>
 
@@ -29,13 +39,14 @@
 
 <a-light id="white-d6" type="directional" color="white" intensity=".1" position="60 0 -60" rotation="0 0 0" angle="90"></a-light>	
 
-<a-light id="white-d7" type="directional" color="white" intensity=".1" position="60 0 60" rotation="0 0 0" angle="90"></a-light>
+<a-light id="white-d7" type="directional" color="white" intensity=".1" position="60 42 60" rotation="0 0 0" angle="90"></a-light>
 
 <a-light id="white-d8" type="directional" color="white" intensity=".1" position="0 0 -60" rotation="0 0 0" angle="90"></a-light>
 
 
 <a-light id="white-d9" type="directional" color="white" intensity=".1" position="-60 0 -60" rotation="" angle="90" light=""></a-light>
-	
+</a-entity>
+
 -->	
 
 

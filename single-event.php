@@ -31,6 +31,35 @@ print do_blocks($post->post_content);
 ?>
 <div id="ros-table"></div>
 <?php
+display_LookingGlass($post->ID);
+function display_LookingGlass($post_id){
+    $trophy_embed_id = get_post_meta($post_id,"looking_glass_embed_trophy",true);
+    $trophy_base_embed_id = get_post_meta($post_id,"looking_glass_embed_trophy_base",true);
+    if((trim($trophy_embed_id) != '') && (trim($trophy_base_embed_id) != '')){
+        ?>
+        <div class="row">
+            <?php 
+            if($trophy_embed_id != ''){?>
+                <div class="col col-sm-6">
+                    <?php
+                    embed_LKBlock_by_id($trophy_embed_id);
+                    ?>
+                </div>
+            <?php } 
+            if($trophy_embed_id != ''){
+                ?>
+                <div class="col col-sm-6">
+                    <?php
+                    embed_LKBlock_by_id($trophy_base_embed_id);
+                    ?>
+                </div>
+            <?php } ?>
+        </div>
+        <?php
+    }
+}
+/*
+
 $trophy_embed_id = get_post_meta($post->ID,"looking_glass_embed_trophy",true);
 $trophy_base_embed_id = get_post_meta($post->ID,"looking_glass_embed_trophy_base",true);
 
@@ -62,6 +91,7 @@ if((trim($trophy_embed_id) != '') && (trim($trophy_base_embed_id) != '')){
                 </div>
 <?php
 }
+*/
 ?>
     <div class="event-content order-sm-12 col-sm-7 col-md-8 col-lg-9 col-xl-10">
      

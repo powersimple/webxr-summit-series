@@ -86,7 +86,7 @@ $default_embed_video_url = "https://www.youtube.com/embed/AWFgm65j4n8?autoplay=1
 //phpinfo();
 
 ?>
-    <script src="<?php print  get_template_directory_uri()?>/assets/js/jquery.js"></script>
+  
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!--  -->
     <!--
@@ -175,6 +175,8 @@ if($section_class==get_post_meta($post->ID,'section',true)){
         <div class="page-loader">
         <div class="loader">Loading...</div>
       </div>
+  
+
   <div class="flex-wrapper"><!--to maintain sticky footer-->
     <header id="header" class="navbar navbar-custom navbar-fixed-top navbar-transparent" role="navigation">
         <div class="container">
@@ -192,11 +194,10 @@ if($section_class==get_post_meta($post->ID,'section',true)){
             </div>
             <div id="main-menu"></div>
           
-        
+          
       </div>  
       
   </header>
-
   <script>
     window.addEventListener("scroll", function() {
         let scroll = window.pageYOffset;
@@ -241,10 +242,17 @@ function extract_number($class) {
    $hero_image = getThumbnail($hero);
         
       $slides = get_slides($post->ID);
+      if($post->post_name != 'nominees'){
 
+      
+      ?>
 
+<?php
+}
       if($hero){
       ?>
+
+
         <section class="parallax home-fade home-full-height hero-content <?=$section_hero_class?> <?=@$section_class?> " id="dynamic-hero" style="background-image:url(<?=$hero_image?>);"></section>
        
 

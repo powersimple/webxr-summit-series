@@ -2,7 +2,7 @@
     get_header();
     
     require_once "functions/functions-awards.php";
-      $pedestals = get_pedestals('polys4');
+      $pedestals = get_pedestals('polys3');
     //    var_dump($pedestals);
       $assets = [];
      
@@ -22,7 +22,7 @@
    </div>
 <?php
 }
-$menu = 'polys4-credits';
+$menu = 'polys3-credits';
 if(@$_GET['menu']){
   $menu = @$_GET['menu'];
 
@@ -76,7 +76,7 @@ $assets3D = get3DAssets("logo3D_src",$credits);
 $asset_list = getAssetList($assets3D);
 //print("<pre>".print_r($credits,true)."</pre>"); die();
 //print("<pre>".print_r($asset_list,true)."</pre>");die();
- //  include "webxr/polys4/drawer-experiences.php";
+ //  include "webxr/polys3/drawer-experiences.php";
  //   include "webxr/polys2/drawer-nominations.php";
 
 
@@ -101,8 +101,8 @@ $asset_list = getAssetList($assets3D);
     <a-assets timeout="80000">
         <!-- Loads assets -->
         <?php
-            include "webxr/polys4/assets.php";
-            include "webxr/polys4/mixins.php";
+            include "webxr/polys3/assets.php";
+            include "webxr/polys3/mixins.php";
             
         ?>
 
@@ -110,27 +110,21 @@ $asset_list = getAssetList($assets3D);
     <a-sky src="#sky" animation="property: object3D.rotation.y; to: -360; easing: linear; dur: 1200000; loop: true;"></a-sky>
 
     <?php
-            include "webxr/polys4/credits-rigging.php";
-            //include "webxr/polys4/lights.php";
+            include "webxr/polys3/credits-rigging.php";
+            //include "webxr/polys3/lights.php";
     $showplatform="true";        
     if(@$_GET['showplatform']){
         $showplatform = "false";
      
     }
 
-$z_start = 600;
-if(@$_GET['z_start']){
-  $z_start = $_GET['z_start'];
-  $trophy_offset = $z_start+280;
- 
-}
-$z_offset = 10;
+
+$z_offset = 15;
 if(@$_GET['z_offset']){
   $z_offset = $_GET['z_offset'];
-  
 }
 
-?><!--
+?>
 <a-entity id="trophy-wrap" class="clickable center-obj-zone" static-body="shape: box; mass: 2" position="0 -225 -400" >
 
 
@@ -140,11 +134,13 @@ if(@$_GET['z_offset']){
                 animation="property: object3D.rotation.y; to: -360; easing: linear; dur: 24000; loop: true;"></a-entity>
         
         </a-entity>
-       -->
+        <a-light id="trophy-light-front" color="#ffffff" position="0 -5.07707 -304.04045" rotation="" light="type: spot; intensity: 20; angle: 90; distance: 500; shadowRadius: -3.72" visible=""></a-light>
        
-
+        <a-light light="type: spot; intensity: 20; angle: 90; distance: 500; shadowRadius: -3.72" position="217.71962 -54.48486 -285.73576" visible=""></a-light>
+        <a-light color="#fff000"  position="0 250 -275" rotation="0 0 0"  light="type: spot; intensity: 20; angle: 90; distance:500; shadowRadius: -3.72" visible=""></a-light>
+        <a-light color="#fff000" position="0 -127.00302 -331.17228" rotation="" light="type: spot; intensity: 22.1; angle: 90; distance: 500; shadowRadius: -3.72" visible=""></a-light>
 <a-entity id="outer-wrap" position="0.05 3.5
- <?=@$z_start?>" rotation="0 0 0" scale="1 1 1" visible="true">
+ 100" rotation="0 0 0" scale="1 1 1" visible="true">
     <a-entity id="credits-wrap" visible="true" scale="2 2 2" position="0 -2 0"  rotation="0 0 0">
 <?php
  
@@ -163,26 +159,9 @@ if(@$_GET['z_offset']){
 </a-entity><!-- credits-->
 
 
-<a-entity id="trophy-rotation" class="center-obj-zone" 
-                visible="true"
-                scale="1 1 1"
-                position="0 -75 -1000"
-                rotation="0 0 0" 
-                
-               >
 
-        <a-entity id="trophy-model" class="center-obj-zone" 
-                gltf-model="#trophy"  visible="true"
-                scale="80 80 80"
-                position="0 0 0"
-                rotation="0 60 0" 
-                animation="property: object3D.rotation.y; to: -360; easing: linear; dur: 96000; loop: true;"
-           > </a-entity>
-           <a-light light="type: spot; intensity: 48.91; angle: 91.11; distance: 502.65; shadowRadius: -3.72; color: #FF000" position="8.87229 289.25449 227.15971" visible="" rotation="0 -31.24 0"></a-light>
-           <a-light color="#fff000" position="-72.17933 54.80446 105.50831" rotation="0 -13.56 0" light="type: spot; intensity: 40; angle: 90; distance: 500; shadowRadius: -3.72" visible=""></a-light>
-           <a-light color="#fff000" position="240.79411 183.07199 29.71258" rotation="-7.8 41 0" light="type: spot; intensity: 30; angle: 60.2; distance: 500; shadowRadius: -3.72" visible=""></a-light>
-           <a-light color="#fff000" position="-63.20265 222.31287 80.0975" rotation="-6.79 -33.59 0" light="type: spot; intensity: 10; angle: 60.2; distance: 500; shadowRadius: -3.72" visible=""></a-light>
-        </a-entity>
+
+
 
 
 

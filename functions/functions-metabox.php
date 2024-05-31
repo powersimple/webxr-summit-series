@@ -1346,6 +1346,11 @@ function setResourceProperties( $meta_boxes ) { // this shows the box where the 
             ],
 			[
                 'type' => 'url',
+                'name' => esc_html__( 'Resource Info URL', 'online-generator' ),
+                'id'   => $prefix . 'resource_info_url',
+            ],
+			[
+                'type' => 'url',
                 'name' => esc_html__( 'Private Resource URL', 'online-generator' ),
                 'id'   => $prefix . 'private_resource_url',
             ],

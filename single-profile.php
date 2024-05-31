@@ -27,7 +27,7 @@ get_header();
     <div class="profile-meta">
           <h5>
             <?= wrapMeta($profile_meta,'profile_title','span');?>
-          <?php  if(@$profile_meta['company'][0] != ''){
+          <?php  if(@$profile_meta['profile_title'][0] != ''){
               print ", ";
             }?>
             <?= wrapMeta($profile_meta,'company','span');?>
@@ -87,7 +87,7 @@ if($default_video_url != ''){
   require_once('templates/embed-video.php');
   
 ?>
-          <div id="appearances"></div>
+          
           </div>
           
 
@@ -102,8 +102,8 @@ if($default_video_url != ''){
   
  jQuery(document).ready(function() {
 
- 
-  getStaticJSON('profiles/profile-<?=$post->ID?>', loadProfileData);
+  loadProfile(<?=$post->ID?>);
+  
 
 })
 </script>

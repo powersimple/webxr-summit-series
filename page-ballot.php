@@ -19,9 +19,6 @@ if($post->post_parent==0){
 ?>
 
 
-<section class="home-section home-parallax home-fade home-full-height
-" id="home" style="background:url(<?=$hero_image?>) center center no-repeat;background-size:cover;">
-</section>
 <?php
 }
 ?>
@@ -57,7 +54,12 @@ if($post->post_parent==0){
  if(@$_GET['mats'] == 1){
 ?>
 
- <form method="post" action="?">
+<?php
+ }
+  if(!@$_POST['email'] && !@$_POST['juror_id']){
+?>
+<!--
+<form method="post" action="?">
     <p>Please Enter the Email Address where you received your Jury Invitation<br>
   Your votes will be anonomyized on the ballot. 
   </p>
@@ -68,17 +70,9 @@ if($post->post_parent==0){
 
 
   </form>
-<?php
- }
-  if(!@$_POST['email'] && !@$_POST['juror_id']){
-?>
-
- Voting for the 2022 Polys - WebXR Awards has ended. Thank you to our Jurors. See you next year.
- <br>
-
-
  <hr>
- <br>
+ <br>-->
+ 
 
 <?php
 
@@ -143,7 +137,7 @@ if($post->post_parent==0){
 
 <?php
 if(@$juror_id != NULL || @$_GET['tally'=='']){
-$awards = get_menu_array('polys3');
+$awards = get_menu_array('polys4');
 
 
     foreach($awards as $key => $award){// outer menu loop
@@ -169,7 +163,7 @@ $awards = get_menu_array('polys3');
             get_ballot($child['ID'],$child['children'],0);//recursive nominees loop
             print "<tr><th colspan='4'>";
             print "I affirm that I have reviewed all nominees in this category<br>before casting a vote<br>";
-            print "<input type='submit' value='SAVE YOUR VOTE NOW for ".$child['title']."'><br>Save Before Proceeding";
+            print "<input type='submit' value='SAVE YOUR VOTE NOW for ".$child['title']."'><br>Please <strong>SAVE</strong> Before Proceeding to the next category!";
             print "</th>";
             print "</table>";
           

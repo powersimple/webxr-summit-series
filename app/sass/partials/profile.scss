@@ -121,6 +121,9 @@ h1.profile-header{
     box-shadow: 0 0 10px 10px rgba(83, 29, 119, 0.4);
 }
 #profile-index{
+    .cred{font-size:1rem;
+    display:block;
+    }
     font-size:1.5em;
     h4{
         color:#fff;
@@ -146,6 +149,7 @@ h1.profile-header{
         
     }
     li{
+        margin-bottom:0px;
         font-size: 1rem;
         color: #00BFFF;
         a {
@@ -164,6 +168,8 @@ h1.profile-header{
 }
 #appearances{
     border:1px solid #ccc;
+    position: relative;
+   top:75px;
     h4{
         font-size:1.5rem;
         text-align: center;
@@ -228,4 +234,8 @@ h1.profile-header{
             transform: scale(1.2); /* Add scaling effect on hover */
         }
     }
+}
+#video-wrap-header{
+    text-align: center;
+    font-size:150%;
 }

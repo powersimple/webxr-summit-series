@@ -359,29 +359,58 @@ function displayProfiles(profiles){
     var events = []
     var embed_video_url = ''
     var slug = ''
+    var menu = ''
+    var profile_id = ''
+    var show_link = false
     for(var p = 0;p<profiles.length;p++){
-      
+        console.log("profile",profiles[p].id,profiles[p].profile.title,profiles[p])
+
+        show_link = false
+       profile_id = profiles[p].id
        
+       if(profiles[p].profile.post.post_content != ""){
+        showlink = true;
+       } 
+
+       if(profiles[p].sort == null){
+        console.log("no sort",profiles[p].profile.title)
+        continue
+       }
+
+       if(showlink){
+        profile_list += '<a href="/profile/'+profiles[p].slug+'" id="'+profiles[p].slug+'">'
+        profile_list += profiles[p].sort;
+        profile_list += '</a>'
+    } else {
         profile_list += '<span id="'+profiles[p].slug+'">'
         profile_list += profiles[p].sort;
         profile_list += '</span>'
-
-        profile_list += ', '+profiles[p].profile_title+", "+profiles[p].company
+    }
+    profile_list += '<span class="cred">'
+        profile_list += profiles[p].profile_title
+        if(profiles[p].profile_title != ""){
+            profile_list += ", "
+        }
+        profile_list += profiles[p].company
+     
+     
+        profile_list += '</span>'
         
         events = profiles[p].events; 
 
         
-      //  console.log("EVENTS",events)
+       // console.log("EVENTS",events)
         
         for(var e=0;e<events.length;e++){
           slug = events[e].event_slug
+          menu = events[e].event_key
             profile_list += '<li>'
              
             embed_video_url = events_object[slug].children[events[e].session_key].meta.embed_video_url 
            // var session_children = events_object[events[e].event_slug].children[events[e].session_id].children
 
-            profile_list += '<a href="#'+slug+'" onclick="setROS(\''+events[e].event_slug+'\');playSessionVideo(\''+embed_video_url+'\',\''+events[e].session_id+'\',\'\');">'
-            
+            profile_list += '<a href="#'+slug+'" onclick="setROS(\''+events[e].event_key+'\');playSessionVideo(\''+embed_video_url+'\',\''+events[e].session_id+'\',\'\');">'
+            //loadProfile(\''+profile_id+'\')
             profile_list += events[e].session_title
            // profile_list += embed_video_url
             
@@ -399,12 +428,17 @@ function displayProfiles(profiles){
     $("#profile-index").html(profile_list);
 
 }
+function loadProfile(id){
+    getStaticJSON('profiles/profile-'+id, loadProfileData);
+}
+
 
 function loadProfileData(data){
     console.log("LOAD profile",data)
     
   var this_class = '';
-  
+    var title = '<h2>'+data.profile.title+'</h3>'
+
     var appearances = '<h4>Appearances by '+data.profile.title+'</h4><hr>';
     var appearances_array = [];
     for(var e=0;e<data.events.length;e++){
@@ -438,5 +472,6 @@ function loadProfileData(data){
     }
     
     appearances += '</ul>';
+    $('#video-wrap-header').html(data.profile.title)
     $('#appearances').html(appearances)
    }

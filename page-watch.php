@@ -12,11 +12,10 @@ $section_menu = get_post_meta($post->ID,"section_menu",true);
 <script>
 // Example event object
 const event = {
-    title: "The Polys 4th Annual WebXR Awards",
-    description: "The Polys is THIS SUNDAY!\nJoin the XR Community for our Annual Celebration of the Immersive Web in our VR Watch Party in ENGAGE Hosted by MetaCities\nJoin Session ID BZL9O (that's a capital O)\n\nSunday, March 3, beginning at 5pm Eastern with Red Carpet interviews by Sophia Moshasha followed the Ceremony hosted by Julie Smithson, LIVE from Planet X Studios in Brooklyn, NY.",
-    location: "On YouTube and ENGAGE",
-    startTime: "20240303T220000Z",
-    endTime: "20240304T003000Z"
+    title: "Your Event Title",
+    description: "This is a <strong>HTML formatted</strong> description.",
+    startTime: "20240101T000000Z",
+    endTime: "20240101T020000Z"
 };
 
 createCalendarEvent(event);
@@ -28,8 +27,10 @@ createCalendarEvent(event);
 <div class="d-flex container-flex">
   <div class="col-md-7 left">
   <div class="widget-container">
-
-
+    <h2>Join Our Event!</h2>
+    <p>Don't miss out on this exciting opportunity.</p>
+    <button class="widget-button" onclick="addToGoogleCalendar(eventConfig)">Add to Google Calendar</button>
+    <button class="widget-button" onclick="downloadICS(eventConfig)">Download ICS</button>
 </div>
   <?php
    print do_blocks(do_shortcode($post->post_content));

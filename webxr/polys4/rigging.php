@@ -14,7 +14,9 @@ if(@$_GET['camera']){
       $cam_y = $cam_coords[1];
       $cam_z = $cam_coords[2];
     }
-  }
+  
+}
+$camera = "$cam_x $cam_y $cam_z";
 ?>
 
 
@@ -37,7 +39,7 @@ if(@$_GET['camera']){
         </a-entity>
 
         <a-entity id="rig" rotation-reader thumbstick-logging
-        movement-controls="speed: 0.2; constrainToNavMesh: true;fly: true " position="0 0.1 1">
+        movement-controls="speed: <?=$speed?>; constrainToNavMesh: true;fly: true " position="0 0.1 1">
         <!-- Player Character -->
         <a-box id="body" plane-hit aabb-collider="collideNonVisible: true; objects: .zone" static-body="shape: box"
             position="0 0.05 0" width="0.25" height="0.25" depth="0.25" visible="false"></a-box>
@@ -49,7 +51,7 @@ if(@$_GET['camera']){
             
         <a-entity id="camera" camera look-controls raycaster="far: 5; objects: .clickable"
             super-hands="colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
-            position="0 1.5 0" 
+            position="<?=$camera?>" 
         
             rotation="180 0 0"
             

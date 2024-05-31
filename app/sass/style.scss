@@ -44,4 +44,23 @@ DO NOT EDIT IN STYLE.CSS
     @import "partials/_metatraversal";
     @import "partials/_ready-player-golf";
     
-   
+    ul{
+        padding-left:20px;
+   li{
+  
+    list-style:disc;
+   }
+}
+.calendar-button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+.calendar-button:hover {
+    background-color: #45a049;
+}

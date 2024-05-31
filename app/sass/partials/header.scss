@@ -94,6 +94,7 @@
     padding-bottom:20%;//default
     background-repeat: no-repeat;
     background-size: cover;
+    top:100px;
 }
 .hero-cover-20 {
     background-size: cover !important;
@@ -114,4 +115,23 @@
       opacity: 1;
   transform: scale(1);
   transition: opacity 0.3s, transform 0.3s;
+}
+.alert-banner{
+    font-size:2rem;
+    line-height:2rem;
+    text-align: center;
+    padding:10px;
+    position: relative;
+    top:75px;
+    height:60px;
+    a{
+        color:#FFD700;
+    }
+    a:hover{
+        text-decoration: underline;
+    }
+    @media(max-width:767px){
+        font-size:1rem;
+        line-height:2rem;
+    }
 }

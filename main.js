@@ -13,13 +13,14 @@ jQuery(document).ready(function() {
 
 function setCountdown(){
   
-    $('#polyscountdown').countdown('2024/03/03 17:00:00 ', function(event) {
-        $(this).html(event.strftime('The show starts in %D Days %Hh %Mm'));
+    $('#polyscountdown').countdown('2025/03/02 17:00:00 ', function(event) {
+        $(this).html(event.strftime('The 5th Polys starts in %D Days %Hh %Mm'));
       });
     /*  $('#nominationcountdown').countdown('2023/01/01', function(event) {
         $(this).html(event.strftime('%D Days %Hh %Mm to the Nomination Deadline'));
       });*/
 }
+
 $( window ).scroll(function() {
     pinFooter()
 
@@ -77,6 +78,7 @@ function reposition_screen() {
   
     
 }
+
 
 
 
@@ -287,7 +289,7 @@ jQuery(function() {
             jQuery("#site-title").removeClass("sticky-header");
             //      jQuery("#sdg-nav").removeClass("sticky-header");
             jQuery("#main-menu").removeClass("sticky-header");
-            jQuery("#pinned-nav").removeClass("sticky-header");
+            jQuery("#pinned-nav").removeClass("sticky-header");     
         } //if-else
     }); //win func.
 }); //ready func.
@@ -303,13 +305,13 @@ function displayFooterMenu() {
 
     for (var i = 0; i < menu_data.length; i++) {
 
-        //console.log("profile =" + menu_data[i].title, menu_data[i].object_id, profiles[menu_data[i].object_id])
+        console.log("profile =" + menu_data[i].title, menu_data[i].object_id, profiles[menu_data[i].object_id])
        // logo = profiles[menu_data[i].object_id].post_media.logo[0].full_path
       //  url = profiles[menu_data[i].object_id].info.url
         slug = profiles[menu_data[i].object_id].slug
             //        console.log(url)
         menu_links += "<li class='col'><a href='/" + slug + "' target='_new' title='" + menu_data[i].title + "'> "
-        menu_links += profiles[menu_data[i].object_id].title
+        menu_links += menu_data[i].title
        // menu_links += '<img src="' + logo + '" alt="' + menu_data[i].title + ' logo">'
         menu_links += "</a></li>"
 
@@ -368,6 +370,51 @@ function getUrlVars()
     }
     return vars;
 }
+function downloadICS(event) {
+    const eventName = event.title;
+    const eventDescription = event.description.replace(/<\/?[^>]+(>|$)/g, ""); // Strip HTML for ICS
+    const startTime = formatICSDate(event.startTime);
+    const endTime = formatICSDate(event.endTime);
+
+    const icsData = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'BEGIN:VEVENT',
+        'SUMMARY:' + eventName,
+        'DESCRIPTION:' + eventDescription,
+        'DTSTART:' + startTime,
+        'DTEND:' + endTime,
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].join('\n');
+
+    const blob = new Blob([icsData], {type: 'text/calendar'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = eventName + '.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function formatICSDate(date) {
+    // Assuming date is in 'YYYYMMDDTHHMMSSZ' format
+    return date;
+}
+
+function createCalendarEvent(event) {
+    const eventName = encodeURIComponent(event.title);
+    const eventDescription = encodeURIComponent(event.description); // HTML tags will be kept for URLs
+
+    // Google Calendar URL
+    const googleUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${eventName}&dates=${event.startTime}/${event.endTime}&details=${eventDescription}&sf=true&output=xml`;
+
+    // Display links
+    document.body.innerHTML += `<a href="${googleUrl}" target="_blank" class="event-link">Add to Google Calendar</a>`;
+    document.body.innerHTML += `<button onclick="downloadICS(event)" class="event-link">Download ICS File</button>`;
+}
+
 var directory_list = [],
     active_filters = {},
     active_filter_count = 0,
@@ -3997,29 +4044,58 @@ function displayProfiles(profiles){
     var events = []
     var embed_video_url = ''
     var slug = ''
+    var menu = ''
+    var profile_id = ''
+    var show_link = false
     for(var p = 0;p<profiles.length;p++){
-      
+        console.log("profile",profiles[p].id,profiles[p].profile.title,profiles[p])
+
+        show_link = false
+       profile_id = profiles[p].id
        
+       if(profiles[p].profile.post.post_content != ""){
+        showlink = true;
+       } 
+
+       if(profiles[p].sort == null){
+        console.log("no sort",profiles[p].profile.title)
+        continue
+       }
+
+       if(showlink){
+        profile_list += '<a href="/profile/'+profiles[p].slug+'" id="'+profiles[p].slug+'">'
+        profile_list += profiles[p].sort;
+        profile_list += '</a>'
+    } else {
         profile_list += '<span id="'+profiles[p].slug+'">'
         profile_list += profiles[p].sort;
         profile_list += '</span>'
-
-        profile_list += ', '+profiles[p].profile_title+", "+profiles[p].company
+    }
+    profile_list += '<span class="cred">'
+        profile_list += profiles[p].profile_title
+        if(profiles[p].profile_title != ""){
+            profile_list += ", "
+        }
+        profile_list += profiles[p].company
+     
+     
+        profile_list += '</span>'
         
         events = profiles[p].events; 
 
         
-      //  console.log("EVENTS",events)
+       // console.log("EVENTS",events)
         
         for(var e=0;e<events.length;e++){
           slug = events[e].event_slug
+          menu = events[e].event_key
             profile_list += '<li>'
              
             embed_video_url = events_object[slug].children[events[e].session_key].meta.embed_video_url 
            // var session_children = events_object[events[e].event_slug].children[events[e].session_id].children
 
-            profile_list += '<a href="#'+slug+'" onclick="setROS(\''+events[e].event_slug+'\');playSessionVideo(\''+embed_video_url+'\',\''+events[e].session_id+'\',\'\');">'
-            
+            profile_list += '<a href="#'+slug+'" onclick="setROS(\''+events[e].event_key+'\');playSessionVideo(\''+embed_video_url+'\',\''+events[e].session_id+'\',\'\');">'
+            //loadProfile(\''+profile_id+'\')
             profile_list += events[e].session_title
            // profile_list += embed_video_url
             
@@ -4037,12 +4113,17 @@ function displayProfiles(profiles){
     $("#profile-index").html(profile_list);
 
 }
+function loadProfile(id){
+    getStaticJSON('profiles/profile-'+id, loadProfileData);
+}
+
 
 function loadProfileData(data){
     console.log("LOAD profile",data)
     
   var this_class = '';
-  
+    var title = '<h2>'+data.profile.title+'</h3>'
+
     var appearances = '<h4>Appearances by '+data.profile.title+'</h4><hr>';
     var appearances_array = [];
     for(var e=0;e<data.events.length;e++){
@@ -4076,6 +4157,7 @@ function loadProfileData(data){
     }
     
     appearances += '</ul>';
+    $('#video-wrap-header').html(data.profile.title)
     $('#appearances').html(appearances)
    }
 
@@ -4086,6 +4168,7 @@ var ros_meta = {
 var currentROS = {}
 
 function runOfShow(menu){
+    console.log("runOfShow",menu)
     var show = menu.menu_levels;
  
         if(show.length != undefined){
@@ -4965,9 +5048,9 @@ function playProfileVideo(a,index){
 
  function setROS(slug){//passes wp slug;
             var menu_name = ros_list[slug]//converts it to menu_name;
-           console.log("menu name",menu_name,menus['menu_name'])
+           console.log("SetROS menu name",slug,ros_list,menu_name,menus[slug])
            
-            currentROS = runOfShow(menus[menu_name])
+            currentROS = runOfShow(menus[slug])
           console.log("set",currentROS)
         }
 
@@ -5007,14 +5090,14 @@ function playProfileVideo(a,index){
 
 
 function playSessionVideo(src,session_id,attrs){
-  
-    var session = setSessionByID(session_id);
 
+    var session = setSessionByID(session_id);
+  
     var event_class = currentROS.slug;
     var event = '<div class="'+currentROS.slug+'" title="'+currentROS.title+'">'+currentROS.title+'</div>'
     var header = ''
     
-    header = event+'<h4>'+currentROS.title+'</h4>'
+    header = event+'<h4>'+session.title+'</h4>'
 
 
     var sponsors = '<div class="'+currentROS.slug+'-sponsors" title="'+currentROS.title+' Sponsors"></div>'

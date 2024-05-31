@@ -60,7 +60,7 @@ if($post->post_parent==0){
         <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-offset-1 col-10 ">
        
       <?php 
-          $awards = get_nominations('polys2');
+          $awards = get_nominations('polys4');
 
           //$awards = get_nominations('virtual-red-carpet-2');
            nomineeList($awards);

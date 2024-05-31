@@ -79,12 +79,12 @@ $title .= ' - ' . $_event_length_seconds;
 return $title;
 }
 /*
-
+*/
 add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_event_length_seconds', 10,3);
 add_action( 'wp_update_nav_menu_item', 'kia_nav_update_event_length_seconds', 10, 2 );
 add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_event_length_seconds', 10, 2 );
 
-*/
+
 
 /* COORDINATES*/
 
@@ -109,7 +109,6 @@ function kia_custom_fields_coords( $item_id, $item ) {
 
 	<?php
 }
-add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_coords', 10, 2 );
 
 /**
 * COORDINATESave the menu item meta
@@ -131,7 +130,8 @@ function kia_nav_update_coords( $menu_id, $menu_item_db_id ) {
 		delete_post_meta( $menu_item_db_id, '_coords' );
 	}
 }
-add_action( 'wp_update_nav_menu_item', 'kia_nav_update_coords', 10, 2 );
+
+
 
 
 
@@ -154,6 +154,8 @@ function kia_custom_menu_title_coords( $title, $item ) {
 	}
 	return $title;
 }
+add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_coords', 10, 2 );
+add_action( 'wp_update_nav_menu_item', 'kia_nav_update_coords', 10, 2 );
 add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_coords', 10, 2 );
 
 
@@ -215,8 +217,6 @@ function kia_nav_update_offset( $menu_id, $menu_item_db_id ) {
 		delete_post_meta( $menu_item_db_id, '_offset' );
 	}
 }
-add_action( 'wp_update_nav_menu_item', 'kia_nav_update_offset', 10, 2 );
-
 
 
 /**
@@ -238,6 +238,10 @@ function kia_custom_menu_title_offset( $title, $item ) {
 	}
 	return $title;
 }
+
+add_action( 'wp_update_nav_menu_item', 'kia_nav_update_offset', 10, 2 );
+
+
 add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_offset', 10, 2 );
 
 
@@ -300,6 +304,8 @@ $_guest_type = get_post_meta( $item_id, '_guest_type', true );
 	<option value="award-presenter"<?=selectedOption("award-presenter",esc_attr($_guest_type ))?>>Award-Presenter</option>
 	<option value="interviewee"<?=selectedOption("interviewee",esc_attr($_guest_type ))?>>Interviewee</option>
 	<option value="host"<?=selectedOption("host",esc_attr($_guest_type ))?>>Host</option>
+	<option value="ambassador"<?=selectedOption("ambassador",esc_attr($_guest_type ))?>>Ambassador</option>
+	
 	<option value="nominee"<?=selectedOption("nominee",esc_attr($_guest_type ))?>>Nominee</option>
 
 	<option value="honoree"<?=selectedOption("honoree",esc_attr($_guest_type ))?>>Honoree</option>
@@ -373,12 +379,12 @@ $title .= ' - ' . $_guest_type;
 return $title;
 }
 
-/*
+/**/
 add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_guest_type', 10,3);
 add_action( 'wp_update_nav_menu_item', 'kia_nav_update_guest_type', 10, 2 );
 add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_guest_type', 10, 2 );
 
-*/
+
 
 /*
 
@@ -408,16 +414,21 @@ $_event_type = get_post_meta( $item_id, '_event_type', true );
 <!-- -->
 
 
-<select size="7" name="_event_type[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>">
+<select size="13" name="_event_type[<?php echo $item_id ;?>]" id="custom-menu-meta-for-<?php echo $item_id ;?>">
 <option value=""<?=selectedOption("",esc_attr($_event_type ))?>></option>
 	
 	
 	
 		<option value="nomination-category"<?=selectedOption("nomination-category",esc_attr($_event_type ))?>>Nomination Category</option>
-		<option value="honors-presentation"<?=selectedOption("honors-presentationn",esc_attr($_event_type ))?>>Honors Presentation</option>
+		<option value="honors-presentation"<?=selectedOption("honors-presentation",esc_attr($_event_type ))?>>Honors Presentation</option>
 		<option value="red-carpet-interview"<?=selectedOption("red-carpet-interview",esc_attr($_event_type ))?>>Red Carpet Interview</option>
+		<option value="category-intro"<?=selectedOption("category-intro",esc_attr($_event_type ))?>>Category Intro</option>
+
 		<option value="special-feature"<?=selectedOption("special-feature",esc_attr($_event_type ))?>>Special Feature</option>
 		<option value="sponsor-segment"<?=selectedOption("sponsor-segment",esc_attr($_event_type ))?>>Sponsor Segment</option>
+		<option value="acceptance-speech"<?=selectedOption("acceptance-speech",esc_attr($_event_type ))?>>Acceptance Speech</option>
+		
+
 		<option value="keynote"<?=selectedOption("keynote",esc_attr($_event_type ))?>>Keynote</option>
 		<option value="welcome"<?=selectedOption("welcome",esc_attr($_event_type ))?>>Welcome</option>
 		<option value="thanks"<?=selectedOption("thanks",esc_attr($_event_type ))?>>Thanks</option>
@@ -488,11 +499,11 @@ return $title;
 }
 
 /*
+*/
 add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_event_type', 10,3);
 add_action( 'wp_update_nav_menu_item', 'kia_nav_update_event_type', 10, 2 );
 add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_event_type', 10, 2 );
 
-*/
 /*
 
 
@@ -505,9 +516,9 @@ CUSTOM MENU META: Edit link
 function kia_custom_fields_edit_link( $item_id, $item,$label ) {
 	if($item->object != 'custom'){
 ?>
-
+<!--
 <hr>
-        <a target="_new" style="font-size:125%;font-weight:bold;" href="/wp-admin/post.php?action=edit&post=<?=$item->object_id?>">Edit <?=$item->type_label?> <?=$item->title?></a>
+        <a target="_new" style="font-size:125%;font-weight:bold;" href="/wp-admin/post.php?action=edit&post=<?=$item->object_id?>">Edit <?=$item->type_label?> <?=$item->title?></a>-->
 <?php
 	}
 }
@@ -543,10 +554,10 @@ function kia_custom_fields_appearance_type( $item_id, $item,$label ) {
     ?>
     <div class="field-_appearance_type description-wide" style="margin: 5px 0;">
         <hr>
-                        <a target="_new" style="font-size:125%;font-weight:bold;" href="/wp-admin/post.php?action=edit&post=<?=$item->object_id?>">Edit <?=$item->type_label?> <?=$item->title?></a>
+                <!--        <a target="_new" style="font-size:125%;font-weight:bold;" href="/wp-admin/post.php?action=edit&post=<?=$item->object_id?>">Edit <?=$item->type_label?> <?=$item->title?></a>
                     </hr>
 
-<!--	-->		<span class="description"><?php _e( "Appearance Type $item_id", 'appearance_type' ); ?></span>
+	-->		<span class="description"><?php _e( "Appearance Type $item_id", 'appearance_type' ); ?></span>
         <br />
 
         <input type="hidden" class="nav-menu-id" value="<?php echo $item_id ;?>" />
@@ -562,7 +573,7 @@ function kia_custom_fields_appearance_type( $item_id, $item,$label ) {
 						<option value="maybe"<?=selectedOption("maybe",esc_attr($_appearance_type ))?>>In Person Maybe</option>
                         <option value="liveremote"<?=selectedOption("liveremote",esc_attr($_appearance_type ))?>>Live Remote</option>
                         <option value="prerecorded"<?=selectedOption("prerecorded",esc_attr($_appearance_type ))?>>Prerecorded</option>
-						<option value="scatter"<?=selectedOption("scatter",esc_attr($_appearance_type ))?>>In Person | Scatter</option>
+						<option value="scatter"<?=selectedOption("in_person_video_call",esc_attr($_appearance_type ))?>>In Person | Video Call</option>
 						
 						<option value="vipzoom"<?=selectedOption("vipzoom",esc_attr($_appearance_type ))?>>VIP Zoom</option>
 						
@@ -620,11 +631,11 @@ function kia_custom_menu_title_appearance_type( $title, $item) {
     return $title;
 }
 
-/*
+/**/
 add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_appearance_type', 10,3);
 add_action( 'wp_update_nav_menu_item', 'kia_nav_update_appearance_type', 10, 2 );
 add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_appearance_type', 10, 2 );
-*/
+
 
 /*
 
@@ -645,10 +656,10 @@ add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_appearance_type', 10, 
 		if($item->object == 'event'){
 			
 			?>
-
+<!--
 			<hr>
 			<a target="_new" style="font-size:125%;font-weight:bold;" href="/wp-admin/post.php?action=edit&post=<?=$item->object_id?>">Edit <?=$item->type_label?> <?=$item->title?></a>
-		</hr>
+		</hr>-->
 		<?php
 		}
 						if($item->object == 'profile'){
@@ -759,11 +770,11 @@ add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_appearance_type', 10, 
 		return $title;
 	}
 
-/*
+/**/
 	add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_confirmation_status', 10,3);
 	add_action( 'wp_update_nav_menu_item', 'kia_nav_update_confirmation_status', 10, 2 );
 	add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_confirmation_status', 10, 2 );
-*/
+
 /*
 
 	CUSTOM MENU META: point_of_contact
@@ -861,11 +872,11 @@ $title .= ' - ' . $_point_of_contact;
 return $title;
 }
 
-/*
+/**/
 add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_point_of_contact', 10,3);
 add_action( 'wp_update_nav_menu_item', 'kia_nav_update_point_of_contact', 10, 2 );
 add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_point_of_contact', 10, 2 );
-*/
+
 
 
 /*
@@ -953,12 +964,12 @@ $title .= ' - ' . $_notes;
 return $title;
 }
 
-/*
+/**/
 add_action( 'wp_nav_menu_item_custom_fields', 'kia_custom_fields_notes', 10,3);
 add_action( 'wp_update_nav_menu_item', 'kia_nav_update_notes', 10, 2 );
 add_filter( 'nav_menu_item_title', 'kia_custom_menu_title_notes', 10, 2 );
 
-*/
+
 
 
 

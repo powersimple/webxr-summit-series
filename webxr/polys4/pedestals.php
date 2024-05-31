@@ -9,6 +9,7 @@
 
    $pedestal_z = 0;
  //  var_dump($pedestals); die();
+ $counter=0;
    foreach($pedestals as $key=>$pedestal){
        extract($pedestal);
       print "<!-- $coords -->";
@@ -70,22 +71,38 @@
 <!--                <a-entity troika-text='value:; color:#fff; fontSize:.025;align:center;' material="shader: standard; metalness: 0.8;"
                position="0 -0.089 0.01" rotation="0 0 0"></a-entity>-->
        </a-plane>
-       <?php }?>
+       <?php
+  
+    }?>
    </a-entity>
    
 
 
-
    <!--TROPHY-->
-   <a-entity id="<?=$pedestal['slug']?>-grab" class="clickable center-obj-zone" dynamic-body="shape: box; mass: 2" position="0 1.28 0" mixin="obj" rotation="0 -75 0" scale="0.25 0.25 0.25" gltf-model="#trophy"></a-entity>
+   <a-entity id="<?=$pedestal['slug']?>-grab" class="clickable grabbable center-obj-zone" static-body="shape: box; mass: 2" position="0 0.96347 -0.00014" mixin="obj" rotation="0 -30 0" scale="0.25 0.25 0.25" gltf-model="#trophy">
+   <?php
+    if($counter==0){}
+        ?> 
+        <a-light id="light-<?=$pedestal['slug']?>" color="white" position="4.56962 1.56774 -0.62147" rotation="-3.37 96.53 0"  light="color: #ffc800; angle: 16.160; type: spot; intensity: 20;distance:3;" visible=""></a-light>
+        <a-light id="light-p4c-experience-of-the-year" color="white" position="3.36421 1.18394 -6.93381"rotation="13.58 90.2 0" light="color: #ffc800; angle: 16.16; type: spot; intensity: 20; distance:5;" visible=""></a-light>
+        <a-light id="light-p4c-experience-of-the-year" color="white" position="0.14272 -0.34994 3.48613" rotation="36.96 1.9100000000000001 0" light="color: #ffc800; angle: 21.4; type: spot; intensity: 23.11; distance: 4.41"  visible=""></a-light>
+     
+        <?php
+    
 
+    
+    $counter++;
+   ?>
+  
+</a-entity>
+  
 <!--NOMINATIONs WRAPPER-->
-   <a-entity id="nominations" rotation="0 0 0" position="0 30 -240" scale="30 30 30" shadow >
+   <a-entity id="nominations" rotation="5 0 0" position="0 100 -240" scale="30 30 30" shadow >
    
            <a-entity id="<?=$pedestal['slug']?>-title" class="art-text" mixin="table-label" position="0 0 0" color="white"
                width="2.5" rotation="0 0 0" text="value:;wrapCount:50 ">
 
-               <a-entity troika-text='value:<?=$pedestal['title']?>; color:#f5f5f5; align:center; color:#fff; fontSize:.5;align:center;font:/wp-content/themes/webxrsummits/fonts/AGENCYB.ttf'
+               <a-entity troika-text='value:<?=$pedestal['title']?>; color:#f5f5f5; align:center; color:#fff; fontSize:1;align:center;font:/wp-content/themes/webxrsummits/fonts/AGENCYB.ttf'
                material="shader: standard; metalness: 0.8;" position="0 2.5 0" rotation="0 0 0">
            </a-entity>
              <?php
@@ -126,7 +143,7 @@
            // continue;
              ?>
              <a-entity id="label-<?=$nomination['slug']?>" troika-text='value:Presented by; color:#f5f5f5;  color:#fff; 
-fontSize:.2;align:center; anchor:center;'material="shader: standard; metalness: 0.8;" rotation="0 0 0" position="0 -0.6 0"> </a-entity>
+fontSize:.2;align:center; anchor:center;maxWidth:3;'material="shader: standard; metalness: 0.8;" rotation="0 0 0" position="0 -0.6 0"> </a-entity>
 
 
 <?php
@@ -170,7 +187,7 @@ fontSize:.2;align:center; anchor:center;'material="shader: standard; metalness: 
                                            scale="1 1 1" position="0 .5 0" ></a-image>
 <!-- nominee label-->
        <a-entity id="label-<?=$nomination['slug']?>" troika-text='value:<?=$nomination['title']?>; color:#f5f5f5;  wrapCount:18; color:#fff; 
-       fontSize:.25;align:center; anchor:center;'material="shader: standard; metalness: 0.8;" rotation="0 0 0" position="0 -0.8 0"> </a-entity>
+       fontSize:.25;align:center; anchor:center;maxWidth:3;'material="shader: standard; metalness: 0.8;" rotation="0 0 0" position="0 -0.8 0"> </a-entity>
 
 
 
@@ -202,28 +219,28 @@ $y=-1.2;
                            
                        ?>
                         <a-entity troika-text='value: <?=$nominee['title'] ?> ; color:#f5f5f5; align:center; color:#fff; fontSize:.2;align:center;'
-               material="shader: standard; metalness: 0.8;" position="0 <?=$y?> 0" rotation="0 -0.1 0"></a-entity>
+               material="shader: standard; metalness: 0.8;maxWidth:3" position="0 <?=$y?> 0" rotation="0 -0.1 0"></a-entity>
 
 
                        
                            <?php
-                           
+                           /*
                            foreach($nominee['children'] as $o => $subnominee){ //nominee
                                $y=$y-.3;
                                ?>
-                                <a-entity troika-text='value: <?=$subnominee['title'] ?> ; color:#f5f5f5; align:center; color:#fff; fontSize:.15;align:center;'
+                                <a-entity troika-text='value: <?=$subnominee['title'] ?> ; color:#f5f5f5; align:center; color:#fff; fontSize:.15;align:center;maxWidth:3;'
                        material="shader: standard; metalness: 0.8;" position="0 <?=$y?> 0" rotation="0 -0.1 0"></a-entity>
 
 <?php
 
                            }
-
+*/
                            $y=$y-.3;
                                }
                                if($winner){
                                    if(!@$_GET['hidewinners']){
                                    ?>
-    <a-entity troika-text='value:WINNER ; color:#fff000; align:center; color:#fff000; fontSize:.2;align:center;'
+    <a-entity troika-text='value:WINNER ; color:#fff000; align:center; color:#fff000; fontSize:.2;align:center;maxWidth:3'
                    material="shader: standard; metalness: 0.8;" position="0 <?=$y?> 0" rotation="0 -0.1 0"></a-entity>
                                    <?php
                                    }

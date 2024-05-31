@@ -20,7 +20,7 @@
         $summit_square_model = $_GET['summit_model'];
     }
 
-    $aframe_version="1.2.0";
+    $aframe_version="1.4.2";
     if(@$_GET['aframe-version']){
       $aframe_version=$_GET['aframe-version'];
 
@@ -30,16 +30,13 @@
 
 <script src="https://aframe.io/releases/<?=$aframe_version?>/aframe.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r134/examples/js/deprecated/Geometry.js"></script>
-<script src="<?php echo get_stylesheet_directory_uri();?>/assets/js/aframe-extras.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
-    <script src="<?php echo get_stylesheet_directory_uri();?>/assets/js/aframe-physics-system.min.js"></script>
-    <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js">
-    </script>
-    <script src="<?php echo get_stylesheet_directory_uri();?>/assets/js/aframe-look-controls.js"></script>
-    <script src="https://unpkg.com/aframe-orbit-controls@1.3.0/dist/aframe-orbit-controls.min.js"></script>
-  <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
-    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/super-hands@^3.0.3/dist/super-hands.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri();?>/webxr/libraries/simple-navmesh-constraint.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
    
     </script>

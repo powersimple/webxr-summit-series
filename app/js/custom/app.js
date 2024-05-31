@@ -13,13 +13,14 @@ jQuery(document).ready(function() {
 
 function setCountdown(){
   
-    $('#polyscountdown').countdown('2024/03/03 17:00:00 ', function(event) {
-        $(this).html(event.strftime('The show starts in %D Days %Hh %Mm'));
+    $('#polyscountdown').countdown('2025/03/02 17:00:00 ', function(event) {
+        $(this).html(event.strftime('The 5th Polys starts in %D Days %Hh %Mm'));
       });
     /*  $('#nominationcountdown').countdown('2023/01/01', function(event) {
         $(this).html(event.strftime('%D Days %Hh %Mm to the Nomination Deadline'));
       });*/
 }
+
 $( window ).scroll(function() {
     pinFooter()
 
@@ -77,6 +78,7 @@ function reposition_screen() {
   
     
 }
+
 
 
 
@@ -287,7 +289,7 @@ jQuery(function() {
             jQuery("#site-title").removeClass("sticky-header");
             //      jQuery("#sdg-nav").removeClass("sticky-header");
             jQuery("#main-menu").removeClass("sticky-header");
-            jQuery("#pinned-nav").removeClass("sticky-header");
+            jQuery("#pinned-nav").removeClass("sticky-header");     
         } //if-else
     }); //win func.
 }); //ready func.
@@ -303,13 +305,13 @@ function displayFooterMenu() {
 
     for (var i = 0; i < menu_data.length; i++) {
 
-        //console.log("profile =" + menu_data[i].title, menu_data[i].object_id, profiles[menu_data[i].object_id])
+        console.log("profile =" + menu_data[i].title, menu_data[i].object_id, profiles[menu_data[i].object_id])
        // logo = profiles[menu_data[i].object_id].post_media.logo[0].full_path
       //  url = profiles[menu_data[i].object_id].info.url
         slug = profiles[menu_data[i].object_id].slug
             //        console.log(url)
         menu_links += "<li class='col'><a href='/" + slug + "' target='_new' title='" + menu_data[i].title + "'> "
-        menu_links += profiles[menu_data[i].object_id].title
+        menu_links += menu_data[i].title
        // menu_links += '<img src="' + logo + '" alt="' + menu_data[i].title + ' logo">'
         menu_links += "</a></li>"
 

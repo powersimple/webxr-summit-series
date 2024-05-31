@@ -4,7 +4,7 @@
 
 get_header();
 //    get_eventsFromTable(15);
-    require_once "webxr/functions-aframe.php";
+    require_once "functions/functions-aframe.php";
     $speed = "0.2";
     if(@$_GET['speed']){
         $speed = $_GET['speed'];    

@@ -18,9 +18,7 @@ if($post->post_parent==0){
 */
 ?>
 
-<section class="home-section home-parallax home-fade home-full-height" id="home" style="background:url(<?=$hero_image?>) center center no-repeat;background-size:cover;">
-    
-    </section>
+
 
 <?php
 }

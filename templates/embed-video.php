@@ -10,7 +10,7 @@ if($show_player==true){
 }
 
 if($default_video_url == ''){
-   print $default_video_url = $default_embed_video_url;
+    $default_video_url = $default_embed_video_url;
 }
 
 ?>
@@ -21,8 +21,11 @@ if($default_video_url == ''){
             <iframe id="video-player" src="<?=$default_video_url?>"  frameborder="0" allowfullscreen></iframe>
                 
         </div> 
-        <div id="video-wrap-footer"></div>
-        </div>
+
+            <div id="video-wrap-footer"></div>
+            
+        
+    </div><div id="appearances"></div>
         <?php
 
         if(@$video_playlist){

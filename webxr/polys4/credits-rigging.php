@@ -56,10 +56,10 @@ if(@$_GET['camera']){
                 rotation="0 -25 0"
                 
                 >
-                <a-light id="cam-light-front"  color="#ffffff"  position="0 0 0" rotation="0 0 0"  light="type: spot; intensity: 4; angle: 75; distance:30; shadowRadius: -3.72" visible=""></a-light>
- <!--
-                <a-light id="cam-light-left"  color="#ffffff"  position="-7 0 0" rotation="0 30 0"  light="type: spot; intensity: 30; angle: 90;distance:30; shadowRadius: -3.72" visible=""></a-light>
-                <a-light id="cam-light-right"  color="#ffffff"  position="15 0 0" rotation="0 60 0"  light="type: spot; intensity: 30; angle: 60;distance:30; shadowRadius: -3.72" visible=""></a-light>-->
+                <a-light id="cam-light-front" color="#ffffff" position="0.73528 -2.47372 0.10294" rotation="-13.54 -7.970000000000001 0" light="type: spot; intensity: 4; angle: 75; distance: 25; shadowRadius: -3.72" visible=""></a-light>
+ 
+                <a-light id="cam-light-left" color="#ffffff" position="-6.03376 0 9.62659" rotation="0 29.999999999999996 0" light="type: spot; intensity: 4; angle: 105.99; distance: 25; shadowRadius: -3.72" visible=""></a-light>
+                <a-light id="cam-light-left" color="#ffffff" position="-6.03376 0 9.62659" rotation="0 29.999999999999996 0" light="type: spot; intensity: 4; angle: 105.99; distance: 25; shadowRadius: -3.72" visible=""></a-light><!---->
                 
 
 

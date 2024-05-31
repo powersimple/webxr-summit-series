@@ -203,12 +203,24 @@ function nomineeAccordion($awards){
 function nomineeListChildren($children){
   foreach($children as $key=>$child){
     extract($child);
-    print $title;
+    print "<strong>". $title."</strong> ";
     if(@$meta['twitter']){
-   //   var_dump(@$meta['twitter'][0]);
-      print " ".str_replace("https://twitter.com/","@",$meta['twitter']['0'])." ";
+   //   var_dump(@$meta['twitter'][0]); 
+    if(@$_GET['twitter']==1){
+        print " ".str_replace("https://twitter.com/","@",$meta['twitter']['0'])." ";
+       
+      }
+      print "<BR>";
     }
-    
+    if(@$meta['instagram']){
+      //   var_dump(@$meta['twitter'][0]); 
+       if(@$_GET['instagram']==1){  
+           print " ".str_replace("","@",$meta['instagram']['0'])." ";
+          
+       
+         print "<BR>";
+       }
+      }
     if(count(@$children)){
 //        print "<BR>";
         nomineeListChildren($children);
@@ -229,7 +241,8 @@ function nomineeList($awards){
       if(!in_array("nomination",explode(" ",$classes[0]))){
      //     continue;
         }
-        
+     
+       // print $title;
         $title = str_replace("2021 – ","",$title);
         print "<h3 class=>".strtoupper($title)."</h3>";
         print "<div class='nominees'>";
@@ -255,7 +268,7 @@ function nomineeList($awards){
          $id = $nominee['post']->ID;
          //
          $title =  htmlentities($nominee['title']);
-       
+       //print_r($nominee);
          if($nominee['classes'][0] == 'presenter'){
        //   continue; 
           $presented = 'Presented by'; 
@@ -275,14 +288,18 @@ function nomineeList($awards){
               if(@$meta['twitter']){
                 //   var_dump(@$meta['twitter'][0]);
                    print " ".str_replace("https://twitter.com/","@",$nominee['meta']['twitter']['0']);
+                  
                  }
+                
               nomineeListChildren(@$children);
               print "</li>";
           } else{
-            print "<li class='$nominee_class'>$presented  <span href='$url' target='blank'>$nominee[title]</span> ";
+           // print "|".$nominee_class;
+            print "<hr><strong><li class='$nominee_class'>$presented  <span href='$url' target='blank'>$nominee[title]</span></strong><br>";
             if(@$meta['twitter']){
               //   var_dump(@$meta['twitter'][0]);
                  print " ".str_replace("https://twitter.com/","@",$nominee['meta']['twitter']['0']);
+                 
                }
             
             nomineeListChildren(@$children);
