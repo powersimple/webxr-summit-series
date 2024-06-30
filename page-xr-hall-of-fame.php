@@ -1,5 +1,5 @@
 <html>
 <head>
-<meta http-equiv="refresh" content="0; url=https://www.awexr.com/hall-of-fame">
+<meta http-equiv="refresh" content="0; url=https://framevr.io/xrhalloffame">
 </head>
 </html>

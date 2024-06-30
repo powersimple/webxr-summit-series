@@ -96,7 +96,12 @@ $default_embed_video_url = "https://www.youtube.com/embed/AWFgm65j4n8?autoplay=1
    
 -->
 
+<style>
+  main{
+    top:150px;
+  }
 
+</style>
 
 
     <title><?=$page_title?><?=get_bloginfo('name')?> - <?=bloginfo("description");?></title>

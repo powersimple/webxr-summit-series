@@ -585,7 +585,7 @@ function displayRunOfShowTable(runOfShow){
                         return match ? match + '&autoplay=1&rel=0' : '?autoplay=1&rel=0';
                     });
                 console.log("event"+n,runOfShow.sessions[n].info.featured_media)
-                sessions += '<a href="#'+runOfShow.sessions[n].info.slug+'" class="watch video-button" onclick="playSessionVideo(\''+embed_video_url+'\',\''+runOfShow.sessions[n]+'\',\'\''+')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
+                sessions += '<a href="#'+runOfShow.sessions[n].info.slug+'" class="watch video-button" onclick="playSessionVideo(\''+runOfShow.sessions[n].info.meta.embed_video_url+'\',\''+runOfShow.sessions[n].title+'\',\'\')" class="watch"><i title="WATCH" class="fa fa-youtube"></i><br> Watch</a>'
                     }
                 }
             }
@@ -927,14 +927,14 @@ function playProfileVideo(a,index){
 
 
 function playSessionVideo(src,session_id,attrs){
-
-    var session = setSessionByID(session_id);
-  
+   
+    var session = setSessionByID(src,session_id,attrs);
+  console.log("session",src,session_id,attrs)
     var event_class = currentROS.slug;
     var event = '<div class="'+currentROS.slug+'" title="'+currentROS.title+'">'+currentROS.title+'</div>'
     var header = ''
-    
-    header = event+'<h4>'+session.title+'</h4>'
+    console.log("session is",session_id.title)
+    header = event+'<h4>'+session_id+'</h4>'
 
 
     var sponsors = '<div class="'+currentROS.slug+'-sponsors" title="'+currentROS.title+' Sponsors"></div>'
@@ -1171,7 +1171,7 @@ function displayRunOfShowCards(runOfShow){
             } else if(title_with_lastnames<100){
                 this_title = title_with_lastnames
             } else 
-            console.log(last_names)
+         //   console.log(last_names)
             
 //           sessions+='<BR><BR><BR><BR><BR><BR><input type="text" value="'+this_title+'" size="100">'+this_title.length+' | '+title_with_lastnames.length +'<BR>'
   //          sessions+='<textarea cols="100" rows="10">' +description+'</textarea><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>'
